@@ -1,5 +1,5 @@
 package de.hdm.marketPlace.shared.report;
 
-public class report {
+public class Report {
 
 }
