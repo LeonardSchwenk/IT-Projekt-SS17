@@ -1,4 +1,4 @@
-package de.hdm.marketPlace.shared;
+package de.hdm.marketPlace.shared.bo;
 
 public class ProjectMarketplace {
 
