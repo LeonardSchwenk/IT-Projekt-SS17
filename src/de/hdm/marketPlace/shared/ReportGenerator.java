@@ -8,7 +8,7 @@ public interface ReportGenerator extends RemoteService{ //Import Remote Service 
 	
 	 public void init() throws IllegalArgumentException;
 
-	  public void setUser(User u) throws IllegalArgumentException;
+	  public void setProjectMarketplace(ProjectMarketplace m) throws IllegalArgumentException; //User oder Marketplace??
 
 	  public abstract AllTenders createAllTendersReport() throws IllegalArgumentException;
 	  

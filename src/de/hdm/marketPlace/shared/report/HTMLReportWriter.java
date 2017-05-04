@@ -121,6 +121,30 @@ public class HTMLReportWriter extends ReportWriter {
     this.reportText = result.toString();
   }
 
+  public void process(AllTenders r){
+	  
+  }
+  
+  public void process(TendersMatchProfil r){
+	  
+  }
+  
+  public void process(AllApplicationsOnTender r){
+	  
+  }
+  
+  public void process(AllApplicationsOfUser r){
+	  
+  }
+  
+  public void process(ProjectInterconnection r){
+	  
+  }
+  
+  public void process(FanInFanOut r){
+	  
+  }
+  
   public String getReportText() {
     return this.getHeader() + this.reportText + this.getTrailer();
   }
