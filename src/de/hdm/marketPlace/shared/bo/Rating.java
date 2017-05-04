@@ -1,12 +1,12 @@
 package de.hdm.marketPlace.shared.bo;
 
-public class Rating {
+public class Rating extends BusinessObject{
 
 	
 	//attributes of class
 	
-	private float rate;
-	private String ratingText;
+	private float rate = 0;
+	private String ratingText = "";
 	
 	//constructor
 	

@@ -1,13 +1,13 @@
 package de.hdm.marketPlace.shared.bo;
 import java.util.Date;
 
-public class TenderProfile {
+public class TenderProfile extends BusinessObject{
 	
 	//attributes of class
 	
 	private Date createDate;
 	private Date updateDate;
-	private int tenderRef;
+	private int tenderRef = 0;
 	
 	//constructor
 	

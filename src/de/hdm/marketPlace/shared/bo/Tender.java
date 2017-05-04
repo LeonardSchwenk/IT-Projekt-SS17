@@ -1,11 +1,11 @@
 package de.hdm.marketPlace.shared.bo;
 
-public class Tender {
+public class Tender extends BusinessObject{
 
 	//attributes of class
 	
-	private String text;
-	private int projectRef;
+	private String text = "";
+	private int projectRef = 0;
 	
 	//Setter and Getter of all attributes
 	

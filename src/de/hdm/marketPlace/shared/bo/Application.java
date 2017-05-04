@@ -2,7 +2,7 @@ package de.hdm.marketPlace.shared.bo;
 
 import java.util.Date; 
 
-public class Application {
+public class Application extends BusinessObject{
 	
 	/* Realisierung der Bewerbungsclasse mit allen 
 	 * relevanten Attributen*/
@@ -10,16 +10,19 @@ public class Application {
 	
 	
 	
-	 private String text; 
+	 private String text = ""; 
+	 //Wie werden wir mit Date umgehen?
 	private Date createDate; 
 	private Date updateDate;
-	private int userRef; 
-	private int tenderRef;
-	private int ratingRef;
+	private int userRef = 0; 
+	private int tenderRef = 0;
+	private int ratingRef = 0;
 	
+	//Was muss in den Konstruktor 
 	
-	
-	public void Application(); 
+	public Application(){
+		
+	}
 	
 	//Alle Get und Set Methoden zu gegebenen Attributen 
 	
@@ -61,7 +64,24 @@ public class Application {
 		this.ratingRef = ratingRef;
 	} 
 	
+	 public String toString() {
+		    return super.toString() + " Bewerbungs-ID: #" + this.applicationID;
+	//this. ? 
+		    
+	public boolean equals(Object o) {
+	    
+	    if (o != null && o instanceof Application) {
+	    	Application c = (Application) o;
+	      try {
+	        return super.equals(c);
+	      }
+	      catch (IllegalArgumentException e) {
+	        return false;
+	      }
+	    }
+	    return false;
 	
 	
 
+}
 }

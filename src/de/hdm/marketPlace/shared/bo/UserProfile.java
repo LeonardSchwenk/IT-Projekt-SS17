@@ -4,7 +4,7 @@ public class UserProfile {
 	
 	//attributes of class
 	
-	private int userRef;
+	private int userRef = 0;
 
 	//Setter and Getter of all attributes
 	

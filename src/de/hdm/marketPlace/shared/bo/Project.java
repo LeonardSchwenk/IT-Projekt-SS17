@@ -2,15 +2,16 @@ package de.hdm.marketPlace.shared.bo;
 
 import java.util.Date; 
 
-public class Project {
+public class Project extends BusinessObject{
 	
-	private String name; 
-	private String text; 
+	private String name = ""; 
+	private String text =""; 
 	private Date startDate;
 	private Date endDate; 
-	private int projectManager; 
-	private int projectMarketplaceRef; 
-	private int tenderRef;
+	private int projectManager = 0; 
+	private int projectMarketplaceRef = 0; 
+	private int tenderRef = 0
+			;
 	public String getName() {
 		return name;
 	}
