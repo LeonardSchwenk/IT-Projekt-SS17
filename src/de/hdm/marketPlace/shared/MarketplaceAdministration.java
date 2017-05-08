@@ -1,6 +1,7 @@
 package de.hdm.marketPlace.shared;
 
 import java.util.ArrayList.*;
+
 import java.util.Date;
 import java.util.Vector;
 
@@ -25,6 +26,18 @@ public interface MarketplaceAdministration {
 	public ProjectMarketplace createMarketplace (String name) throws IllegalArgumentException;
 	public void updateMarketplace (ProjectMarketplace marketplace) throws IllegalArgumentException;
 	public void deleteMarketplace (ProjectMarketplace marketplace) throws IllegalArgumentException;
+	public void joinMarketplace (int marketplaceId, User user) throws IllegalArgumentException;
+	public void leaveMarketplace (int marketplaceId, User user) throws IllegalArgumentException;
+	
+	//Methoden zur Benutzerverwaltung
+	public User createUser (User user) throws IllegalArgumentException;
+	public void updateUser (int partnerProfilId) throws IllegalArgumentException;
+	public void deleteUser (int partnerProfilId) throws IllegalArgumentException;
+	public User findById (int partnerProfilId) throws IllegalArgumentException;
+	public User findByName (String name) throws IllegalArgumentException;
+	
+	//Methoden zur Verwaltung von Methoden
+	
 	
 	
 	
