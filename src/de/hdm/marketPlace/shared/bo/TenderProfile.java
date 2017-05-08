@@ -9,14 +9,7 @@ public class TenderProfile extends BusinessObject{
 	private Date updateDate;
 	private int tenderRef = 0;
 	
-	//constructor
 	
-	public TenderProfile(Date createDate, Date updateDate, int tenderRef) {
-		this.createDate = createDate;
-		this.updateDate = updateDate;
-		this.tenderRef  = tenderRef;
-	}
-
 	//Setter and Getter of all attributes
 	
 	public Date getCreateDate() {

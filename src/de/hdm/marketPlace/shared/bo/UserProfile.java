@@ -1,6 +1,6 @@
 package de.hdm.marketPlace.shared.bo;
 
-public class UserProfile {
+public class UserProfile extends BusinessObject {
 	
 	//attributes of class
 	

@@ -13,7 +13,7 @@ public class ApplicationMapper {
 	protected ApplicationMapper(){
 	}
 	
-	public Application findByID(int ID){
+	public Application findByID(int Id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -24,17 +24,17 @@ public class ApplicationMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT ID, Text, Rating_ID, Tender_ID, User_ID value FROM Application" + "WHERE ID=" + ID +"ORDER BY Tender_ID");
+		ResultSet rs =stmt.executeQuery("SELECT Id, Text, RatingRef, TenderRef, UserRef value FROM Application" + "WHERE Id=" + Id +"ORDER BY TenderRef");
 		
 		if ( rs.next()){
 			
 			Application a = new Application();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			a.setID(rs.getInt("ID"));
+			a.setId(rs.getInt("Id"));
 			a.setText(rs.getString("Text"));
-			a.setRating_ID(rs.getInt("Rating_ID"));
-			a.setTender_ID(rs.getInt("Tender_ID"));
-			a.setUser_ID(rs.getInt("User_ID"));
+			a.setRatingRef(rs.getInt("RatingRef"));
+			a.setTenderRef(rs.getInt("TenderRef"));
+			a.setUserRef(rs.getInt("UserRef"));
 			
 			
 			
@@ -64,13 +64,13 @@ public class ApplicationMapper {
 	     
 	      if (rs.next()) {
 	
-	    a.setID(rs.getInt("maxid") + 1);
+	    a.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO Application (ID, Text, Rating_ID, Tender_ID, User_ID) "
-	           + "VALUES (" + a.getText() + ",'" + a.getRating_ID() + "','"+ a.getTender_ID() + ",'"+ a.getUser_ID()  + "')");
+	        stmt.executeUpdate("INSERT INTO Application (Id, Text, RatingRef, TenderRef, UserRef) "
+	           + "VALUES (" + a.getText() + ",'" + a.getRatingRef() + "','"+ a.getTenderRef() + ",'"+ a.getUserRef()  + "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -88,8 +88,8 @@ public class ApplicationMapper {
 	      Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE Application " + "SET Text=\""
-	          + a.getText() + "\", " + "Rating_ID=\"" + a.getRating_ID() + "User_ID=\"" + a.getUser_ID() +  "\" "
-	          + "WHERE id=" + a.getID());
+	          + a.getText() + "\", " + "RatingRef=\"" + a.getRatingRef() + "UserRef=\"" + a.getUserRef() +  "\" "
+	          + "WHERE id=" + a.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -106,7 +106,7 @@ public class ApplicationMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Application " + "WHERE ID=" + a.getID());
+	      stmt.executeUpdate("DELETE FROM Application " + "WHERE Id=" + a.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

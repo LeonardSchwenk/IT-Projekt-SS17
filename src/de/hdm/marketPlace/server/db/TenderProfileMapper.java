@@ -12,7 +12,7 @@ public class TenderProfileMapper {
 	protected TenderProfileMapper(){
 	}
 	
-	public TenderProfile findByID(int ID){
+	public TenderProfile findByID(int Id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -23,14 +23,14 @@ public class TenderProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT ID, Tender_ID value FROM TenderProfile" + "WHERE ID=" + ID +"ORDER BY Tender_ID");
+		ResultSet rs =stmt.executeQuery("SELECT Id, TenderRef value FROM TenderProfile" + "WHERE Id=" + Id +"ORDER BY TenderRef");
 		
 		if ( rs.next()){
 			
 			TenderProfile tp = new TenderProfile();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			tp.setID(rs.getInt("ID"));
-			tp.setTender_ID(rs.getInt("Tender_ID"));
+			tp.setId(rs.getInt("Id"));
+			tp.setTenderRef(rs.getInt("TenderRef"));
 	
 			
 			return tp; 
@@ -59,13 +59,13 @@ public class TenderProfileMapper {
 	     
 	      if (rs.next()) {
 	
-	    tp.setID(rs.getInt("maxid") + 1);
+	    tp.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO TenderProfile (ID, Tender_ID) "
-	           + "VALUES (" + tp.getTender_ID() + "')");
+	        stmt.executeUpdate("INSERT INTO TenderProfile (Id, TenderRef) "
+	           + "VALUES (" + tp.getTenderRef() + "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -82,9 +82,9 @@ public class TenderProfileMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE TenderProfile " + "SET Tender_ID=\""
-	          + tp.getTender_ID() + "\", " +  "\" "
-	          + "WHERE id=" + tp.getID());
+	      stmt.executeUpdate("UPDATE TenderProfile " + "SET TenderRef=\""
+	          + tp.getTenderRef() + "\", " +  "\" "
+	          + "WHERE Id=" + tp.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -101,7 +101,7 @@ public class TenderProfileMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM TenderProfile " + "WHERE ID=" + tp.getID());
+	      stmt.executeUpdate("DELETE FROM TenderProfile " + "WHERE Id=" + tp.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

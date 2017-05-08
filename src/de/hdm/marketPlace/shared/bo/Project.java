@@ -8,7 +8,7 @@ public class Project extends BusinessObject{
 	private String text =""; 
 	private Date startDate;
 	private Date endDate; 
-	private int projectManager = 0; 
+	private int projectManagerRef = 0; 
 	private int projectMarketplaceRef = 0; 
 	private int tenderRef = 0
 			;
@@ -36,11 +36,11 @@ public class Project extends BusinessObject{
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public int getProjectManager() {
-		return projectManager;
+	public int getProjectManagerRef() {
+		return projectManagerRef;
 	}
-	public void setProjectManager(int projectManager) {
-		this.projectManager = projectManager;
+	public void setProjectManagerRef(int projectManager) {
+		this.projectManagerRef = projectManager;
 	}
 	public int getProjectMarketplaceRef() {
 		return projectMarketplaceRef;

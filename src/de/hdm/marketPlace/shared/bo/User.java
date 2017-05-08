@@ -1,6 +1,6 @@
 package de.hdm.marketPlace.shared.bo;
 
-public class User {
+public class User extends BusinessObject {
 	
 	
 	//Anlegen der Attribute für die Klasse User

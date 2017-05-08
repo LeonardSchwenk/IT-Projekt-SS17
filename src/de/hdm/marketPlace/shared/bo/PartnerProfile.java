@@ -5,6 +5,8 @@ import java.util.Vector;
 public class PartnerProfile extends BusinessObject{
 
 	private String text = "";
+ 
+	
 	private Vector<Attribute> attributeRef = new Vector<Attribute>();
 	
 	public String getText() {

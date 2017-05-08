@@ -7,6 +7,7 @@ public class ProjectMarketplace {
 	//attributes of the class
 	
 	private String name = "";
+	
 	private Vector<UserProfile> userRef = new Vector<UserProfile>();
 	
 	//Setters and Getters of all attributes
