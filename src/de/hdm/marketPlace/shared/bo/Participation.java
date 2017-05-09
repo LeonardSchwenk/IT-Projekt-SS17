@@ -2,12 +2,12 @@ package de.hdm.marketPlace.shared.bo;
 
 import java.util.Date; 
 
-public class Participation {
+public class Participation extends BusinessObject{
 	
-	private int projectRef;
-	private int userRef; 
-	private int ratingRef; 
-	private int workingDays;
+	private int projectRef = 0;
+	private int userRef = 0; 
+	private int ratingRef = 0; 
+	private int workingDays = 0;
 	private Date startDate;
 	private Date endDate;
 	
@@ -49,8 +49,10 @@ public class Participation {
 		this.endDate = endDate;
 	}
 	
-
+	 public String toString() {
+		    return super.toString() + " inhaber, Kunden-ID: #" + this.participationID;
 	
 	
 
+}
 }

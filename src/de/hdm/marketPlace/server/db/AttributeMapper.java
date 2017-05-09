@@ -13,7 +13,7 @@ public class AttributeMapper {
 	protected AttributeMapper(){
 	}
 	
-	public Attribute findByID(int ID){
+	public Attribute findByID(int Id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -24,13 +24,13 @@ public class AttributeMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT ID, name, text, value FROM Attribute" + "WHERE ID=" + ID +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT Id, name, text, value FROM Attribute" + "WHERE Id=" + Id +"ORDER BY name");
 		
 		if ( rs.next()){
 			
 			Attribute a = new Attribute();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			a.setID(rs.getInt("ID");
+			a.setId(rs.getInt("Id"));
 			a.setName(rs.getString("name"));
 			a.setText(rs.getString("text"));
 			a.setValue(rs.getInt("value"));
@@ -61,13 +61,13 @@ public class AttributeMapper {
 	     
 	      if (rs.next()) {
 	
-	    a.setID(rs.getInt("maxid") + 1);
+	    a.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO attribute (ID, name, text, value) "
-	           + "VALUES (" + a.getID() + ",'" + a.getName() + "','"
+	        stmt.executeUpdate("INSERT INTO attribute (Id, name, text, value) "
+	           + "VALUES (" + a.getId() + ",'" + a.getName() + "','"
 	            + a.getText()+ "','" +a.getValue()   + "')");
 	      }
 	    }
@@ -87,7 +87,7 @@ public class AttributeMapper {
 
 	      stmt.executeUpdate("UPDATE Attribute " + "SET name=\""
 	          + a.getName() + "\", " + "text=\"" + a.getText() + "value=\"" + a.getValue() +  "\" "
-	          + "WHERE id=" + a.getID());
+	          + "WHERE Id=" + a.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -104,7 +104,7 @@ public class AttributeMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Attribue " + "WHERE ID=" + a.getID());
+	      stmt.executeUpdate("DELETE FROM Attribue " + "WHERE Id=" + a.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

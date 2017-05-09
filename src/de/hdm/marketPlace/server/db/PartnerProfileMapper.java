@@ -12,7 +12,7 @@ public class PartnerProfileMapper {
 	protected PartnerProfileMapper(){
 	}
 	
-	public PartnerProfile findByID(int ID){
+	public PartnerProfile findByID(int Id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -23,18 +23,19 @@ public class PartnerProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT ID, Arribute_ID, text, value FROM PartnerProfile" + "WHERE ID=" + ID +"ORDER BY Attribute_ID");
+		ResultSet rs =stmt.executeQuery("SELECT Id, ArributeRef, text, value FROM PartnerProfile" + "WHERE Id=" + Id +"ORDER BY AttributeRef");
 		
 		if ( rs.next()){
 			
 			PartnerProfile p = new PartnerProfile();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			p.setID(rs.getInt("ID");
-			p.setAttribute_ID(rs.getInt("Attribute_ID"));
+			p.setId(rs.getInt("Id"));
+			
+			p.getAttributeRef();
 			p.setText(rs.getString("text"));
 			
 			
-			return p; 
+			return p;
 			
 		}
 	
@@ -60,13 +61,13 @@ public class PartnerProfileMapper {
 	     
 	      if (rs.next()) {
 	
-	    p.setID(rs.getInt("maxid") + 1);
+	    p.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO PartnerProfile (ID, Attribute_ID, text, ) "
-	           + "VALUES (" + p.getID() + ",'" + p.getText() + ",'" + p.getAttribute_ID() + "')");
+	        stmt.executeUpdate("INSERT INTO PartnerProfile (Id, AttributeRef, text, ) "
+	           + "VALUES (" + p.getId() + ",'" + p.getText() + ",'" + p.getAttributeRef() + "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -84,15 +85,15 @@ public class PartnerProfileMapper {
 	      Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE PartnerProfile " + "SET Text=\""
-	          + p.getText() + "\", " + "Attribute_ID=\"" + p.getAttribute_ID() +  "\" "
-	          + "WHERE id=" + p.getID());
+	          + p.getText() + "\", " + "AttributeRef=\"" + p.getAttributeRef() +  "\" "
+	          + "WHERE Id=" + p.getId());
 
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
 	    }
 
-	    return pa;
+	    return p;
 	  }
 
 	  
@@ -102,7 +103,7 @@ public class PartnerProfileMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM PartnerProfile " + "WHERE ID=" + p.getID());
+	      stmt.executeUpdate("DELETE FROM PartnerProfile " + "WHERE Id=" + p.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

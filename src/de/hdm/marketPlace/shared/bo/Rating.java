@@ -1,19 +1,13 @@
 package de.hdm.marketPlace.shared.bo;
 
-public class Rating {
+public class Rating extends BusinessObject{
 
 	
 	//attributes of class
 	
-	private float rate;
-	private String ratingText;
+	private float rate = 0;
+	private String Text = "";
 	
-	//constructor
-	
-	public Rating(float rate, String ratingText) {
-		this.rate = rate;
-		this.ratingText = ratingText;		
-	}
 
 	//Setter and Getter of all attributes
 	
@@ -25,12 +19,12 @@ public class Rating {
 		this.rate = rate;
 	}
 
-	public String getRatingText() {
-		return ratingText;
+	public String getText() {
+		return Text;
 	}
 
-	public void setRatingText(String ratingText) {
-		this.ratingText = ratingText;
+	public void setText(String Text) {
+		this.Text = Text;
 	}
 	
 	
