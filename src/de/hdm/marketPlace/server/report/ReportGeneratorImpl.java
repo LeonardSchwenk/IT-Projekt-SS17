@@ -1,17 +1,12 @@
 package de.hdm.marketPlace.server.report;
 
 import java.util.Date;
+//import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.marketPlace.shared.MarketplaceAdministration;
 import de.hdm.marketPlace.shared.ReportGenerator;
-import de.hdm.marketPlace.shared.bo.Tender;
-import de.hdm.marketPlace.shared.bo.User;
-import de.hdm.marketPlace.shared.report.AllApplicationsOfUser;
-import de.hdm.marketPlace.shared.report.AllApplicationsOnTender;
-import de.hdm.marketPlace.shared.report.AllTenders;
-import de.hdm.marketPlace.shared.report.FanInFanOut;
-import de.hdm.marketPlace.shared.report.ProjectInterconnection;
-import de.hdm.marketPlace.shared.report.TendersMatchProfil;
+import de.hdm.marketPlace.shared.bo.*;
+import de.hdm.marketPlace.shared.report.*;
 
 
 public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGenerator{ //Wo findet sich RemotService Servlet??
@@ -30,20 +25,20 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		    this.administration = a;
 		  }
 	
-	protected MarketplaceAdministration getBankVerwaltung() {
+	protected MarketplaceAdministration MarketplaceAdministration() {
 		    return this.administration;
 		  }
 
 	  
-	public void setProjectMarketplace(ProjectMarktplace m) { //muss der marketplace gesetzt werden??
-		    this.administration.setMarketplace(m);
+	public void setProjectMarketplace(ProjectMarketplace m) { //muss der marketplace gesetzt werden??
+		    this.administration.setMarketplace(m); // Methode fehlt noch in der Administration Klasse
 		  }
 		   
 		  
 		  
-	protected void addImprint(Report r) { //Impressumsdaten anpassen
+	protected void addImprint(Report r) { //Impressumsdaten anpassen + bank durch ProjectMarketplace ersetzen
 			 
-			    Bank bank = this.administration.getBank();s imprint = new CompositeParagraph();
+			    ProjectMarketplace projectMarketplace = this.administration.getBank();s imprint = new CompositeParagraph(); //getter fehlt noch in Administration Klasse
 
 			    imprint.addSubParagraph(new SimpleParagraph(bank.getName()));
 			    imprint.addSubParagraph(new SimpleParagraph(bank.getStreet()));

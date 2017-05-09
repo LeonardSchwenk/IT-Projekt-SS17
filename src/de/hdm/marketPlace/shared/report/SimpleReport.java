@@ -2,7 +2,7 @@ package de.hdm.marketPlace.shared.report;
 
 import java.util.Vector;
 
-public class SimpleReport {
+public class SimpleReport extends Report{
 	
 	  private static final long serialVersionUID = 1L;
 
