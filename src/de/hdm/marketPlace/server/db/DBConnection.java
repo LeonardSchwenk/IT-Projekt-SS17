@@ -6,7 +6,7 @@ import java.sql.*;
 public class DBConnection {
 
 	
-	private static final String JDBC_URL = "jdbc:mysql//localhost/marcetplace";
+	private static final String JDBC_URL = "jdbc:mysql//localhost/marketplace";
 	private static final String User ="root";
 	private static final String Pass = null ;
 	

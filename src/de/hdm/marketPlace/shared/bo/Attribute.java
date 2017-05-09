@@ -5,6 +5,8 @@ public class Attribute extends BusinessObject {
 	private String name = "";
 	private String Text = "";
 	private int value = 0 ;
+	private int partnerprofileRef = 0;
+	
 	
 	
 	
@@ -26,6 +28,12 @@ public class Attribute extends BusinessObject {
 	}
 	public void setValue(int value) {
 		this.value = value;
+	}
+	public int getPartnerprofileRef() {
+		return partnerprofileRef;
+	}
+	public void setPartnerprofileRef(int partnerprofileRef) {
+		this.partnerprofileRef = partnerprofileRef;
 	}
 	
 	

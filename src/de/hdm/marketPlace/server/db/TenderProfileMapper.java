@@ -23,7 +23,7 @@ public class TenderProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, TenderRef value FROM TenderProfile" + "WHERE Id=" + Id +"ORDER BY TenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT Id, TenderRef, patnerprofilRef, attributeRef value FROM TenderProfile" + "WHERE Id=" + Id +"ORDER BY TenderRef");
 		
 		if ( rs.next()){
 			
@@ -31,6 +31,8 @@ public class TenderProfileMapper {
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
 			tp.setId(rs.getInt("Id"));
 			tp.setTenderRef(rs.getInt("TenderRef"));
+			tp.setPartnerprofileRef(rs.getInt("PartnerprofileRef"));
+			tp.setAttributeRef(rs.getInt("AttributeRef"));
 	
 			
 			return tp; 
@@ -64,8 +66,8 @@ public class TenderProfileMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO TenderProfile (Id, TenderRef) "
-	           + "VALUES (" + tp.getTenderRef() + "')");
+	        stmt.executeUpdate("INSERT INTO TenderProfile (Id, tenderRef, partnerprofileRef, attributeRef ) "
+	           + "VALUES (" + tp.getTenderRef() +  ",'" + tp.getPartnerprofileRef() +  ",'" + tp.getAttributeRef()+"')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -83,7 +85,7 @@ public class TenderProfileMapper {
 	      Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE TenderProfile " + "SET TenderRef=\""
-	          + tp.getTenderRef() + "\", " +  "\" "
+	          + tp.getTenderRef() + "\", " + "\", " + "AttributeRef=\"" + tp.getAttributeRef() + "\", " + "PartnerprofileRef=\"" + tp.getPartnerprofileRef() +  "\" "
 	          + "WHERE Id=" + tp.getId());
 
 	    }

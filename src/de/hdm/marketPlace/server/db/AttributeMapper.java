@@ -34,6 +34,7 @@ public class AttributeMapper {
 			a.setName(rs.getString("name"));
 			a.setText(rs.getString("text"));
 			a.setValue(rs.getInt("value"));
+			a.setPartnerprofileRef(rs.getInt("PartnerprofileRef"));
 			
 			return a; 
 			
@@ -66,9 +67,9 @@ public class AttributeMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO attribute (Id, name, text, value) "
+	        stmt.executeUpdate("INSERT INTO attribute (Id, name, text, value, partnerprofileRef) "
 	           + "VALUES (" + a.getId() + ",'" + a.getName() + "','"
-	            + a.getText()+ "','" +a.getValue()   + "')");
+	            + a.getText()+ "','" +a.getValue()  + "','" +  a.getPartnerprofileRef()+  "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -86,7 +87,7 @@ public class AttributeMapper {
 	      Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE Attribute " + "SET name=\""
-	          + a.getName() + "\", " + "text=\"" + a.getText() + "value=\"" + a.getValue() +  "\" "
+	          + a.getName() + "\", " + "text=\"" + a.getText() + "value=\"" + a.getValue() + "PartnerprofileRef=\"" + a.getPartnerprofileRef() +  "\" "
 	          + "WHERE Id=" + a.getId());
 
 	    }

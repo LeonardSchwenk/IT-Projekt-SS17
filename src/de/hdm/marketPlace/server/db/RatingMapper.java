@@ -7,7 +7,7 @@ import de.hdm.marketPlace.shared.bo.Rating;
 
 public class RatingMapper {
 
-	private static RatingMapper participationMapper = null;
+	private static RatingMapper ratingMapper = null;
 	
 	protected RatingMapper(){
 	}
@@ -65,7 +65,7 @@ public class RatingMapper {
 
 	        
 	        stmt.executeUpdate("INSERT INTO Rating (Id, rate, text) "
-	           + "VALUES (" + r.getRate() + ",'" + r.getText() +  "')");
+	           + "VALUES (" + r.getRate() + ",'" + r.getText() +  "'" +")");
 	      }
 	    }
 	    catch (SQLException e) {

@@ -2,7 +2,7 @@ package de.hdm.marketPlace.shared.bo;
 
 import java.util.Vector; 
 
-public class ProjectMarketplace {
+public class ProjectMarketplace extends BusinessObject{
 
 	//attributes of the class
 	

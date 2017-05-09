@@ -1,20 +1,21 @@
 package de.hdm.marketPlace.server.db;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import java.sql.*;
+import de.hdm.marketPlace.shared.bo.TenderProfile;
+import de.hdm.marketPlace.shared.bo.User;
 
 
+public class UserMapper {
 
-import de.hdm.marketPlace.shared.bo.UserProfile;
-
-
-public class UserProfileMapper {
-
-	private static UserProfileMapper userMapper = null;
+private static UserMapper UserMapper = null;
 	
-	protected UserProfileMapper(){
+	protected UserMapper(){
 	}
 	
-	public UserProfile findByID(int Id){
+	public User findByID(int Id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -25,19 +26,16 @@ public class UserProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, name value FROM UserProfile" + "WHERE Id=" + Id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT Id, name value FROM User" + "WHERE Id=" + Id +"ORDER BY Id");
 		
 		if ( rs.next()){
 			
-			UserProfile u = new UserProfile();
+			User u = new User();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
 			u.setId(rs.getInt("Id"));
-			u.setText(rs.getString("text"));
-			u.setUserRef(rs.getInt("UserRef"));
-			u.setAttributeRef(rs.getInt("AttributeRef"));
+			u.setName(rs.getString("Name"));
 			
-			
-			
+	
 			
 			return u; 
 			
@@ -52,7 +50,7 @@ public class UserProfileMapper {
 	
 	}
 	
-	public UserProfile insert(UserProfile u) {
+	public User insert(User u) {
 	    Connection con = DBConnection.getConnection();
 
 	    try {
@@ -60,7 +58,7 @@ public class UserProfileMapper {
 
 	  
 	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM UserProfile ");
+	          + "FROM User ");
 
 	     
 	      if (rs.next()) {
@@ -70,8 +68,8 @@ public class UserProfileMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO UserProfile (Id, UserRef, AttributeRef ,text) "
-	           + "VALUES (" + u.getUserRef() +  ",'" + u.getAttributeRef() +  ",'" + u.getText() +   "')");
+	        stmt.executeUpdate("INSERT INTO User (Id, name) "
+	           + "VALUES (" + u.getName() +  "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -82,15 +80,15 @@ public class UserProfileMapper {
 	  }
 
 
-	  public UserProfile update(UserProfile u) {
+	  public User update(User u) {
 	    Connection con = DBConnection.getConnection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE User " + "SET AttributeRef=\""
-	    	          + u.getAttributeRef()+ "SET Text=\""   + u.getText()  + "SET UserRef=\""
-	    	    	          + u.getUserRef() + "\" " + "WHERE Id=" + u.getId());
+	      stmt.executeUpdate("UPDATE User " + "SET TenderRef=\""
+	          + u.getName() + "\", " + "\" "
+	          + "WHERE Id=" + u.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -101,13 +99,13 @@ public class UserProfileMapper {
 	  }
 
 	  
-	  public void delete(UserProfile u) {
+	  public void delete(User u) {
 	    Connection con = DBConnection.getConnection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM UserProfile " + "WHERE Id=" + u.getId());
+	      stmt.executeUpdate("DELETE FROM User " + "WHERE Id=" + u.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -115,5 +113,6 @@ public class UserProfileMapper {
 	  }
 	
 	
-	}
 
+
+}
