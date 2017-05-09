@@ -28,6 +28,7 @@ public interface MarketplaceAdministration {
 	public void deleteMarketplace (ProjectMarketplace marketplace) throws IllegalArgumentException;
 	public void joinMarketplace (int marketplaceId, User user) throws IllegalArgumentException;
 	public void leaveMarketplace (int marketplaceId, User user) throws IllegalArgumentException;
+	public ProjectMarketplace getMarketplace (User user) throws IllegalArgumentException;
 	
 	//Methoden zur Benutzerverwaltung
 	public User createUser (User user) throws IllegalArgumentException;
