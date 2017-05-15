@@ -13,31 +13,95 @@ public interface MarketplaceAdministration {
 	
 	public void init() throws IllegalArgumentException;
 	
+	//Methoden zur Verwaltung von Marktplätzen
+	//Methode zur Erstellung eines Marktplatzes
+	public ProjectMarketplace createMarketplace (String name) throws IllegalArgumentException;
+	
+	//Methode zum Beitreten eines Marktplatzes
+	public void joinMarketplace (User user, ProjectMarketplace marketplace)throws IllegalArgumentException;
+	
+	//Methode zum Löschen eines Marktplatzes
+	public void deleteMarketplace (ProjectMarketplace marketplace)throws IllegalArgumentException;
+	
+	
+	//Methoden zur Benutzerverwaltung 
+	//Methode zur Erstellung eines Benutzers
+	public User createUser (String firstName, String lastName) throws IllegalArgumentException;
+	
+	//Methode zum Bearbeiten eines Benutzers
+	public void updateUser (User user, String firstName, String lastName) throws IllegalArgumentException;
+	
+	//Methode zum Löschen eines Benutzers
+	public void deleteUser (User user) throws IllegalArgumentException;
+	
+	//Methode zum Finden von Benutzern anhand deren Nachnamen
+	public Vector <User> getAllUserByName (String lastName) throws IllegalArgumentException;
+	
+	//Ausgeben aller Benutzer
+	public Vector <User> getAllUser () throws IllegalArgumentException;
+	
+	
+	//Methoden zur Verwaltung von Bewerbungen
+	//eine Bewerbung erstellen
+	public Application createApplicationFor (User applicant, Tender tender, String content)throws IllegalArgumentException;
+	
+	//eine Bewerbung bearbeiten
+	public void updateApplication (Application application, String inhalt) throws IllegalArgumentException;
+	
+	//eine Bewerbung löschen
+	public void deleteApplication (Application application)throws IllegalArgumentException;
+	
+	//Ausgeben aller Bewerbungen auf eine Ausschreibung
+	public Vector <Application> getAllApplicationsByTender(Tender tender) throws IllegalArgumentException;
+	
+	//Ausgeben aller Bewerbungen
+	public Vector <Application> getAllApplications () throws IllegalArgumentException;
+	
+	
+	//Methoden zur Verwaltung von Ausschreibungen
+	//eine Ausschreibung erstellen
+	public Tender createTender (String text) throws IllegalArgumentException;
+	
+	//eine Ausschreibung bearbeiten
+	public void updateTender (Tender tender, String text ) throws IllegalArgumentException;
+	
+	//eine Ausschreibung löschen
+	public void deleteTender (Tender tender) throws IllegalArgumentException;
+	
+	//Ausgeben aller Ausschreibungen eines Users
+	public Vector <Tender> getAllTenderByUser (User user ) throws IllegalArgumentException;
+	
+	//Ausgeben aller Bewerber auf eine Ausschreibung
+	public Vector <User> getAllApplicants (Tender tender) throws IllegalArgumentException;
+	
+	//Ausgeben aller Ausschreibungen
+	public Vector <Tender> getAllTender () throws IllegalArgumentException;
+	
+	
 	
 	//Methoden zur Verwaltung von Projekten
-	public Project createProject (String name, Date startDate, Date endDate) throws IllegalArgumentException;
-	public void updateProject (Project project) throws IllegalArgumentException;
+	//ein Projekt erstellen
+	public Project createProject (String name, String text, Date startDate, Date endDate, User manager) throws IllegalArgumentException;
+	
+	//ein Projekt bearbeiten
+	public void updateProject (Project project, String name, String text, Date startDate, Date endDate, User manager)  throws IllegalArgumentException;
+	
+	//ein Projekt löschen
 	public void deleteProject (Project project) throws IllegalArgumentException;
-	public void getProject(Project project) throws IllegalArgumentException;
-	public Vector <Project> getAllProjects (User user) throws IllegalArgumentException;
+	
+	//Ausgeben aller Projekte eines Managers
+	public Vector <Project> getAllProjectsOfManager (User user) throws IllegalArgumentException;
+	
+	//Ausgeben aller Projekte
+	public Vector <Project> getAllProjects () throws IllegalArgumentException;
 	
 	
-	//Methoden zur Verwaltung von ProjectMarketplace
-	public ProjectMarketplace createMarketplace (String name) throws IllegalArgumentException;
-	public void updateMarketplace (ProjectMarketplace marketplace) throws IllegalArgumentException;
-	public void deleteMarketplace (ProjectMarketplace marketplace) throws IllegalArgumentException;
-	public void joinMarketplace (int marketplaceId, User user) throws IllegalArgumentException;
-	public void leaveMarketplace (int marketplaceId, User user) throws IllegalArgumentException;
-	public ProjectMarketplace getMarketplace (User user) throws IllegalArgumentException;
 	
-	//Methoden zur Benutzerverwaltung
-	public User createUser (User user) throws IllegalArgumentException;
-	public void updateUser (int partnerProfilId) throws IllegalArgumentException;
-	public void deleteUser (int partnerProfilId) throws IllegalArgumentException;
-	public User findById (int partnerProfilId) throws IllegalArgumentException;
-	public User findByName (String name) throws IllegalArgumentException;
 	
-	//Methoden zur Verwaltung von Methoden
+ 	
+	
+	
+	
 	
 	
 	
