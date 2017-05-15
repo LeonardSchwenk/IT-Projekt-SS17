@@ -12,7 +12,7 @@ public class RatingMapper {
 	protected RatingMapper(){
 	}
 	
-	public Rating findByID(int ID){
+	public Rating findByID(int Id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -23,13 +23,13 @@ public class RatingMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT ID, rate, text value FROM Rating" + "WHERE ID=" + ID +"ORDER BY rate");
+		ResultSet rs =stmt.executeQuery("SELECT Id, rate, text value FROM Rating" + "WHERE Id=" + Id +"ORDER BY rate");
 		
 		if ( rs.next()){
 			
 			Rating r = new Rating();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			r.setID(rs.getInt("ID");
+			r.setId(rs.getInt("Id"));
 			r.setRate(rs.getFloat("rate"));
 			r.setText(rs.getString("text"));
 			
@@ -59,12 +59,12 @@ public class RatingMapper {
 	     
 	      if (rs.next()) {
 	
-	    r.setID(rs.getInt("maxid") + 1);
+	    r.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO Rating (ID, rate, text) "
+	        stmt.executeUpdate("INSERT INTO Rating (Id, rate, text) "
 	           + "VALUES (" + r.getRate() + ",'" + r.getText() +  "')");
 	      }
 	    }
@@ -83,8 +83,8 @@ public class RatingMapper {
 	      Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE Rating " + "SET Rate=\""
-	          + r.getRate() + "\", " + "text=\"" + r.getText() + "User_ID=\"" 
-	          + "WHERE id=" + r.getID());
+	          + r.getRate() + "\", " + "text=\"" + r.getText() + "UserRef=\"" 
+	          + "WHERE Id=" + r.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -101,7 +101,7 @@ public class RatingMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Rating " + "WHERE ID=" + p.getID());
+	      stmt.executeUpdate("DELETE FROM Rating " + "WHERE Id=" + r.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

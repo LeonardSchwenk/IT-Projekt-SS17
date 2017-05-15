@@ -13,7 +13,7 @@ public class ParticipationMapper {
 	protected ParticipationMapper(){
 	}
 	
-	public Participation findByID(int ID){
+	public Participation findByID(int Id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -24,16 +24,16 @@ public class ParticipationMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT ID, Workdays, Project_ID, User_ID value FROM Participation" + "WHERE ID=" + ID +"ORDER BY Workdays");
+		ResultSet rs =stmt.executeQuery("SELECT Id, Workdays, ProjectRef, UserRef value FROM Participation" + "WHERE Id=" + Id +"ORDER BY WorkingDays");
 		
 		if ( rs.next()){
 			
 			Participation p = new Participation();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			p.setID(rs.getInt("ID");
-			p.setWorkdays(rs.getInt("Workdays"));
-			p.setProject_ID(rs.getInt("Project_ID"));
-			p.setUser_ID(rs.getInt("User_ID"));
+			p.setId(rs.getInt("Id"));
+			p.setWorkingDays(rs.getInt("WorkingDays"));
+			p.setProjectRef(rs.getInt("ProjectRef"));
+			p.setUserRef(rs.getInt("UserRef"));
 			
 			return p; 
 			
@@ -61,14 +61,14 @@ public class ParticipationMapper {
 	     
 	      if (rs.next()) {
 	
-	    p.setID(rs.getInt("maxid") + 1);
+	    p.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO Participation (ID, Workdays, Project_ID, User_ID) "
-	           + "VALUES (" + p.getWorkdays() + ",'" + p.getProject_ID() + "','"
-	            + p.getUser_ID()  + "')");
+	        stmt.executeUpdate("INSERT INTO Participation (Id, WorkingDays, ProjectRef, UserRef) "
+	           + "VALUES (" + p.getWorkingDays() + ",'" + p.getProjectRef() + "','"
+	            + p.getUserRef()  + "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -85,9 +85,9 @@ public class ParticipationMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE Participation " + "SET Workdays=\""
-	          + p.getWorkdays() + "\", " + "Project_ID=\"" + p.getProject_ID() + "User_ID=\"" + p.getUser_ID() +  "\" "
-	          + "WHERE id=" + p.getID());
+	      stmt.executeUpdate("UPDATE Participation " + "SET WorkingDays=\""
+	          + p.getWorkingDays() + "\", " + "ProjectRef=\"" + p.getProjectRef() + "UserRef=\"" + p.getUserRef() +  "\" "
+	          + "WHERE Id=" + p.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -104,7 +104,7 @@ public class ParticipationMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Participation " + "WHERE ID=" + p.getID());
+	      stmt.executeUpdate("DELETE FROM Participation " + "WHERE Id=" + p.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

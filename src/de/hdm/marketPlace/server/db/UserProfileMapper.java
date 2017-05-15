@@ -12,7 +12,7 @@ public class UserProfileMapper {
 	protected UserProfileMapper(){
 	}
 	
-	public User findByID(int ID){
+	public User findByID(int Id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -23,15 +23,14 @@ public class UserProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT ID, name value FROM User" + "WHERE ID=" + ID +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT Id, name value FROM User" + "WHERE Id=" + Id +"ORDER BY name");
 		
 		if ( rs.next()){
 			
 			User u = new User();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			u.setID(rs.getInt("ID");
+			u.setId(rs.getInt("Id"));
 			u.setName(rs.getString("name"));
-		
 			return u; 
 			
 		}
@@ -58,12 +57,12 @@ public class UserProfileMapper {
 	     
 	      if (rs.next()) {
 	
-	    u.setID(rs.getInt("maxid") + 1);
+	    u.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO User (ID, name) "
+	        stmt.executeUpdate("INSERT INTO User (Id, name) "
 	           + "VALUES (" + u.getName() +  "')");
 	      }
 	    }
@@ -83,7 +82,7 @@ public class UserProfileMapper {
 
 	      stmt.executeUpdate("UPDATE User " + "SET Name=\""
 	          + u.getName() +  "\" "
-	          + "WHERE id=" + u.getID());
+	          + "WHERE Id=" + u.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -100,7 +99,7 @@ public class UserProfileMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM User " + "WHERE ID=" + u.getID());
+	      stmt.executeUpdate("DELETE FROM User " + "WHERE Id=" + u.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

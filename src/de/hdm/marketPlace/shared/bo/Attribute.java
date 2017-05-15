@@ -1,10 +1,11 @@
 package de.hdm.marketPlace.shared.bo;
 
-public class Attribute {
+public class Attribute extends BusinessObject {
 	
-	private String name;
-	private String valueText;
-	private int value;
+	private String name = "";
+	private String Text = "";
+	private int value = 0 ;
+	
 	
 	
 	
@@ -14,11 +15,11 @@ public class Attribute {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getValueText() {
-		return valueText;
+	public String getText() {
+		return Text;
 	}
-	public void setValueText(String valueText) {
-		this.valueText = valueText;
+	public void setText(String Text) {
+		this.Text = Text;
 	}
 	public int getValue() {
 		return value;

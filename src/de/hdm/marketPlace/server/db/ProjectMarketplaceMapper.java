@@ -2,8 +2,9 @@ package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
 
-import de.hdm.marketPlace.shared.bo.bo.bo.ProjectMarketplace;
+import de.hdm.marketPlace.shared.bo.ProjectMarketplace;
 
+//insert delete update ergänzen
 
 
 public class ProjectMarketplaceMapper {

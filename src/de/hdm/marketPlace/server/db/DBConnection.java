@@ -19,14 +19,14 @@ public class DBConnection {
 	public static Connection getConnection() {
 	try {
 		
-		return DriverManager.getConnection(JDBC_URL,User,Pass);
-		
+		// return DriverManager.getConnection(JDBC_URL,User,Pass);
+		 con =  DriverManager.getConnection(JDBC_URL,User,Pass);
 	}
 	catch(Exception E){
 		E.printStackTrace();
 	}
 	
-	return null; 
+	return con; 
 
 	}
 }
