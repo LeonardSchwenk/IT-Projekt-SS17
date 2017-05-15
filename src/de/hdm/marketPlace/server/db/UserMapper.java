@@ -1,39 +1,50 @@
 package de.hdm.marketPlace.server.db;
 import java.sql.Connection;
+
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import de.hdm.marketPlace.shared.bo.TenderProfile;
 import de.hdm.marketPlace.shared.bo.User;
 
 
 public class UserMapper {
 
-private static UserMapper UserMapper = null;
+private static UserMapper userMapper = null;
 	
 	protected UserMapper(){
 	}
 	
-	public User findByID(int Id){
+
+	
+	public static UserMapper userMapper() {
+	    if (userMapper == null) {
+	    	userMapper = new UserMapper();
+	    }
+	    return userMapper;
+	  }
+	    
+	public User findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
-	
-	
 	
 	try {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, name value FROM User" + "WHERE Id=" + Id +"ORDER BY Id");
+		
+		ResultSet rs = stmt
+		          .executeQuery("SELECT id, name FROM user "
+		              + "WHERE id=" + id + " ORDER BY name");
 		
 		if ( rs.next()){
 			
 			User u = new User();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			u.setId(rs.getInt("Id"));
-			u.setName(rs.getString("Name"));
+			u.setId(rs.getInt("id"));
+			u.setName(rs.getString("name"));
 			
 	
 			
@@ -54,11 +65,11 @@ private static UserMapper UserMapper = null;
 	    Connection con = DBConnection.getConnection();
 
 	    try {
-	      Statement stmt = con.createStatement();
+	     Statement stmt = con.createStatement();
 
 	  
 	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM User ");
+	          + "FROM user ");
 
 	     
 	      if (rs.next()) {
@@ -66,10 +77,12 @@ private static UserMapper UserMapper = null;
 	    u.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
+	        
+	        u.setId(rs.getInt("maxid") + 1);
 
 	        
-	        stmt.executeUpdate("INSERT INTO User (Id, name) "
-	           + "VALUES (" + u.getName() +  "')");
+	        stmt.executeUpdate("INSERT INTO user (id, name) "
+	           + "VALUES ('" + u.getId() + "','" + u.getName() +  "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -86,10 +99,13 @@ private static UserMapper UserMapper = null;
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE User " + "SET TenderRef=\""
-	          + u.getName() + "\", " + "\" "
-	          + "WHERE Id=" + u.getId());
+	      stmt.executeUpdate("UPDATE user " + "SET Name=\""
+	          + u.getName() + "\" "
+	          + "WHERE id=" + u.getId());
 
+	      
+	      
+	      
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -105,7 +121,7 @@ private static UserMapper UserMapper = null;
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM User " + "WHERE Id=" + u.getId());
+	      stmt.executeUpdate("DELETE FROM user " + "WHERE id=" + u.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

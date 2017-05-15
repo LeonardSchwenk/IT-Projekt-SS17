@@ -55,7 +55,9 @@ public class TenderProfile extends BusinessObject{
 	public void setAttributeRef(int attributeRef) {
 		this.attributeRef = attributeRef;
 	}
-	
+	 public String toString() {
+		    return super.toString() + "TenderRef:  " + this.tenderRef + "PartnerprofileRef: " + this.partnerprofileRef+ " AttributeRef: " + this.attributeRef;
+		  }
 	
 	
 	

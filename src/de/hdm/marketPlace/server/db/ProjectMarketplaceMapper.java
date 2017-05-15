@@ -3,6 +3,7 @@ package de.hdm.marketPlace.server.db;
 import java.sql.*;
 
 
+
 import de.hdm.marketPlace.shared.bo.ProjectMarketplace;
 import de.hdm.marketPlace.shared.bo.Rating;
 
@@ -20,7 +21,7 @@ public class ProjectMarketplaceMapper {
 
 	}
 	
-	  private static ProjectMarketplace projectmarketplace = null;
+	Connection con = DBConnection.getConnection();
 
 	
 	
@@ -34,7 +35,7 @@ public class ProjectMarketplaceMapper {
 	
 	
 	
-	public ProjectMarketplace findByKey(int Id) {
+	public ProjectMarketplace findByKey(int id) {
 	    
 	    Connection con = DBConnection.getConnection();
 
@@ -42,14 +43,15 @@ public class ProjectMarketplaceMapper {
 	    
 	      Statement stmt = con.createStatement();
 
-	      ResultSet rs = stmt.executeQuery("SELECT Id, Name, UserRef FROM ProjectMarketplace "
-	              + "WHERE ProjectMarketplaceRef=" + Id );
+	      ResultSet rs = stmt.executeQuery("SELECT id, name, userRef FROM projectmarketplace "
+	              + "WHERE id=" + id +"ORDER BY name" );
 
 	    
 	      if (rs.next()) {
 	    	  
 	    	ProjectMarketplace pm = new ProjectMarketplace();
-	        pm.setName(rs.getString("Name"));
+	        pm.setName(rs.getString("name"));
+	        
 	        
 	      
 
@@ -82,8 +84,8 @@ public class ProjectMarketplaceMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO ProjectMarketplace (Id, name) "
-	           + "VALUES (" + pm.getName()  +  "')");
+	        stmt.executeUpdate("INSERT INTO projectmarketplace (id, name) "
+	           + "VALUES ('" + pm.getName()  +  "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -100,9 +102,9 @@ public class ProjectMarketplaceMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE ProjectMarketplace " + "SET name=\""
+	      stmt.executeUpdate("UPDATE projectmarketplace " + "SET name=\""
 	          + pm.getName() + "\", " 
-	          + "WHERE Id=" + pm.getId());
+	          + "WHERE id=" + pm.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -119,7 +121,7 @@ public class ProjectMarketplaceMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM ProjectMarketplace " + "WHERE Id=" + pm.getId());
+	      stmt.executeUpdate("DELETE FROM ProjectMarketplace " + "WHERE id=" + pm.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

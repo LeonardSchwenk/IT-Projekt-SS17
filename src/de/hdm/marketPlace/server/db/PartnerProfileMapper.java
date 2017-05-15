@@ -2,6 +2,7 @@ package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
 
+
 import de.hdm.marketPlace.shared.bo.PartnerProfile;;
 
 
@@ -12,7 +13,14 @@ public class PartnerProfileMapper {
 	protected PartnerProfileMapper(){
 	}
 	
-	public PartnerProfile findByID(int Id){
+	public static PartnerProfileMapper partnerProfileMapper() {
+	    if (partnerProfileMapper == null) {
+	    	partnerProfileMapper = new PartnerProfileMapper();
+	    }
+	    return partnerProfileMapper;
+	  }
+	
+	public PartnerProfile findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -23,7 +31,7 @@ public class PartnerProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, ArributeRef, text, value FROM PartnerProfile" + "WHERE Id=" + Id +"ORDER BY AttributeRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, arributeRef, text, value FROM PartnerProfile" + "WHERE Id=" + Id +"ORDER BY AttributeRef");
 		
 		if ( rs.next()){
 			

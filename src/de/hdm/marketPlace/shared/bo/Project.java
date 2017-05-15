@@ -8,11 +8,11 @@ public class Project extends BusinessObject{
 	private String text =""; 
 	private Date startDate;
 	private Date endDate; 
-	private int projectManagerRef = 0; 
-	private int projectMarketplaceRef = 0; 
+	private int projectmarketplaceRef = 0; 
+	private int userRef = 0; 
 	private int tenderRef = 0;
 	
-	private int userRef = 0;
+	
 	
 	public String getName() {
 		return name;
@@ -38,18 +38,7 @@ public class Project extends BusinessObject{
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public int getProjectManagerRef() {
-		return projectManagerRef;
-	}
-	public void setProjectManagerRef(int projectManager) {
-		this.projectManagerRef = projectManager;
-	}
-	public int getProjectMarketplaceRef() {
-		return projectMarketplaceRef;
-	}
-	public void setProjectMarketplaceRef(int projectMarketplaceRef) {
-		this.projectMarketplaceRef = projectMarketplaceRef;
-	}
+	
 	public int getTenderRef() {
 		return tenderRef;
 	}
@@ -63,11 +52,17 @@ public class Project extends BusinessObject{
 		this.userRef = userRef;
 	} 
 	
+	
+	public int getProjectmarketplaceRef() {
+		return projectmarketplaceRef;
+	}
+	public void setProjectmarketplaceRef(int projectmarketplaceRef) {
+		this.projectmarketplaceRef = projectmarketplaceRef;
+	}
+
+		
 	 public String toString() {
-		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " ProjectManager: " + this.projectManagerRef+ " ProjectMarketplace: " + this.projectMarketplaceRef+ "Tender: " + this.tenderRef+ "User: " + this.userRef;
+		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " ProjectMarketplace: " + this.projectmarketplaceRef+  "Tender: " + this.tenderRef+ "User: " + this.userRef;
 		  }
 
-		}
-	
-
-
+}

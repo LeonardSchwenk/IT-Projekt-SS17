@@ -37,5 +37,8 @@ public class UserProfile extends BusinessObject {
 		this.text = text;
 	}
 
+	 public String toString() {
+		    return super.toString() + "UserRef:  " + this.userRef + "Text: " + this.text+ " AttributeRef: " + this.attributeRef;
+		  }
 
 }

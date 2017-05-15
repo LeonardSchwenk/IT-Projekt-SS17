@@ -45,8 +45,9 @@ public class ProjectMarketplace extends BusinessObject{
 	     
 	      result.append(a.toString() + "\n");
 	    }
+		return super.toString()+"Name:" + this.name;
 
-	    
-	    return result.toString();
+		
+	   
 }
 }
