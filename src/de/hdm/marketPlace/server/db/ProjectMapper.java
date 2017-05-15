@@ -11,9 +11,18 @@ public class ProjectMapper {
 	private static ProjectMapper projectMapper = null;
 	
 	protected ProjectMapper(){
+		
 	}
 	
-	public Project findByID(int Id){
+
+	public static ProjectMapper projectMapper() {
+	    if (projectMapper == null) {
+	    	projectMapper = new ProjectMapper();
+	    }
+	    return projectMapper;
+	  }
+	
+	public Project findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -24,19 +33,19 @@ public class ProjectMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, name, text, ProjectMangerRef, TenderRef value FROM Project" + "WHERE Id=" + Id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT Id, name, text, projectmarketplaceRef, tenderRef, userRef value FROM project" + "WHERE id=" + id +"ORDER BY name");
 		
 		if ( rs.next()){
 			
 			Project p = new Project();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			p.setId(rs.getInt("ID"));
-			p.setName(rs.getString("Name"));
-			p.setText(rs.getString("Text"));
-			p.setProjectManagerRef(rs.getInt("ProjectManagerRef"));
+			p.setId(rs.getInt("id"));
+			p.setName(rs.getString("name"));
+			p.setText(rs.getString("text"));
+			p.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
+			p.setTenderRef(rs.getInt("tenderRef"));
+			p.setUserRef(rs.getInt("userRef"));
 			
-			
-			p.setTenderRef(rs.getInt("TenderRef"));
 			
 			return p; 
 			
@@ -69,9 +78,9 @@ public class ProjectMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO Project (Id, Name, Text, ProjectMangerRef, TenderRef) "
-	           + "VALUES (" + p.getId() + ",'" + p.getName() + "','"
-	            + p.getText()+ "','" +p.getProjectManagerRef() + "','"    + p.getTenderRef()  + "')");
+	        stmt.executeUpdate("INSERT INTO project (id, name, text, projectmarketplaceRef,userRef , tenderRef) "
+	           + "VALUES ('" + p.getId() + "','" + p.getName() + "','"
+	            + p.getText()+ "','" + p.getProjectmarketplaceRef() + "','"    + p.getUserRef()  + "','"    + p.getTenderRef()  + "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -88,8 +97,8 @@ public class ProjectMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE Project " + "SET name=\""
-	          + p.getName() + "\", " + "text=\"" + p.getText() + "ProjectManagerRef=\"" + p.getProjectManagerRef() +  "TenderRef=\"" + p.getTenderRef() +  "\" "
+	      stmt.executeUpdate("UPDATE project " + "SET name=\""
+	          + p.getName() + "\", " + "text=\"" + p.getText()+ "\", " + "projektmarketplaceRef=\"" + p.getProjectmarketplaceRef()+ "\", " +  "UserRef=\"" + p.getUserRef() +  "\", " +  "TenderRef=\"" + p.getTenderRef() +  "\" "
 	          + "WHERE Id=" + p.getId());
 
 	    }
@@ -107,7 +116,7 @@ public class ProjectMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Project " + "WHERE Id=" + p.getId());
+	      stmt.executeUpdate("DELETE FROM Project " + "WHERE id=" + p.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

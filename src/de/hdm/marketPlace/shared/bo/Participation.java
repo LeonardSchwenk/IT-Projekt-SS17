@@ -50,9 +50,6 @@ public class Participation extends BusinessObject{
 	}
 	
 	 public String toString() {
-		    return super.toString() + " inhaber, Kunden-ID: #" + this.participationID;
-	
-	
-
-}
+		    return super.toString() + "projectRef:  " + this.projectRef + "userRef: " + this.userRef+ " ratingRef: " + this.ratingRef + "workingDays" + this.workingDays+ "startdate" + this.startDate+ "enddate" + this.endDate;
+		  }
 }

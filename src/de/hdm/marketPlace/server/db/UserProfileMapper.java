@@ -2,17 +2,29 @@ package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
 
-import de.hdm.marketPlace.shared.bo.User;
+
+
+import de.hdm.marketPlace.shared.bo.UserProfile;
 
 
 public class UserProfileMapper {
 
-	private static UserProfileMapper userMapper = null;
+	private static UserProfileMapper userProfileMapper = null;
 	
 	protected UserProfileMapper(){
+		
+		
 	}
 	
-	public User findByID(int Id){
+	public static UserProfileMapper  userProfileMapper() {
+		if (userProfileMapper == null){
+			userProfileMapper = new UserProfileMapper();
+			
+		}
+		return userProfileMapper;
+	}
+	
+	public UserProfile findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -23,14 +35,19 @@ public class UserProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, name value FROM User" + "WHERE Id=" + Id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, text, userRef, attributeRef FROM userprofile" + "WHERE id=" + id +"ORDER BY name");
 		
 		if ( rs.next()){
 			
-			User u = new User();
-			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			u.setId(rs.getInt("Id"));
-			u.setName(rs.getString("name"));
+			UserProfile u = new UserProfile();
+			u.setId(rs.getInt("id"));
+			u.setText(rs.getString("text"));
+			u.setUserRef(rs.getInt("userRef"));
+			u.setAttributeRef(rs.getInt("attributeRef"));
+			
+			
+			
+			
 			return u; 
 			
 		}
@@ -44,7 +61,7 @@ public class UserProfileMapper {
 	
 	}
 	
-	public User insert(User u) {
+	public UserProfile insert(UserProfile u) {
 	    Connection con = DBConnection.getConnection();
 
 	    try {
@@ -52,7 +69,7 @@ public class UserProfileMapper {
 
 	  
 	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM User ");
+	          + "FROM userprofile ");
 
 	     
 	      if (rs.next()) {
@@ -62,8 +79,8 @@ public class UserProfileMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO User (Id, name) "
-	           + "VALUES (" + u.getName() +  "')");
+	        stmt.executeUpdate("INSERT INTO userprofile (id, userRef, attributeRef ,text) "
+	           + "VALUES ('" + u.getUserRef() +  "','" + u.getAttributeRef() +  "','" + u.getText() +   "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -74,15 +91,15 @@ public class UserProfileMapper {
 	  }
 
 
-	  public User update(User u) {
+	  public UserProfile update(UserProfile u) {
 	    Connection con = DBConnection.getConnection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE User " + "SET Name=\""
-	          + u.getName() +  "\" "
-	          + "WHERE Id=" + u.getId());
+	      stmt.executeUpdate("UPDATE User " + "SET AttributeRef=\""
+	    	          + u.getAttributeRef()+  "\", " + "SET Text=\""   + u.getText() + "\", "  + "SET UserRef=\""
+	    	    	          + u.getUserRef() + "\" " + "WHERE id=" + u.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -93,13 +110,13 @@ public class UserProfileMapper {
 	  }
 
 	  
-	  public void delete(User u) {
+	  public void delete(UserProfile u) {
 	    Connection con = DBConnection.getConnection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM User " + "WHERE Id=" + u.getId());
+	      stmt.executeUpdate("DELETE FROM UserProfile " + "WHERE Id=" + u.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

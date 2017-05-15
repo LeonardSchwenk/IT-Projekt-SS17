@@ -12,7 +12,15 @@ public class TenderProfileMapper {
 	protected TenderProfileMapper(){
 	}
 	
-	public TenderProfile findByID(int Id){
+
+	public static TenderProfileMapper tenderProfileMapper() {
+	    if (tenderProfileMapper == null) {
+	    	tenderProfileMapper = new TenderProfileMapper();
+	    }
+	    return tenderProfileMapper;
+	  }
+	
+	public TenderProfile findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -23,14 +31,16 @@ public class TenderProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, TenderRef value FROM TenderProfile" + "WHERE Id=" + Id +"ORDER BY TenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, attributeRef value FROM tenderProfile" + "WHERE id=" + id +"ORDER BY tenderRef");
 		
 		if ( rs.next()){
 			
 			TenderProfile tp = new TenderProfile();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			tp.setId(rs.getInt("Id"));
-			tp.setTenderRef(rs.getInt("TenderRef"));
+			tp.setId(rs.getInt("id"));
+			tp.setTenderRef(rs.getInt("tenderRef"));
+			tp.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
+			tp.setAttributeRef(rs.getInt("attributeRef"));
 	
 			
 			return tp; 
@@ -64,8 +74,8 @@ public class TenderProfileMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO TenderProfile (Id, TenderRef) "
-	           + "VALUES (" + tp.getTenderRef() + "')");
+	        stmt.executeUpdate("INSERT INTO TenderProfile (id, tenderRef, partnerprofileRef, attributeRef ) "
+	           + "VALUES ('" + tp.getTenderRef() +  "','" + tp.getPartnerprofileRef() +  "','" + tp.getAttributeRef()+"')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -83,7 +93,7 @@ public class TenderProfileMapper {
 	      Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE TenderProfile " + "SET TenderRef=\""
-	          + tp.getTenderRef() + "\", " +  "\" "
+	          + tp.getTenderRef() + "\", "  + "AttributeRef=\"" + tp.getAttributeRef() + "\", " + "PartnerprofileRef=\"" + tp.getPartnerprofileRef() +  "\" "
 	          + "WHERE Id=" + tp.getId());
 
 	    }

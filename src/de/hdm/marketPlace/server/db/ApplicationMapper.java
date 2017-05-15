@@ -3,6 +3,7 @@ package de.hdm.marketPlace.server.db;
 import java.sql.*;
 
 
+
 import de.hdm.marketPlace.shared.bo.Application;
 
 
@@ -13,7 +14,15 @@ public class ApplicationMapper {
 	protected ApplicationMapper(){
 	}
 	
-	public Application findByID(int Id){
+
+	public static ApplicationMapper applicationMapper() {
+	    if (applicationMapper == null) {
+	    	applicationMapper = new ApplicationMapper();
+	    }
+	    return applicationMapper;
+	  }
+	
+	public Application findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -24,17 +33,17 @@ public class ApplicationMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, Text, RatingRef, TenderRef, UserRef value FROM Application" + "WHERE Id=" + Id +"ORDER BY TenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, text, ratingRef, tenderRef, userRef value FROM application" + "WHERE id=" + id +"ORDER BY tenderRef");
 		
 		if ( rs.next()){
 			
 			Application a = new Application();
 			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			a.setId(rs.getInt("Id"));
-			a.setText(rs.getString("Text"));
-			a.setRatingRef(rs.getInt("RatingRef"));
-			a.setTenderRef(rs.getInt("TenderRef"));
-			a.setUserRef(rs.getInt("UserRef"));
+			a.setId(rs.getInt("id"));
+			a.setText(rs.getString("text"));
+			a.setRatingRef(rs.getInt("ratingRef"));
+			a.setTenderRef(rs.getInt("tenderRef"));
+			a.setUserRef(rs.getInt("userRef"));
 			
 			
 			
@@ -69,8 +78,8 @@ public class ApplicationMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO Application (Id, Text, RatingRef, TenderRef, UserRef) "
-	           + "VALUES (" + a.getText() + ",'" + a.getRatingRef() + "','"+ a.getTenderRef() + ",'"+ a.getUserRef()  + "')");
+	        stmt.executeUpdate("INSERT INTO application (id, text, ratingRef, tenderRef, userRef) "
+	           + "VALUES ('" + a.getText() + "','" + a.getRatingRef() + "','"+ a.getTenderRef() + ",'"+ a.getUserRef()  + "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -87,8 +96,8 @@ public class ApplicationMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE Application " + "SET Text=\""
-	          + a.getText() + "\", " + "RatingRef=\"" + a.getRatingRef() + "UserRef=\"" + a.getUserRef() +  "\" "
+	      stmt.executeUpdate("UPDATE application " + "SET Text=\""
+	          + a.getText() + "\", " + "RatingRef=\"" + a.getRatingRef()+ "\", " + "UserRef=\"" + a.getUserRef() + "\", " + "TenderRef=\"" + a.getTenderRef() +  "\" "
 	          + "WHERE id=" + a.getId());
 
 	    }
@@ -106,7 +115,7 @@ public class ApplicationMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Application " + "WHERE Id=" + a.getId());
+	      stmt.executeUpdate("DELETE FROM application " + "WHERE id=" + a.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

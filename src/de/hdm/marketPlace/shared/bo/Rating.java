@@ -6,11 +6,19 @@ public class Rating extends BusinessObject{
 	//attributes of class
 	
 	private float rate = 0;
-	private String Text = "";
+	private String text = "";
 	
 
 	//Setter and Getter of all attributes
 	
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
 	public float getRate() {
 		return rate;
 	}
@@ -19,14 +27,11 @@ public class Rating extends BusinessObject{
 		this.rate = rate;
 	}
 
-	public String getText() {
-		return Text;
-	}
-
-	public void setText(String Text) {
-		this.Text = Text;
-	}
 	
 	
+	
+	 public String toString() {
+		    return super.toString() + "Rate:  " + this.rate + "Text: " + this.text;
+		  }
 	
 }

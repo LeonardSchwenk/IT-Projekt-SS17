@@ -8,6 +8,10 @@ public class TenderProfile extends BusinessObject{
 	private Date createDate;
 	private Date updateDate;
 	private int tenderRef = 0;
+	private int partnerprofileRef = 0;
+	private int attributeRef = 0;
+	
+	
 	
 	
 	//Setter and Getter of all attributes
@@ -35,7 +39,25 @@ public class TenderProfile extends BusinessObject{
 	public void setTenderRef(int tenderRef) {
 		this.tenderRef = tenderRef;
 	}
-	
+
+	public int getPartnerprofileRef() {
+		return partnerprofileRef;
+	}
+
+	public void setPartnerprofileRef(int partnerprofileRef) {
+		this.partnerprofileRef = partnerprofileRef;
+	}
+
+	public int getAttributeRef() {
+		return attributeRef;
+	}
+
+	public void setAttributeRef(int attributeRef) {
+		this.attributeRef = attributeRef;
+	}
+	 public String toString() {
+		    return super.toString() + "TenderRef:  " + this.tenderRef + "PartnerprofileRef: " + this.partnerprofileRef+ " AttributeRef: " + this.attributeRef;
+		  }
 	
 	
 	

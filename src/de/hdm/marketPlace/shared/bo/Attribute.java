@@ -3,8 +3,10 @@ package de.hdm.marketPlace.shared.bo;
 public class Attribute extends BusinessObject {
 	
 	private String name = "";
-	private String Text = "";
+	private String text = "";
 	private int value = 0 ;
+	private int partnerprofileRef = 0;
+	
 	
 	
 	
@@ -16,10 +18,10 @@ public class Attribute extends BusinessObject {
 		this.name = name;
 	}
 	public String getText() {
-		return Text;
+		return text;
 	}
-	public void setText(String Text) {
-		this.Text = Text;
+	public void setText(String text) {
+		this.text = text;
 	}
 	public int getValue() {
 		return value;
@@ -27,8 +29,16 @@ public class Attribute extends BusinessObject {
 	public void setValue(int value) {
 		this.value = value;
 	}
+	public int getPartnerprofileRef() {
+		return partnerprofileRef;
+	}
+	public void setPartnerprofileRef(int partnerprofileRef) {
+		this.partnerprofileRef = partnerprofileRef;
+	}
 	
-	
+	 public String toString() {
+		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " Value: " + this.value + "PartnerProfile" + this.partnerprofileRef;
+		  }
 	
 	
 

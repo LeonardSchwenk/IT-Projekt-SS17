@@ -13,7 +13,15 @@ public class AttributeMapper {
 	protected AttributeMapper(){
 	}
 	
-	public Attribute findByID(int Id){
+	public static AttributeMapper attributeMapper(){
+		if(attributeMapper == null){
+			attributeMapper = new  AttributeMapper();
+		}
+		
+		return attributeMapper;
+	}
+	
+	public Attribute findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -24,7 +32,7 @@ public class AttributeMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, name, text, value FROM Attribute" + "WHERE Id=" + Id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, value, partnerprofileRef FROM attribute" + "WHERE id=" + id +"ORDER BY name");
 		
 		if ( rs.next()){
 			
@@ -34,6 +42,7 @@ public class AttributeMapper {
 			a.setName(rs.getString("name"));
 			a.setText(rs.getString("text"));
 			a.setValue(rs.getInt("value"));
+			a.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
 			
 			return a; 
 			
@@ -66,9 +75,9 @@ public class AttributeMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO attribute (Id, name, text, value) "
-	           + "VALUES (" + a.getId() + ",'" + a.getName() + "','"
-	            + a.getText()+ "','" +a.getValue()   + "')");
+	        stmt.executeUpdate("INSERT INTO attribute (id, name, text, value, partnerprofileRef) "
+	           + "VALUES ('" + a.getId() + "','" + a.getName() + "','"
+	            + a.getText()+ "','" +a.getValue()  + "','" +  a.getPartnerprofileRef()+  "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -85,8 +94,8 @@ public class AttributeMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE Attribute " + "SET name=\""
-	          + a.getName() + "\", " + "text=\"" + a.getText() + "value=\"" + a.getValue() +  "\" "
+	      stmt.executeUpdate("UPDATE attribute " + "SET name=\""
+	          + a.getName() + "\", " + "text=\"" + a.getText() + "\", "+ "value=\"" + a.getValue() + "\", " + "PartnerprofileRef=\"" + a.getPartnerprofileRef() +  "\" "
 	          + "WHERE Id=" + a.getId());
 
 	    }
@@ -104,7 +113,7 @@ public class AttributeMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Attribue " + "WHERE Id=" + a.getId());
+	      stmt.executeUpdate("DELETE FROM attribue " + "WHERE id=" + a.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

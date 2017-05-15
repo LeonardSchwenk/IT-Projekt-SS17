@@ -2,7 +2,7 @@ package de.hdm.marketPlace.shared.bo;
 
 import java.util.Vector; 
 
-public class ProjectMarketplace {
+public class ProjectMarketplace extends BusinessObject{
 
 	//attributes of the class
 	
@@ -45,8 +45,9 @@ public class ProjectMarketplace {
 	     
 	      result.append(a.toString() + "\n");
 	    }
+		return super.toString()+"Name:" + this.name;
 
-	    
-	    return result.toString();
+		
+	   
 }
 }

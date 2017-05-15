@@ -18,6 +18,10 @@ public class Application extends BusinessObject{
 	private int tenderRef = 0;
 	private int ratingRef = 0;
 	
+	
+	private int partnerprofileRef = 0 ;
+	
+	
 	//Was muss in den Konstruktor 
 	
 	public Application(){
@@ -65,8 +69,8 @@ public class Application extends BusinessObject{
 	} 
 	
 	 public String toString() {
-		    return super.toString() + " Bewerbungs-ID: #" + this.applicationID;
-	//this. ? 
+		    return super.toString() + " Text: " + this.text+ " Partnerprofile: " + this.partnerprofileRef+ " Rating: " + this.ratingRef+ " Tender: " + this.tenderRef+ " User: " + this.userRef;
+		    }
 		    
 	public boolean equals(Object o) {
 	    

@@ -2,7 +2,11 @@ package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
 
+
+
 import de.hdm.marketPlace.shared.bo.ProjectMarketplace;
+import de.hdm.marketPlace.shared.bo.Rating;
+
 
 //insert delete update ergänzen
 
@@ -16,7 +20,22 @@ public class ProjectMarketplaceMapper {
 	protected ProjectMarketplaceMapper () {
 
 	}
-	public ProjectMarketplace findByKey(int ProjectMarketplace_ID) {
+	
+	Connection con = DBConnection.getConnection();
+
+	
+	
+	public static ProjectMarketplaceMapper ProjectMarketplaceMapper() {
+	    if (projectmarketplaceMapper == null) {
+	    	projectmarketplaceMapper = new ProjectMarketplaceMapper();
+	    }
+	    return projectmarketplaceMapper;
+	  }
+	    
+	
+	
+	
+	public ProjectMarketplace findByKey(int id) {
 	    
 	    Connection con = DBConnection.getConnection();
 
@@ -24,13 +43,16 @@ public class ProjectMarketplaceMapper {
 	    
 	      Statement stmt = con.createStatement();
 
-	      ResultSet rs = stmt.executeQuery("SELECT ProjectMarketplace_ID, Name, UserRef FROM ProjectMarketplace "
-	              + "WHERE ProjectMarketplace_ID=" + ProjectMarketplace_ID );
+	      ResultSet rs = stmt.executeQuery("SELECT id, name, userRef FROM projectmarketplace "
+	              + "WHERE id=" + id +"ORDER BY name" );
 
 	    
 	      if (rs.next()) {
-	    	  ProjectMarketplace pm = new ProjectMarketplace();
-	        pm.setName(rs.getString("Name"));
+	    	  
+	    	ProjectMarketplace pm = new ProjectMarketplace();
+	        pm.setName(rs.getString("name"));
+	        
+	        
 	      
 
 	        return pm;
@@ -43,6 +65,69 @@ public class ProjectMarketplaceMapper {
 
 	    return null;
 	  }
+
+	public ProjectMarketplace insert(ProjectMarketplace pm) {
+	    Connection con = DBConnection.getConnection();
+
+	    try {
+	      Statement stmt = con.createStatement();
+
+	  
+	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
+	          + "FROM ProjectMarketplace ");
+
+	     
+	      if (rs.next()) {
+	
+	    pm.setId(rs.getInt("maxid") + 1);
+
+	        stmt = con.createStatement();
+
+	        
+	        stmt.executeUpdate("INSERT INTO projectmarketplace (id, name) "
+	           + "VALUES ('" + pm.getName()  +  "')");
+	      }
+	    }
+	    catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+
+	    return pm;
+	  }
+
+
+	  public ProjectMarketplace update(ProjectMarketplace pm) {
+	    Connection con = DBConnection.getConnection();
+
+	    try {
+	      Statement stmt = con.createStatement();
+
+	      stmt.executeUpdate("UPDATE projectmarketplace " + "SET name=\""
+	          + pm.getName() + "\", " 
+	          + "WHERE id=" + pm.getId());
+
+	    }
+	    catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+
+	    return pm;
+	  }
+
+	  
+	  public void delete(ProjectMarketplace pm) {
+	    Connection con = DBConnection.getConnection();
+
+	    try {
+	      Statement stmt = con.createStatement();
+
+	      stmt.executeUpdate("DELETE FROM ProjectMarketplace " + "WHERE id=" + pm.getId());
+	    }
+	    catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	  }
+	
 	
 	
 }
