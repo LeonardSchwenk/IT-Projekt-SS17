@@ -11,6 +11,7 @@ public class HTMLReportWriter extends ReportWriter {
     this.reportText = "";
   }
 
+  
   public String paragraph2HTML(Paragraph p) {
     if (p instanceof CompositeParagraph) {
       return this.paragraph2HTML((CompositeParagraph) p);
@@ -20,6 +21,7 @@ public class HTMLReportWriter extends ReportWriter {
     }
   }
 
+  
   public String paragraph2HTML(CompositeParagraph p) {
     StringBuffer result = new StringBuffer();
 
@@ -30,6 +32,7 @@ public class HTMLReportWriter extends ReportWriter {
     return result.toString();
   }
 
+  
   public String paragraph2HTML(SimpleParagraph p) {
     return "<p>" + p.toString() + "</p>";
   }
@@ -45,6 +48,7 @@ public class HTMLReportWriter extends ReportWriter {
     return "</body></html>";
   }
 
+  
   public void process(AllAccountsOfCustomerReport r) {
 
     this.resetReportText();

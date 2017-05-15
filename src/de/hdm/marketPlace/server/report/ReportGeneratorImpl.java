@@ -2,6 +2,7 @@ package de.hdm.marketPlace.server.report;
 
 import java.util.Date;
 //import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.Vector;
 
 import de.hdm.marketPlace.shared.MarketplaceAdministration;
 import de.hdm.marketPlace.shared.ReportGenerator;
@@ -25,7 +26,7 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		    this.administration = a;
 		  }
 	
-	protected MarketplaceAdministration MarketplaceAdministration() {
+	protected MarketplaceAdministration getMarketplaceAdministration() {
 		    return this.administration;
 		  }
 
@@ -38,11 +39,11 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		  
 	protected void addImprint(Report r) { //Impressumsdaten anpassen + bank durch ProjectMarketplace ersetzen
 			 
-			    ProjectMarketplace projectMarketplace = this.administration.getBank();s imprint = new CompositeParagraph(); //getter fehlt noch in Administration Klasse
+			    ProjectMarketplace projectMarketplace = this.administration.getMarketplace(); //warum User als Übergabewert??
+			    CompositeParagraph imprint = new CompositeParagraph(); //getter fehlt noch in Administration Klasse
 
-			    imprint.addSubParagraph(new SimpleParagraph(bank.getName()));
-			    imprint.addSubParagraph(new SimpleParagraph(bank.getStreet()));
-			    imprint.addSubParagraph(new SimpleParagraph(bank.getZip() + " " + bank.getCity()));
+			    imprint.addSubParagraph(new SimpleParagraph(projectMarketplace.getName()));
+			    // Mehr Information darstellen??
 
 			    r.setImprint(imprint);
 
@@ -51,10 +52,40 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 	
 	// ALLE noch mit entsprechendem Code zum erzeugen der einzelnen Reportss
 	
-	  public AllTenders createAllTendersReport() throws IllegalArgumentException{
+	  public AllTenders createAllTendersReport(ProjectMarketplace m) throws IllegalArgumentException{
+		  
+		  if(this.getMarketplaceAdministration() == null)
+			  return null;
+		  
+		  AllTenders result = new AllTenders(); //Leerer Report
+		  
+		  result.setTitle("All Tenders on Marketplace");
+		  
+		  this.addImprint(result);
+		  
+		  result.setCreated(new Date());
+		  
+		  CompositeParagraph header = new CompositeParagraph();
+		  
+		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName()));
+		  
+		  result.setHeaderData(header);
+		  
+		  
+		  
+		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
+		  
+		  headline.addColumn(new Column("TenderName"));
+		  headline.addColumn(new Column("TenderText"));
+		  
+		  result.addRow(headline);
+		  
+		  Vector<Tender> allTenders = this.administration.geTaLLtender(); //Hier passende Methode ändern
+		  
+		  }
 		  
 	  }
-	  
+		  
 	  public TendersMatchProfil createTendersMatchProfilReport() throws IllegalArgumentException{
 		  
 	  }
