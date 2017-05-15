@@ -77,24 +77,170 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		  
 		  headline.addColumn(new Column("TenderName"));
 		  headline.addColumn(new Column("TenderText"));
+		  headline.addColumn(new Column("TenderProfil"));
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Tender> allTenders = this.administration.geTaLLtender(); //Hier passende Methode ändern
+		  Vector<Tender> allTenders = this.administration.geTaLLtender(m); //Hier passende Methode ändern
 		  
+		  for(Tender t : allTenders){
+			  
+			  Row tenderRow = new Row();
+			  
+			 tenderRow.addColumn(new Column(t.GETNAME())); // Methode fehlt noch
+			 tenderRow.addColumn(new Column(t.getText()));
+			 tenderRow.addColumn(new Column(t.GETTENDERPROFIL(t))); // Methode fehlt noch
+			 tenderRow.addColumn(new Column(t.GETPROJECT(t))); // Methode fehlt noch
+			 
+			 result.addRow(tenderRow);
 		  }
+		  
+		  return result;
 		  
 	  }
 		  
-	  public TendersMatchProfil createTendersMatchProfilReport() throws IllegalArgumentException{
+	  public TendersMatchProfil createTendersMatchProfilReport(ProjectMarketplace m, User u) throws IllegalArgumentException{
+		  
+		  if(this.getMarketplaceAdministration() == null)
+			  return null;
+		  
+		  TendersMatchProfil result = new TendersMatchProfil(); //Leerer Report
+		  
+		  result.setTitle("Tenders which match my Profil on Marketplace");
+		  
+		  this.addImprint(result);
+		  
+		  result.setCreated(new Date());
+		  
+		  CompositeParagraph header = new CompositeParagraph();
+		  
+		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName()));
+		  header.addSubParagraph(new SimpleParagraph("Name: " + u.getName()));
+		  
+		  result.setHeaderData(header);
+		  
+		  
+		  
+		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
+		  
+		  headline.addColumn(new Column("TenderName"));
+		  headline.addColumn(new Column("TenderText"));
+		  headline.addColumn(new Column("TenderProfil"));
+		  headline.addColumn(new Column("Project"));
+		  
+		  result.addRow(headline);
+		  
+		  Vector<Tender> allTenders = this.administration.geTaLLtendersMATCH(m); //Hier passende Methode ändern
+		  
+		  for(Tender t : allTenders){
+			  
+			  Row tenderRow = new Row();
+			  
+			 tenderRow.addColumn(new Column(t.GETNAME())); // Methode fehlt noch
+			 tenderRow.addColumn(new Column(t.getText()));
+			 tenderRow.addColumn(new Column(t.GETTENDERPROFIL(t))); // Methode fehlt noch
+			 tenderRow.addColumn(new Column(t.GETPROJECT(t))); // Methode fehlt noch
+			 
+			 result.addRow(tenderRow);
+		  }
+		  
+		  return result;
 		  
 	  }
 	  
 	  public AllApplicationsOnTender createAllApplicationsOnTenderReport(Tender t) throws IllegalArgumentException{
 		  
+		  if(this.getMarketplaceAdministration() == null)
+			  return null;
+		  
+		  AllApplicationsOnTender result = new AllApplicationsOnTender(); //Leerer Report
+		  
+		  result.setTitle("All Applications on Tender");
+		  
+		  this.addImprint(result);
+		  
+		  result.setCreated(new Date());
+		  
+		  CompositeParagraph header = new CompositeParagraph();
+		  
+		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName())); //Muss bei jedem Report der marketplace gewählt werden??
+		  header.addSubParagraph(new SimpleParagraph("Tender: " + t.getNAME()));
+		  
+		  result.setHeaderData(header);
+		  
+		  
+		  
+		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
+		  
+		  headline.addColumn(new Column("UserName"));
+		  headline.addColumn(new Column("ApplicationText"));
+		  headline.addColumn(new Column("Rating"));
+		  
+		  result.addRow(headline);
+		  
+		  Vector<Application> allApplications = this.administration.geTaLLtendersMATCH(m); //Hier passende Methode ändern
+		  
+		  for(Application a : allApplications){
+			  
+			  Row applicationRow = new Row();
+			  
+			 applicationRow.addColumn(new Column(a.GETNAME())); // Methode fehlt noch
+			 applicationRow.addColumn(new Column(a.getText()));
+			 applicationRow.addColumn(new Column(a.GETRating(t))); // Methode fehlt noch
+
+			 
+			 result.addRow(applicationRow);
+		  }
+		  
+		  return result;
+		  
 	  }
 
 	  public AllApplicationsOfUser createAllApplicationsOfUserReport(User u) throws IllegalArgumentException{
+		  
+		  if(this.getMarketplaceAdministration() == null)
+			  return null;
+		  
+		  AllApplicationsOfUser result = new AllApplicationsOfUser(); //Leerer Report
+		  
+		  result.setTitle("All Applications of User");
+		  
+		  this.addImprint(result);
+		  
+		  result.setCreated(new Date());
+		  
+		  CompositeParagraph header = new CompositeParagraph();
+		  
+		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName())); //Muss bei jedem Report der marketplace gewählt werden??
+		  header.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
+		  
+		  result.setHeaderData(header);
+		  
+		  
+		  
+		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
+		  
+		  headline.addColumn(new Column("ApplicationText"));
+		  headline.addColumn(new Column("Rating"));
+		  headline.addColumn(new Column("Tender"));
+		  
+		  result.addRow(headline);
+		  
+		  Vector<Application> allApplications = this.administration.geTALLApplication(u); //Hier passende Methode ändern
+		  
+		  for(Application a : allApplications){
+			  
+			  Row applicationRow = new Row();
+			  
+			 applicationRow.addColumn(new Column(a.getText())); 
+			 applicationRow.addColumn(new Column(a.GETRating(t))); // Methode fehlt noch
+			 applicationRow.addColumn(new Column(a.GETTENDER(t))); // Methode fehlt noch
+			 
+			 result.addRow(applicationRow);
+		  }
+		  
+		  return result;
+		  
 		  
 	  }
 	  
