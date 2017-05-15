@@ -74,6 +74,9 @@ public interface MarketplaceAdministration {
 	//Ausgeben aller Bewerber auf eine Ausschreibung
 	public Vector <User> getAllApplicants (Tender tender) throws IllegalArgumentException;
 	
+	//Ausgeben von Ausschreibungen anhand vom Namen
+	public Vector <Tender> getAllTenderByName (String text)  throws IllegalArgumentException;
+	
 	//Ausgeben aller Ausschreibungen
 	public Vector <Tender> getAllTender () throws IllegalArgumentException;
 	
@@ -92,8 +95,46 @@ public interface MarketplaceAdministration {
 	//Ausgeben aller Projekte eines Managers
 	public Vector <Project> getAllProjectsOfManager (User user) throws IllegalArgumentException;
 	
+	//Anzeigen der mitarbeitenden Personen an einem Projekt
+	public Vector <User> getAllUserOfProject (Project project) throws IllegalArgumentException;
+	
 	//Ausgeben aller Projekte
 	public Vector <Project> getAllProjects () throws IllegalArgumentException;
+	
+	
+	//Methoden zur Vewaltung von Mitarbeit an Projekten
+	//Erstellen einer Teilnahme
+	public Participation createParticipation (User user, Project project, int workingDays, Date startDate, Date endDate) throws IllegalArgumentException;
+	
+	//Bearbeiten einer Teilnahme
+	public void updateParticipation (Participation participation, User user, Project project, int workingDays, Date startDate, Date endDate) throws IllegalArgumentException;
+	
+	//Löschen einer Teilnahme
+	public void deleteParticipation (Participation paricipation) throws IllegalArgumentException;
+	
+	//Anzeigen aller Teilnahmen einer Person
+	public Vector <Participation> getAllParticipationsOfUser (User user) throws IllegalArgumentException;
+	
+	//Anzeigen aller Teilnahmen aller Projekte
+	public Vector <Participation> getAllParticipations () throws IllegalArgumentException;
+	
+	
+	
+	//Methoden zur Verwaltung von Ratings
+	//Erstellen einer Bewertung
+	public Rating createRating (float rate, String ratingText) throws IllegalArgumentException;
+	
+	//Bearbeiten einer Bewertung
+	public void updateRating (Rating rating, float rate, String ratingText) throws IllegalArgumentException;
+	
+	//Löschen einer Bewertung
+	public void deleteRating (Rating rating) throws IllegalArgumentException;
+	
+	//Anzeigen aller Bewertungen einer Bewerbung
+	public Vector <Rating> getAllRatingsOfApplication (Application application) throws IllegalArgumentException;
+	
+	
+	
 	
 	
 	
