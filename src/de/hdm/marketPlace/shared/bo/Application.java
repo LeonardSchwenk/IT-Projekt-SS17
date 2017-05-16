@@ -9,17 +9,14 @@ public class Application extends BusinessObject{
 	
 	
 	
-	
-	 private String text = ""; 
-	 //Wie werden wir mit Date umgehen?
+	private String titel = "";		//HIER noch Mapper anpassen + toString
+	private String text = ""; 
 	private Date createDate; 
 	private Date updateDate;
 	private int userRef = 0; 
 	private int tenderRef = 0;
 	private int ratingRef = 0;
 	
-	
-	private int partnerprofileRef = 0 ;
 	
 	
 	//Was muss in den Konstruktor 
@@ -68,8 +65,16 @@ public class Application extends BusinessObject{
 		this.ratingRef = ratingRef;
 	} 
 	
-	 public String toString() {
-		    return super.toString() + " Text: " + this.text+ " Partnerprofile: " + this.partnerprofileRef+ " Rating: " + this.ratingRef+ " Tender: " + this.tenderRef+ " User: " + this.userRef;
+	 public String getTitel() {
+		return titel;
+	}
+
+	public void setTitel(String titel) {
+		this.titel = titel;
+	}
+
+	public String toString() {
+		    return super.toString() + " Text: " +  " Rating: " + this.ratingRef+ " Tender: " + this.tenderRef+ " User: " + this.userRef;
 		    }
 		    
 	public boolean equals(Object o) {

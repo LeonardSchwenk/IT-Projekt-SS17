@@ -32,15 +32,15 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 
 	  
 	public void setProjectMarketplace(ProjectMarketplace m) { //muss der marketplace gesetzt werden??
-		    this.administration.setMarketplace(m); // Methode fehlt noch in der Administration Klasse
+		    this.administration.setMarketplace(m); 
 		  }
 		   
 		  
 		  
 	protected void addImprint(Report r) { //Impressumsdaten anpassen + bank durch ProjectMarketplace ersetzen
 			 
-			    ProjectMarketplace projectMarketplace = this.administration.getMarketplace(); //warum User als Übergabewert??
-			    CompositeParagraph imprint = new CompositeParagraph(); //getter fehlt noch in Administration Klasse
+			    ProjectMarketplace projectMarketplace = this.administration.getMarketplace(); 
+			    CompositeParagraph imprint = new CompositeParagraph();
 
 			    imprint.addSubParagraph(new SimpleParagraph(projectMarketplace.getName()));
 			    // Mehr Information darstellen??
@@ -81,16 +81,15 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Tender> allTenders = this.administration.geTaLLtender(m); //Hier passende Methode ändern
+		  Vector<Tender> allTenders = this.administration.getAllTender(m); 
 		  
 		  for(Tender t : allTenders){
 			  
 			  Row tenderRow = new Row();
 			  
-			 tenderRow.addColumn(new Column(t.GETNAME())); // Methode fehlt noch
+			 tenderRow.addColumn(new Column(t.getName()));
 			 tenderRow.addColumn(new Column(t.getText()));
-			 tenderRow.addColumn(new Column(t.GETTENDERPROFIL(t))); // Methode fehlt noch
-			 tenderRow.addColumn(new Column(t.GETPROJECT(t))); // Methode fehlt noch
+			 tenderRow.addColumn(new Column(administration.getProjectName(t.getProjectRef()))); 
 			 
 			 result.addRow(tenderRow);
 		  }
@@ -125,21 +124,19 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		  
 		  headline.addColumn(new Column("TenderName"));
 		  headline.addColumn(new Column("TenderText"));
-		  headline.addColumn(new Column("TenderProfil"));
 		  headline.addColumn(new Column("Project"));
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Tender> allTenders = this.administration.geTaLLtendersMATCH(m); //Hier passende Methode ändern
+		  Vector<Tender> allTenders = this.administration.getTenderMatch(u); //Hier passende Methode ändern
 		  
 		  for(Tender t : allTenders){
 			  
 			  Row tenderRow = new Row();
 			  
-			 tenderRow.addColumn(new Column(t.GETNAME())); // Methode fehlt noch
-			 tenderRow.addColumn(new Column(t.getText()));
-			 tenderRow.addColumn(new Column(t.GETTENDERPROFIL(t))); // Methode fehlt noch
-			 tenderRow.addColumn(new Column(t.GETPROJECT(t))); // Methode fehlt noch
+			  tenderRow.addColumn(new Column(t.getName()));
+				 tenderRow.addColumn(new Column(t.getText()));
+				 tenderRow.addColumn(new Column(administration.getProjectName(t.getProjectRef())));
 			 
 			 result.addRow(tenderRow);
 		  }
@@ -164,7 +161,7 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		  CompositeParagraph header = new CompositeParagraph();
 		  
 		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName())); //Muss bei jedem Report der marketplace gewählt werden??
-		  header.addSubParagraph(new SimpleParagraph("Tender: " + t.getNAME()));
+		  header.addSubParagraph(new SimpleParagraph("Tender: " + t.getName()));
 		  
 		  result.setHeaderData(header);
 		  
@@ -172,21 +169,23 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		  
 		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
 		  
+		  headline.addColumn(new Column("Titel"));
 		  headline.addColumn(new Column("UserName"));
 		  headline.addColumn(new Column("ApplicationText"));
 		  headline.addColumn(new Column("Rating"));
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Application> allApplications = this.administration.geTaLLtendersMATCH(m); //Hier passende Methode ändern
+		  Vector<Application> allApplications = this.administration.getAllApplicationsByTender(t); 
 		  
 		  for(Application a : allApplications){
 			  
 			  Row applicationRow = new Row();
 			  
-			 applicationRow.addColumn(new Column(a.GETNAME())); // Methode fehlt noch
+			 applicationRow.addColumn(new Column(a.getTitel())); 
+			 applicationRow.addColumn(new Column(a.getUserRef())); //Hier noch UserName finden
 			 applicationRow.addColumn(new Column(a.getText()));
-			 applicationRow.addColumn(new Column(a.GETRating(t))); // Methode fehlt noch
+			 applicationRow.addColumn(new Column(a.getRatingRef())); //RatingRef muss noch in String umgewandelt werden
 
 			 
 			 result.addRow(applicationRow);
@@ -196,7 +195,7 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		  
 	  }
 
-	  public AllApplicationsOfUser createAllApplicationsOfUserReport(User u) throws IllegalArgumentException{
+	  public AllApplicationsOfUser createAllApplicationsOfUserReport(ProjectMarketplace m, User u) throws IllegalArgumentException{
 		  
 		  if(this.getMarketplaceAdministration() == null)
 			  return null;
@@ -220,21 +219,21 @@ public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGe
 		  
 		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
 		  
+		  headline.addColumn(new Column("Titel"));
 		  headline.addColumn(new Column("ApplicationText"));
 		  headline.addColumn(new Column("Rating"));
-		  headline.addColumn(new Column("Tender"));
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Application> allApplications = this.administration.geTALLApplication(u); //Hier passende Methode ändern
+		  Vector<Application> allApplications = this.administration.getAllApplicationsOfUser(u);
 		  
 		  for(Application a : allApplications){
 			  
 			  Row applicationRow = new Row();
 			  
+			 applicationRow.addColumn(new Column(a.getTitel()));
 			 applicationRow.addColumn(new Column(a.getText())); 
-			 applicationRow.addColumn(new Column(a.GETRating(t))); // Methode fehlt noch
-			 applicationRow.addColumn(new Column(a.GETTENDER(t))); // Methode fehlt noch
+			 applicationRow.addColumn(new Column(a.getRatingRef())); // Methode fehlt noch
 			 
 			 result.addRow(applicationRow);
 		  }

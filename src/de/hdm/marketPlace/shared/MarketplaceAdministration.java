@@ -23,6 +23,16 @@ public interface MarketplaceAdministration {
 	//Methode zum Löschen eines Marktplatzes
 	public void deleteMarketplace (ProjectMarketplace marketplace)throws IllegalArgumentException;
 	
+	//Methode zur Ausgabe des aktuellen Marktplatzes
+	public ProjectMarketplace getMarketplace() throws IllegalArgumentException;
+	
+	//Setzen des Marktplatzes, auf welchem Marketplatz befinde ich mich?
+	public void setMarketplace(ProjectMarketplace m) throws IllegalArgumentException;
+	
+	
+	
+	
+	
 	
 	//Methoden zur Benutzerverwaltung 
 	//Methode zur Erstellung eines Benutzers
@@ -57,6 +67,11 @@ public interface MarketplaceAdministration {
 	//Ausgeben aller Bewerbungen
 	public Vector <Application> getAllApplications () throws IllegalArgumentException;
 	
+	//ausgeben aller Bewerbungen eines bestimmten Users
+	public Vector <Application> getAllApplicationsOfUser(User u) throws IllegalArgumentException;
+	
+	
+	
 	
 	//Methoden zur Verwaltung von Ausschreibungen
 	//eine Ausschreibung erstellen
@@ -78,7 +93,12 @@ public interface MarketplaceAdministration {
 	public Vector <Tender> getAllTenderByName (String text)  throws IllegalArgumentException;
 	
 	//Ausgeben aller Ausschreibungen
-	public Vector <Tender> getAllTender () throws IllegalArgumentException;
+	public Vector <Tender> getAllTender (ProjectMarketplace m) throws IllegalArgumentException;
+	
+	//Ausgeben von allen Auschreibungen die zu meinem Profil passen
+	public Vector<Tender> getTenderMatch (User u) throws IllegalArgumentException;
+	
+
 	
 	
 	
@@ -100,6 +120,9 @@ public interface MarketplaceAdministration {
 	
 	//Ausgeben aller Projekte
 	public Vector <Project> getAllProjects () throws IllegalArgumentException;
+	
+	//Ausgeben des Projektnamen
+	public String getProjectName(int projectRef) throws IllegalArgumentException;
 	
 	
 	//Methoden zur Vewaltung von Mitarbeit an Projekten

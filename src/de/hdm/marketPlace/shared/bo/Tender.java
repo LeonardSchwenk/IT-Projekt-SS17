@@ -9,8 +9,16 @@ public class Tender extends BusinessObject{
 	
 	private int projectRef = 0;
 	
+	private int tenderProfilRef = 0;
+	
 	//Setter and Getter of all attributes
 	
+	public int getTenderProfilRef() {
+		return tenderProfilRef;
+	}
+	public void setTenderProfilRef(int tenderProfilRef) {
+		this.tenderProfilRef = tenderProfilRef;
+	}
 	public String getText() {
 		return text;
 	}
