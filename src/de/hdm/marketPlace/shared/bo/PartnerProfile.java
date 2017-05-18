@@ -1,6 +1,6 @@
 package de.hdm.marketPlace.shared.bo;
 
-public class PartnerProfile extends BusinessObject {
+public abstract class PartnerProfile extends BusinessObject {
 	
 	private String text = "";
 	
