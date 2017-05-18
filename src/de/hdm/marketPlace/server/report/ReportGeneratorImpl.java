@@ -10,7 +10,7 @@ import de.hdm.marketPlace.shared.bo.*;
 import de.hdm.marketPlace.shared.report.*;
 
 
-public class ReportGeneratorImpl extends RemotServiceServlet implements ReportGenerator{ //Wo findet sich RemotService Servlet??
+public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportGenerator{ //Wo findet sich RemotService Servlet??
 
 	// Erzeugt später die fertigen Reports und gibt sich mit Hilfe der tabellen aus
 	
