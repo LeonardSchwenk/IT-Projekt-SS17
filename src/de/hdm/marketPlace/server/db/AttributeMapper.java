@@ -1,8 +1,9 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
+import java.util.Vector;
 
-
+import de.hdm.marketPlace.shared.bo.Application;
 import de.hdm.marketPlace.shared.bo.Attribute;
 
 
@@ -119,6 +120,44 @@ public class AttributeMapper {
 	      e.printStackTrace();
 	    }
 	  }
+	  
+	  
+	  public Vector<Attribute> findAll() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Attribute> result = new Vector<Attribute>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt
+		          .executeQuery("SELECT id, name, text, value, partnerprofileRef FROM attribute "
+		              + " ORDER BY value");
+
+		    
+		      while (rs.next()) {
+		    	  Attribute a = new Attribute();
+					a.setId(rs.getInt("Id"));
+					a.setName(rs.getString("name"));
+					a.setText(rs.getString("text"));
+					a.setValue(rs.getInt("value"));
+					a.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
+
+		       
+		        result.addElement(a);
+		      }
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+
+		   
+		    return result;
+		  }
+
+
+	  
 	
 	
 	}

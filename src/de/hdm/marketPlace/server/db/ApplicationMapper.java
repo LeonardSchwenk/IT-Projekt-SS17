@@ -1,5 +1,7 @@
 package de.hdm.marketPlace.server.db;
 
+import java.util.Vector;
+
 import java.sql.*;
 
 
@@ -121,6 +123,46 @@ public class ApplicationMapper {
 	      e.printStackTrace();
 	    }
 	  }
+	  
+	  
+	  
+	  public Vector<Application> findAll() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Application> result = new Vector<Application>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt
+		          .executeQuery("SELECT id, text, ratingRef, tenderRef, userRef FROM application "
+		              + " ORDER BY ratingref");
+
+		    
+		      while (rs.next()) {
+		    	  Application a = new Application();
+		    	  a.setId(rs.getInt("id"));
+					a.setText(rs.getString("text"));
+					a.setRatingRef(rs.getInt("ratingRef"));
+					a.setTenderRef(rs.getInt("tenderRef"));
+					a.setUserRef(rs.getInt("userRef"));
+					
+
+		       
+		        result.addElement(a);
+		      }
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+
+		   
+		    return result;
+		  }
+
+
+	  
 	
 	
 	}

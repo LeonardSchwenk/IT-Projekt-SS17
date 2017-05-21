@@ -1,8 +1,9 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
+import java.util.Vector;
 
-
+import de.hdm.marketPlace.shared.bo.Attribute;
 import de.hdm.marketPlace.shared.bo.Project;
 
 
@@ -33,7 +34,7 @@ public class ProjectMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, name, text, projectmarketplaceRef, tenderRef, userRef value FROM project" + "WHERE id=" + id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectmarketplaceRef, tenderRef, userRef value FROM project" + "WHERE id=" + id +"ORDER BY name");
 		
 		if ( rs.next()){
 			
@@ -122,6 +123,43 @@ public class ProjectMapper {
 	      e.printStackTrace();
 	    }
 	  }
+	  
+	  public Vector<Project> findAll() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Project> result = new Vector<Project>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt
+		          .executeQuery("SELECT id, name, text, projectmarketplaceRef, tenderRef, userRef value FROM project "
+		              + " ORDER BY name");
+
+		    
+		      while (rs.next()) {
+		    	  Project p = new Project();
+		    	  
+		    	  p.setId(rs.getInt("id"));
+					p.setName(rs.getString("name"));
+					p.setText(rs.getString("text"));
+					p.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
+					p.setTenderRef(rs.getInt("tenderRef"));
+					p.setUserRef(rs.getInt("userRef"));
+
+		   
+		        result.addElement(p);
+		      }
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+
+		   
+		    return result;
+		  }
+
 	
 	
 	}
