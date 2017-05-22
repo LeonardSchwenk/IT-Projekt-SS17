@@ -2,14 +2,15 @@ package de.hdm.marketPlace.shared.bo;
 
 import java.util.Date; 
 
+/*Realisierung einer Bewerbung, welche ein Nutzer des Projektmarktplatz
+ * anlegen kann. Eine Bewerbung besitz ein Titel, einen Text (Inhalt/Motivationsschreiben)
+ * usw. 
+ * */
 public class Application extends BusinessObject{
 	
-	/* Realisierung der Bewerbungsclasse mit allen 
-	 * relevanten Attributen*/
+	//Attribute der Klasse 
 	
-	
-	
-	private String titel = "";		//HIER noch Mapper anpassen + toString
+	private String titel = "";		
 	private String text = ""; 
 	private Date createDate; 
 	private Date updateDate;
@@ -17,15 +18,15 @@ public class Application extends BusinessObject{
 	private int tenderRef = 0;
 	private int ratingRef = 0;
 	
-	
-	
-	//Was muss in den Konstruktor 
+	// No Argument Konstruktor 
 	
 	public Application(){
+		super();
 		
 	}
 	
-	//Alle Get und Set Methoden zu gegebenen Attributen 
+	/*Alle Get und Set Methoden zum auslesen und setzen der 
+	Attribute */
 	
 
 	public String getText() {
@@ -72,25 +73,11 @@ public class Application extends BusinessObject{
 	public void setTitel(String titel) {
 		this.titel = titel;
 	}
+	
+	// Erzeugt textuelle Darstellung der jeweiligen Bewerbungs-Instanz 
 
 	public String toString() {
 		    return super.toString() + " Text: " +  " Rating: " + this.ratingRef+ " Tender: " + this.tenderRef+ " User: " + this.userRef;
 		    }
-		    
-	public boolean equals(Object o) {
-	    
-	    if (o != null && o instanceof Application) {
-	    	Application c = (Application) o;
-	      try {
-	        return super.equals(c);
-	      }
-	      catch (IllegalArgumentException e) {
-	        return false;
-	      }
-	    }
-	    return false;
-	
-	
-
 }
-}
+		   

@@ -1,15 +1,17 @@
 package de.hdm.marketPlace.shared.bo;
 
+/*Realisierung eines Projektmarktplatz auf welcheme Projekte angelegt 
+ * werden können. */
 
 public class ProjectMarketplace extends BusinessObject{
 
-	//attributes of the class
+	//Attribute der Klasse 
 	
 	private String name = "";
-	
 	private int userRef = 0; 
 	
-	//Setters and Getters of all attributes
+	/*Alle Get und Set Methoden zum auslesen und setzen der 
+	Attribute */
 	
 	public String getName() {
 		return name;
@@ -17,9 +19,6 @@ public class ProjectMarketplace extends BusinessObject{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
 	public int getUserRef() {
 		return userRef;
 	}
@@ -27,12 +26,9 @@ public class ProjectMarketplace extends BusinessObject{
 		this.userRef = userRef;
 	}
 	
+	//Textuelle Ausgabe der jeweiligen Martplatz-Instanz 
+	
 	public String toString() {
-	    
-	      
-		return super.toString()+"Name:" + this.name + "User" + this.userRef;
-
-		
-	   
+	    return super.toString()+"Name:" + this.name + "User" + this.userRef;	   
 }
 }
