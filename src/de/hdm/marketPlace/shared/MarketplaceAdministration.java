@@ -130,7 +130,7 @@ public interface MarketplaceAdministration {
 	public void deleteProject (Project project) throws IllegalArgumentException;
 	
 	//Ausgeben aller Projekte eines Managers
-	public Vector <Project> getAllProjectsOfManager (User user) throws IllegalArgumentException;
+	public Vector <Project> getAllProjectsOfUser (int userRef) throws IllegalArgumentException;
 	
 	//Anzeigen der mitarbeitenden Personen an einem Projekt
 	public Vector <User> getAllUserOfProject (Project project) throws IllegalArgumentException;
@@ -138,8 +138,6 @@ public interface MarketplaceAdministration {
 	//Ausgeben aller Projekte
 	public Vector <Project> getAllProjects () throws IllegalArgumentException;
 	
-	//Ausgeben des Projektnamen
-	public String getProjectName(int projectRef) throws IllegalArgumentException;
 	
 	
 	//Methoden zur Vewaltung von Mitarbeit an Projekten
@@ -183,6 +181,9 @@ public interface MarketplaceAdministration {
 	//Methoden zur Verwaltung eines Ausschreiberprofils
 	//Erstellen eines Ausschreiberprofils
 	public TenderProfile createTenderProfile (Date createDate) throws IllegalArgumentException;
+	
+	//Rückgabe eines Ausschreiberprofils anhand einer Id
+	public TenderProfile getTenderProfileById (int TenderProfileRef) throws IllegalArgumentException;
 	
 	//Bearbeiten eines Ausschreiberprofils
 	public void updateTenderProfile (TenderProfile tenderProfile, Date updateDate) throws IllegalArgumentException;
