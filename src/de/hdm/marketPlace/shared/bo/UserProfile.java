@@ -8,7 +8,6 @@ public class UserProfile extends BusinessObject {
 	
 	private int userRef = 0;
 	private String text = "";
-	// vektor annpassung zu attribute 
 	private int attributeRef = 0;
 
 	//Setter and Getter of all attributes

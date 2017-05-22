@@ -1,6 +1,5 @@
 package de.hdm.marketPlace.shared.bo;
 
-import java.util.Vector; 
 
 public class ProjectMarketplace extends BusinessObject{
 
@@ -8,7 +7,7 @@ public class ProjectMarketplace extends BusinessObject{
 	
 	private String name = "";
 	
-	private Vector<UserProfile> userRef = new Vector<UserProfile>();
+	private int userRef = 0; 
 	
 	//Setters and Getters of all attributes
 	
@@ -18,34 +17,20 @@ public class ProjectMarketplace extends BusinessObject{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Vector<UserProfile> getUserRef() {
+	
+	
+	
+	public int getUserRef() {
 		return userRef;
 	}
-	
-	public void addUserRef (UserProfile a){
-		this.userRef.addElement (a);
-	}
-	
-	public void removeUserRef (UserProfile a){
-		this.userRef.addElement(a);
-	}
-	
-	public UserProfile getParagraphAt(int a) {
-	    return this.userRef.elementAt(a);
+	public void setUserRef(int userRef) {
+		this.userRef = userRef;
 	}
 	
 	public String toString() {
 	    
-	    StringBuffer result = new StringBuffer();
-
-	    
-	    for (int i = 0; i < this.userRef.size(); i++) {
-	      UserProfile a = this.userRef.elementAt(i);
-
-	     
-	      result.append(a.toString() + "\n");
-	    }
-		return super.toString()+"Name:" + this.name;
+	      
+		return super.toString()+"Name:" + this.name + "User" + this.userRef;
 
 		
 	   
