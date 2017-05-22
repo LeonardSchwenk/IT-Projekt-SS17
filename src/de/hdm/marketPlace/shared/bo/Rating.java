@@ -19,8 +19,9 @@ public class Rating extends BusinessObject{
 		this.text = text;
 	}
 
-	public float getRate() {
-		return rate;
+	public String getRate() {
+		String s = String.valueOf(rate);
+		return s;
 	}
 
 	public void setRate(float rate) {

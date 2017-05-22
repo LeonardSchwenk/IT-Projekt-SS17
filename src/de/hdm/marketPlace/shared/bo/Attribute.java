@@ -23,8 +23,9 @@ public class Attribute extends BusinessObject {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public int getValue() {
-		return value;
+	public String getValue() {
+		String s = String.valueOf(value);
+		return s;
 	}
 	public void setValue(int value) {
 		this.value = value;
