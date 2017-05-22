@@ -61,6 +61,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 	
 	public TenderProfile createTenderProfile (Date createDate) throws IllegalArgumentException{
 		TenderProfile tp = new TenderProfile();
+		
 	}
 	
 	
