@@ -8,6 +8,8 @@ import de.hdm.marketPlace.shared.MarketplaceAdministration;
 import de.hdm.marketPlace.shared.ReportGenerator;
 import de.hdm.marketPlace.shared.bo.*;
 import de.hdm.marketPlace.shared.report.*;
+import de.hdm.thies.bankProjekt.shared.bo.Customer;
+import de.hdm.thies.bankProjekt.shared.report.AllAccountsOfAllCustomersReport;
 
 
 public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportGenerator{ //Wo findet sich RemotService Servlet??
@@ -176,7 +178,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Application> allApplications = this.administration.getAllApplicationsByTender(t); 
+		  Vector<Application> allApplications = this.administration.getAllApplicationsByTender(t); //Andern
 		  
 		  for(Application a : allApplications){
 			  
@@ -245,9 +247,228 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	  
 	  public ProjectInterconnection createProjectInterconnectionReport(User u) throws IllegalArgumentException{
 		  
+		  if(this.getMarketplaceAdministration() == null)
+			  return null;
+		  
+		  ProjectInterconnection result1 = new ProjectInterconnection(); //Leerer Report
+		  
+		  result1.setTitle("All Applications of User");
+		  
+		  this.addImprint(result1);
+		  
+		  result1.setCreated(new Date());
+		  
+		  CompositeParagraph header = new CompositeParagraph();
+		  
+		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName())); //Muss bei jedem Report der marketplace gewählt werden??
+		  header.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
+		  
+		  result1.setHeaderData(header);
+		  
+		  
+		  
+		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
+		  
+		  headline.addColumn(new Column("ApplicationTitel"));
+		  headline.addColumn(new Column("ApplicationText"));
+		  headline.addColumn(new Column("TenderTitle"));
+		  
+		  result1.addRow(headline);
+		  
+		  Vector<Application> allApplications = this.administration.getAllApplicationsOfUser(u);
+		  
+		  for(Application a : allApplications){
+			  
+			  Row applicationRow = new Row();
+			  
+			 applicationRow.addColumn(new Column(a.getTitel()));
+			 applicationRow.addColumn(new Column(a.getText())); 
+			 applicationRow.addColumn(new Column(a.getTenderRef())); // Methode fehlt noch
+			 
+			 result1.addRow(applicationRow);
+		  }
+		  
+		  return result1;
+		  
+		  
+ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
+		  
+		  result2.setTitle("All Participations of User");
+		  
+		  this.addImprint(result2);
+		  
+		  result2.setCreated(new Date());
+		  
+		  CompositeParagraph header2 = new CompositeParagraph();
+		  
+		  header2.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName())); //Muss bei jedem Report der marketplace gewählt werden??
+		  header2.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
+		  
+		  result2.setHeaderData(header2);
+		  
+		  
+		  
+		  Row headline2 = new Row(); //Erste Reihe in dem report (Bezeichnungen)
+		  
+		  headline2.addColumn(new Column("ProjectName"));
+		  headline2.addColumn(new Column("WorkingDays"));
+		  headline2.addColumn(new Column("TenderTitle"));
+		  
+		  result2.addRow(headline);
+		  
+		  Vector<Participation> allParticipations = this.administration.getAllParticipationsOfUser(u);
+		  
+		  for(Participation a : allParticipations){
+			  
+			  Row participationRow = new Row();
+			  
+			  participationRow.addColumn(new Column(administration.getProjectName(a.getProjectRef())));
+			  participationRow.addColumn(new Column(a.getWorkingDays())); 
+			  participationRow.addColumn(new Column(administration.getRatingbyId(a.getRatingRef().getRate()))); // Methode fehlt noch
+			 
+			 result2.addRow(participationRow);
+		  }
+		  
+		  return result2;
+		  
+	  }
+	
+	  public FanInFanOutByUser createFanInFanOutByUserReport(User u)throws IllegalArgumentException{ // NICHT OBJEKT SONDERN NUR REFERENZ
+		  
+		  if(this.getMarketplaceAdministration() == null)
+			  return null;
+		  
+		  FanInFanOutByUser result = new FanInFanOutByUser(); //Leerer Report
+		  
+		  result.setTitle("Applications");
+		  
+		  this.addImprint(result);
+		  
+		  result.setCreated(new Date());
+		  
+		  CompositeParagraph header = new CompositeParagraph();
+		  
+		  header.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
+		  
+		  result.setHeaderData(header);
+		  
+		  
+		  
+		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
+		  
+		  headline.addColumn(new Column("Anzahl"));
+		  headline.addColumn(new Column("ApplicationTitle"));
+		  headline.addColumn(new Column("ApplicationStatus"));
+		  
+		  
+		  result.addRow(headline);
+		  
+		  Vector<Application> allApplications = this.administration.getAllApplicationsOfUser(u);
+		  
+		  int Counter = 1;
+		  
+		  for(Application a : allApplications){
+			  
+			  Row applicationRow = new Row();
+			  
+			 String s = String.valueOf(Counter);
+			 
+			 String status = null;
+			 
+			 Vector<Participation> allParticipations = this.administration.getAllParticipationsOfUser(u);
+			 
+			 for(Participation p : allParticipations){
+			 
+				 if(p.getRatingRef() == a.getRatingRef()){
+					 status = "Accepted";
+				 
+			 }
+				 else if(){
+					 
+				 }
+				 
+			 }
+			 applicationRow.addColumn(new Column(s));
+			 applicationRow.addColumn(new Column(a.getText())); 
+			 applicationRow.addColumn(new Column(status));
+			 
+			Counter++;
+			 
+			 result.addRow(applicationRow);
+		  }
+		  
+		  return result;
+		  
+ FanInFanOutByUser result1 = new FanInFanOutByUser(); //Leerer Report
+		  
+		  result1.setTitle("Tenders");
+		  
+		  this.addImprint(result1);
+		  
+		  result1.setCreated(new Date());
+		  
+		  CompositeParagraph header1 = new CompositeParagraph();
+		  
+		  header1.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
+		  
+		  result1.setHeaderData(header1);
+		  
+		  
+		  
+		  Row headline1 = new Row(); //Erste Reihe in dem report (Bezeichnungen)
+		  
+		  headline1.addColumn(new Column("Anzahl"));
+		  headline1.addColumn(new Column("TenderTitle"));
+		  headline1.addColumn(new Column("TenderStatus"));
+		  
+		  
+		  result1.addRow(headline1);
+		  
+		  Vector<Tender> allTenders = this.administration.getAllTenderByUser(u);
+		  
+		  int Counter1 = 1;
+		  
+		  for(Tender a : allTenders){
+			  
+			  Row applicationRow1 = new Row();
+			  
+			 String s1 = String.valueOf(Counter1);
+			 
+			 applicationRow1.addColumn(new Column(s1));
+			 applicationRow1.addColumn(new Column(a.getText())); 
+			 applicationRow1.addColumn(new Column(administration.getRatingbyId(a.getRatingRef().getRate()))); // Methode fehlt noch
+			 
+			Counter++;
+			 
+			 result1.addRow(applicationRow1);
+		  }
+		  
+		  return result1;
+		  
 	  }
 	  
-	  public FanInFanOut createFanInFanOutReport(User u) throws IllegalArgumentException{
+	  
+	  public FanInFanOut createFanInFanOutReport() throws IllegalArgumentException{
+		  
+		  if(this.getMarketplaceAdministration() == null)
+			  return null;
+
+		  FanInFanOut result = new FanInFanOut();
+
+		    result.setTitle("FanInOut Analyse");
+
+		    this.addImprint(result);
+
+		    result.setCreated(new Date());
+
+		    Vector<User> allUsers = this.administration.getAllUser();
+
+		    for (User c : allUsers) {
+		   
+		      result.addSubReport(this.createFanInFanOutByUserReport(c));
+		    }
+
+		    return result;
 		  
 	  }
 	  

@@ -30,8 +30,9 @@ public class Participation extends BusinessObject{
 	public void setRatingRef(int ratingRef) {
 		this.ratingRef = ratingRef;
 	}
-	public int getWorkingDays() {
-		return workingDays;
+	public String getWorkingDays() {
+		String s = String.valueOf(workingDays);
+		return s;
 	}
 	public void setWorkingDays(int workingDays) {
 		this.workingDays = workingDays;
