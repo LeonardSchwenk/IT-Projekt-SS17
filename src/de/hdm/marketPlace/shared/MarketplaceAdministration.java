@@ -157,6 +157,22 @@ public interface MarketplaceAdministration {
 	public Vector <Rating> getAllRatingsOfApplication (Application application) throws IllegalArgumentException;
 	
 	
+	//Methoden zur Verwaltung eines Ausschreiberprofils
+	//Erstellen eines Ausschreiberprofils
+	public TenderProfile createTenderProfile (Date createDate) throws IllegalArgumentException;
+	
+	//Bearbeiten eines Ausschreiberprofils
+	public void updateTenderProfile (TenderProfile tenderProfile, Date updateDate) throws IllegalArgumentException;
+	
+	//Löschen eines Ausschreiberprofils
+	public void deleteTenderProfile (TenderProfile tenderProfile) throws IllegalArgumentException;
+	
+	
+	//Methoden zur Verwaltung eines UserProfile
+	//Erstellen eines UserProfile
+	
+	
+	
 	
 	
 	
