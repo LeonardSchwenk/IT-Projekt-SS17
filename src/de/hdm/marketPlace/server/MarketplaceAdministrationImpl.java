@@ -1,11 +1,13 @@
 package de.hdm.marketPlace.server;
 
 import de.hdm.marketPlace.shared.*;
+
 import de.hdm.marketPlace.shared.bo.*;
 import de.hdm.marketPlace.server.db.*;
 
 import java.util.Vector;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -40,6 +42,26 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		
 	}
 	
+	//Implementierung des Codes in die Klassen, welche vorher in dem Interface MarketplaceAdministration definiert wurden
+	public void init() throws IllegalArgumentException {
+		this.apMapper = ApplicationMapper.applicationMapper();
+		this.atMapper = AttributeMapper.attributeMapper();
+		this.paMapper = ParticipationMapper.participationMapper();
+		this.prMapper = ProjectMapper.projectMapper();
+		this.pmMapper = ProjectMarketplaceMapper.ProjectMarketplaceMapper();
+		this.raMapper = RatingMapper.ratingMapper();
+		this.teMapper = TenderMapper.tenderMapper();
+		this.usMapper = UserMapper.userMapper();
+		this.upMapper = UserProfileMapper.userProfileMapper();
+		
+	}
+	
+	//Methoden für die Customer-Objekte
+	//Methoden zur Verwaltung eines Ausschreiberprofils
+	
+	public TenderProfile createTenderProfile (Date createDate) throws IllegalArgumentException{
+		TenderProfile tp = new TenderProfile();
+	}
 	
 	
 	
