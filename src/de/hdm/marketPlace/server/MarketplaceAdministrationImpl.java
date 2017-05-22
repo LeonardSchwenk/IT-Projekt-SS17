@@ -195,6 +195,34 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 	}
 	
 	
+	//Methoden zur Verwaltung von Ausschreibungen
+	public Tender createTender (int projectRef, int tenderProfileRef, String text) throws IllegalArgumentException {
+		Tender t = new Tender();
+		t.setProjectRef(projectRef);
+		t.setTenderProfilRef(tenderProfileRef);
+		t.setText(text);
+		
+		return teMapper.insert(t);
+	}
+	
+	public Tender findTenderById (int tenderRef) throws IllegalArgumentException {
+		return teMapper.findByID(tenderRef);
+	}
+	
+	public void updateTender (Tender t, int projectRef, int tenderProfileRef, String text) throws IllegalArgumentException {
+		t.setProjectRef(projectRef);
+		t.setTenderProfilRef(tenderProfileRef);
+		t.setText(text);
+		
+		teMapper.update(t);
+	}
+	
+	public Vector <Tender> getAllTenderOfUser (int userRef) throws IllegalArgumentException {
+		return teMapper.getAllTenderOfUser(userRef);
+	}
+	
+	
+	
 	
 	
 	

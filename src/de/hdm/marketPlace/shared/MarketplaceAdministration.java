@@ -98,7 +98,7 @@ public interface MarketplaceAdministration {
 	public void deleteTender (Tender tender) throws IllegalArgumentException;
 	
 	//Ausgeben aller Ausschreibungen eines Users
-	public Vector <Tender> getAllTenderByUser (User user ) throws IllegalArgumentException;
+	public Vector <Tender> getAllTenderOfUser (User user ) throws IllegalArgumentException;
 	
 	//Ausgeben aller Bewerber auf eine Ausschreibung
 	public Vector <User> getAllApplicants (Tender tender) throws IllegalArgumentException;
