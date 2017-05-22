@@ -12,7 +12,17 @@ public class TenderMapper {
 	protected TenderMapper(){
 	}
 	
-	public Tender findByID(int Id){
+
+	public static TenderMapper tenderMapper(){
+		if(tenderMapper == null){
+			tenderMapper = new  TenderMapper();
+		}
+		
+		return tenderMapper;
+	}
+	
+	
+	public Tender findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -23,7 +33,7 @@ public class TenderMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, Text, ProjectRef value FROM Tender" + "WHERE Id=" + Id +"ORDER BY ProjectRef");
+		ResultSet rs =stmt.executeQuery("SELECT Id, Text, ProjectRef value FROM Tender " + "WHERE id= " + id +"ORDER BY ProjectRef");
 		
 		if ( rs.next()){
 			

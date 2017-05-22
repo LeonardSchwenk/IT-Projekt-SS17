@@ -5,6 +5,7 @@ import de.hdm.marketPlace.*;
 
 import de.hdm.marketPlace.server.db.*;
 import de.hdm.marketPlace.shared.bo.Attribute;
+import de.hdm.marketPlace.shared.bo.Project;
 import de.hdm.marketPlace.shared.bo.ProjectMarketplace;
 
 
@@ -47,10 +48,25 @@ public class mapperStart {
 		Attribute a1 = new Attribute();
 		
 		
-		a1.setText("erster text");;
+		//a1.setText("erster text");;
 		
 		
-		am.insert(a1);
+	//	am.insert(a1);
+		
+		//am.findByID(1);
+		//System.out.println(am.findByID(1));
+		
+		ProjectMapper pm = ProjectMapper.projectMapper();
+		
+		Project p = new Project();
+		
+		p.setName("project 1 ");
+		p.setText("project 1 mit text befüllen");
+		
+		pm.insert(p);
+		
+		
+		
 		
 		
 		

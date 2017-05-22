@@ -2,7 +2,11 @@ package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 
+import de.hdm.marketPlace.shared.bo.Attribute;
 import de.hdm.marketPlace.shared.bo.Project;
 
 
@@ -33,7 +37,7 @@ public class ProjectMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, name, text, projectmarketplaceRef, tenderRef, userRef value FROM project" + "WHERE id=" + id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectmarketplaceRef, tenderRef, userRef, startDate, endDate value FROM project " + "WHERE id=" + id +"ORDER BY name");
 		
 		if ( rs.next()){
 			
@@ -45,6 +49,10 @@ public class ProjectMapper {
 			p.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
 			p.setTenderRef(rs.getInt("tenderRef"));
 			p.setUserRef(rs.getInt("userRef"));
+			
+			// hinzufügen von date 
+			p.setStartDate(rs.getDate("startDate"));
+			p.setEndDate(rs.getDate("endDate"));
 			
 			
 			return p; 
@@ -76,11 +84,16 @@ public class ProjectMapper {
 	    p.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
-
 	        
-	        stmt.executeUpdate("INSERT INTO project (id, name, text, projectmarketplaceRef,userRef , tenderRef) "
+	        SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd");
+	        Date jetzigesdatum = new Date();
+	        String date = mySQLformate.format(jetzigesdatum);
+	        
+	        
+	        
+	        stmt.executeUpdate("INSERT INTO project (id, name, text, projectmarketplaceRef, userRef , tenderRef, startDate, endDate) "
 	           + "VALUES ('" + p.getId() + "','" + p.getName() + "','"
-	            + p.getText()+ "','" + p.getProjectmarketplaceRef() + "','"    + p.getUserRef()  + "','"    + p.getTenderRef()  + "')");
+	            + p.getText()+ "','" + p.getProjectmarketplaceRef() + "','"    + p.getUserRef()  + "','"    + p.getTenderRef() + "','"    + date + "','"    + date+ "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -96,9 +109,18 @@ public class ProjectMapper {
 
 	    try {
 	      Statement stmt = con.createStatement();
+	      
+	      
+	      
+	      SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd");
+	        Date jetzigesdatum = new Date();
+	        String date = mySQLformate.format(jetzigesdatum);
+	        
+		
+	        
 
 	      stmt.executeUpdate("UPDATE project " + "SET name=\""
-	          + p.getName() + "\", " + "text=\"" + p.getText()+ "\", " + "projektmarketplaceRef=\"" + p.getProjectmarketplaceRef()+ "\", " +  "UserRef=\"" + p.getUserRef() +  "\", " +  "TenderRef=\"" + p.getTenderRef() +  "\" "
+	          + p.getName() + "\", " + "text=\"" + p.getText()+ "\", " + "projektmarketplaceRef=\"" + p.getProjectmarketplaceRef()+ "\", " +  "UserRef=\"" + p.getUserRef() +  "\", " +  "TenderRef=\"" + p.getTenderRef()+  "\", " +  "StartDate=\"" + date+  "\", " +  "EndDate=\"" + date +  "\" "
 	          + "WHERE Id=" + p.getId());
 
 	    }
@@ -122,6 +144,45 @@ public class ProjectMapper {
 	      e.printStackTrace();
 	    }
 	  }
+	  
+	  
+	  // wenn nach autoren, bewerbunge, bewertungen etc gesucht wird muss immer ein vektor dazukommen da es mehr als einen geben kann 
+	  public Vector<Project> findAll() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Project> result = new Vector<Project>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt
+		          .executeQuery("SELECT id, name, text, projectmarketplaceRef, tenderRef, userRef value FROM project "
+		              + " ORDER BY name");
+
+		    
+		      while (rs.next()) {
+		    	  Project p = new Project();
+		    	  
+		    	  p.setId(rs.getInt("id"));
+					p.setName(rs.getString("name"));
+					p.setText(rs.getString("text"));
+					p.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
+					p.setTenderRef(rs.getInt("tenderRef"));
+					p.setUserRef(rs.getInt("userRef"));
+
+		   
+		        result.addElement(p);
+		      }
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+
+		   
+		    return result;
+		  }
+
 	
 	
 	}
