@@ -1,6 +1,8 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import de.hdm.marketPlace.shared.bo.TenderProfile;;
 
@@ -31,7 +33,7 @@ public class TenderProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, attributeRef value FROM tenderProfile " + "WHERE id=" + id +"ORDER BY tenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, attributeRef, tenderprofileDate value FROM tenderProfile " + "WHERE id=" + id +"ORDER BY tenderRef");
 		
 		if ( rs.next()){
 			
@@ -41,7 +43,8 @@ public class TenderProfileMapper {
 			tp.setTenderRef(rs.getInt("tenderRef"));
 			tp.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
 			tp.setAttributeRef(rs.getInt("attributeRef"));
-	
+			tp.setTenderProfileDate(rs.getDate("tenderprofileDate"));
+			
 			
 			return tp; 
 			
@@ -61,6 +64,11 @@ public class TenderProfileMapper {
 
 	    try {
 	      Statement stmt = con.createStatement();
+	      
+	      SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd ");
+	        Date currentDate = new Date();
+	        String date = mySQLformate.format(currentDate);
+	        
 
 	  
 	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
@@ -74,8 +82,8 @@ public class TenderProfileMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO TenderProfile (id, tenderRef, partnerprofileRef, attributeRef ) "
-	           + "VALUES ('" + tp.getTenderRef() +  "','" + tp.getPartnerprofileRef() +  "','" + tp.getAttributeRef()+"')");
+	        stmt.executeUpdate("INSERT INTO TenderProfile (id, tenderRef, partnerprofileRef, attributeRefn, tenderprofileDate ) "
+	           + "VALUES ('" + tp.getTenderRef() +  "','" + tp.getPartnerprofileRef() +  "','" + tp.getAttributeRef() + "','"    +  date+"')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -91,10 +99,15 @@ public class TenderProfileMapper {
 
 	    try {
 	      Statement stmt = con.createStatement();
+	      
+	      SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd ");
+	        Date currentDate = new Date();
+	        String date = mySQLformate.format(currentDate);
+	        
 
 	      stmt.executeUpdate("UPDATE TenderProfile " + "SET TenderRef=\""
-	          + tp.getTenderRef() + "\", "  + "AttributeRef=\"" + tp.getAttributeRef() + "\", " + "PartnerprofileRef=\"" + tp.getPartnerprofileRef() +  "\" "
-	          + "WHERE Id=" + tp.getId());
+	          + tp.getTenderRef() + "\", "  + "AttributeRef=\"" + tp.getAttributeRef() + "\", " + "PartnerprofileRef=\"" + tp.getPartnerprofileRef() + "tenderprofileDate=\"" + date+   "\" "
+	          + "WHERE id=" + tp.getId());
 
 	    }
 	    catch (SQLException e) {

@@ -1,10 +1,11 @@
 package de.hdm.marketPlace.server.db;
 
+import java.util.Date;
 import java.util.Vector;
 
+
 import java.sql.*;
-
-
+import java.text.SimpleDateFormat;
 
 import de.hdm.marketPlace.shared.bo.Application;
 
@@ -35,7 +36,7 @@ public class ApplicationMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, text, ratingRef, tenderRef, userRef value FROM application " + "WHERE id=" + id +" ORDER BY tenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, text, ratingRef, tenderRef, userRef, applicationDate value FROM application " + "WHERE id=" + id +" ORDER BY tenderRef");
 		
 		if ( rs.next()){
 			
@@ -45,6 +46,7 @@ public class ApplicationMapper {
 			a.setRatingRef(rs.getInt("ratingRef"));
 			a.setTenderRef(rs.getInt("tenderRef"));
 			a.setUserRef(rs.getInt("userRef"));
+			a.setApplicationDate(rs.getDate("applicationDate"));
 			
 			
 			
@@ -67,6 +69,9 @@ public class ApplicationMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
+	      SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd ");
+	        Date currentDate = new Date();
+	        String date = mySQLformate.format(currentDate);
 	  
 	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
 	          + "FROM Application ");
@@ -79,8 +84,8 @@ public class ApplicationMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO application (id, text, ratingRef, tenderRef, userRef) "
-	           + "VALUES ('" + a.getText() + "','" + a.getRatingRef() + "','"+ a.getTenderRef() + ",'"+ a.getUserRef()  + "')");
+	        stmt.executeUpdate("INSERT INTO application (id, text, ratingRef, tenderRef, userRef, applicationDate) "
+	           + "VALUES ('" + a.getText() + "','" + a.getRatingRef() + "','"+ a.getTenderRef() + ",'"+ a.getUserRef() + "','"    +  date + "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -96,9 +101,13 @@ public class ApplicationMapper {
 
 	    try {
 	      Statement stmt = con.createStatement();
+	      
+	      SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd");
+	        Date currentDate = new Date();
+	        String date = mySQLformate.format(currentDate);
 
 	      stmt.executeUpdate("UPDATE application " + "SET Text=\""
-	          + a.getText() + "\", " + "RatingRef=\"" + a.getRatingRef()+ "\", " + "UserRef=\"" + a.getUserRef() + "\", " + "TenderRef=\"" + a.getTenderRef() +  "\" "
+	          + a.getText() + "\", " + "RatingRef=\"" + a.getRatingRef()+ "\", " + "UserRef=\"" + a.getUserRef() + "\", " + "TenderRef=\"" + a.getTenderRef() +  "applicationDate=\"" + date  +  "\" "
 	          + "WHERE id=" + a.getId());
 
 	    }

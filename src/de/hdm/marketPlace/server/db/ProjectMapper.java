@@ -42,7 +42,6 @@ public class ProjectMapper {
 		if ( rs.next()){
 			
 			Project p = new Project();
-			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
 			p.setId(rs.getInt("id"));
 			p.setName(rs.getString("name"));
 			p.setText(rs.getString("text"));
@@ -50,7 +49,6 @@ public class ProjectMapper {
 			p.setTenderRef(rs.getInt("tenderRef"));
 			p.setUserRef(rs.getInt("userRef"));
 			
-			// hinzufügen von date 
 			p.setStartDate(rs.getDate("startDate"));
 			p.setEndDate(rs.getDate("endDate"));
 			
@@ -74,7 +72,11 @@ public class ProjectMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	  
+	    
+	        SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd ");
+	        Date currentDate = new Date();
+	        String date = mySQLformate.format(currentDate);
+	        
 	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
 	          + "FROM Project ");
 
@@ -84,16 +86,12 @@ public class ProjectMapper {
 	    p.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
-	        
-	        SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd");
-	        Date jetzigesdatum = new Date();
-	        String date = mySQLformate.format(jetzigesdatum);
-	        
+	      
 	        
 	        
 	        stmt.executeUpdate("INSERT INTO project (id, name, text, projectmarketplaceRef, userRef , tenderRef, startDate, endDate) "
 	           + "VALUES ('" + p.getId() + "','" + p.getName() + "','"
-	            + p.getText()+ "','" + p.getProjectmarketplaceRef() + "','"    + p.getUserRef()  + "','"    + p.getTenderRef() + "','"    + date + "','"    + date+ "')");
+	            + p.getText()+ "','" + p.getProjectmarketplaceRef() + "','"    + p.getUserRef()  + "','"    + p.getTenderRef() + "','"    +  date +  "','"    + date+ "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -113,15 +111,15 @@ public class ProjectMapper {
 	      
 	      
 	      SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd");
-	        Date jetzigesdatum = new Date();
-	        String date = mySQLformate.format(jetzigesdatum);
+	        Date currentDate = new Date();
+	        String date = mySQLformate.format(currentDate);
 	        
 		
 	        
 
 	      stmt.executeUpdate("UPDATE project " + "SET name=\""
 	          + p.getName() + "\", " + "text=\"" + p.getText()+ "\", " + "projektmarketplaceRef=\"" + p.getProjectmarketplaceRef()+ "\", " +  "UserRef=\"" + p.getUserRef() +  "\", " +  "TenderRef=\"" + p.getTenderRef()+  "\", " +  "StartDate=\"" + date+  "\", " +  "EndDate=\"" + date +  "\" "
-	          + "WHERE Id=" + p.getId());
+	          + "WHERE id=" + p.getId());
 
 	    }
 	    catch (SQLException e) {
