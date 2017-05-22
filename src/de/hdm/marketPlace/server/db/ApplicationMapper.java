@@ -35,12 +35,11 @@ public class ApplicationMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, text, ratingRef, tenderRef, userRef value FROM application" + "WHERE id=" + id +"ORDER BY tenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, text, ratingRef, tenderRef, userRef value FROM application " + "WHERE id=" + id +" ORDER BY tenderRef");
 		
 		if ( rs.next()){
 			
 			Application a = new Application();
-			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
 			a.setId(rs.getInt("id"));
 			a.setText(rs.getString("text"));
 			a.setRatingRef(rs.getInt("ratingRef"));

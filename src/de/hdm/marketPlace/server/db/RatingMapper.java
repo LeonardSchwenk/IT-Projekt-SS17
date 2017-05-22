@@ -12,6 +12,14 @@ public class RatingMapper {
 	protected RatingMapper(){
 	}
 	
+	public static RatingMapper ratingMapper(){
+		if(ratingMapper == null){
+			ratingMapper = new  RatingMapper();
+		}
+		
+		return ratingMapper;
+	}
+	
 	public Rating findByID(int Id){
 		
 		Connection con = DBConnection.getConnection();
@@ -23,7 +31,7 @@ public class RatingMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, rate, text value FROM Rating" + "WHERE Id=" + Id +"ORDER BY rate");
+		ResultSet rs =stmt.executeQuery("SELECT Id, rate, text value FROM Rating " + "WHERE Id=" + Id +"ORDER BY rate");
 		
 		if ( rs.next()){
 			

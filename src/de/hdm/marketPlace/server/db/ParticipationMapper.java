@@ -32,7 +32,7 @@ public class ParticipationMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, workingDays, projectRef, userRef, ratingRef value FROM participation" + "WHERE id=" + id +"ORDER BY workingDays");
+		ResultSet rs =stmt.executeQuery("SELECT id, workingDays, projectRef, userRef, ratingRef value FROM participation " + "WHERE id=" + id +"ORDER BY workingDays");
 		
 		if ( rs.next()){
 			

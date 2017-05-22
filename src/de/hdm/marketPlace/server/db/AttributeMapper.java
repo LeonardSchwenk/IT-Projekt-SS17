@@ -1,6 +1,7 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
+
 import java.util.Vector;
 
 import de.hdm.marketPlace.shared.bo.Application;
@@ -22,6 +23,8 @@ public class AttributeMapper {
 		return attributeMapper;
 	}
 	
+	
+	
 	public Attribute findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
@@ -33,13 +36,12 @@ public class AttributeMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, name, text, value, partnerprofileRef FROM attribute" + "WHERE id=" + id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, value, partnerprofileRef FROM attribute "  + "WHERE id=" + id +" ORDER BY name");
 		
 		if ( rs.next()){
 			
 			Attribute a = new Attribute();
-			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			a.setId(rs.getInt("Id"));
+			a.setId(rs.getInt("id"));
 			a.setName(rs.getString("name"));
 			a.setText(rs.getString("text"));
 			a.setValue(rs.getInt("value"));
