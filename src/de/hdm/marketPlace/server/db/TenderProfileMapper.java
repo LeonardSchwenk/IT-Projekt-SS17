@@ -35,7 +35,7 @@ public class TenderProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, attributeRef, tenderprofileDate value FROM tenderProfile " + "WHERE id=" + id +"ORDER BY tenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, tenderprofileDate value FROM tenderProfile " + "WHERE id=" + id +"ORDER BY tenderRef");
 		
 		if ( rs.next()){
 			
@@ -43,8 +43,7 @@ public class TenderProfileMapper {
 			tp.setId(rs.getInt("id"));
 			tp.setTenderRef(rs.getInt("tenderRef"));
 			tp.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
-			tp.setAttributeRef(rs.getInt("attributeRef"));
-			tp.setTenderProfileDate(rs.getDate("tenderprofileDate"));
+			tp.setTenderprofileDate(rs.getDate("tenderprofileDate"));
 			
 			
 			return tp; 
@@ -83,7 +82,7 @@ public class TenderProfileMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO TenderProfile (id, tenderRef, partnerprofileRef, attributeRefn, tenderprofileDate ) "
+	        stmt.executeUpdate("INSERT INTO TenderProfile (id, tenderRef, partnerprofileRef, tenderprofileDate ) "
 	           + "VALUES ('" + tp.getTenderRef() +  "','" + tp.getPartnerprofileRef() +  "','" + tp.getAttributeRef() + "','"    +  date+"')");
 	      }
 	    }

@@ -36,7 +36,7 @@ public class ProjectMarketplaceMapper {
 	
 	
 	
-	public ProjectMarketplace findByKey(int id) {
+	public ProjectMarketplace findByID(int id) {
 	    
 	    Connection con = DBConnection.getConnection();
 
