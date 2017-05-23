@@ -154,7 +154,7 @@ public interface MarketplaceAdministration {
 	public void deleteParticipation (Participation paricipation) throws IllegalArgumentException;
 	
 	//Anzeigen einer Teilnahme anhand von RatingRef
-	public Participation findParticipationByRatingRef(int ratingRef) throws IllegalArgumentException;
+	public Participation getParticipationByRatingRef(int ratingRef) throws IllegalArgumentException;
 	
 	
 	//Anzeigen aller Teilnahmen einer Person
