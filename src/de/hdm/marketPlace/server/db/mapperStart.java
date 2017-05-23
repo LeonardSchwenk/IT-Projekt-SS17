@@ -1,12 +1,12 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
+import java.util.Vector;
+
 import de.hdm.marketPlace.*;
 
 import de.hdm.marketPlace.server.db.*;
-import de.hdm.marketPlace.shared.bo.Attribute;
-import de.hdm.marketPlace.shared.bo.Project;
-import de.hdm.marketPlace.shared.bo.ProjectMarketplace;
+import de.hdm.marketPlace.shared.bo.*;
 
 
 import de.hdm.marketPlace.shared.bo.User;
@@ -31,21 +31,21 @@ public class mapperStart {
 	
 	*/
 		
-		UserMapper um = UserMapper.userMapper();
+		//UserMapper um = UserMapper.userMapper();
 		
-		User user1 = new User();
+	//	User user1 = new User();
 		
 		
-		user1.setName("updateleonard");
+	//	user1.setName("updateleonard");
 		
 	//	um.insert(user1);
 	
-		um.update(user1);
+	//	um.update(user1);
 		
 		
-		AttributeMapper am = AttributeMapper.attributeMapper();
+	//	AttributeMapper am = AttributeMapper.attributeMapper();
 		
-		Attribute a1 = new Attribute();
+//		Attribute a1 = new Attribute();
 		
 		
 		//a1.setText("erster text");;
@@ -56,7 +56,7 @@ public class mapperStart {
 		//am.findByID(1);
 		//System.out.println(am.findByID(1));
 		
-		ProjectMapper pm = ProjectMapper.projectMapper();
+	/*	ProjectMapper pm = ProjectMapper.projectMapper();
 		
 		Project p = new Project();
 		
@@ -65,10 +65,15 @@ public class mapperStart {
 		
 		pm.insert(p);
 		
+		*/
+		
+		TenderMapper tm = TenderMapper.tenderMapper();
 		
 		
 		
-		
+		 Vector <Tender> allTender = tm.findAll();
+		 
+		 System.out.println(allTender);
 		
 		
 		

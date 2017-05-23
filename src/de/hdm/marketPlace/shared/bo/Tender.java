@@ -1,5 +1,9 @@
 package de.hdm.marketPlace.shared.bo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /*Realisierung einer Ausschreibung/Stellenanzeige. 
  * Diese hat einen Namen und einen Text/Inhalt
  * usw.*/
@@ -11,17 +15,14 @@ public class Tender extends BusinessObject{
 	private String text = "";
 	private String name = "";
 	private int projectRef = 0;
-	private int tenderProfilRef = 0;
+
+	private Date startDate;
+	private Date endDate;
 	
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
 	Attribute */
 	
-	public int getTenderProfilRef() {
-		return tenderProfilRef;
-	}
-	public void setTenderProfilRef(int tenderProfilRef) {
-		this.tenderProfilRef = tenderProfilRef;
-	}
+
 	public String getText() {
 		return text;
 	}
@@ -46,5 +47,23 @@ public class Tender extends BusinessObject{
 	public String toString() {
 		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " ProjectRef: " + this.projectRef;
 		  }
+	
+	public String DateToString(Date d){
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String stringDate = df.format(d);
+		return stringDate;
+	}
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 	
 }

@@ -1,5 +1,7 @@
 package de.hdm.marketPlace.shared.bo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date; 
 
 /*Realisierung eines Projekts welches am Marktplatz angelegt werden
@@ -15,7 +17,7 @@ public class Project extends BusinessObject{
 	private Date endDate; 
 	private int projectmarketplaceRef = 0; 
 	private int userRef = 0; 
-	private int tenderRef = 0;
+	
 	
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
 	Attribute */
@@ -44,12 +46,6 @@ public class Project extends BusinessObject{
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public int getTenderRef() {
-		return tenderRef;
-	}
-	public void setTenderRef(int tenderRef) {
-		this.tenderRef = tenderRef;
-	}
 	public int getUserRef() {
 		return userRef;
 	}
@@ -67,7 +63,13 @@ public class Project extends BusinessObject{
 	//Textuelle Ausgabe der jeweiligen Projekt-Instanz 
 	
 	public String toString() {
-		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " ProjectMarketplace: " + this.projectmarketplaceRef+  "Tender: " + this.tenderRef+ "User: " + this.userRef;
+		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " ProjectMarketplace: " + this.projectmarketplaceRef+ "User: " + this.userRef;
 		  }
+	
+	public String DateToString(Date d){
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String stringDate = df.format(d);
+		return stringDate;
+	}
 
 }

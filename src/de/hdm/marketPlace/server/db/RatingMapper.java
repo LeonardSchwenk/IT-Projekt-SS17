@@ -1,8 +1,10 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
+import java.util.Vector;
 
 import de.hdm.marketPlace.shared.bo.Rating;
+import de.hdm.marketPlace.shared.bo.User;
 
 
 public class RatingMapper {
@@ -31,13 +33,12 @@ public class RatingMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT Id, rate, text value FROM Rating " + "WHERE Id=" + Id +"ORDER BY rate");
+		ResultSet rs =stmt.executeQuery("SELECT id, rate, text value FROM Rating " + "WHERE Id=" + Id +"ORDER BY rate");
 		
 		if ( rs.next()){
 			
 			Rating r = new Rating();
-			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
-			r.setId(rs.getInt("Id"));
+			r.setId(rs.getInt("id"));
 			r.setRate(rs.getFloat("rate"));
 			r.setText(rs.getString("text"));
 			
@@ -72,7 +73,7 @@ public class RatingMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO Rating (Id, rate, text) "
+	        stmt.executeUpdate("INSERT INTO Rating (id, rate, text) "
 	           + "VALUES (" + r.getRate() + ",'" + r.getText() +  "'" +")");
 	      }
 	    }
@@ -109,13 +110,38 @@ public class RatingMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Rating " + "WHERE Id=" + r.getId());
+	      stmt.executeUpdate("DELETE FROM Rating " + "WHERE id=" + r.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
 	    }
 	  }
 	
-	
+	//  getallratingofapplication
+	  
+	  public Vector<Rating> findRatingByApplicationRef(int applicationRef){
+		  Connection con = DBConnection.getConnection();
+		  Vector<Rating> result = new Vector <Rating>();
+		  
+		  try{
+			  Statement stmt = con.createStatement();
+			  
+			  ResultSet rs = stmt.executeQuery("SELECT id, rate, text value FROM Rating "  +"ORDER BY rate");
+			  while(rs.next()){
+				  
+					Rating r = new Rating();
+					r.setId(rs.getInt("id"));
+					r.setRate(rs.getFloat("rate"));
+					r.setText(rs.getString("text"));
+					
+			  result.addElement(r);
+			  }
+		  
+		  }
+		  catch(Exception e){
+			  e.printStackTrace();
+		  }
+		  return result;
+	  }
 	}
 
