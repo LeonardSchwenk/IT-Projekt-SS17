@@ -1,5 +1,7 @@
 package de.hdm.marketPlace.shared.bo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /*Realisierung eines Partnerprofils. Dieses Profil ist einer 
@@ -56,7 +58,11 @@ public class TenderProfile extends BusinessObject{
 		    return super.toString() + "TenderRef:  " + this.tenderRef + "PartnerprofileRef: " + this.partnerprofileRef+ " AttributeRef: " + this.attributeRef;
 		  }
 	
-	
+	public String DateToString(Date d){
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String stringDate = df.format(d);
+		return stringDate;
+	}
 	
 
 }
