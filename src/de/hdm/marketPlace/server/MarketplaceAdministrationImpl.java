@@ -284,6 +284,63 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		return apMapper.getAllApplications;
 	}
 	
+	public Vector <Application> getAllApplicationsByUserRef (int userRef) throws IllegalArgumentException {
+		return apMapper.findAllApplicationsByUserRef (userRef);
+	}
+	
+	
+	//Methoden zur Benutzerverwaltung
+	
+	public User createUser (String name) throws IllegalArgumentException {
+		User u = new User ();
+		
+		u.setName(name);
+		return usMapper.insert(u);
+	}
+	
+	public User getUserById (int userRef) throws IllegalArgumentException {
+		return usMapper.findByID(userRef);
+	}
+	
+	public void updateUser (User u, String name) throws IllegalArgumentException{
+		u.setName(name);
+		
+		usMapper.update(u);
+	}
+	
+	public void deleteUser (User u) throws IllegalArgumentException {
+		usMapper.delete(u);
+	}
+	
+	public Vector <User> getAllUserByName (String name) throws IllegalArgumentException {
+		return usMapper.findAllUserByName (name);
+	}
+	
+	public Vector <User> getAllUser() throws IllegalArgumentException {
+		return usMapper.findAll();
+	}
+	
+	
+	//Methoden zur Verwaltung von Marktplätzen
+	
+	public ProjectMarketplace createMarketplace (String name) throws IllegalArgumentException {
+		ProjectMarketplace pm = new ProjectMarketplace();
+		pm.setName(name);
+		
+		pmMapper.insert(pm);
+	}
+	
+	public ProjectMarketplace getMarketplaceById (int projectmarketplaceRef) throws IllegalArgumentException {
+		return pmMapper.findById(projectmarketplaceRef);
+	}
+	
+	public void joinMarketplace (int userRef, int projectmarketplaceRef) throws IllegalArgumentException {
+		User u = usMapper.findByID(userRef);
+		u.setMarketplaceRef (projectmarketplaceRef);
+		
+		usMapper.update(u);
+	}
+	
 	
 	
 	

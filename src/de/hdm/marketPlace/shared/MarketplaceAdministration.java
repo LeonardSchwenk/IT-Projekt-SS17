@@ -23,7 +23,7 @@ public interface MarketplaceAdministration {
 	public ProjectMarketplace getMarketplaceById (int marketplaceRef) throws IllegalArgumentException;
 	
 	//Methode zum Beitreten eines Marktplatzes
-	public void joinMarketplace (User user, ProjectMarketplace marketplace)throws IllegalArgumentException;
+	public void joinMarketplace (int userRef, int marketplaceRef)throws IllegalArgumentException;
 	
 	//Methode zum Löschen eines Marktplatzes
 	public void deleteMarketplace (ProjectMarketplace marketplace)throws IllegalArgumentException;
@@ -79,7 +79,7 @@ public interface MarketplaceAdministration {
 	public Vector <Application> getAllApplications () throws IllegalArgumentException;
 	
 	//ausgeben aller Bewerbungen eines bestimmten Users
-	public Vector <Application> getAllApplicationsOfUser(User u) throws IllegalArgumentException;
+	public Vector <Application> getAllApplicationsByUserRef(int userRef) throws IllegalArgumentException;
 	
 	
 	
