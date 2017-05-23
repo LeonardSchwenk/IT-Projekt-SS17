@@ -31,7 +31,7 @@ public class TenderProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, attributeRef value FROM tenderProfile" + "WHERE id=" + id +"ORDER BY tenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, attributeRef value FROM tenderProfile " + "WHERE id=" + id +"ORDER BY tenderRef");
 		
 		if ( rs.next()){
 			

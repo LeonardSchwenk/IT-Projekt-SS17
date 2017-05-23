@@ -4,6 +4,7 @@ import java.sql.*;
 
 
 
+
 import de.hdm.marketPlace.shared.bo.ProjectMarketplace;
 import de.hdm.marketPlace.shared.bo.Rating;
 
@@ -25,7 +26,7 @@ public class ProjectMarketplaceMapper {
 
 	
 	
-	public static ProjectMarketplaceMapper ProjectMarketplaceMapper() {
+	public static ProjectMarketplaceMapper projectMarketplaceMapper() {
 	    if (projectmarketplaceMapper == null) {
 	    	projectmarketplaceMapper = new ProjectMarketplaceMapper();
 	    }
