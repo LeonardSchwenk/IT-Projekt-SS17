@@ -12,7 +12,7 @@ public class TenderProfile extends BusinessObject{
 	
 	private Date tenderDate;
 	private int tenderRef = 0;
-	private int partnerprofileRef = 0;
+	
 	
 	
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
@@ -31,17 +31,12 @@ public class TenderProfile extends BusinessObject{
 	public void setTenderRef(int tenderRef) {
 		this.tenderRef = tenderRef;
 	}
-	public int getPartnerprofileRef() {
-		return partnerprofileRef;
-	}
-	public void setPartnerprofileRef(int partnerprofileRef) {
-		this.partnerprofileRef = partnerprofileRef;
-	}
+	
 	
 	
 	//Textuelle Darstellung der jeweiligen Partnerprofil-Instanz 
 	
 	public String toString() {
-		    return super.toString() + "TenderRef:  " + this.tenderRef + "PartnerprofileRef: " + this.partnerprofileRef;
+		    return super.toString() + "TenderRef:  " + this.tenderRef;
 		  }
 }

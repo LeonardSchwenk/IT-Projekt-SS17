@@ -9,6 +9,7 @@ public class Rating extends BusinessObject{
 	
 	private float rate = 0;
 	private String text = "";
+	private int applicationRef = 0; 
 	
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
 	Attribute */
@@ -30,11 +31,20 @@ public class Rating extends BusinessObject{
 	public void setRate(float rate) {
 		this.rate = rate;
 	}
+	public int getApplicationRef() {
+		return applicationRef;
+	}
+	public void setApplicationRef(int applicationRef) {
+		this.applicationRef = applicationRef;
+	}
+	
 
 	//Textuelle Ausgabe einer Bewertungs-Instanz
 	
+	
 	public String toString() {
-		    return super.toString() + "Rate:  " + this.rate + "Text: " + this.text;
+		    return super.toString() + "Rate:  " + this.rate + "Text: " + this.text
+		    		+ " ApplicationRef: " + this.applicationRef;
 		  }
 	
 }

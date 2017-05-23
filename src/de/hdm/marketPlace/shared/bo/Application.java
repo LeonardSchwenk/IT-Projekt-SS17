@@ -10,7 +10,7 @@ public class Application extends BusinessObject{
 	
 	//Attribute der Klasse 
 	
-	private String titel = "";		
+	private String name = "";		
 	private String text = ""; 
 	private Date applicationDate; 
 	private int userRef = 0; 
@@ -53,12 +53,12 @@ public class Application extends BusinessObject{
 		this.ratingRef = ratingRef;
 	} 
 	
-	 public String getTitel() {
-		return titel;
+	 public String getName() {
+		return name;
 	}
 
-	public void setTitel(String titel) {
-		this.titel = titel;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public Date getApplicationDate() {
 		return applicationDate;
@@ -71,7 +71,7 @@ public class Application extends BusinessObject{
 	// Erzeugt textuelle Darstellung der jeweiligen Bewerbungs-Instanz 
 
 	public String toString() {
-		    return super.toString() + " Text: " +  " Rating: " + this.ratingRef+ " Tender: " + this.tenderRef+ " User: " + this.userRef;
+		    return super.toString() + "Name : " + this.name +" Text: " + this.text +  " Rating: " + this.ratingRef+ " Tender: " + this.tenderRef+ " User: " + this.userRef;
 		    }
 }
 		   

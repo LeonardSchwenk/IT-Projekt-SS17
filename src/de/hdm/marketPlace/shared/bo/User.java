@@ -8,6 +8,7 @@ public class User extends BusinessObject {
 	//Attribute der Klasse 
 	
 	private String name = "";
+	private int projectmarketplaceRef = 0; 
 	
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
 	Attribute */
@@ -18,7 +19,13 @@ public class User extends BusinessObject {
 	public String getName (){
 		return name;
 	}
-	
+	public int getProjectmarketplaceRef() {
+		return projectmarketplaceRef;
+	}
+	public void setProjectmarketplaceRef(int projectmarketplaceRef) {
+		this.projectmarketplaceRef = projectmarketplaceRef;
+	}
+		
 	//Textuelle Ausgabe der jeweiligen Nutzerprofil-Instanz  
 	
 		public String toString() {

@@ -11,17 +11,12 @@ public class Tender extends BusinessObject{
 	private String text = "";
 	private String name = "";
 	private int projectRef = 0;
-	private int tenderProfilRef = 0;
+
 	
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
 	Attribute */
 	
-	public int getTenderProfilRef() {
-		return tenderProfilRef;
-	}
-	public void setTenderProfilRef(int tenderProfilRef) {
-		this.tenderProfilRef = tenderProfilRef;
-	}
+
 	public String getText() {
 		return text;
 	}
