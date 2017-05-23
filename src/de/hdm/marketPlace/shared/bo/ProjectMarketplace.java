@@ -1,16 +1,17 @@
 package de.hdm.marketPlace.shared.bo;
 
-import java.util.Vector; 
+/*Realisierung eines Projektmarktplatz auf welcheme Projekte angelegt 
+ * werden können. */
 
 public class ProjectMarketplace extends BusinessObject{
 
-	//attributes of the class
+	//Attribute der Klasse 
 	
 	private String name = "";
+	private int userRef = 0; 
 	
-	private Vector<UserProfile> userRef = new Vector<UserProfile>();
-	
-	//Setters and Getters of all attributes
+	/*Alle Get und Set Methoden zum auslesen und setzen der 
+	Attribute */
 	
 	public String getName() {
 		return name;
@@ -18,36 +19,16 @@ public class ProjectMarketplace extends BusinessObject{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Vector<UserProfile> getUserRef() {
+	public int getUserRef() {
 		return userRef;
 	}
-	
-	public void addUserRef (UserProfile a){
-		this.userRef.addElement (a);
+	public void setUserRef(int userRef) {
+		this.userRef = userRef;
 	}
 	
-	public void removeUserRef (UserProfile a){
-		this.userRef.addElement(a);
-	}
-	
-	public UserProfile getParagraphAt(int a) {
-	    return this.userRef.elementAt(a);
-	}
+	//Textuelle Ausgabe der jeweiligen Martplatz-Instanz 
 	
 	public String toString() {
-	    
-	    StringBuffer result = new StringBuffer();
-
-	    
-	    for (int i = 0; i < this.userRef.size(); i++) {
-	      UserProfile a = this.userRef.elementAt(i);
-
-	     
-	      result.append(a.toString() + "\n");
-	    }
-		return super.toString()+"Name:" + this.name;
-
-		
-	   
+	    return super.toString()+"Name:" + this.name + "User" + this.userRef;	   
 }
 }
