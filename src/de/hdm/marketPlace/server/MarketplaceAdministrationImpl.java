@@ -1,6 +1,7 @@
 package de.hdm.marketPlace.server;
 
 import de.hdm.marketPlace.shared.*;
+import java.io.Serializable;
 
 import de.hdm.marketPlace.shared.bo.*;
 import de.hdm.marketPlace.server.db.*;
@@ -57,6 +58,35 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		this.upMapper = UserProfileMapper.userProfileMapper();
 		this.tpMapper = TenderProfileMapper.tenderProfileMapper();
 		
+	}
+	//Methoden zur Verwaltung von Projektmarkpl‰tzen
+	
+	public ProjectMarketPlace createProjectMarketPlace(int id, String name )
+			throws IllegalArgumentException {
+
+		ProjectMarketPlace projectMarketPlace = new ProjectMarketPlace();
+		projectMarketPlace.setProjectMarketPlaceId(1);
+		projectMarketPlace.setName(name);
+		
+
+		return this.pmMapper.insert(projectMarketPlace);
+
+	}
+	
+	public ProjectMarketPlace findProjectMarketPlaceById(int id) throws IllegalArgumentException {
+		return this.pmMapper.findById(id);
+	}
+
+	public Vector<ProjectMarketPlace> findAllProjectMarketPlace() throws IllegalArgumentException {
+		return this.pmMapper.findAll();
+	}
+
+	public void update(ProjectMarketPlace pm) throws IllegalArgumentException {
+		pmMapper.update(pm);
+	}
+
+	public void delete(ProjectMarketPlace pm) throws IllegalArgumentException {
+		pmMapper.delete(pm);
 	}
 	
 	//Methoden f√ºr die Customer-Objekte
@@ -222,7 +252,9 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 	}
 	
 	
+	*/
 	
+	*/
 	
 	
 	
