@@ -89,6 +89,174 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		pmMapper.delete(pm);
 	}
 	
+	//Methoden zur Verwaltung eines Users
+	
+	public User createUser(String google_id, String name, String typ)
+			throws IllegalArgumentException {
+
+		User user= new User();
+		user.setGoogleId(google_id);
+		user.setName(name);
+		user.setTyp(typ);
+
+		return this.usMapper.insert(User)
+
+	}
+	
+	public User getUserById(int id) throws IllegalArgumentException {
+		return this.usMapper.findByKey(id);
+	}
+
+	public Vector<User> getAllUser() throws IllegalArgumentException {
+		return this.usMapper.findAll();
+	}
+
+	public Vector<User> getUserByName(String name) {
+		return this.usMapper.findByName(name);
+	}
+	
+	public Vector<User> getUserByTyp(String typ) {
+		return this.usMapper.findByTyp(typ);
+	}
+
+	public void updateUser(User User) throws IllegalArgumentException {
+		this.usMapper.update(User);
+	}
+
+	public void deleteUser(User User) throws IllegalArgumentException {
+		
+		//Zugehöriges UserProfile löschen
+		UserProfile userProfile = upMapper.findByUser(User);
+  		
+  		if(userProfile != null) {
+  			this.deleteUserProfile(userProfile);
+  		}
+      
+      	//Zugehörige Projekte löschen		      
+      	Vector<Project> pl = new Vector<Project>();
+      	
+      	if(pl != null) {
+      		pl = prMapper.findByUser(User);
+      		for(Project project: pl){
+      			this.delete(project);
+
+      		}
+      	}
+		
+		//Zugehörige Bewerbungen löschen
+  		Vector<Application> al = new Vector<Application>();
+  		
+  		if (al != null) {
+  			al = this.raMapper.findByUser(User);
+  			for(Application application : al){
+  				this.deleteApplication(a);
+  			}
+  		}
+      
+  		
+    
+      	this.usMapper.delete(User);
+ 	
+      	
+	}
+      	
+	//Methoden zur Verwaltung einer Bewerbung
+	public Application createApplication (int applicationID, Date startdate, String definition)
+			throws IllegalArgumentException {
+		Application application = new Application();
+		return this.apMapper.insert(application, null, null);
+	}
+
+	public void updateApplication(int applicationID, Date startDate, String definition
+			throws IllegalArgumentException {
+		Application application = new Application ();
+		application.setApplicationID(applicationID);
+		application.setStartDate(startDate);
+		application.setDefinition(definition);
+		this.apMapper.update(application);
+	}
+	
+	public void deleteApplication(Application application) {
+		
+		
+		Application a = this.apMapper.findByApplication(application);
+  		if (a != null) {
+  			//fehlt noch
+  			}
+  		this.apMapper.deleteRatingOfApplication(application);
+		this.apMapper.delete(application);
+  		}
+	
+	//Methoden zur Verwaltung eines UserProfils
+	
+public UserProfile createUserProfile(User u) throws IllegalArgumentException {
+		
+	UserProfile up = new UserProfile();
+		up.setUserId(u.getUserId());
+		
+		return this.upMapper.insertUserProfile(up);
+	}
+
+	public UserProfile findById(int i) throws IllegalArgumentException {
+		return this.upMapper.findById(i);
+	}
+
+	
+	public UserProfile updateUserProfile(UserProfile up) throws IllegalArgumentException {
+		return this.upMapper.updateUserProfile(up);
+	}
+
+	public void deleteUserProfile(UserProfile up) throws IllegalArgumentException {
+		
+		
+		Vector<Attribute> a= new Vector<Attribute>();
+      	
+      	if(a != null) {
+      		a = atMapper.findByPartnerprofile(pp);
+      		for(Attribute attribute : a){
+      			this.deleteAttribute(Attribute);
+      		}
+      	}
+    		//Partnerprofil löschen
+    		this.upMapper.deleteUserProfile(up);
+      	}
+		
+		
+		
+		//Zugehörige EIgenschaften löschen
+		this.attributeMapper.deleteAttributeOfUserProfile(up);
+		
+	}
+	public ArrayList<Tender> getAllTender() throws IllegalArgumentException {
+		return this.teMapper.findAll();
+	}
+	
+	//Methoden zur Verwaltung einer Eigenschaft
+	
+	public Attribute insertAttribute(Attribute a, UserProfile up)throws IllegalArgumentException{
+		return this.atMapper.insertAttribute(a, up);
+	}
+	
+	public Attribute updateAttribute(Attribute a)throws IllegalArgumentException{
+		return this.atMapper.updateAttribute(a);
+	}
+	
+	public void deleteAttribute(Attribute a)throws IllegalArgumentException{
+		atMapper.deleteAttribute(a);
+	}
+	
+	
+	public void deleteAllAttributeOfPartnerprofile(UserProfile up)throws IllegalArgumentException{
+		atMapper.deleteAllAttributeOfUserProfile(up);
+	}
+	
+	
+	public Vector<Attribute> selectAllAttributeOfUserProfile(UserProfile up)throws IllegalArgumentException{
+		return this.atMapper.findByUserProfile(up);
+	}
+	
+
+	
 	//Methoden fÃ¼r die Customer-Objekte
 	//Methoden zur Verwaltung eines Ausschreiberprofils
 	

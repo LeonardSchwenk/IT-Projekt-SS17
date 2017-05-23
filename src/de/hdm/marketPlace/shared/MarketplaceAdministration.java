@@ -17,22 +17,22 @@ public interface MarketplaceAdministration {
 	
 	//Methoden zur Verwaltung von Marktplätzen
 	//Methode zur Erstellung eines Marktplatzes
-	public ProjectMarketplace createMarketplace (String name) throws IllegalArgumentException;
+	public ProjectMarketplace createProjectMarketplace (String name) throws IllegalArgumentException;
 	
 	//Methode zur Rückgabe eines Marketplace anhand seiner Id
-	public ProjectMarketplace getMarketplaceById (int marketplaceRef) throws IllegalArgumentException;
+	public ProjectMarketplace getProjectMarketplaceById (int marketplaceRef) throws IllegalArgumentException;
 	
 	//Methode zum Beitreten eines Marktplatzes
-	public void joinMarketplace (User user, ProjectMarketplace marketplace)throws IllegalArgumentException;
+	public void joinProjectMarketplace (User user, ProjectMarketplace marketplace)throws IllegalArgumentException;
 	
 	//Methode zum Löschen eines Marktplatzes
-	public void deleteMarketplace (ProjectMarketplace marketplace)throws IllegalArgumentException;
+	public void deleteProjectMarketplace (ProjectMarketplace marketplace)throws IllegalArgumentException;
 	
 	//Methode zur Ausgabe des aktuellen Marktplatzes
-	public ProjectMarketplace getMarketplace() throws IllegalArgumentException;
+	public ProjectMarketplace getProjectMarketplace() throws IllegalArgumentException;
 	
 	//Setzen des Marktplatzes, auf welchem Marketplatz befinde ich mich?
-	public void setMarketplace(ProjectMarketplace m) throws IllegalArgumentException;
+	public void setProjectMarketplace(ProjectMarketplace m) throws IllegalArgumentException;
 	
 	
 	
