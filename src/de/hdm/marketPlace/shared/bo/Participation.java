@@ -1,5 +1,7 @@
 package de.hdm.marketPlace.shared.bo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date; 
 
 /*Realisierung einer Projektbeteiligung. Diese deutet an, dass ein
@@ -65,4 +67,10 @@ public class Participation extends BusinessObject{
 	 public String toString() {
 		    return super.toString() + "projectRef:  " + this.projectRef + "userRef: " + this.userRef+ " ratingRef: " + this.ratingRef + "workingDays" + this.workingDays+ "startdate" + this.startDate+ "enddate" + this.endDate;
 		  }
+	 
+	 public String DateToString(Date d){
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			String stringDate = df.format(d);
+			return stringDate;
+		}
 }

@@ -4,12 +4,12 @@ import java.util.Date;
 //import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.Vector;
 
+import de.hdm.marketPlace.server.MarketplaceAdministrationImpl;
 import de.hdm.marketPlace.shared.MarketplaceAdministration;
 import de.hdm.marketPlace.shared.ReportGenerator;
 import de.hdm.marketPlace.shared.bo.*;
 import de.hdm.marketPlace.shared.report.*;
-import de.hdm.thies.bankProjekt.shared.bo.Customer;
-import de.hdm.thies.bankProjekt.shared.report.AllAccountsOfAllCustomersReport;
+
 
 
 public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportGenerator{ //Wo findet sich RemotService Servlet??
@@ -79,7 +79,6 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  headline.addColumn(new Column("TenderName"));
 		  headline.addColumn(new Column("TenderText"));
-		  headline.addColumn(new Column("TenderProfil"));
 		  
 		  result.addRow(headline);
 		  
@@ -91,7 +90,6 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			  
 			 tenderRow.addColumn(new Column(t.getName()));
 			 tenderRow.addColumn(new Column(t.getText()));
-			 tenderRow.addColumn(new Column(administration.getProjectName(t.getProjectRef()))); 
 			 
 			 result.addRow(tenderRow);
 		  }
@@ -130,7 +128,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Tender> allTenders = this.administration.getTenderMatch(u); //Hier passende Methode ändern
+		  Vector<Tender> allTenders = this.administration.getTenderMatch(u);
 		  
 		  for(Tender t : allTenders){
 			  
@@ -138,7 +136,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			  
 			  tenderRow.addColumn(new Column(t.getName()));
 				 tenderRow.addColumn(new Column(t.getText()));
-				 tenderRow.addColumn(new Column(administration.getProjectName(t.getProjectRef())));
+				 tenderRow.addColumn(new Column(administration.getProjectById(t.getProjectRef()).getName()));
 			 
 			 result.addRow(tenderRow);
 		  }
@@ -162,8 +160,8 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  CompositeParagraph header = new CompositeParagraph();
 		  
-		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName())); //Muss bei jedem Report der marketplace gewählt werden??
 		  header.addSubParagraph(new SimpleParagraph("Tender: " + t.getName()));
+		  header.addSubParagraph(new SimpleParagraph("Project: " + administration.getProjectById(t.getProjectRef()).getName()));
 		  
 		  result.setHeaderData(header);
 		  
@@ -185,9 +183,9 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			  Row applicationRow = new Row();
 			  
 			 applicationRow.addColumn(new Column(a.getTitel())); 
-			 applicationRow.addColumn(new Column(a.getUserRef())); //Hier noch UserName finden
+			 applicationRow.addColumn(new Column(administration.getUserById(a.getUserRef()).getName()));
 			 applicationRow.addColumn(new Column(a.getText()));
-			 applicationRow.addColumn(new Column(a.getRatingRef())); //RatingRef muss noch in String umgewandelt werden
+			 applicationRow.addColumn(new Column(administration.getRatingById(a.getRatingRef()).getRate()));
 
 			 
 			 result.addRow(applicationRow);
@@ -197,7 +195,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 	  }
 
-	  public AllApplicationsOfUser createAllApplicationsOfUserReport(ProjectMarketplace m, User u) throws IllegalArgumentException{
+	  public AllApplicationsOfUser createAllApplicationsOfUserReport(User u) throws IllegalArgumentException{
 		  
 		  if(this.getMarketplaceAdministration() == null)
 			  return null;
@@ -212,7 +210,6 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  CompositeParagraph header = new CompositeParagraph();
 		  
-		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName())); //Muss bei jedem Report der marketplace gewählt werden??
 		  header.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
 		  
 		  result.setHeaderData(header);
@@ -224,6 +221,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  headline.addColumn(new Column("Titel"));
 		  headline.addColumn(new Column("ApplicationText"));
 		  headline.addColumn(new Column("Rating"));
+		  headline.addColumn(new Column("Tender"));
 		  
 		  result.addRow(headline);
 		  
@@ -235,7 +233,8 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			  
 			 applicationRow.addColumn(new Column(a.getTitel()));
 			 applicationRow.addColumn(new Column(a.getText())); 
-			 applicationRow.addColumn(new Column(a.getRatingRef())); // Methode fehlt noch
+			 applicationRow.addColumn(new Column(administration.getRatingById(a.getRatingRef()).getRate()));
+			 applicationRow.addColumn(new Column(administration.getTenderById(a.getTenderRef()).getName()));
 			 
 			 result.addRow(applicationRow);
 		  }
@@ -245,75 +244,36 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 	  }
 	  
-	  public ProjectInterconnection createProjectInterconnectionReport(User u) throws IllegalArgumentException{
+	  public ParticipationsOfUser createParticipationsOfUserReport(User u) throws IllegalArgumentException{
 		  
 		  if(this.getMarketplaceAdministration() == null)
 			  return null;
 		  
-		  ProjectInterconnection result1 = new ProjectInterconnection(); //Leerer Report
+		 
+		  ParticipationsOfUser result = new ParticipationsOfUser(); //Leerer Report
 		  
-		  result1.setTitle("All Applications of User");
+		  result.setTitle("All Participations of User");
 		  
-		  this.addImprint(result1);
+		  this.addImprint(result);
 		  
-		  result1.setCreated(new Date());
+		  result.setCreated(new Date());
 		  
 		  CompositeParagraph header = new CompositeParagraph();
 		  
-		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName())); //Muss bei jedem Report der marketplace gewählt werden??
 		  header.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
 		  
-		  result1.setHeaderData(header);
+		  result.setHeaderData(header);
 		  
 		  
 		  
 		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
 		  
-		  headline.addColumn(new Column("ApplicationTitel"));
-		  headline.addColumn(new Column("ApplicationText"));
-		  headline.addColumn(new Column("TenderTitle"));
+		  headline.addColumn(new Column("ProjectName"));
+		  headline.addColumn(new Column("WorkingDays"));
+		  headline.addColumn(new Column("StartDate"));
+		  headline.addColumn(new Column("EndDate"));
 		  
-		  result1.addRow(headline);
-		  
-		  Vector<Application> allApplications = this.administration.getAllApplicationsOfUser(u);
-		  
-		  for(Application a : allApplications){
-			  
-			  Row applicationRow = new Row();
-			  
-			 applicationRow.addColumn(new Column(a.getTitel()));
-			 applicationRow.addColumn(new Column(a.getText())); 
-			 applicationRow.addColumn(new Column(a.getTenderRef())); // Methode fehlt noch
-			 
-			 result1.addRow(applicationRow);
-		  }
-		  
-		  return result1;
-		  
-		  
-ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
-		  
-		  result2.setTitle("All Participations of User");
-		  
-		  this.addImprint(result2);
-		  
-		  result2.setCreated(new Date());
-		  
-		  CompositeParagraph header2 = new CompositeParagraph();
-		  
-		  header2.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
-		  
-		  result2.setHeaderData(header2);
-		  
-		  
-		  
-		  Row headline2 = new Row(); //Erste Reihe in dem report (Bezeichnungen)
-		  
-		  headline2.addColumn(new Column("ProjectName"));
-		  headline2.addColumn(new Column("WorkingDays"));
-		  headline2.addColumn(new Column("TenderTitle"));
-		  
-		  result2.addRow(headline);
+		  result.addRow(headline);
 		  
 		  Vector<Participation> allParticipations = this.administration.getAllParticipationsOfUser(u);
 		  
@@ -321,17 +281,42 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 			  
 			  Row participationRow = new Row();
 			  
-			  participationRow.addColumn(new Column(administration.getProjectName(a.getProjectRef())));
+			  participationRow.addColumn(new Column(administration.getProjectById(a.getProjectRef()).getName()));
 			  participationRow.addColumn(new Column(a.getWorkingDays())); 
-			  participationRow.addColumn(new Column(administration.getRatingbyId(a.getRatingRef().getRate()))); // Methode fehlt noch
+			  participationRow.addColumn(new Column(a.DateToString(a.getStartDate())));
+			  participationRow.addColumn(new Column(a.DateToString(a.getEndDate())));
 			 
-			 result2.addRow(participationRow);
+			 result.addRow(participationRow);
 		  }
 		  
-		  return result2;
+		  return result;
 		  
 	  }
 	
+	  public ProjectInterconnection createProjectInterconnectionReport(User u) throws IllegalArgumentException{
+		  
+		  if(this.getMarketplaceAdministration() == null)
+			  return null;
+
+		  ProjectInterconnection result = new ProjectInterconnection();
+
+		    result.setTitle("ProjectInterconnection of User");
+
+		    this.addImprint(result);
+
+		    result.setCreated(new Date());
+
+		    
+		    result.addSubReport(this.createAllApplicationsOfUserReport(u));
+		    result.addSubReport(this.createParticipationsOfUserReport(u));
+		    
+
+		    return result;
+		  
+	  }
+		  
+	  
+	  
 	  public FanInFanOutByUser createFanInFanOutByUserReport(User u)throws IllegalArgumentException{ // NICHT OBJEKT SONDERN NUR REFERENZ
 		  
 		  if(this.getMarketplaceAdministration() == null)
@@ -374,15 +359,19 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 			 
 			 String status = null;
 			 
+			 Date now = new Date();
+			 
+			 int dateInt = administration.getTenderById(a.getTenderRef()).getEndDate().compareTo(now);
+					 
 			 Participation p = null;
-			 p = this.administration.getParticipationByRating(a.getRatingRef()); //Methode noch in Administration erstellen
+			 p = this.administration.getParticipationByRatingId(a.getRatingRef()); //Methode noch in Administration erstellen
 			 
 			 if(p != null){
 					 status = "Accepted";
 				 
 				 }
 			 
-				 else if(administration.getTenderById(a.getTenderRef()).getEndDate > CurrentDate){
+				 else if(dateInt >0){
 					 status = "Going on";
 				 }
 				 
@@ -427,9 +416,10 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 		  
 		  result1.addRow(headline1);
 		  
-		  Vector<Tender> allTenders = this.administration.getAllTenderByUser(u);
+		  Vector<Tender> allTenders = this.administration.getAllTenderOfUser(u);
 		  
 		  int Counter1 = 1;
+		  
 		  
 		  for(Tender t : allTenders){
 			  
@@ -439,7 +429,25 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 			 
 			 String status1 = null;
 			 
-			 // Woher weis ich welche Ausschreibung mit welcher Teilnahme zusammenhängt??
+			 Date now1 = new Date();
+			 
+			 int dateInt1 = t.getEndDate().compareTo(now1);
+					 
+			 Participation part1 = administration.getParticipationByTenderId(t.getId());
+			 
+			 
+			 if(part1 != null){
+				 status1 = "Job Successfully filled";
+			 
+			 }
+		 
+			 else if(dateInt1 > 0 && part1 == null){
+				 status1 = "Going on";
+			 }
+			 
+			 else {
+				 status1 = "Rejected";
+			 }
 			 
 			 tenderRow.addColumn(new Column(s1));
 			 tenderRow.addColumn(new Column(t.getText())); 

@@ -11,7 +11,8 @@ public class Attribute extends BusinessObject {
 	private String name = "";
 	private String text = "";
 	private int value = 0 ;
-	private int partnerprofileRef = 0;
+	private int userprofileRef = 0;
+	private int tenderprofilRef =0; 
 	
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
 	Attribute */
@@ -38,17 +39,24 @@ public class Attribute extends BusinessObject {
 	public void setValue(int value) {
 		this.value = value;
 	}
-	public int getPartnerprofileRef() {
-		return partnerprofileRef;
+	 public int getUserprofileRef() {
+		return userprofileRef;
 	}
-	public void setPartnerprofileRef(int partnerprofileRef) {
-		this.partnerprofileRef = partnerprofileRef;
+	public void setUserprofileRef(int userprofileRef) {
+		this.userprofileRef = userprofileRef;
+	}
+	public int getTenderprofilRef() {
+		return tenderprofilRef;
+	}
+	public void setTenderprofilRef(int tenderprofilRef) {
+		this.tenderprofilRef = tenderprofilRef;
 	}
 	
 	//Textuelle Ausgabe der jeweiligen Attribut-Instanz 
 	
-	 public String toString() {
-		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " Value: " + this.value + "PartnerProfile" + this.partnerprofileRef;
+	public String toString() {
+		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " Value: " + this.value + "UserProfile: " + this.userprofileRef + 
+		    		"TenderProfil : " + this.tenderprofilRef;
 		  }
 	
 	
