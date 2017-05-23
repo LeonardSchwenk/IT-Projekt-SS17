@@ -2,7 +2,12 @@ package de.hdm.marketPlace.shared.bo;
 
 import java.util.Date; 
 
+/*Realisierung einer Projektbeteiligung. Diese deutet an, dass ein
+ * Projektleiter mit einem Bewerber zusammenarbeiten will.*/
+
 public class Participation extends BusinessObject{
+	
+	//Attribute der Klasse
 	
 	private int projectRef = 0;
 	private int userRef = 0; 
@@ -11,6 +16,8 @@ public class Participation extends BusinessObject{
 	private Date startDate;
 	private Date endDate;
 	
+	/*Alle Get und Set Methoden zum auslesen und setzen der 
+	Attribute */
 	
 	public int getProjectRef() {
 		return projectRef;
@@ -30,8 +37,13 @@ public class Participation extends BusinessObject{
 	public void setRatingRef(int ratingRef) {
 		this.ratingRef = ratingRef;
 	}
-	public int getWorkingDays() {
-		return workingDays;
+	
+	/*Integerwert wird auf String geändert, um im späteren Verlauf 
+	 * im Reportgeneratro ausgegeben zu werden */
+	
+	public String getWorkingDays() {
+		String s = String.valueOf(workingDays);
+		return s;
 	}
 	public void setWorkingDays(int workingDays) {
 		this.workingDays = workingDays;
@@ -48,6 +60,7 @@ public class Participation extends BusinessObject{
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	//Textuelle Ausgabe der jeweiligen Projektbeteiligungs-Instanz 
 	
 	 public String toString() {
 		    return super.toString() + "projectRef:  " + this.projectRef + "userRef: " + this.userRef+ " ratingRef: " + this.ratingRef + "workingDays" + this.workingDays+ "startdate" + this.startDate+ "enddate" + this.endDate;

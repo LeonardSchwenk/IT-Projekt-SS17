@@ -2,7 +2,12 @@ package de.hdm.marketPlace.shared.bo;
 
 import java.util.Date; 
 
+/*Realisierung eines Projekts welches am Marktplatz angelegt werden
+ * kann. Ein Projekt hat einen Name, einen Text/Inhalt usw.*/
+
 public class Project extends BusinessObject{
+	
+	//Attribute der Klasse 
 	
 	private String name = ""; 
 	private String text =""; 
@@ -10,9 +15,10 @@ public class Project extends BusinessObject{
 	private Date endDate; 
 	private int projectmarketplaceRef = 0; 
 	private int userRef = 0; 
-	private int tenderRef = 0;
 	
 	
+	/*Alle Get und Set Methoden zum auslesen und setzen der 
+	Attribute */
 	
 	public String getName() {
 		return name;
@@ -38,21 +44,12 @@ public class Project extends BusinessObject{
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
-	public int getTenderRef() {
-		return tenderRef;
-	}
-	public void setTenderRef(int tenderRef) {
-		this.tenderRef = tenderRef;
-	}
 	public int getUserRef() {
 		return userRef;
 	}
 	public void setUserRef(int userRef) {
 		this.userRef = userRef;
 	} 
-	
-	
 	public int getProjectmarketplaceRef() {
 		return projectmarketplaceRef;
 	}
@@ -61,8 +58,10 @@ public class Project extends BusinessObject{
 	}
 
 		
-	 public String toString() {
-		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " ProjectMarketplace: " + this.projectmarketplaceRef+  "Tender: " + this.tenderRef+ "User: " + this.userRef;
+	//Textuelle Ausgabe der jeweiligen Projekt-Instanz 
+	
+	public String toString() {
+		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " ProjectMarketplace: " + this.projectmarketplaceRef+ "User: " + this.userRef;
 		  }
 
 }

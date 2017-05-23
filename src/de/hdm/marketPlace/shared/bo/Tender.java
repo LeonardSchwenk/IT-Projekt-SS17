@@ -1,16 +1,27 @@
 package de.hdm.marketPlace.shared.bo;
 
+/*Realisierung einer Ausschreibung/Stellenanzeige. 
+ * Diese hat einen Namen und einen Text/Inhalt
+ * usw.*/
+
 public class Tender extends BusinessObject{
 
-	//attributes of class
+	//Attribute der Klasse 
 	
 	private String text = "";
 	private String name = "";
-	
 	private int projectRef = 0;
+	private int tenderProfilRef = 0;
 	
-	//Setter and Getter of all attributes
+	/*Alle Get und Set Methoden zum auslesen und setzen der 
+	Attribute */
 	
+	public int getTenderProfilRef() {
+		return tenderProfilRef;
+	}
+	public void setTenderProfilRef(int tenderProfilRef) {
+		this.tenderProfilRef = tenderProfilRef;
+	}
 	public String getText() {
 		return text;
 	}
@@ -30,7 +41,9 @@ public class Tender extends BusinessObject{
 		this.name = name;
 	}
 	
-	 public String toString() {
+	// Textuelle Darstellung der jeweiligen Ausschreibungs-Instanz 
+	
+	public String toString() {
 		    return super.toString() + "Name:  " + this.name + "Text: " + this.text+ " ProjectRef: " + this.projectRef;
 		  }
 	
