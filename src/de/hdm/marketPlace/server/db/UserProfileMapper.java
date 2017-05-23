@@ -35,7 +35,7 @@ public class UserProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, text, userRef, attributeRef FROM userprofile " + "WHERE id=" + id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, text, userRef FROM userprofile " + "WHERE id=" + id +"ORDER BY name");
 		
 		if ( rs.next()){
 			
@@ -43,7 +43,7 @@ public class UserProfileMapper {
 			u.setId(rs.getInt("id"));
 			u.setText(rs.getString("text"));
 			u.setUserRef(rs.getInt("userRef"));
-			u.setAttributeRef(rs.getInt("attributeRef"));
+		
 			
 			
 			
@@ -79,8 +79,8 @@ public class UserProfileMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO userprofile (id, userRef, attributeRef ,text) "
-	           + "VALUES ('" + u.getUserRef() +  "','" + u.getAttributeRef() +  "','" + u.getText() +   "')");
+	        stmt.executeUpdate("INSERT INTO userprofile (id, userRef ,text) "
+	           + "VALUES ('" + u.getUserRef() +  "','" + u.getText() +   "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -97,8 +97,7 @@ public class UserProfileMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE User " + "SET AttributeRef=\""
-	    	          + u.getAttributeRef()+  "\", " + "SET Text=\""   + u.getText() + "\", "  + "SET UserRef=\""
+	      stmt.executeUpdate("UPDATE User " +  "\", " + "SET Text=\""   + u.getText() + "\", "  + "SET UserRef=\""
 	    	    	          + u.getUserRef() + "\" " + "WHERE id=" + u.getId());
 
 	    }

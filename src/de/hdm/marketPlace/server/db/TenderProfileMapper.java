@@ -35,14 +35,13 @@ public class TenderProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, tenderprofileDate value FROM tenderProfile " + "WHERE id=" + id +"ORDER BY tenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, tenderprofileDate value FROM tenderProfile " + "WHERE id=" + id +"ORDER BY tenderRef");
 		
 		if ( rs.next()){
 			
 			TenderProfile tp = new TenderProfile();
 			tp.setId(rs.getInt("id"));
 			tp.setTenderRef(rs.getInt("tenderRef"));
-			tp.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
 			tp.setTenderprofileDate(rs.getDate("tenderprofileDate"));
 			
 			
@@ -82,8 +81,8 @@ public class TenderProfileMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO TenderProfile (id, tenderRef, partnerprofileRef, tenderprofileDate ) "
-	           + "VALUES ('" + tp.getTenderRef() +  "','" + tp.getPartnerprofileRef() +  "','" + tp.getAttributeRef() + "','"    +  date+"')");
+	        stmt.executeUpdate("INSERT INTO TenderProfile (id, tenderRef, tenderprofileDate ) "
+	           + "VALUES ('" + tp.getTenderRef() + "','"    +  date+"')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -106,7 +105,7 @@ public class TenderProfileMapper {
 	        
 
 	      stmt.executeUpdate("UPDATE TenderProfile " + "SET TenderRef=\""
-	          + tp.getTenderRef() + "\", "  + "AttributeRef=\"" + tp.getAttributeRef() + "\", " + "PartnerprofileRef=\"" + tp.getPartnerprofileRef() + "tenderprofileDate=\"" + date+   "\" "
+	          + tp.getTenderRef() + "\", " + "tenderprofileDate=\"" + date+   "\" "
 	          + "WHERE id=" + tp.getId());
 
 	    }
@@ -139,7 +138,7 @@ public class TenderProfileMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, attributeRef, tenderprofileDate value FROM tenderProfile "  +"ORDER BY tenderRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id, tenderRef, tenderprofileDate value FROM tenderProfile "  +"ORDER BY tenderRef");
 
 		     
 		      while (rs.next()) {
@@ -147,9 +146,7 @@ public class TenderProfileMapper {
 					TenderProfile tp = new TenderProfile();
 					tp.setId(rs.getInt("id"));
 					tp.setTenderRef(rs.getInt("tenderRef"));
-					tp.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
-					tp.setAttributeRef(rs.getInt("attributeRef"));
-					tp.setTenderProfileDate(rs.getDate("tenderprofileDate"));
+					tp.setTenderprofileDate(rs.getDate("tenderprofileDate"));
 					
 
 		        

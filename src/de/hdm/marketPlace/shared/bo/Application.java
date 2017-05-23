@@ -17,7 +17,7 @@ public class Application extends BusinessObject{
 	private Date applicationDate; 
 	private int userRef = 0; 
 	private int tenderRef = 0;
-	private int ratingRef = 0;
+	
 	
 	// No Argument Konstruktor 
 	
@@ -48,12 +48,7 @@ public class Application extends BusinessObject{
 	public void setTenderRef(int tenderRef) {
 		this.tenderRef = tenderRef;
 	}
-	public int getRatingRef() {
-		return ratingRef;
-	}
-	public void setRatingRef(int ratingRef) {
-		this.ratingRef = ratingRef;
-	} 
+	
 	
 	 public String getName() {
 		return name;
@@ -73,7 +68,7 @@ public class Application extends BusinessObject{
 	// Erzeugt textuelle Darstellung der jeweiligen Bewerbungs-Instanz 
 
 	public String toString() {
-		    return super.toString() + "Name : " + this.name +" Text: " + this.text +  " Rating: " + this.ratingRef+ " Tender: " + this.tenderRef+ " User: " + this.userRef;
+		    return super.toString() + "Name : " + this.name +" Text: " + this.text + " Tender: " + this.tenderRef+ " User: " + this.userRef;
 		    }
 	
 	public String DateToString(Date d){

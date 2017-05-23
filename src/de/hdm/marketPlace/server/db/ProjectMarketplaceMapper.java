@@ -44,14 +44,16 @@ public class ProjectMarketplaceMapper {
 	    
 	      Statement stmt = con.createStatement();
 
-	      ResultSet rs = stmt.executeQuery("SELECT id, name, userRef FROM projectmarketplace "
+	      ResultSet rs = stmt.executeQuery("SELECT id, name FROM projectmarketplace "
 	              + "WHERE id=" + id +"ORDER BY name" );
 
 	    
 	      if (rs.next()) {
 	    	  
 	    	ProjectMarketplace pm = new ProjectMarketplace();
+	    	pm.setId(rs.getInt("id"));
 	        pm.setName(rs.getString("name"));
+	       
 	        
 	        
 	      
@@ -75,7 +77,7 @@ public class ProjectMarketplaceMapper {
 
 	  
 	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM ProjectMarketplace ");
+	          + "FROM projectmarketplace ");
 
 	     
 	      if (rs.next()) {

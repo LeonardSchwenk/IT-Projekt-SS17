@@ -39,7 +39,7 @@ public class ProjectMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectmarketplaceRef, tenderRef, userRef, startDate, endDate value FROM project " + "WHERE id=" + id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate value FROM project " + "WHERE id=" + id +"ORDER BY name");
 		
 		if ( rs.next()){
 			
@@ -48,9 +48,7 @@ public class ProjectMapper {
 			p.setName(rs.getString("name"));
 			p.setText(rs.getString("text"));
 			p.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
-			p.setTenderRef(rs.getInt("tenderRef"));
 			p.setUserRef(rs.getInt("userRef"));
-			
 			p.setStartDate(rs.getDate("startDate"));
 			p.setEndDate(rs.getDate("endDate"));
 			
@@ -91,9 +89,9 @@ public class ProjectMapper {
 	      
 	        
 	        
-	        stmt.executeUpdate("INSERT INTO project (id, name, text, projectmarketplaceRef, userRef , tenderRef, startDate, endDate) "
+	        stmt.executeUpdate("INSERT INTO project (id, name, text, projectmarketplaceRef, userRef, startDate, endDate) "
 	           + "VALUES ('" + p.getId() + "','" + p.getName() + "','"
-	            + p.getText()+ "','" + p.getProjectmarketplaceRef() + "','"    + p.getUserRef()  + "','"    + p.getTenderRef() + "','"    +  date +  "','"    + date+ "')");
+	            + p.getText()+ "','" + p.getProjectmarketplaceRef() + "','"    + p.getUserRef()   + "','"    +  date +  "','"    + date+ "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -120,7 +118,7 @@ public class ProjectMapper {
 	        
 
 	      stmt.executeUpdate("UPDATE project " + "SET name=\""
-	          + p.getName() + "\", " + "text=\"" + p.getText()+ "\", " + "projektmarketplaceRef=\"" + p.getProjectmarketplaceRef()+ "\", " +  "UserRef=\"" + p.getUserRef() +  "\", " +  "TenderRef=\"" + p.getTenderRef()+  "\", " +  "StartDate=\"" + date+  "\", " +  "EndDate=\"" + date +  "\" "
+	          + p.getName() + "\", " + "text=\"" + p.getText()+ "\", " + "projektmarketplaceRef=\"" + p.getProjectmarketplaceRef()+ "\", " +  "UserRef=\"" + p.getUserRef() +  "\", " +    "\", " +  "StartDate=\"" + date+  "\", " +  "EndDate=\"" + date +  "\" "
 	          + "WHERE id=" + p.getId());
 
 	    }
@@ -156,7 +154,7 @@ public class ProjectMapper {
 		      Statement stmt = con.createStatement();
 
 		      ResultSet rs = stmt
-		          .executeQuery("SELECT id, name, text, projectmarketplaceRef, tenderRef, userRef value FROM project "
+		          .executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef value FROM project "
 		              + " ORDER BY name");
 
 		    
@@ -167,7 +165,6 @@ public class ProjectMapper {
 					p.setName(rs.getString("name"));
 					p.setText(rs.getString("text"));
 					p.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
-					p.setTenderRef(rs.getInt("tenderRef"));
 					p.setUserRef(rs.getInt("userRef"));
 
 		   
@@ -196,7 +193,7 @@ public class ProjectMapper {
 				Statement stmt = con.createStatement();
 
 				ResultSet rs = stmt
-						.executeQuery("SELECT id, name, text, projectmarketplaceRef, tenderRef, userRef, startDate, endDate value FROM project "  +"ORDER BY name");
+						.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate value FROM project "  +"ORDER BY name");
 
 			
 				while (rs.next()) {
@@ -205,7 +202,6 @@ public class ProjectMapper {
 					p.setName(rs.getString("name"));
 					p.setText(rs.getString("text"));
 					p.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
-					p.setTenderRef(rs.getInt("tenderRef"));
 					p.setUserRef(rs.getInt("userRef"));
 					
 					p.setStartDate(rs.getDate("startDate"));

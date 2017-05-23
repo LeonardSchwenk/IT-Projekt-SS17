@@ -27,7 +27,7 @@ public class ApplicationMapper {
 	    return applicationMapper;
 	  }
 	
-	public Application findByID(User u){
+	public Application findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -38,14 +38,15 @@ public class ApplicationMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, text, ratingRef, tenderRef, userRef, applicationDate value FROM application " + "WHERE id=" + u +" ORDER BY tenderRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, text, name tenderRef, userRef, applicationDate value FROM application " + "WHERE id=" + id +" ORDER BY tenderRef");
 		
 		if ( rs.next()){
 			
 			Application a = new Application();
 			a.setId(rs.getInt("id"));
 			a.setText(rs.getString("text"));
-			a.setRatingRef(rs.getInt("ratingRef"));
+			a.setName(rs.getString("name"));
+			
 			a.setTenderRef(rs.getInt("tenderRef"));
 			a.setUserRef(rs.getInt("userRef"));
 			a.setApplicationDate(rs.getDate("applicationDate"));
@@ -86,8 +87,8 @@ public class ApplicationMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO application (id, text, ratingRef, tenderRef, userRef, applicationDate) "
-	           + "VALUES ('" + a.getText() + "','" + a.getRatingRef() + "','"+ a.getTenderRef() + ",'"+ a.getUserRef() + "','"    +  date + "')");
+	        stmt.executeUpdate("INSERT INTO application (id, text, name  tenderRef, userRef, applicationDate) "
+	           + "VALUES ('" + a.getText()  + "','"+ a.getTenderRef() + ",'"+ a.getUserRef() + "','"    +  date + "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -109,7 +110,7 @@ public class ApplicationMapper {
 	        String date = mySQLformate.format(currentDate);
 
 	      stmt.executeUpdate("UPDATE application " + "SET Text=\""
-	          + a.getText() + "\", " + "RatingRef=\"" + a.getRatingRef()+ "\", " + "UserRef=\"" + a.getUserRef() + "\", " + "TenderRef=\"" + a.getTenderRef() +  "applicationDate=\"" + date  +  "\" "
+	          + a.getText() + "\", " + "Name=\"" + a.getName() + "\", " + "\", " + "UserRef=\"" + a.getUserRef() + "\", " + "TenderRef=\"" + a.getTenderRef() +  "applicationDate=\"" + date  +  "\" "
 	          + "WHERE id=" + a.getId());
 
 	    }
@@ -146,18 +147,17 @@ public class ApplicationMapper {
 		      Statement stmt = con.createStatement();
 
 		      ResultSet rs = stmt
-		          .executeQuery("SELECT id, text, ratingRef, tenderRef, userRef FROM application "
-		              + " ORDER BY ratingref");
+		          .executeQuery("SELECT id, text, name, tenderRef, userRef FROM application "
+		              + " ORDER BY tenderRef");
 
 		    
 		      while (rs.next()) {
 		    	  Application a = new Application();
 		    	  a.setId(rs.getInt("id"));
 					a.setText(rs.getString("text"));
-					a.setRatingRef(rs.getInt("ratingRef"));
 					a.setTenderRef(rs.getInt("tenderRef"));
 					a.setUserRef(rs.getInt("userRef"));
-					
+					a.setName(rs.getString("name"));
 
 		       
 		        result.addElement(a);
@@ -171,34 +171,7 @@ public class ApplicationMapper {
 		    return result;
 		  }
 
-	//  getallappicationsbytender
-	  
-	  public Vector<Tender> findAllApplicationsByTenderRef(int tenderRef){
-		  Connection con = DBConnection.getConnection();
-		  Vector<Tender> result = new Vector <Tender>();
-		  
-		  try{
-			  Statement stmt = con.createStatement();
-			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, text, projectRef value FROM Tender " +"ORDER BY ProjectRef");
-			  while(rs.next()){
-				  
-					Tender t = new Tender();
-					t.setId(rs.getInt("id"));
-					t.setText(rs.getString("text"));
-					t.setProjectRef(rs.getInt("projectRef"));
-					
-			  
-			  result.addElement(t);
-			  }
-		  
-		  }
-		  catch(Exception e){
-			  e.printStackTrace();
-		  }
-		  return result;
-	  }
-
+	
 	  
 	  
 	  public Vector<Application> findAllApplicationsByUserRef(int userRef) {
@@ -211,15 +184,15 @@ public class ApplicationMapper {
 				Statement stmt = con.createStatement();
 
 				ResultSet rs = stmt
-						.executeQuery("SELECT id, text, ratingRef, tenderRef, userRef FROM application "
-		              + " ORDER BY ratingref");
+						.executeQuery("SELECT id, text,  tenderRef, userRef FROM application "
+		              + " ORDER BY tenderRef");
 
 			
 				while (rs.next()) {
 					Application a = new Application();
 					a.setId(rs.getInt("id"));
 					a.setText(rs.getString("text"));
-					a.setRatingRef(rs.getInt("ratingRef"));
+					a.setName(rs.getString("name"));
 					a.setTenderRef(rs.getInt("tenderRef"));
 					a.setUserRef(rs.getInt("userRef"));
 					

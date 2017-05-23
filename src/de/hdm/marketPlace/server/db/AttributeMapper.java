@@ -36,7 +36,7 @@ public class AttributeMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, name, text, value, partnerprofileRef FROM attribute "  + "WHERE id=" + id +" ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, value, tenderprofileRef, userprofileRef FROM attribute "  + "WHERE id=" + id +" ORDER BY name");
 		
 		if ( rs.next()){
 			
@@ -45,7 +45,8 @@ public class AttributeMapper {
 			a.setName(rs.getString("name"));
 			a.setText(rs.getString("text"));
 			a.setValue(rs.getInt("value"));
-			a.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
+			a.setTenderprofilRef(rs.getInt("tenderprofileRef"));
+			a.setUserprofileRef(rs.getInt("userprofileRef"));
 			
 			return a; 
 			
@@ -78,9 +79,9 @@ public class AttributeMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO attribute (id, name, text, value, partnerprofileRef) "
+	        stmt.executeUpdate("INSERT INTO attribute (id, name, text, value, tenderprofileRef, userprofileRef) "
 	           + "VALUES ('" + a.getId() + "','" + a.getName() + "','"
-	            + a.getText()+ "','" +a.getValue()  + "','" +  a.getPartnerprofileRef()+  "')");
+	            + a.getText()+ "','" +a.getValue()  + "','" +  a.getTenderprofilRef() + "','" +  a.getUserprofileRef()+  "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -98,7 +99,7 @@ public class AttributeMapper {
 	      Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE attribute " + "SET name=\""
-	          + a.getName() + "\", " + "text=\"" + a.getText() + "\", "+ "value=\"" + a.getValue() + "\", " + "PartnerprofileRef=\"" + a.getPartnerprofileRef() +  "\" "
+	          + a.getName() + "\", " + "text=\"" + a.getText() + "\", "+ "value=\"" + a.getValue() + "\", " + "TenderProfileRef=\"" + a.getTenderprofilRef()  + "\", " + "UserProfileRef=\"" + a.getUserprofileRef() +  "\" "
 	          + "WHERE Id=" + a.getId());
 
 	    }
@@ -134,7 +135,7 @@ public class AttributeMapper {
 		      Statement stmt = con.createStatement();
 
 		      ResultSet rs = stmt
-		          .executeQuery("SELECT id, name, text, value, partnerprofileRef FROM attribute "
+		          .executeQuery("SELECT id, name, text, value, tenderprofileRef, userprofileRef FROM attribute "
 		              + " ORDER BY value");
 
 		    
@@ -144,7 +145,8 @@ public class AttributeMapper {
 					a.setName(rs.getString("name"));
 					a.setText(rs.getString("text"));
 					a.setValue(rs.getInt("value"));
-					a.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
+					a.setTenderprofilRef(rs.getInt("tenderprofileRef"));
+					a.setUserprofileRef(rs.getInt("userprofileRef"));
 
 		       
 		        result.addElement(a);
@@ -168,7 +170,7 @@ public class AttributeMapper {
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, name, text, value, partnerprofileRef FROM attribute "   +" ORDER BY name");
+			  ResultSet rs = stmt.executeQuery("SELECT id, name, text, value, tenderprofileRef, userprofileRef FROM attribute "   +" ORDER BY name");
 			  while(rs.next()){
 				  
 				  Attribute a = new Attribute();
@@ -176,7 +178,8 @@ public class AttributeMapper {
 					a.setName(rs.getString("name"));
 					a.setText(rs.getString("text"));
 					a.setValue(rs.getInt("value"));
-					a.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
+					a.setTenderprofilRef(rs.getInt("tenderprofileRef"));
+					a.setUserprofileRef(rs.getInt("userprofileRef"));
 					
 					
 				  result.addElement(a);

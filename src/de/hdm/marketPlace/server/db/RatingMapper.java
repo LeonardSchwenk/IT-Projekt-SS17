@@ -1,10 +1,10 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
+
 import java.util.Vector;
 
-import de.hdm.marketPlace.shared.bo.Rating;
-import de.hdm.marketPlace.shared.bo.User;
+import de.hdm.marketPlace.shared.bo.*;
 
 
 public class RatingMapper {
@@ -22,7 +22,7 @@ public class RatingMapper {
 		return ratingMapper;
 	}
 	
-	public Rating findByID(int Id){
+	public Rating findByID(int id){
 		
 		Connection con = DBConnection.getConnection();
 		
@@ -33,7 +33,7 @@ public class RatingMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, rate, text value FROM Rating " + "WHERE Id=" + Id +"ORDER BY rate");
+		ResultSet rs =stmt.executeQuery("SELECT id, rate, text, applicationRef value FROM rating " + "WHERE id=" + id +"ORDER BY rate");
 		
 		if ( rs.next()){
 			
@@ -41,6 +41,7 @@ public class RatingMapper {
 			r.setId(rs.getInt("id"));
 			r.setRate(rs.getFloat("rate"));
 			r.setText(rs.getString("text"));
+			r.setApplicationRef(rs.getInt("applicationRef"));
 			
 			return r; 
 			
@@ -73,8 +74,8 @@ public class RatingMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO Rating (id, rate, text) "
-	           + "VALUES (" + r.getRate() + ",'" + r.getText() +  "'" +")");
+	        stmt.executeUpdate("INSERT INTO Rating (id, rate, text, applicationRef) "
+	           + "VALUES (" + r.getRate() + ",'" + r.getText() + ",'" + r.getApplicationRef() +  "'" +")");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -92,7 +93,7 @@ public class RatingMapper {
 	      Statement stmt = con.createStatement();
 
 	      stmt.executeUpdate("UPDATE Rating " + "SET Rate=\""
-	          + r.getRate() + "\", " + "text=\"" + r.getText() + "UserRef=\"" 
+	          + r.getRate() + "\", " + "text=\"" + r.getText() + "applicationRef=\"" + r.getApplicationRef() +  "\" "
 	          + "WHERE Id=" + r.getId());
 
 	    }
@@ -126,13 +127,14 @@ public class RatingMapper {
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, rate, text value FROM Rating "  +"ORDER BY rate");
+			  ResultSet rs = stmt.executeQuery("SELECT id, rate, text, applicationRef FROM Rating "  +"ORDER BY rate");
 			  while(rs.next()){
 				  
 					Rating r = new Rating();
 					r.setId(rs.getInt("id"));
 					r.setRate(rs.getFloat("rate"));
 					r.setText(rs.getString("text"));
+					r.setApplicationRef(rs.getInt("applicationRef"));
 					
 			  result.addElement(r);
 			  }

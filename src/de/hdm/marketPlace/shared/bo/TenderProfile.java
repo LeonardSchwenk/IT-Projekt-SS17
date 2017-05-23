@@ -36,7 +36,7 @@ public class TenderProfile extends BusinessObject{
 	public String toString() {
 		    return super.toString() + "TenderRef:  " + this.tenderRef;
 		  }
-<<<<<<< HEAD
+
 
 	public Date getTenderprofileDate() {
 		return tenderprofileDate;
@@ -45,7 +45,7 @@ public class TenderProfile extends BusinessObject{
 	public void setTenderprofileDate(Date tenderprofileDate) {
 		this.tenderprofileDate = tenderprofileDate;
 	}
-=======
+
 	
 	public String DateToString(Date d){
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -54,5 +54,5 @@ public class TenderProfile extends BusinessObject{
 	}
 	
 
->>>>>>> refs/remotes/origin/master
+
 }

@@ -38,14 +38,16 @@ private static UserMapper userMapper = null;
 		
 		
 		ResultSet rs = stmt
-		          .executeQuery("SELECT id, name FROM user "
+		          .executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef  FROM user "
 		              + "WHERE id=" + id + " ORDER BY name");
 		
 		if ( rs.next()){
 			
 			User u = new User();
 			u.setId(rs.getInt("id"));
-			u.setName(rs.getString("name"));
+			u.setFirstname(rs.getString("firstname"));
+			u.setLastname(rs.getString("lastname"));
+			u.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
 			
 	
 			
@@ -82,8 +84,8 @@ private static UserMapper userMapper = null;
 	        u.setId(rs.getInt("maxid") + 1);
 
 	        
-	        stmt.executeUpdate("INSERT INTO user (id, name) "
-	           + "VALUES ('" + u.getId() + "','" + u.getName() +  "')");
+	        stmt.executeUpdate("INSERT INTO user (id, firstname, lastname, projectmarketplaceRef) "
+	           + "VALUES ('" + u.getId() + "','" + u.getFirstname() +  "','" + u.getLastname()+  "','" + u.getProjectmarketplaceRef() +  "')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -100,8 +102,10 @@ private static UserMapper userMapper = null;
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE user " + "SET Name=\""
-	          + u.getName() + "\" "
+	      stmt.executeUpdate("UPDATE user " + "SET FistName=\""
+	          + u.getFirstname()+ "SET LastName=\""
+	    	          + u.getLastname() + "SET ProjectMarketplaceRef=\""
+	    	    	          + u.getProjectmarketplaceRef() + "\" "
 	          + "WHERE id=" + u.getId());
 
 	      
@@ -137,14 +141,16 @@ private static UserMapper userMapper = null;
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, name "
+			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef "
 			          + "FROM user " + "WHERE user LIKE '" + name
 			          + "' ORDER BY name");
 			  while(rs.next()){
 				  
 				  User u = new User();
 			  u.setId(rs.getInt("id"));
-			  u.setName(rs.getString("name"));
+				u.setFirstname(rs.getString("firstname"));
+				u.setLastname(rs.getString("lastname"));
+				u.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
 			  
 			  result.addElement(u);
 			  }
@@ -165,14 +171,16 @@ private static UserMapper userMapper = null;
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, name FROM User "
+		      ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef FROM User "
 		          + " ORDER BY id");
 
 		     
 		      while (rs.next()) {
 		    	  User u = new User();
 		    		u.setId(rs.getInt("id"));
-					u.setName(rs.getString("name"));
+		    		u.setFirstname(rs.getString("firstname"));
+					u.setLastname(rs.getString("lastname"));
+					u.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
 
 		        
 		        result.addElement(u);
@@ -193,13 +201,15 @@ private static UserMapper userMapper = null;
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, name "
+			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef "
 			          + "FROM user " + "' ORDER BY name");
 			  while(rs.next()){
 				  
 				  User u = new User();
 			  u.setId(rs.getInt("id"));
-			  u.setName(rs.getString("name"));
+				u.setFirstname(rs.getString("firstname"));
+				u.setLastname(rs.getString("lastname"));
+				u.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
 			  
 			  result.addElement(u);
 			  }
@@ -217,13 +227,15 @@ private static UserMapper userMapper = null;
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, name "
+			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRefe "
 			          + "FROM user "   + "' ORDER BY name");
 			  while(rs.next()){
 				  
 				  User u = new User();
 			  u.setId(rs.getInt("id"));
-			  u.setName(rs.getString("name"));
+				u.setFirstname(rs.getString("firstname"));
+				u.setLastname(rs.getString("lastname"));
+				u.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
 			  
 			  result.addElement(u);
 			  }
