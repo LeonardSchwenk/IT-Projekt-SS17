@@ -12,7 +12,7 @@ public class Attribute extends BusinessObject {
 	private String text = "";
 	private int value = 0 ;
 	private int userprofileRef = 0;
-	priavte int tenderprofilRef =0; 
+	private int tenderprofilRef =0; 
 	
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
 	Attribute */
