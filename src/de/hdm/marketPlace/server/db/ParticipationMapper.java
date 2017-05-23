@@ -3,8 +3,10 @@ package de.hdm.marketPlace.server.db;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
 import de.hdm.marketPlace.shared.bo.Participation;
+import de.hdm.marketPlace.shared.bo.User;
 
 
 public class ParticipationMapper {
@@ -134,6 +136,80 @@ public class ParticipationMapper {
 	    }
 	  }
 	
-	
+	//  getallparticipationofuser
+	  
+	  public Vector<Participation> findAllParticipationsByUser() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Participation> result = new Vector<Participation>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, userRef, ratingRef, startDate, endDate value FROM participation " +"ORDER BY workingDays");
+
+		     
+		      while (rs.next()) {
+		    	  Participation p = new Participation();
+		    	  p.setId(rs.getInt("id"));
+					p.setWorkingDays(rs.getInt("workingDays"));
+					p.setProjectRef(rs.getInt("projectRef"));
+					p.setUserRef(rs.getInt("userRef"));
+					p.setRatingRef(rs.getInt("ratingRef"));
+					p.setStartDate(rs.getDate("startDate"));
+					p.setEndDate(rs.getDate("endDate"));
+					
+
+		        
+		        result.addElement(p);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
+
+	  
+	//  getallparticipations
+	  
+	  public Vector<Participation> findAll() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Participation> result = new Vector<Participation>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, userRef, ratingRef, startDate, endDate value FROM participation " +"ORDER BY workingDays");
+
+		     
+		      while (rs.next()) {
+		    	  Participation p = new Participation();
+		    	  p.setId(rs.getInt("id"));
+					p.setWorkingDays(rs.getInt("workingDays"));
+					p.setProjectRef(rs.getInt("projectRef"));
+					p.setUserRef(rs.getInt("userRef"));
+					p.setRatingRef(rs.getInt("ratingRef"));
+					p.setStartDate(rs.getDate("startDate"));
+					p.setEndDate(rs.getDate("endDate"));
+					
+
+		        
+		        result.addElement(p);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
+
 	}
 

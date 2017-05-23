@@ -2,10 +2,10 @@ package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
 
+
 import java.util.Vector;
 
-import de.hdm.marketPlace.shared.bo.Application;
-import de.hdm.marketPlace.shared.bo.Attribute;
+import de.hdm.marketPlace.shared.bo.*;
 
 
 public class AttributeMapper {
@@ -159,8 +159,101 @@ public class AttributeMapper {
 		  }
 
 
+	 // Getalluserprofiles 
 	  
-	
+	  public Vector<UserProfile> getAllUserProfiles() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<UserProfile> result = new Vector<UserProfile>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, text, userRef, attributeRef FROM userprofile "  +"ORDER BY name");
+
+		     
+		      while (rs.next()) {
+					UserProfile u = new UserProfile();
+					u.setId(rs.getInt("id"));
+					u.setText(rs.getString("text"));
+					u.setUserRef(rs.getInt("userRef"));
+					u.setAttributeRef(rs.getInt("attributeRef"));
+
+		        
+		        result.addElement(u);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
+
+	  
+	  //Getalltenderprofiles 
+	  
+	  
+	  public Vector<UserProfile> getAllTenderProfiles() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<UserProfile> result = new Vector<UserProfile>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, text, userRef, attributeRef FROM userprofile "  +"ORDER BY name");
+
+		     
+		      while (rs.next()) {
+					UserProfile u = new UserProfile();
+					u.setId(rs.getInt("id"));
+					u.setText(rs.getString("text"));
+					u.setUserRef(rs.getInt("userRef"));
+					u.setAttributeRef(rs.getInt("attributeRef"));
+
+		        
+		        result.addElement(u);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
+	  
+	  public Vector<Attribute> findByProfile(int ProfileRef){
+		  Connection con = DBConnection.getConnection();
+		  Vector<Attribute> result = new Vector <Attribute>();
+		  
+		  try{
+			  Statement stmt = con.createStatement();
+			  
+			  ResultSet rs = stmt.executeQuery("SELECT id, name, text, value, partnerprofileRef FROM attribute "   +" ORDER BY name");
+			  while(rs.next()){
+				  
+				  Attribute a = new Attribute();
+					a.setId(rs.getInt("id"));
+					a.setName(rs.getString("name"));
+					a.setText(rs.getString("text"));
+					a.setValue(rs.getInt("value"));
+					a.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
+					
+					
+				  result.addElement(a);
+			  }
+		  
+		  }
+		  catch(Exception e){
+			  e.printStackTrace();
+		  }
+		  return result;
+	  }
 	
 	}
 

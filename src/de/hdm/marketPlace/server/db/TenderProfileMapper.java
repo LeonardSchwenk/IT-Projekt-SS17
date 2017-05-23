@@ -132,5 +132,8 @@ public class TenderProfileMapper {
 	  }
 	
 	
+	  
+	  
+	  
 	}
 
