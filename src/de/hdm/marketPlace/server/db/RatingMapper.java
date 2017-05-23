@@ -119,7 +119,7 @@ public class RatingMapper {
 	
 	//  getallratingofapplication
 	  
-	  public Vector<Rating> findRatingByApplication(int applicationRef){
+	  public Vector<Rating> findRatingByApplicationRef(int applicationRef){
 		  Connection con = DBConnection.getConnection();
 		  Vector<Rating> result = new Vector <Rating>();
 		  

@@ -138,7 +138,7 @@ public class ParticipationMapper {
 	
 	//  getallparticipationofuser
 	  
-	  public Vector<Participation> findAllParticipationsByUser() {
+	  public Vector<Participation> findAllParticipationsByUserRef(int userRef) {
 		    Connection con = DBConnection.getConnection();
 
 		   

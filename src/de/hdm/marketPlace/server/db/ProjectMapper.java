@@ -185,7 +185,7 @@ public class ProjectMapper {
 
 	  //getallprojectbyuser
 	  
-	  public Vector<Project> findAllProjectsByUser(int userRef) {
+	  public Vector<Project> findAllProjectsByUserRef(int userRef) {
 			
 			Connection con = DBConnection.getConnection();
 		

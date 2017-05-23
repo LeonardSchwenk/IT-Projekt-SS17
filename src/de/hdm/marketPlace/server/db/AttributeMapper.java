@@ -158,76 +158,10 @@ public class AttributeMapper {
 		    return result;
 		  }
 
-
-	 // Getalluserprofiles 
 	  
-	  public Vector<UserProfile> getAllUserProfiles() {
-		    Connection con = DBConnection.getConnection();
-
-		   
-		    Vector<UserProfile> result = new Vector<UserProfile>();
-
-		    try {
-		      Statement stmt = con.createStatement();
-
-		      ResultSet rs = stmt.executeQuery("SELECT id, text, userRef, attributeRef FROM userprofile "  +"ORDER BY name");
-
-		     
-		      while (rs.next()) {
-					UserProfile u = new UserProfile();
-					u.setId(rs.getInt("id"));
-					u.setText(rs.getString("text"));
-					u.setUserRef(rs.getInt("userRef"));
-					u.setAttributeRef(rs.getInt("attributeRef"));
-
-		        
-		        result.addElement(u);
-		      }
-		    }
-		    catch (Exception e) {
-		      e.printStackTrace();
-		    }
-
-		    
-		    return result;
-		  }
-
+	
 	  
-	  //Getalltenderprofiles 
-	  
-	  
-	  public Vector<UserProfile> getAllTenderProfiles() {
-		    Connection con = DBConnection.getConnection();
-
-		   
-		    Vector<UserProfile> result = new Vector<UserProfile>();
-
-		    try {
-		      Statement stmt = con.createStatement();
-
-		      ResultSet rs = stmt.executeQuery("SELECT id, text, userRef, attributeRef FROM userprofile "  +"ORDER BY name");
-
-		     
-		      while (rs.next()) {
-					UserProfile u = new UserProfile();
-					u.setId(rs.getInt("id"));
-					u.setText(rs.getString("text"));
-					u.setUserRef(rs.getInt("userRef"));
-					u.setAttributeRef(rs.getInt("attributeRef"));
-
-		        
-		        result.addElement(u);
-		      }
-		    }
-		    catch (Exception e) {
-		      e.printStackTrace();
-		    }
-
-		    
-		    return result;
-		  }
-	  
-	  public Vector<Attribute> findByProfile(int ProfileRef){
+	  public Vector<Attribute> findAllAttributesByUserProfileRef(int userprofileRef){
 		  Connection con = DBConnection.getConnection();
 		  Vector<Attribute> result = new Vector <Attribute>();
 		  

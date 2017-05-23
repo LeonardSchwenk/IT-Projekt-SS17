@@ -3,7 +3,9 @@ package de.hdm.marketPlace.server.db;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
+import de.hdm.marketPlace.shared.bo.Participation;
 import de.hdm.marketPlace.shared.bo.TenderProfile;;
 
 
@@ -38,7 +40,6 @@ public class TenderProfileMapper {
 		if ( rs.next()){
 			
 			TenderProfile tp = new TenderProfile();
-			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
 			tp.setId(rs.getInt("id"));
 			tp.setTenderRef(rs.getInt("tenderRef"));
 			tp.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
@@ -130,7 +131,39 @@ public class TenderProfileMapper {
 	      e.printStackTrace();
 	    }
 	  }
-	
+	  public Vector<TenderProfile> findAll() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<TenderProfile> result = new Vector<TenderProfile>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, tenderRef, patnerprofilRef, attributeRef, tenderprofileDate value FROM tenderProfile "  +"ORDER BY tenderRef");
+
+		     
+		      while (rs.next()) {
+
+					TenderProfile tp = new TenderProfile();
+					tp.setId(rs.getInt("id"));
+					tp.setTenderRef(rs.getInt("tenderRef"));
+					tp.setPartnerprofileRef(rs.getInt("partnerprofileRef"));
+					tp.setAttributeRef(rs.getInt("attributeRef"));
+					tp.setTenderProfileDate(rs.getDate("tenderprofileDate"));
+					
+
+		        
+		        result.addElement(tp);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
 	
 	  
 	  

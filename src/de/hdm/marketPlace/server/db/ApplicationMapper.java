@@ -173,7 +173,7 @@ public class ApplicationMapper {
 
 	//  getallappicationsbytender
 	  
-	  public Vector<Tender> findAllApplicationsByTender(int tenderRef){
+	  public Vector<Tender> findAllApplicationsByTenderRef(int tenderRef){
 		  Connection con = DBConnection.getConnection();
 		  Vector<Tender> result = new Vector <Tender>();
 		  
@@ -201,7 +201,7 @@ public class ApplicationMapper {
 
 	  
 	  
-	  public Vector<Application> findAllApplicationsByUser(int userRef) {
+	  public Vector<Application> findAllApplicationsByUserRef(int userRef) {
 			
 			Connection con = DBConnection.getConnection();
 		

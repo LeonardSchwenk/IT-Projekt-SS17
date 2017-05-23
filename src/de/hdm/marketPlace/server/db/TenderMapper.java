@@ -125,7 +125,38 @@ public class TenderMapper {
 	  }
 	//  getalltenderbyuser
 	  
-	  public Vector<Tender> findAllTenderByUser(int userRef) {
+	  public Vector<Tender> findAllTenderByUserRef(int userRef) {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Tender> result = new Vector<Tender>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef value FROM tender " +"ORDER BY projectRef");
+
+		     
+		      while (rs.next()) {
+		    	  Tender t = new Tender();
+					t.setId(rs.getInt("id"));
+					t.setName(rs.getString("name"));
+					t.setText(rs.getString("text"));
+					t.setProjectRef(rs.getInt("projectRef"));
+					
+		        
+		        result.addElement(t);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
+	  
+	  public Vector<Tender> findAllTenderByTenderRef(int tenderRef) {
 		    Connection con = DBConnection.getConnection();
 
 		   

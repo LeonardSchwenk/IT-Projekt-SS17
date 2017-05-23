@@ -144,7 +144,6 @@ private static UserMapper userMapper = null;
 				  
 				  User u = new User();
 			  u.setId(rs.getInt("id"));
-				
 			  u.setName(rs.getString("name"));
 			  
 			  result.addElement(u);
@@ -187,7 +186,54 @@ private static UserMapper userMapper = null;
 		    return result;
 		  }
 
-
+	  public Vector<User> findAllUserByTenderRef(int TenderRef){
+		  Connection con = DBConnection.getConnection();
+		  Vector<User> result = new Vector <User>();
+		  
+		  try{
+			  Statement stmt = con.createStatement();
+			  
+			  ResultSet rs = stmt.executeQuery("SELECT id, name "
+			          + "FROM user " + "' ORDER BY name");
+			  while(rs.next()){
+				  
+				  User u = new User();
+			  u.setId(rs.getInt("id"));
+			  u.setName(rs.getString("name"));
+			  
+			  result.addElement(u);
+			  }
+		  
+		  }
+		  catch(Exception e){
+			  e.printStackTrace();
+		  }
+		  return result;
+	  }
+	  public Vector<User> findAllUserByProjectRef(int ProjectRef){
+		  Connection con = DBConnection.getConnection();
+		  Vector<User> result = new Vector <User>();
+		  
+		  try{
+			  Statement stmt = con.createStatement();
+			  
+			  ResultSet rs = stmt.executeQuery("SELECT id, name "
+			          + "FROM user "   + "' ORDER BY name");
+			  while(rs.next()){
+				  
+				  User u = new User();
+			  u.setId(rs.getInt("id"));
+			  u.setName(rs.getString("name"));
+			  
+			  result.addElement(u);
+			  }
+		  
+		  }
+		  catch(Exception e){
+			  e.printStackTrace();
+		  }
+		  return result;
+	  }
 	  
 	 
 	  
