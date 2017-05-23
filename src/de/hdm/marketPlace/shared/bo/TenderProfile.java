@@ -10,8 +10,7 @@ public class TenderProfile extends BusinessObject{
 	
 	//Attribute der Klasse 
 	
-	private Date createDate;
-	private Date updateDate;
+	private Date tenderDate;
 	private int tenderRef = 0;
 	private int partnerprofileRef = 0;
 	private int attributeRef = 0;
@@ -19,20 +18,15 @@ public class TenderProfile extends BusinessObject{
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
 	Attribute */
 	
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+	
 	public int getTenderRef() {
 		return tenderRef;
+	}
+	public Date getTenderDate() {
+		return tenderDate;
+	}
+	public void setTenderDate(Date tenderDate) {
+		this.tenderDate = tenderDate;
 	}
 	public void setTenderRef(int tenderRef) {
 		this.tenderRef = tenderRef;
@@ -55,8 +49,4 @@ public class TenderProfile extends BusinessObject{
 	public String toString() {
 		    return super.toString() + "TenderRef:  " + this.tenderRef + "PartnerprofileRef: " + this.partnerprofileRef+ " AttributeRef: " + this.attributeRef;
 		  }
-	
-	
-	
-
 }
