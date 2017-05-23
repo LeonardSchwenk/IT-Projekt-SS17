@@ -1,15 +1,16 @@
 package de.hdm.marketPlace.shared.bo;
 
+/*Realisierung eines Nutzers des Systems*/ 
+
 public class User extends BusinessObject {
 	
 	
-	//Anlegen der Attribute für die Klasse User
+	//Attribute der Klasse 
 	
 	private String name = "";
 	
-	//Getter und Setter-Methoden für die Attribute
-	
-	
+	/*Alle Get und Set Methoden zum auslesen und setzen der 
+	Attribute */
 	
 	public void setName (String name){
 		this.name = name;
@@ -18,7 +19,10 @@ public class User extends BusinessObject {
 		return name;
 	}
 	
+	//Textuelle Ausgabe der jeweiligen Nutzerprofil-Instanz  
 	
-	
+		public String toString() {
+			    return super.toString() + "Name:  " + this.name;
+			  }
+	}
 
-}
