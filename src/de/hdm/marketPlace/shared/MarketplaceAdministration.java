@@ -61,7 +61,7 @@ public interface MarketplaceAdministration {
 	
 	//Methoden zur Verwaltung von Bewerbungen
 	//eine Bewerbung erstellen
-	public Application createApplicationFor (User applicant, Tender tender, String content)throws IllegalArgumentException;
+	public Application createApplicationFor (String titel, String text, Date createDate, Date updateDate, int userRef, int tenderRef, int ratingRef)throws IllegalArgumentException;
 	
 	//Rückgabe einer Methode anhand einer Id
 	public Application getApplicationById (int applicationRef) throws IllegalArgumentException;

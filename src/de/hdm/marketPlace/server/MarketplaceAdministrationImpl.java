@@ -217,9 +217,72 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		teMapper.update(t);
 	}
 	
+	public void deleteTender (Tender t) throws IllegalArgumentException{
+		teMapper.delete(t);
+	}
+	
 	public Vector <Tender> getAllTenderOfUser (int userRef) throws IllegalArgumentException {
 		return teMapper.getAllTenderOfUser(userRef);
 	}
+	
+	public Vector <Tender> getAllTenderByName (String name) throws IllegalArgumentException {
+		return teMapper.getAllTenderByName (name);
+	}
+	
+	public Vector <Tender> getAllTender () throws IllegalArgumentException {
+		return teMapper.getAllTender();
+	}
+	
+	public Vector <Tender> getTenderMatch (UserProfile up) throws IllegalArgumentException {
+		return teMapper.getTenderMatch (up);
+	}
+	
+	
+	//Methoden zur Verwaltung von Bewerbungen
+	
+	public Application createApplication (String titel, String text, int userRef, int tenderRef, int ratingRef) throws IllegalArgumentException {
+		Application a = new Application();
+		a.setTitel(titel);
+		a.setText(text);
+		a.setCreateDate(new Date());
+		a.setUserRef(userRef);
+		a.setTenderRef(tenderRef);
+		a.setRatingRef(ratingRef);
+		
+		return apMapper.insert(a);
+	}
+	
+	
+	public Application getApplicationById (int applicationRef) throws IllegalArgumentException {
+		return apMapper.findByID(applicationRef);
+	}
+	
+	public void updateApplication (Application a, String titel, String text, int userRef, int tenderRef, int ratingRef) throws IllegalArgumentException {
+		a.setTitel(titel);
+		a.setText(text);
+		a.setUpdateDate(new Date());
+		a.setUserRef(userRef);
+		a.setTenderRef(tenderRef);
+		a.setRatingRef(ratingRef);
+		
+		apMapper.update(a);
+	}
+	
+	public void deleteApplication (Application a) throws IllegalArgumentException {
+		apMapper.delete(a);
+	}
+	
+	public Vector <Application> getAllApplicationsByTender (int tenderRef) throws IllegalArgumentException {
+		return apMapper.getAllApplicationsByTender(tenderRef);
+	}
+	
+	public Vector <Application> getAllApplications () throws IllegalArgumentException {
+		return apMapper.getAllApplications;
+	}
+	
+	
+	
+	
 	
 	
 	
