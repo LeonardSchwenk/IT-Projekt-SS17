@@ -8,7 +8,7 @@ public class UserProfile extends BusinessObject {
 	
 	private int userRef = 0;
 	private String text = "";
-	private int attributeRef = 0;
+	
 
 	/*Alle Get und Set Methoden zum auslesen und setzen der 
 	Attribute */
@@ -18,12 +18,6 @@ public class UserProfile extends BusinessObject {
 	}
 	public void setUserRef(int userRef) {
 		this.userRef = userRef;
-	}
-	public int getAttributeRef() {
-		return attributeRef;
-	}
-	public void setAttributeRef(int attributeRef) {
-		this.attributeRef = attributeRef;
 	}
 	public String getText() {
 		return text;
@@ -35,6 +29,6 @@ public class UserProfile extends BusinessObject {
 	//Textuelle Ausgabe der jeweiligen Nutzerprofil-Instanz  
 	
 	public String toString() {
-		    return super.toString() + "UserRef:  " + this.userRef + "Text: " + this.text+ " AttributeRef: " + this.attributeRef;
+		    return super.toString() + "UserRef:  " + this.userRef + "Text: " + this.text;
 		  }
 }
