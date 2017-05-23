@@ -155,7 +155,7 @@ public interface MarketplaceAdministration {
 	
 	//Anzeigen einer Teilnahme anhand von RatingRef
 	public Participation findParticipationByRatingRef(int ratingRef) throws IllegalArgumentException;
-	}
+	
 	
 	//Anzeigen aller Teilnahmen einer Person
 	public Vector <Participation> getAllParticipationsOfUser (User user) throws IllegalArgumentException;
