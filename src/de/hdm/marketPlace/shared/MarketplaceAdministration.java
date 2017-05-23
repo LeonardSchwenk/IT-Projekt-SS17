@@ -31,11 +31,8 @@ public interface MarketplaceAdministration {
 	//Methode zur Ausgabe des aktuellen Marktplatzes
 	public ProjectMarketplace getMarketplace() throws IllegalArgumentException;
 	
-	//Setzen des Marktplatzes, auf welchem Marketplatz befinde ich mich?
-	public void setMarketplace(ProjectMarketplace m) throws IllegalArgumentException;
-	
-	
-	
+	//Methode zum Aktkualisieren eines Marktplatzes
+		public void updateMarketplace (ProjectMarketplace marketplace)throws IllegalArgumentException;
 	
 	
 	
@@ -43,15 +40,15 @@ public interface MarketplaceAdministration {
 	//Methode zur Erstellung eines Benutzers
 	public User createUser (String firstName, String lastName) throws IllegalArgumentException;
 	
-	//Methode zur RÃ¼ckgabe eines Users anhand seiner ID
-	public User getUserById (int userRef) throws IllegalArgumentException;
-	
 	//Methode zum Bearbeiten eines Benutzers
 	public void updateUser (User user, String firstName, String lastName) throws IllegalArgumentException;
 	
 	//Methode zum LÃ¶schen eines Benutzers
 	public void deleteUser (User user) throws IllegalArgumentException;
 	
+	//Methode zur RÃ¼ckgabe eines Users anhand seiner ID
+	public User getUserById (int userRef) throws IllegalArgumentException;
+		
 	//Methode zum Finden von Benutzern anhand deren Nachnamen
 	public Vector <User> getAllUserByName (String lastName) throws IllegalArgumentException;
 	
@@ -100,9 +97,6 @@ public interface MarketplaceAdministration {
 	//Ausgeben aller Ausschreibungen eines Users
 	public Vector <Tender> getAllTenderOfUser (User user ) throws IllegalArgumentException;
 	
-	//Ausgeben aller Bewerber auf eine Ausschreibung
-	public Vector <User> getAllApplicants (Tender tender) throws IllegalArgumentException;
-	
 	//Ausgeben von Ausschreibungen anhand vom Namen
 	public Vector <Tender> getAllTenderByName (String text)  throws IllegalArgumentException;
 	
@@ -131,9 +125,6 @@ public interface MarketplaceAdministration {
 	
 	//Ausgeben aller Projekte eines Managers
 	public Vector <Project> getAllProjectsOfUser (int userRef) throws IllegalArgumentException;
-	
-	//Anzeigen der mitarbeitenden Personen an einem Projekt
-	public Vector <User> getAllUserOfProject (Project project) throws IllegalArgumentException;
 	
 	//Ausgeben aller Projekte
 	public Vector <Project> getAllProjects () throws IllegalArgumentException;
@@ -197,7 +188,36 @@ public interface MarketplaceAdministration {
 	
 	
 	//Methoden zur Verwaltung eines UserProfile
-	//Erstellen eines UserProfile
+	//Erstellen eines UserProfils
+	public UserProfile createUserProfile (Date createDate) throws IllegalArgumentException;
+	
+	//RÃ¼ckgabe eines UserProfils anhand einer Id
+	public UserProfile getUserProfileById (int userProfileRef) throws IllegalArgumentException;
+	
+	//Bearbeiten eines UserProfile
+	public void updateUserProfile (UserProfile userProfile, Date updateDate) throws IllegalArgumentException;
+	
+	//LÃ¶schen eines Ausschreiberprofils
+	public void deleteUserProfile (UserProfile userProfile) throws IllegalArgumentException;
+	
+	//Methoden zur Verwaltung einer Eigenschaft
+	
+	//Ein Attribut einem Userprofil hinzufügen
+	public Attribute insertAttribute(Attribute a, UserProfile up)throws IllegalArgumentException;
+				
+	//Bearbeiten eines Attributes
+	public Attribute updateAttribute(Attribute a)throws IllegalArgumentException;
+				
+	//Löschen eines Attributes
+	public void deleteAttribute(Attribute a)throws IllegalArgumentException;
+	
+	//Lösche alle Attribute eines UserProfils
+	public void deleteAllAttributeOfUserprofile(UserProfile up)throws IllegalArgumentException;
+
+	//Alle Attribute eines Users
+	public Vector<Attribute> selectAllAttributeOfUserProfile(UserProfile up)throws IllegalArgumentException;
+
+	
 	
 	
 	
