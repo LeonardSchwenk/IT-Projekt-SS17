@@ -59,6 +59,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		this.tpMapper = TenderProfileMapper.tenderProfileMapper();
 		
 	}
+	
 	//Methoden zur Verwaltung von Projektmarkplätzen
 	
 	public ProjectMarketPlace createProjectMarketPlace(int id, String name )
