@@ -301,7 +301,6 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 		  
 		  CompositeParagraph header2 = new CompositeParagraph();
 		  
-		  header2.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName())); //Muss bei jedem Report der marketplace gewählt werden??
 		  header2.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
 		  
 		  result2.setHeaderData(header2);
@@ -364,7 +363,7 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 		  result.addRow(headline);
 		  
 		  Vector<Application> allApplications = this.administration.getAllApplicationsOfUser(u);
-		  
+		  		  
 		  int Counter = 1;
 		  
 		  for(Application a : allApplications){
@@ -375,19 +374,23 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 			 
 			 String status = null;
 			 
-			 Vector<Participation> allParticipations = this.administration.getAllParticipationsOfUser(u);
+			 Participation p = null;
+			 p = this.administration.getParticipationByRating(a.getRatingRef()); //Methode noch in Administration erstellen
 			 
-			 for(Participation p : allParticipations){
-			 
-				 if(p.getRatingRef() == a.getRatingRef()){
+			 if(p != null){
 					 status = "Accepted";
 				 
-			 }
-				 else if(){
-					 
+				 }
+			 
+				 else if(administration.getTenderById(a.getTenderRef()).getEndDate > CurrentDate){
+					 status = "Going on";
 				 }
 				 
-			 }
+				 else {
+					 status = "Rejected";
+				 }
+				 
+			 
 			 applicationRow.addColumn(new Column(s));
 			 applicationRow.addColumn(new Column(a.getText())); 
 			 applicationRow.addColumn(new Column(status));
@@ -428,19 +431,23 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 		  
 		  int Counter1 = 1;
 		  
-		  for(Tender a : allTenders){
+		  for(Tender t : allTenders){
 			  
-			  Row applicationRow1 = new Row();
+			  Row tenderRow = new Row();
 			  
 			 String s1 = String.valueOf(Counter1);
 			 
-			 applicationRow1.addColumn(new Column(s1));
-			 applicationRow1.addColumn(new Column(a.getText())); 
-			 applicationRow1.addColumn(new Column(administration.getRatingbyId(a.getRatingRef().getRate()))); // Methode fehlt noch
+			 String status1 = null;
+			 
+			 // Woher weis ich welche Ausschreibung mit welcher Teilnahme zusammenhängt??
+			 
+			 tenderRow.addColumn(new Column(s1));
+			 tenderRow.addColumn(new Column(t.getText())); 
+			 tenderRow.addColumn(new Column(status1));
 			 
 			Counter++;
 			 
-			 result1.addRow(applicationRow1);
+			 result1.addRow(tenderRow);
 		  }
 		  
 		  return result1;
@@ -455,7 +462,7 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 
 		  FanInFanOut result = new FanInFanOut();
 
-		    result.setTitle("FanInOut Analyse");
+		    result.setTitle("FanInOut Analyse of all Users");
 
 		    this.addImprint(result);
 
@@ -463,9 +470,9 @@ ProjectInterconnection result2 = new ProjectInterconnection(); //Leerer Report
 
 		    Vector<User> allUsers = this.administration.getAllUser();
 
-		    for (User c : allUsers) {
+		    for (User u : allUsers) {
 		   
-		      result.addSubReport(this.createFanInFanOutByUserReport(c));
+		      result.addSubReport(this.createFanInFanOutByUserReport(u));
 		    }
 
 		    return result;
