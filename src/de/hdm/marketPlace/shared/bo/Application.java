@@ -14,8 +14,7 @@ public class Application extends BusinessObject{
 	
 	private String titel = "";		
 	private String text = ""; 
-	private Date createDate; 
-	private Date updateDate;
+	private Date applicationDate; 
 	private int userRef = 0; 
 	private int tenderRef = 0;
 	private int ratingRef = 0;
@@ -36,18 +35,6 @@ public class Application extends BusinessObject{
 	}
 	public void setText(String text) {
 		this.text = text;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
 	}
 	public int getUserRef() {
 		return userRef;
@@ -74,6 +61,13 @@ public class Application extends BusinessObject{
 
 	public void setTitel(String titel) {
 		this.titel = titel;
+	}
+	public Date getApplicationDate() {
+		return applicationDate;
+	}
+
+	public void setApplicationDate(Date applicationDate) {
+		this.applicationDate = applicationDate;
 	}
 	
 	// Erzeugt textuelle Darstellung der jeweiligen Bewerbungs-Instanz 

@@ -2,11 +2,13 @@ package de.hdm.marketPlace.server.db;
 import java.sql.Connection;
 
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import de.hdm.marketPlace.shared.bo.TenderProfile;
-import de.hdm.marketPlace.shared.bo.User;
+import java.util.Vector;
+
+import de.hdm.marketPlace.shared.bo.*;
 
 
 public class UserMapper {
@@ -42,7 +44,6 @@ private static UserMapper userMapper = null;
 		if ( rs.next()){
 			
 			User u = new User();
-			//Set ID fehlt // die ID muss erst im business objekt erstellt werden 
 			u.setId(rs.getInt("id"));
 			u.setName(rs.getString("name"));
 			
@@ -128,7 +129,120 @@ private static UserMapper userMapper = null;
 	    }
 	  }
 	
-	
+	  
+	  public Vector<User> findByName(String name){
+		  Connection con = DBConnection.getConnection();
+		  Vector<User> result = new Vector <User>();
+		  
+		  try{
+			  Statement stmt = con.createStatement();
+			  
+			  ResultSet rs = stmt.executeQuery("SELECT id, name "
+			          + "FROM user " + "WHERE user LIKE '" + name
+			          + "' ORDER BY name");
+			  while(rs.next()){
+				  
+				  User u = new User();
+			  u.setId(rs.getInt("id"));
+			  u.setName(rs.getString("name"));
+			  
+			  result.addElement(u);
+			  }
+		  
+		  }
+		  catch(Exception e){
+			  e.printStackTrace();
+		  }
+		  return result;
+	  }
+	  
+	  public Vector<User> findAll() {
+		    Connection con = DBConnection.getConnection();
 
+		   
+		    Vector<User> result = new Vector<User>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, name FROM User "
+		          + " ORDER BY id");
+
+		     
+		      while (rs.next()) {
+		    	  User u = new User();
+		    		u.setId(rs.getInt("id"));
+					u.setName(rs.getString("name"));
+
+		        
+		        result.addElement(u);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
+
+	  public Vector<User> findAllUserByTenderRef(int TenderRef){
+		  Connection con = DBConnection.getConnection();
+		  Vector<User> result = new Vector <User>();
+		  
+		  try{
+			  Statement stmt = con.createStatement();
+			  
+			  ResultSet rs = stmt.executeQuery("SELECT id, name "
+			          + "FROM user " + "' ORDER BY name");
+			  while(rs.next()){
+				  
+				  User u = new User();
+			  u.setId(rs.getInt("id"));
+			  u.setName(rs.getString("name"));
+			  
+			  result.addElement(u);
+			  }
+		  
+		  }
+		  catch(Exception e){
+			  e.printStackTrace();
+		  }
+		  return result;
+	  }
+	  public Vector<User> findAllUserByProjectRef(int ProjectRef){
+		  Connection con = DBConnection.getConnection();
+		  Vector<User> result = new Vector <User>();
+		  
+		  try{
+			  Statement stmt = con.createStatement();
+			  
+			  ResultSet rs = stmt.executeQuery("SELECT id, name "
+			          + "FROM user "   + "' ORDER BY name");
+			  while(rs.next()){
+				  
+				  User u = new User();
+			  u.setId(rs.getInt("id"));
+			  u.setName(rs.getString("name"));
+			  
+			  result.addElement(u);
+			  }
+		  
+		  }
+		  catch(Exception e){
+			  e.printStackTrace();
+		  }
+		  return result;
+	  }
+	  
+	 
+	  
+	  
+	  
+	  
+	  
+	
+	  
+	  
 
 }
