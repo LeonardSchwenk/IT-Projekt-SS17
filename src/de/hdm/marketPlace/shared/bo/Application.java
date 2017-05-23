@@ -1,5 +1,7 @@
 package de.hdm.marketPlace.shared.bo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date; 
 
 /*Realisierung einer Bewerbung, welche ein Nutzer des Projektmarktplatz
@@ -73,5 +75,11 @@ public class Application extends BusinessObject{
 	public String toString() {
 		    return super.toString() + "Name : " + this.name +" Text: " + this.text +  " Rating: " + this.ratingRef+ " Tender: " + this.tenderRef+ " User: " + this.userRef;
 		    }
+	
+	public String DateToString(Date d){
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String stringDate = df.format(d);
+		return stringDate;
+	}
 }
 		   
