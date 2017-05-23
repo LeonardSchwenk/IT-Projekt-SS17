@@ -142,6 +142,10 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		paMapper.delete(pa);
 	}
 	
+	public Participation findParticipationByRatingRef (int ratingRef) throws IllegalArgumentException {
+		paMapper.findParticipationByRatingRef(ratingRef);
+	}
+	
 	public Vector <Participation> getAllParticipationsOfUser (int userRef) throws IllegalArgumentException {
 		return paMapper.getAllParticipationsOfUser (userRef);
 	}
