@@ -120,9 +120,9 @@ public class RatingMapper {
 	
 	//  getallratingofapplication
 	  
-	  public Vector<Rating> findRatingByApplicationRef(int applicationRef){
+	  public Rating findRatingByApplicationRef(int applicationRef){
 		  Connection con = DBConnection.getConnection();
-		  Vector<Rating> result = new Vector <Rating>();
+		  Rating result = new Rating();
 		  
 		  try{
 			  Statement stmt = con.createStatement();
@@ -136,7 +136,7 @@ public class RatingMapper {
 					r.setText(rs.getString("text"));
 					r.setApplicationRef(rs.getInt("applicationRef"));
 					
-			  result.addElement(r);
+			 
 			  }
 		  
 		  }
@@ -145,5 +145,37 @@ public class RatingMapper {
 		  }
 		  return result;
 	  }
+	  
+	  public Vector<Rating> findAll() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Rating> result = new Vector<Rating>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, rate, text, applicationRef value FROM rating "  +"ORDER BY rate");
+
+		     
+		      while (rs.next()) {
+		    	  
+		    		Rating r = new Rating();
+					r.setId(rs.getInt("id"));
+					r.setRate(rs.getFloat("rate"));
+					r.setText(rs.getString("text"));
+					r.setApplicationRef(rs.getInt("applicationRef"));
+					
+		        
+		        result.addElement(r);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
 	}
 
