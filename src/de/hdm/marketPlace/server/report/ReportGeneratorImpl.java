@@ -33,8 +33,8 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  }
 
 	  
-	public void setProjectMarketplace(ProjectMarketplace m) { //muss der marketplace gesetzt werden??
-		    this.administration.setMarketplace(m); 
+	public void setProjectMarketplace(User u, ProjectMarketplace m) { //muss der marketplace gesetzt werden??
+		    this.administration.joinMarketplace(u.getId(), m.getId()); 
 		  }
 		   
 		  
@@ -114,7 +114,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  CompositeParagraph header = new CompositeParagraph();
 		  
 		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName()));
-		  header.addSubParagraph(new SimpleParagraph("Name: " + u.getName()));
+		  header.addSubParagraph(new SimpleParagraph("Name: " + u.getLastname() +", " + u.getFirstname()));
 		  
 		  result.setHeaderData(header);
 		  
@@ -182,10 +182,10 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			  
 			  Row applicationRow = new Row();
 			  
-			 applicationRow.addColumn(new Column(a.getTitel())); 
-			 applicationRow.addColumn(new Column(administration.getUserById(a.getUserRef()).getName()));
+			 applicationRow.addColumn(new Column(a.getName())); 
+			 applicationRow.addColumn(new Column(administration.getUserById(a.getUserRef()).getLastname() + administration.getUserById(a.getUserRef()).getFirstname()));
 			 applicationRow.addColumn(new Column(a.getText()));
-			 applicationRow.addColumn(new Column(administration.getRatingById(a.getRatingRef()).getRate()));
+			 applicationRow.addColumn(new Column(administration.getRatingByApplicationRef(a.getId()).getRate()));
 
 			 
 			 result.addRow(applicationRow);
@@ -210,7 +210,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  CompositeParagraph header = new CompositeParagraph();
 		  
-		  header.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
+		  header.addSubParagraph(new SimpleParagraph("Name: " + u.getLastname() +", " + u.getFirstname()));
 		  
 		  result.setHeaderData(header);
 		  
@@ -225,15 +225,15 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Application> allApplications = this.administration.getAllApplicationsOfUser(u);
+		  Vector<Application> allApplications = this.administration.getAllApplicationsByUserRef(u.getId());
 		  
 		  for(Application a : allApplications){
 			  
 			  Row applicationRow = new Row();
 			  
-			 applicationRow.addColumn(new Column(a.getTitel()));
+			 applicationRow.addColumn(new Column(a.getName()));
 			 applicationRow.addColumn(new Column(a.getText())); 
-			 applicationRow.addColumn(new Column(administration.getRatingById(a.getRatingRef()).getRate()));
+			 applicationRow.addColumn(new Column(administration.getRatingByApplicationRef(a.getId()).getRate()));
 			 applicationRow.addColumn(new Column(administration.getTenderById(a.getTenderRef()).getName()));
 			 
 			 result.addRow(applicationRow);
@@ -260,7 +260,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  CompositeParagraph header = new CompositeParagraph();
 		  
-		  header.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
+		  header.addSubParagraph(new SimpleParagraph("Name: " + u.getLastname()+", "  + u.getFirstname()));
 		  
 		  result.setHeaderData(header);
 		  
@@ -317,14 +317,14 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 	  
 	  
-	  public FanInFanOutByUser createFanInFanOutByUserReport(User u)throws IllegalArgumentException{ // NICHT OBJEKT SONDERN NUR REFERENZ
+	  public ApplicationStatus createApplicationStatusReport(User u) throws IllegalArgumentException {
 		  
 		  if(this.getMarketplaceAdministration() == null)
 			  return null;
 		  
-		  FanInFanOutByUser result = new FanInFanOutByUser(); //Leerer Report
+		  ApplicationStatus result = new ApplicationStatus(); //Leerer Report
 		  
-		  result.setTitle("Applications");
+		  result.setTitle("ApplicationStatus");
 		  
 		  this.addImprint(result);
 		  
@@ -332,7 +332,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  CompositeParagraph header = new CompositeParagraph();
 		  
-		  header.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
+		  header.addSubParagraph(new SimpleParagraph("Name: " + u.getLastname()+", "  + u.getFirstname()));
 		  
 		  result.setHeaderData(header);
 		  
@@ -347,7 +347,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Application> allApplications = this.administration.getAllApplicationsOfUser(u);
+		  Vector<Application> allApplications = this.administration.getAllApplicationsByUserRef(u.getId());
 		  		  
 		  int Counter = 1;
 		  
@@ -364,7 +364,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			 int dateInt = administration.getTenderById(a.getTenderRef()).getEndDate().compareTo(now);
 					 
 			 Participation p = null;
-			 p = this.administration.getParticipationByRatingId(a.getRatingRef()); //Methode noch in Administration erstellen
+			 p = this.administration.getParticipationByRatingId(administration.getRatingByApplicationRef(a.getId())); //Was passiert wenn Objekt nicht gefunden wird?
 			 
 			 if(p != null){
 					 status = "Accepted";
@@ -391,74 +391,83 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  return result;
 		  
- FanInFanOutByUser result1 = new FanInFanOutByUser(); //Leerer Report
+	  }
 		  
-		  result1.setTitle("Tenders");
+		  // ----------------------------------------------------------------------------------
+	  
+	  public TenderStatus createTenderStatusReport(User u) throws IllegalArgumentException{
 		  
-		  this.addImprint(result1);
+		  if(this.getMarketplaceAdministration() == null)
+			  return null;
 		  
-		  result1.setCreated(new Date());
+		  TenderStatus result = new TenderStatus(); //Leerer Report
 		  
-		  CompositeParagraph header1 = new CompositeParagraph();
+		  result.setTitle("TenderStatus");
 		  
-		  header1.addSubParagraph(new SimpleParagraph("User: " + u.getName()));
+		  this.addImprint(result);
 		  
-		  result1.setHeaderData(header1);
+		  result.setCreated(new Date());
 		  
+		  CompositeParagraph header = new CompositeParagraph();
 		  
+		  header.addSubParagraph(new SimpleParagraph("Name: " + u.getLastname()+", "  + u.getFirstname()));
 		  
-		  Row headline1 = new Row(); //Erste Reihe in dem report (Bezeichnungen)
-		  
-		  headline1.addColumn(new Column("Anzahl"));
-		  headline1.addColumn(new Column("TenderTitle"));
-		  headline1.addColumn(new Column("TenderStatus"));
+		  result.setHeaderData(header);
 		  
 		  
-		  result1.addRow(headline1);
+		  
+		  Row headline = new Row(); //Erste Reihe in dem report (Bezeichnungen)
+		  
+		  headline.addColumn(new Column("Anzahl"));
+		  headline.addColumn(new Column("TenderTitle"));
+		  headline.addColumn(new Column("TenderStatus"));
+		  
+		  
+		  result.addRow(headline);
 		  
 		  Vector<Tender> allTenders = this.administration.getAllTenderOfUser(u);
 		  
-		  int Counter1 = 1;
+		  int Counter = 1;
 		  
 		  
 		  for(Tender t : allTenders){
 			  
 			  Row tenderRow = new Row();
 			  
-			 String s1 = String.valueOf(Counter1);
+			 String s = String.valueOf(Counter);
 			 
-			 String status1 = null;
+			 String status = null;
 			 
-			 Date now1 = new Date();
+			 Date now = new Date();
 			 
-			 int dateInt1 = t.getEndDate().compareTo(now1);
+			 int dateInt = t.getEndDate().compareTo(now);
 					 
-			 Participation part1 = administration.getParticipationByTenderId(t.getId());
+			 Participation part = administration.getParticipationByTenderId(t.getId());
 			 
 			 
-			 if(part1 != null){
-				 status1 = "Job Successfully filled";
+			 if(part != null){
+				 status = "Job Successfully filled";
 			 
 			 }
 		 
-			 else if(dateInt1 > 0 && part1 == null){
-				 status1 = "Going on";
+			 else if(dateInt > 0 && part == null){
+				 status = "Going on";
 			 }
 			 
 			 else {
-				 status1 = "Rejected";
+				 status = "Rejected";
 			 }
 			 
-			 tenderRow.addColumn(new Column(s1));
+			 tenderRow.addColumn(new Column(s));
 			 tenderRow.addColumn(new Column(t.getText())); 
-			 tenderRow.addColumn(new Column(status1));
+			 tenderRow.addColumn(new Column(status));
 			 
 			Counter++;
 			 
-			 result1.addRow(tenderRow);
+			 result.addRow(tenderRow);
 		  }
 		  
-		  return result1;
+		  return result;
 		  
 	  }
 	  
@@ -480,12 +489,14 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
 		    for (User u : allUsers) {
 		   
-		      result.addSubReport(this.createFanInFanOutByUserReport(u));
+		      result.addSubReport(this.createApplicationStatusReport(u));
+		      result.addSubReport(this.createTenderStatusReport(u));
 		    }
 
 		    return result;
 		  
 	  }
-	  
+
+
 	
 }
