@@ -70,10 +70,12 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		
 		return pmMapper.insert(pm);
 	}
-	public void update(ProjectMarketplace pm) throws IllegalArgumentException {
+	public void updateMarketplace(ProjectMarketplace pm, String name) throws IllegalArgumentException {
+		pm.setName(name);
+		
 		pmMapper.update(pm);
 	}
-	public void delete(ProjectMarketplace pm) throws IllegalArgumentException {
+	public void deleteMarketplace(ProjectMarketplace pm) throws IllegalArgumentException {
 		pmMapper.delete(pm);
 	}
 	
@@ -95,11 +97,11 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 	
 	//Methoden zur Benutzerverwaltung
 	
-		public User createUser (String firstname, String lastname) throws IllegalArgumentException {
+		public User createUser (String firstName, String lastName) throws IllegalArgumentException {
 			User u = new User ();
 			
-			u.setFirstname(firstname);
-			u.setLastname(lastname);
+			u.setFirstname(firstName);
+			u.setLastname(lastName);
 			//Google ID ? 
 			//Usertyp einf�gen?
 			return usMapper.insert(u);
@@ -109,9 +111,9 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return usMapper.findByID(userRef);
 		}
 		
-		public void updateUser (User u, String firstname, String lastname) throws IllegalArgumentException{
-			u.setFirstname(firstname);
-			u.setLastname(lastname);
+		public void updateUser (User u, String firstName, String lastName) throws IllegalArgumentException{
+			u.setFirstname(firstName);
+			u.setLastname(lastName);
 			
 			usMapper.update(u);
 		}
@@ -158,8 +160,8 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		
 		}
 		
-		public Vector <User> getAllUserByName (String name) throws IllegalArgumentException {
-			return usMapper.findByName(name);
+		public Vector <User> getAllUserByName (String lastName) throws IllegalArgumentException {
+			return usMapper.findByName(lastName);
 		}
 		
 		public Vector <User> getAllUser() throws IllegalArgumentException {
@@ -307,11 +309,11 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Vector <Project> getAllProjectsOfUser (int userRef) throws IllegalArgumentException {
-			prMapper.findAllProjectsByUserRef(userRef);
+			return prMapper.findAllProjectsByUserRef(userRef);
 		}
 		
 		public Vector <Project> getAllProjects () throws IllegalArgumentException {
-			prMapper.findAll();
+			return prMapper.findAll();
 		}
 		
 		//-----------------------------------------------------
@@ -349,7 +351,9 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			paMapper.delete(pa);
 		}
 		
-		//Methode findParticipationByRatingId fehlt
+		public Participation getParticipationByRatingRef (int ratingRef) throws IllegalArgumentException {
+			return paMapper.findByRatingRef (ratingRef);
+		}
 		
 		
 		public Vector <Participation> getAllParticipationsOfUser (int userRef) throws IllegalArgumentException {
@@ -395,7 +399,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		return raMapper.findAll();
 	}
 	
-	public Rating getRatingByApplicationRef (int applicationRef) throws IllegalArgumentException{
+	public Rating getRatingsByApplicationRef (int applicationRef) throws IllegalArgumentException{
 		return raMapper.findRatingByApplicationRef(applicationRef);
 	}
 	//---------------------------------------------------
@@ -455,13 +459,13 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			Vector<Attribute> a= new Vector<Attribute>();
 	      	
 	      	if(a != null) {
-	      		a = atMapper.findByUserprofile(pp);
+	      		a = atMapper.findAllAttributesByUserProfileRef(int userprofileRef);
 	      		for(Attribute attribute : a){
 	      			this.deleteAttribute(Attribute);
 	      		}
 	      	}
 	    		//Partnerprofil l�schen
-	    		this.upMapper.deleteUserProfile(up);
+	    		this.upMapper.delete(up);
 	      	}
 			
 			
@@ -494,7 +498,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		
 		
 		
-		public Vector<Attribute> getAttributesByUserProfileRef (int userprofileRef)throws IllegalArgumentException{
+		public Vector<Attribute> getAttributesByUserProfileRef (int userprofileRef) throws IllegalArgumentException{
 			return this.atMapper.findAllAttributesByUserProfileRef(userprofileRef);
 		}
 		
