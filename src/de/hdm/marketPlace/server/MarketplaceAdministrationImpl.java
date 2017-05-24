@@ -346,11 +346,15 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			paMapper.delete(pa);
 		}
 		
-		//Methode findParticipationByRating fehlt
+		//Methode findParticipationByRatingId fehlt
 		
 		
 		public Vector <Participation> getAllParticipationsOfUser (int userRef) throws IllegalArgumentException {
 			return paMapper.findAllParticipationsByUserRef(userRef);
+		}
+		
+		public Participation getParticipationByTenderRef (int tenderRef) throws IllegalArgumentException {
+			return paMapper.findParticipationByTenderRef (tenderRef);
 		}
 		
 		public Vector <Participation> getAllParticipations () throws IllegalArgumentException {
@@ -384,8 +388,12 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		raMapper.delete(r);
 	}
 	
-	public Vector <Rating> getAllRatingsByApplicationRef (int applicationRef) throws IllegalArgumentException{
-		return this.raMapper.findRatingByApplicationRef(applicationRef);
+	public Vector <Rating> getAllRatings () throws IllegalArgumentException {
+		return raMapper.findAll();
+	}
+	
+	public Rating getRatingByApplicationRef (int applicationRef) throws IllegalArgumentException{
+		return raMapper.findRatingByApplicationRef(applicationRef);
 	}
 	//---------------------------------------------------
 	
