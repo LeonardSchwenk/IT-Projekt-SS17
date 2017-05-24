@@ -1,12 +1,11 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
-
-
-
+import java.util.Vector;
 
 import de.hdm.marketPlace.shared.bo.ProjectMarketplace;
 import de.hdm.marketPlace.shared.bo.Rating;
+import de.hdm.marketPlace.shared.bo.Tender;
 
 
 //insert delete update ergänzen
@@ -130,6 +129,37 @@ public class ProjectMarketplaceMapper {
 	      e.printStackTrace();
 	    }
 	  }
+	  
+	  public Vector<ProjectMarketplace> findAll() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<ProjectMarketplace> result = new Vector<ProjectMarketplace>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, name FROM projectmarketplace "
+	              +"ORDER BY name");
+
+		     
+		      while (rs.next()) {
+		    	  
+			    	ProjectMarketplace pm = new ProjectMarketplace();
+			    	pm.setId(rs.getInt("id"));
+			        pm.setName(rs.getString("name"));
+					
+		        
+		        result.addElement(pm);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
 	
 	
 	
