@@ -1,6 +1,8 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import de.hdm.marketPlace.shared.bo.Tender;
@@ -35,7 +37,7 @@ public class TenderMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id,name, text, projectRef value FROM tender " + "WHERE id= " + id +"ORDER BY projectRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectRef, startDate, endDate value FROM tender " + "WHERE id= " + id +"ORDER BY projectRef");
 		
 		if ( rs.next()){
 			
@@ -44,7 +46,8 @@ public class TenderMapper {
 			t.setName(rs.getString("name"));
 			t.setText(rs.getString("text"));
 			t.setProjectRef(rs.getInt("projectRef"));
-			
+			t.setStartDate(rs.getDate("startDate"));
+			t.setEndDate(rs.getDate("endDate")); 
 		
 			
 			
@@ -78,10 +81,14 @@ public class TenderMapper {
 	    t.setId(rs.getInt("maxid") + 1);
 
 	        stmt = con.createStatement();
+	        
+	        SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd");
+	        Date currentDate = new Date();
+	        String date = mySQLformate.format(currentDate);
 
 	        
-	        stmt.executeUpdate("INSERT INTO Tender ( id, text, ProjectRef) "
-	           + "VALUES (" + t.getText() + ",'" + t.getProjectRef() + ",'" + t.getName()  + "')");
+	        stmt.executeUpdate("INSERT INTO Tender ( id, text, projectRef, startDate, endDate ) "
+	           + "VALUES (" + t.getText() + ",'" + t.getProjectRef() + ",'" + t.getName()  +  "','"    +  date +  "','"    + date +"')");
 	      }
 	    }
 	    catch (SQLException e) {
@@ -97,9 +104,13 @@ public class TenderMapper {
 
 	    try {
 	      Statement stmt = con.createStatement();
+	      
+	      SimpleDateFormat mySQLformate = new SimpleDateFormat("yyyy-MM-dd");
+	        Date currentDate = new Date();
+	        String date = mySQLformate.format(currentDate);
 
 	      stmt.executeUpdate("UPDATE Tender " + "SET Text=\""
-	          + t.getText() + "\", " + "ProjectRef=\"" + t.getProjectRef() + "\", " + "Name=\"" + t.getName()  +  "\" "
+	          + t.getText() + "\", " + "ProjectRef=\"" + t.getProjectRef() + "\", " + "Name=\"" + t.getName() +  "StartDate=\"" + date +  "\", " +  "EndDate=\"" + date  +  "\" "
 	          + "WHERE Id=" + t.getId());
 
 	    }
@@ -134,7 +145,7 @@ public class TenderMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef value FROM tender " +"ORDER BY projectRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender " +"ORDER BY projectRef");
 
 		     
 		      while (rs.next()) {
@@ -143,7 +154,8 @@ public class TenderMapper {
 					t.setName(rs.getString("name"));
 					t.setText(rs.getString("text"));
 					t.setProjectRef(rs.getInt("projectRef"));
-					
+					t.setStartDate(rs.getDate("startDate"));
+					t.setEndDate(rs.getDate("endDate")); 
 		        
 		        result.addElement(t);
 		      }
@@ -165,7 +177,7 @@ public class TenderMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef value FROM tender " +"ORDER BY projectRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender " +"ORDER BY projectRef");
 
 		     
 		      while (rs.next()) {
@@ -174,7 +186,8 @@ public class TenderMapper {
 					t.setName(rs.getString("name"));
 					t.setText(rs.getString("text"));
 					t.setProjectRef(rs.getInt("projectRef"));
-					
+					t.setStartDate(rs.getDate("startDate"));
+					t.setEndDate(rs.getDate("endDate")); 
 		        
 		        result.addElement(t);
 		      }
@@ -198,7 +211,7 @@ public class TenderMapper {
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, text, projectRef value FROM tender " +"ORDER BY projectRef");
+			  ResultSet rs = stmt.executeQuery("SELECT id, text, projectRef, startDate, endDate value FROM tender " +"ORDER BY projectRef");
 			  while(rs.next()){
 				  
 				  				Tender t = new Tender();
@@ -206,6 +219,8 @@ public class TenderMapper {
 								t.setName(rs.getString("name"));
 								t.setText(rs.getString("text"));
 								t.setProjectRef(rs.getInt("projectRef"));
+								t.setStartDate(rs.getDate("startDate"));
+								t.setEndDate(rs.getDate("endDate")); 
 								
 			  result.addElement(t);
 			  }
@@ -227,7 +242,7 @@ public class TenderMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef value FROM tender " +"ORDER BY projectRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender " +"ORDER BY projectRef");
 
 		     
 		      while (rs.next()) {
@@ -236,7 +251,8 @@ public class TenderMapper {
 					t.setName(rs.getString("name"));
 					t.setText(rs.getString("text"));
 					t.setProjectRef(rs.getInt("projectRef"));
-					
+					t.setStartDate(rs.getDate("startDate"));
+					t.setEndDate(rs.getDate("endDate")); 
 		        
 		        result.addElement(t);
 		      }

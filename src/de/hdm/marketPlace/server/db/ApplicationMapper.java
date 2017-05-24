@@ -135,46 +135,7 @@ public class ApplicationMapper {
 	    }
 	  }
 	  
-	  //getallApplications
-	  
-	  public Vector<Application> getAllApplications() {
-		    Connection con = DBConnection.getConnection();
-
-		   
-		    Vector<Application> result = new Vector<Application>();
-
-		    try {
-		      Statement stmt = con.createStatement();
-
-		      ResultSet rs = stmt
-		          .executeQuery("SELECT id, text, name, tenderRef, userRef FROM application "
-		              + " ORDER BY tenderRef");
-
-		    
-		      while (rs.next()) {
-		    	  Application a = new Application();
-		    	  a.setId(rs.getInt("id"));
-					a.setText(rs.getString("text"));
-					a.setTenderRef(rs.getInt("tenderRef"));
-					a.setUserRef(rs.getInt("userRef"));
-					a.setName(rs.getString("name"));
-
-		       
-		        result.addElement(a);
-		      }
-		    }
-		    catch (SQLException e2) {
-		      e2.printStackTrace();
-		    }
-
-		   
-		    return result;
-		  }
-
-	
-	  
-	  
-	  public Vector<Application> findAllApplicationsByUserRef(int userRef) {
+	  public Vector<Application> findAllApplicationsByTenderRef(int TenderRef) {
 			
 			Connection con = DBConnection.getConnection();
 		
@@ -195,6 +156,48 @@ public class ApplicationMapper {
 					a.setName(rs.getString("name"));
 					a.setTenderRef(rs.getInt("tenderRef"));
 					a.setUserRef(rs.getInt("userRef"));
+					
+				
+					result.addElement(a);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			
+			return result;
+		}
+	
+	
+	
+
+	  
+	  
+	  public Vector<Application> findAllApplicationsByUserRef(int userRef) {
+			
+			Connection con = DBConnection.getConnection();
+		
+			Vector<Application> result = new Vector<Application>();
+
+			try {
+				Statement stmt = con.createStatement();
+
+				ResultSet rs = stmt
+						.executeQuery("SELECT id, text,  tenderRef, userRef FROM application "
+		              + " ORDER BY userRef");
+
+			
+				while (rs.next()) {
+					Application a = new Application();
+					a.setId(rs.getInt("id"));
+					a.setText(rs.getString("text"));
+					a.setName(rs.getString("name"));
+					
+					a.setTenderRef(rs.getInt("tenderRef"));
+					a.setUserRef(rs.getInt("userRef"));
+					a.setApplicationDate(rs.getDate("applicationDate"));
+					
+					
 					
 				
 					result.addElement(a);
