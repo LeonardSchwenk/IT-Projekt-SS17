@@ -2,12 +2,15 @@ package de.hdm.marketPlace.server;
 
 import de.hdm.marketPlace.shared.*;
 
+
 import de.hdm.marketPlace.shared.bo.*;
 import de.hdm.marketPlace.server.db.*;
 
 import java.util.Vector;
 import java.util.ArrayList;
 import java.util.Date;
+
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
 
@@ -65,7 +68,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		ProjectMarketplace pm = new ProjectMarketplace();
 		pm.setName(name);
 		
-		pmMapper.insert(pm);
+		return pmMapper.insert(pm);
 	}
 	public void update(ProjectMarketplace pm) throws IllegalArgumentException {
 		pmMapper.update(pm);
@@ -210,13 +213,13 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			 */
 		}
 		
-		public Vector <Application> getAllApplicationsByTender (int tenderRef) throws IllegalArgumentException {
-			return apMapper.findApplicationsByTenderRef(tenderRef);
+		public Vector <Application> getAllApplicationsByTenderRef (int tenderRef) throws IllegalArgumentException {
+			return apMapper.findAllApplicationsByTenderRef(tenderRef);
 					
 		}
 		
 		public Vector <Application> getAllApplications () throws IllegalArgumentException {
-			return apMapper.getAllApplications();
+			return apMapper.findAll();
 		}
 		
 		public Vector <Application> getAllApplicationsByUserRef (int userRef) throws IllegalArgumentException {
@@ -435,7 +438,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return this.upMapper.insert(up);
 		}
 
-		public UserProfile getById(int userProfileRef) throws IllegalArgumentException {
+		public UserProfile getUserProfileById(int userProfileRef) throws IllegalArgumentException {
 			return this.upMapper.findByID(userProfileRef);
 		}
 
@@ -473,7 +476,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			a.setUserprofileRef(userprofileRef);
 			a.setValue(value);
 			
-			atMapper.insert(a);
+			return atMapper.insert(a);
 		}
 		
 		public void updateAttribute(Attribute a, int userprofileRef, String name, String text, int value)throws IllegalArgumentException{
@@ -496,7 +499,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Vector <Attribute> getAllAttributes () throws IllegalArgumentException {
-			atMapper.findAll();
+			return atMapper.findAll();
 		}
 		
 

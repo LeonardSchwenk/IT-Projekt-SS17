@@ -70,7 +70,7 @@ public interface MarketplaceAdministration {
 	public void deleteApplication (Application application)throws IllegalArgumentException;
 	
 	//Ausgeben aller Bewerbungen auf eine Ausschreibung
-	public Vector <Application> getAllApplicationsByTender(Tender tender) throws IllegalArgumentException;
+	public Vector <Application> getAllApplicationsByTenderRef(int tenderRef) throws IllegalArgumentException;
 	
 	//Ausgeben aller Bewerbungen
 	public Vector <Application> getAllApplications () throws IllegalArgumentException;
@@ -83,7 +83,7 @@ public interface MarketplaceAdministration {
 	
 	//Methoden zur Verwaltung von Ausschreibungen
 	//eine Ausschreibung erstellen
-	public Tender createTender (String text) throws IllegalArgumentException;
+	public Tender createTender (String name, int projectRef, String text, Date startDate, Date endDate) throws IllegalArgumentException;
 	
 	//RÃ¼ckgabe einer Ausschreibung anhand einer Id
 	public Tender getTenderById (int tenderRef) throws IllegalArgumentException;
@@ -189,7 +189,7 @@ public interface MarketplaceAdministration {
 	
 	//Methoden zur Verwaltung eines UserProfile
 	//Erstellen eines UserProfils
-	public UserProfile createUserProfile (Date createDate) throws IllegalArgumentException;
+	public UserProfile createUserProfile (User u, String text) throws IllegalArgumentException;
 	
 	//RÃ¼ckgabe eines UserProfils anhand einer Id
 	public UserProfile getUserProfileById (int userProfileRef) throws IllegalArgumentException;
@@ -200,18 +200,19 @@ public interface MarketplaceAdministration {
 	//LÃ¶schen eines Ausschreiberprofils
 	public void deleteUserProfile (UserProfile userProfile) throws IllegalArgumentException;
 	
+	
 	//Methoden zur Verwaltung einer Eigenschaft
 	
-	//Ein Attribut einem Userprofil hinzufügen
+	//Ein Attribut einem Userprofil hinzufï¿½gen
 	public Attribute insertAttribute(Attribute a, UserProfile up)throws IllegalArgumentException;
 				
 	//Bearbeiten eines Attributes
-	public Attribute updateAttribute(Attribute a)throws IllegalArgumentException;
+	public void updateAttribute(Attribute a, int userprofileRef, String name, String text, int value) throws IllegalArgumentException;
 				
-	//Löschen eines Attributes
+	//Lï¿½schen eines Attributes
 	public void deleteAttribute(Attribute a)throws IllegalArgumentException;
 	
-	//Lösche alle Attribute eines UserProfils
+	//Lï¿½sche alle Attribute eines UserProfils
 	public void deleteAllAttributeOfUserprofile(UserProfile up)throws IllegalArgumentException;
 
 	//Alle Attribute eines Users
