@@ -67,37 +67,38 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		
 		pmMapper.insert(pm);
 	}
-	public void update(ProjectMarketPlace pm) throws IllegalArgumentException {
+	public void update(ProjectMarketplace pm) throws IllegalArgumentException {
 		pmMapper.update(pm);
 	}
-	public void delete(ProjectMarketPlace pm) throws IllegalArgumentException {
+	public void delete(ProjectMarketplace pm) throws IllegalArgumentException {
 		pmMapper.delete(pm);
 	}
 	
 	public ProjectMarketplace getMarketplaceById (int projectmarketplaceRef) throws IllegalArgumentException {
-		return pmMapper.findById(projectmarketplaceRef);
+		return pmMapper.findByID(projectmarketplaceRef);
 	}
 	
 	public void joinMarketplace (int userRef, int projectmarketplaceRef) throws IllegalArgumentException {
 		User u = usMapper.findByID(userRef);
-		u.setMarketplaceRef (projectmarketplaceRef);
+		u.setProjectmarketplaceRef(projectmarketplaceRef); 
 		
 		usMapper.update(u);
 	}
-	public Vector<ProjectMarketPlace> findAllProjectMarketPlace() throws IllegalArgumentException {
+	public Vector<ProjectMarketplace> getAllProjectMarketplace() throws IllegalArgumentException {
 		return this.pmMapper.findAll();
 	}
 	
-	//-----------------------------------------
+	
 	
 	//Methoden zur Benutzerverwaltung
 	
-		public User createUser (String name) throws IllegalArgumentException {
+		public User createUser (String firstname, String lastname) throws IllegalArgumentException {
 			User u = new User ();
 			
-			u.setName(name);
+			u.setFirstname(firstname);
+			u.setLastname(lastname);
 			//Google ID ? 
-			//Usertyp einfügen?
+			//Usertyp einfï¿½gen?
 			return usMapper.insert(u);
 		}
 		
@@ -105,8 +106,9 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return usMapper.findByID(userRef);
 		}
 		
-		public void updateUser (User u, String name) throws IllegalArgumentException{
-			u.setName(name);
+		public void updateUser (User u, String firstname, String lastname) throws IllegalArgumentException{
+			u.setFirstname(firstname);
+			u.setLastname(lastname);
 			
 			usMapper.update(u);
 		}
@@ -115,14 +117,14 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			usMapper.delete(u);
 			
 			/*
-			 //Zugehöriges UserProfile löschen
+			 //Zugehï¿½riges UserProfile lï¿½schen
 			UserProfile userProfile = upMapper.findByUser(User);
 	  		
 	  		if(userProfile != null) {
 	  			this.deleteUserProfile(userProfile);
 	  		}
 	      
-	      	//Zugehörige Projekte löschen		      
+	      	//Zugehï¿½rige Projekte lï¿½schen		      
 	      	Vector<Project> pl = new Vector<Project>();
 	      	
 	      	if(pl != null) {
@@ -133,7 +135,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 	      		}
 	      	}
 			
-			//Zugehörige Bewerbungen löschen
+			//Zugehï¿½rige Bewerbungen lï¿½schen
 	  		Vector<Application> al = new Vector<Application>();
 	  		
 	  		if (al != null) {
@@ -154,7 +156,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Vector <User> getAllUserByName (String name) throws IllegalArgumentException {
-			return usMapper.findAllUserByName (name);
+			return usMapper.findByName(name);
 		}
 		
 		public Vector <User> getAllUser() throws IllegalArgumentException {
@@ -165,14 +167,13 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		
 		//Methoden zur Verwaltung von Bewerbungen
 		
-		public Application createApplication (String titel, String text, int userRef, int tenderRef, int ratingRef) throws IllegalArgumentException {
+		public Application createApplication (String name, String text, int userRef, int tenderRef) throws IllegalArgumentException {
 			Application a = new Application();
-			a.setTitel(titel);
+			a.setName(name);
 			a.setText(text);
-			a.setCreateDate(new Date());
+			a.setApplicationDate(new Date());
 			a.setUserRef(userRef);
 			a.setTenderRef(tenderRef);
-			a.setRatingRef(ratingRef);
 			
 			return apMapper.insert(a);
 		}
@@ -182,13 +183,12 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return apMapper.findByID(applicationRef);
 		}
 		
-		public void updateApplication (Application a, String titel, String text, int userRef, int tenderRef, int ratingRef) throws IllegalArgumentException {
-			a.setTitel(titel);
+		public void updateApplication (Application a, String name, String text, int userRef, int tenderRef) throws IllegalArgumentException {
+			a.setName(name);
 			a.setText(text);
-			a.setUpdateDate(new Date());
+			a.setApplicationDate(new Date());
 			a.setUserRef(userRef);
 			a.setTenderRef(tenderRef);
-			a.setRatingRef(ratingRef);
 			
 			apMapper.update(a);
 		}
@@ -211,11 +211,12 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Vector <Application> getAllApplicationsByTender (int tenderRef) throws IllegalArgumentException {
-			return apMapper.getAllApplicationsByTender(tenderRef);
+			return apMapper.findApplicationsByTenderRef(tenderRef);
+					
 		}
 		
 		public Vector <Application> getAllApplications () throws IllegalArgumentException {
-			return apMapper.getAllApplications;
+			return apMapper.getAllApplications();
 		}
 		
 		public Vector <Application> getAllApplicationsByUserRef (int userRef) throws IllegalArgumentException {
@@ -225,11 +226,13 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		//-------------------------------------------------
 		
 		//Methoden zur Verwaltung von Ausschreibungen
-		public Tender createTender (int projectRef, int tenderProfileRef, String text) throws IllegalArgumentException {
+		public Tender createTender (String name, int projectRef, String text, Date startDate, Date endDate) throws IllegalArgumentException {
 			Tender t = new Tender();
+			t.setName(name);
 			t.setProjectRef(projectRef);
-			t.setTenderProfilRef(tenderProfileRef);
 			t.setText(text);
+			t.setStartDate(startDate);
+			t.setEndDate(endDate);
 			
 			return teMapper.insert(t);
 		}
@@ -238,10 +241,12 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return teMapper.findByID(tenderRef);
 		}
 		
-		public void updateTender (Tender t, int projectRef, int tenderProfileRef, String text) throws IllegalArgumentException {
+		public void updateTender (Tender t, int projectRef, String text, String name, Date startDate, Date endDate) throws IllegalArgumentException {
 			t.setProjectRef(projectRef);
-			t.setTenderProfilRef(tenderProfileRef);
 			t.setText(text);
+			t.setName(name);
+			t.setStartDate(startDate);
+			t.setEndDate(endDate);
 			
 			teMapper.update(t);
 		}
@@ -251,32 +256,29 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Vector <Tender> getAllTenderOfUser (int userRef) throws IllegalArgumentException {
-			return teMapper.getAllTenderOfUser(userRef);
+			return teMapper.findAllTenderByUserRef(userRef);
 		}
 		
 		public Vector <Tender> getAllTenderByName (String name) throws IllegalArgumentException {
-			return teMapper.getAllTenderByName (name);
+			return teMapper.findByName(name);
 		}
 		
 		public Vector <Tender> getAllTender () throws IllegalArgumentException {
-			return teMapper.getAllTender();
+			return teMapper.findAll();
 		}
 		
-		public Vector <Tender> getTenderMatch (UserProfile up) throws IllegalArgumentException {
-			return teMapper.getTenderMatch (up);
-		}
+		
 		
 		//--------------------------------------------
 		//Methoden zur Verwaltung von Projekten
 		
-		public Project createProject (String name, String text, Date startDate, Date endDate, int managerRef, int tenderRef) throws IllegalArgumentException {
+		public Project createProject (String name, String text, Date startDate, Date endDate, int managerRef) throws IllegalArgumentException {
 			Project p = new Project();
 			p.setName(name);
 			p.setText(text);
 			p.setStartDate(startDate);
 			p.setEndDate(endDate);
 			p.setUserRef(managerRef);
-			p.setTenderRef(tenderRef);
 			
 			return prMapper.insert(p);
 		}
@@ -286,13 +288,12 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 					
 		}
 		
-		public void updateProject (Project p, String name, String text, Date startDate, Date endDate, int managerRef, int tenderRef) throws IllegalArgumentException {
+		public void updateProject (Project p, String name, String text, Date startDate, Date endDate, int managerRef) throws IllegalArgumentException {
 			p.setName(name);
 			p.setText(text);
 			p.setStartDate(startDate);
 			p.setEndDate(endDate);
 			p.setUserRef(managerRef);
-			p.setTenderRef(tenderRef);
 			
 			prMapper.update(p);
 			
@@ -303,11 +304,11 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Vector <Project> getAllProjectsOfUser (int userRef) throws IllegalArgumentException {
-			prMapper.getAllProjectsOfUser (userRef);
+			prMapper.findAllProjectsByUserRef(userRef);
 		}
 		
 		public Vector <Project> getAllProjects () throws IllegalArgumentException {
-			prMapper.getAllProjects();
+			prMapper.findAll();
 		}
 		
 		//-----------------------------------------------------
@@ -345,16 +346,15 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			paMapper.delete(pa);
 		}
 		
-		public Participation getParticipationByRatingRef (int ratingRef) throws IllegalArgumentException {
-			paMapper.findParticipationByRatingRef(ratingRef);
-		}
+		//Methode findParticipationByRating fehlt
+		
 		
 		public Vector <Participation> getAllParticipationsOfUser (int userRef) throws IllegalArgumentException {
-			return paMapper.getAllParticipationsOfUser (userRef);
+			return paMapper.findAllParticipationsByUserRef(userRef);
 		}
 		
 		public Vector <Participation> getAllParticipations () throws IllegalArgumentException {
-			return paMapper.getAllParticipations();
+			return paMapper.findAll();
 		}
 		
 		//--------------------------------------------------
@@ -384,16 +384,17 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		raMapper.delete(r);
 	}
 	
-	public Vector <Rating> getAllRatingsOfApplication (Application a) throws IllegalArgumentException{
-		return this.raMapper.getAllRatingsOfApplication (a);
+	public Vector <Rating> getAllRatingsByApplicationRef (int applicationRef) throws IllegalArgumentException{
+		return this.raMapper.findRatingByApplicationRef(applicationRef);
 	}
 	//---------------------------------------------------
 	
 	//Methoden zur Verwaltung eines Ausschreiberprofils
 	
-	public TenderProfile createTenderProfile (Date createDate) throws IllegalArgumentException{
+	public TenderProfile createTenderProfile ( int tenderRef) throws IllegalArgumentException{
 		TenderProfile tp = new TenderProfile();
-		tp.setCreateDate(new Date());
+		tp.setTenderprofileDate(new Date());
+		tp.setTenderRef(tenderRef);
 		
 		return this.tpMapper.insert(tp);
 	}
@@ -402,8 +403,10 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		return this.tpMapper.findByID(tenderProfileRef);
 	}
 	
-	public void updateTenderProfile (TenderProfile tp, Date updateDate) throws IllegalArgumentException {
-		tp.setUpdateDate (new Date());
+	public void updateTenderProfile (TenderProfile tp, int tenderRef) throws IllegalArgumentException {
+		tp.setTenderprofileDate(new Date());
+		tp.setTenderRef(tenderRef);
+		
 		this.tpMapper.update(tp);
 	}
 	
@@ -415,21 +418,24 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 
 	// UserProfile Methoden
 	
-	public UserProfile createUserProfile(User u) throws IllegalArgumentException {
+	public UserProfile createUserProfile(User u, String text) throws IllegalArgumentException {
 		
 		UserProfile up = new UserProfile();
-			up.setId(u.getId());
+			up.setUserRef(u.getId());
+			up.setText(text);
 			
-			return this.upMapper.insertUserProfile(up);
+			return this.upMapper.insert(up);
 		}
 
-		public UserProfile getById(int i) throws IllegalArgumentException {
-			return this.upMapper.findById(i);
+		public UserProfile getById(int userProfileRef) throws IllegalArgumentException {
+			return this.upMapper.findByID(userProfileRef);
 		}
 
 		
-		public UserProfile updateUserProfile(UserProfile up) throws IllegalArgumentException {
-			return this.upMapper.updateUserProfile(up);
+		public void updateUserProfile(UserProfile up, String text) throws IllegalArgumentException {
+			up.setText(text);
+			
+			upMapper.update(up);
 		}
 
 		public void deleteUserProfile(UserProfile up) throws IllegalArgumentException {
@@ -443,7 +449,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 	      			this.deleteAttribute(Attribute);
 	      		}
 	      	}
-	    		//Partnerprofil löschen
+	    		//Partnerprofil lï¿½schen
 	    		this.upMapper.deleteUserProfile(up);
 	      	}
 			
@@ -452,26 +458,37 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		//---------------------------------------------------------
 		//Methoden zur Verwaltung einer Eigenschaft
 		
-		public Attribute insertAttribute(Attribute a, UserProfile up)throws IllegalArgumentException{
-			return this.atMapper.insertAttribute(a, up);
+		public Attribute createAttribute(int userprofileRef, String name, String text, int value)throws IllegalArgumentException{
+			Attribute a = new Attribute();
+			a.setName(name);
+			a.setText(text);
+			a.setUserprofileRef(userprofileRef);
+			a.setValue(value);
+			
+			atMapper.insert(a);
 		}
 		
-		public Attribute updateAttribute(Attribute a)throws IllegalArgumentException{
-			return this.atMapper.updateAttribute(a);
+		public void updateAttribute(Attribute a, int userprofileRef, String name, String text, int value)throws IllegalArgumentException{
+			a.setUserprofileRef(userprofileRef);
+			a.setName(name);
+			a.setText(text);
+			a.setValue(value);
+			
+			atMapper.update(a);
 		}
 		
 		public void deleteAttribute(Attribute a)throws IllegalArgumentException{
-			atMapper.deleteAttribute(a);
+			atMapper.delete(a);
 		}
 		
 		
-		public void deleteAllAttributeOfUserProfile(UserProfile up)throws IllegalArgumentException{
-			atMapper.deleteAllAttributeOfUserProfile(up);
+		
+		public Vector<Attribute> getAttributesByUserProfileRef (int userprofileRef)throws IllegalArgumentException{
+			return this.atMapper.findAllAttributesByUserProfileRef(userprofileRef);
 		}
 		
-		
-		public Vector<Attribute> selectAllAttributeOfUserProfile(UserProfile up)throws IllegalArgumentException{
-			return this.atMapper.findByUserProfile(up);
+		public Vector <Attribute> getAllAttributes () throws IllegalArgumentException {
+			atMapper.findAll();
 		}
 		
 
