@@ -14,6 +14,7 @@ public class Participation extends BusinessObject{
 	private int projectRef = 0;
 	private int userRef = 0; 
 	private int ratingRef = 0; 
+	private int tenderRef  = 0;
 	private int workingDays = 0;
 	private Date startDate;
 	private Date endDate;
@@ -39,7 +40,13 @@ public class Participation extends BusinessObject{
 	public void setRatingRef(int ratingRef) {
 		this.ratingRef = ratingRef;
 	}
-	
+	public int getTenderRef() {
+		return tenderRef;
+	}
+	public void setTenderRef(int tenderRef) {
+		this.tenderRef = tenderRef;
+	}
+
 	/*Integerwert wird auf String geändert, um im späteren Verlauf 
 	 * im Reportgeneratro ausgegeben zu werden */
 	
@@ -73,4 +80,5 @@ public class Participation extends BusinessObject{
 			String stringDate = df.format(d);
 			return stringDate;
 		}
+	
 }
