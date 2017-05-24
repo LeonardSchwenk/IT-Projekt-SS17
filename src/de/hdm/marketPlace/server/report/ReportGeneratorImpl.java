@@ -364,7 +364,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			 int dateInt = administration.getTenderById(a.getTenderRef()).getEndDate().compareTo(now);
 					 
 			 Participation p = null;
-			 p = this.administration.getParticipationByRatingId(administration.getRatingByApplicationRef(a.getId())); //Methode noch in Administration erstellen
+			 p = this.administration.getParticipationByRatingId(administration.getRatingByApplicationRef(a.getId())); //Was passiert wenn Objekt nicht gefunden wird?
 			 
 			 if(p != null){
 					 status = "Accepted";
