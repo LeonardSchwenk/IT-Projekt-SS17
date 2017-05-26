@@ -47,8 +47,7 @@ public class ParticipationMapper {
 			p.setRatingRef(rs.getInt("ratingRef"));
 			p.setStartDate(rs.getDate("startDate"));
 			p.setEndDate(rs.getDate("endDate"));
-			p.setTenderRef(rs.getString("tenderRef"));
-			
+			p.setTenderRef(rs.getInt("tenderRef"));
 			return p; 
 			
 		}
@@ -87,7 +86,7 @@ public class ParticipationMapper {
 
 	        
 	        stmt.executeUpdate("INSERT INTO Participation (id, workingDays, projectRef, tenderRef, userRef, ratingRef) "
-	           + "VALUES ('" + p.getWorkingDays() + "','" + p.getProjectRef() + "','" + p.getTenderRef + "','"
+	           + "VALUES ('" + p.getWorkingDays() + "','" + p.getProjectRef() + "','" + p.getTenderRef() + "','"
 	            + p.getUserRef()+  "','"  + p.getRatingRef() + "','"    +  date +  "','"    + date + "')");
 	      }
 	    }
@@ -159,7 +158,7 @@ public class ParticipationMapper {
 					p.setRatingRef(rs.getInt("ratingRef"));
 					p.setStartDate(rs.getDate("startDate"));
 					p.setEndDate(rs.getDate("endDate"));
-					p.setTenderRef(rs.getString("tenderRef"));
+					p.setTenderRef(rs.getInt("tenderRef"));
 
 		        
 		        result.addElement(p);
@@ -197,7 +196,7 @@ public class ParticipationMapper {
 					p.setRatingRef(rs.getInt("ratingRef"));
 					p.setStartDate(rs.getDate("startDate"));
 					p.setEndDate(rs.getDate("endDate"));
-					p.setTenderRef(rs.getString("tenderRef"));
+					p.setTenderRef(rs.getInt("tenderRef"));
 
 		        
 		        result.addElement(p);
@@ -233,7 +232,42 @@ public class ParticipationMapper {
 					p.setRatingRef(rs.getInt("ratingRef"));
 					p.setStartDate(rs.getDate("startDate"));
 					p.setEndDate(rs.getDate("endDate"));
-					p.setTenderRef(rs.getString("tenderRef"));
+					p.setTenderRef(rs.getInt("tenderRef"));
+
+		        
+		        result.addElement(p);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
+	  
+	  public Vector<Participation> findAllParticipationsByTenderRef(int tenderRef) {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Participation> result = new Vector<Participation>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate value FROM participation " +"ORDER BY workingDays");
+
+		     
+		      while (rs.next()) {
+		    	  Participation p = new Participation();
+		    	  p.setId(rs.getInt("id"));
+					p.setWorkingDays(rs.getInt("workingDays"));
+					p.setProjectRef(rs.getInt("projectRef"));
+					p.setUserRef(rs.getInt("userRef"));
+					p.setRatingRef(rs.getInt("ratingRef"));
+					p.setStartDate(rs.getDate("startDate"));
+					p.setEndDate(rs.getDate("endDate"));
+					p.setTenderRef(rs.getInt("tenderRef"));
 
 		        
 		        result.addElement(p);
