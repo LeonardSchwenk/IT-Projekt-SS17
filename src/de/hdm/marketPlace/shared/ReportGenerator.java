@@ -8,20 +8,27 @@ public interface ReportGenerator extends RemoteService{ //Import Remote Service 
 	
 	 public void init() throws IllegalArgumentException;
 
-	  public void setProjectMarketplace(ProjectMarketplace m) throws IllegalArgumentException; //User oder Marketplace??
+	  public void setProjectMarketplace(User u, ProjectMarketplace m) throws IllegalArgumentException; 
 
-	  public abstract AllTenders createAllTendersReport() throws IllegalArgumentException;
+	  public abstract AllTenders createAllTendersReport(ProjectMarketplace m) throws IllegalArgumentException;
 	  
-	  public abstract TendersMatchProfil createTendersMatchProfilReport() throws IllegalArgumentException;
+	  public abstract TendersMatchProfil createTendersMatchProfilReport(ProjectMarketplace m, User u) throws IllegalArgumentException;
 	  
 	  public abstract AllApplicationsOnTender createAllApplicationsOnTenderReport(Tender t) throws IllegalArgumentException;
 
 	  public abstract AllApplicationsOfUser createAllApplicationsOfUserReport(User u) throws IllegalArgumentException;
 	  
+	  //------------------------------------------------------ProjectInterconnection
 	  public abstract ProjectInterconnection createProjectInterconnectionReport(User u) throws IllegalArgumentException;
 	  
-	  public abstract FanInFanOut createFanInFanOutReport(User u) throws IllegalArgumentException;
+	  public ParticipationsOfUser createParticipationsOfUserReport(User u) throws IllegalArgumentException;
 	  
+	  //---------------------------------------------------- FanInFanOut
+	  public abstract FanInFanOut createFanInFanOutReport() throws IllegalArgumentException;
+	  
+	  public abstract ApplicationStatus createApplicationStatusReport(User u) throws IllegalArgumentException;
+	  
+	  public abstract TenderStatus createTenderStatusReport(User u) throws IllegalArgumentException;
   
 	}
 	

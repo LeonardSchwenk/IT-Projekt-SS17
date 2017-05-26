@@ -48,82 +48,7 @@ public class HTMLReportWriter extends ReportWriter {
     return "</body></html>";
   }
 
-  
-  public void process(AllAccountsOfCustomerReport r) {
-
-    this.resetReportText();
-
-    StringBuffer result = new StringBuffer();
-
-    result.append("<H1>" + r.getTitle() + "</H1>");
-    result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
-    result.append("<td valign=\"top\"><b>" + paragraph2HTML(r.getHeaderData())
-        + "</b></td>");
-    result.append("<td valign=\"top\">" + paragraph2HTML(r.getImprint())
-        + "</td>");
-    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
-        + "</td></tr></table>");
-
-    Vector<Row> rows = r.getRows();
-    result.append("<table style=\"width:400px\">");
-
-    for (int i = 0; i < rows.size(); i++) {
-      Row row = rows.elementAt(i);
-      result.append("<tr>");
-      for (int k = 0; k < row.getNumColumns(); k++) {
-        if (i == 0) {
-          result.append("<td style=\"background:silver;font-weight:bold\">" + row.getColumnAt(k)
-              + "</td>");
-        }
-        else {
-          if (i > 1) {
-            result.append("<td style=\"border-top:1px solid silver\">"
-                + row.getColumnAt(k) + "</td>");
-          }
-          else {
-            result.append("<td valign=\"top\">" + row.getColumnAt(k) + "</td>");
-          }
-        }
-      }
-      result.append("</tr>");
-    }
-
-    result.append("</table>");
-
-    this.reportText = result.toString();
-  }
-
-  public void process(AllAccountsOfAllCustomersReport r) {
- 
-    this.resetReportText();
-
-    StringBuffer result = new StringBuffer();
-
-    result.append("<H1>" + r.getTitle() + "</H1>");
-    result.append("<table><tr>");
-
-    if (r.getHeaderData() != null) {
-      result.append("<td>" + paragraph2HTML(r.getHeaderData()) + "</td>");
-    }
-
-    result.append("<td>" + paragraph2HTML(r.getImprint()) + "</td>");
-    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
-        + "</td></tr></table>");
-
-    for (int i = 0; i < r.getNumSubReports(); i++) {
-   
-      AllAccountsOfCustomerReport subReport = (AllAccountsOfCustomerReport) r
-          .getSubReportAt(i);
-
-      this.process(subReport);
-
-      result.append(this.reportText + "\n");
-
-      this.resetReportText();
-    }
-
-    this.reportText = result.toString();
-  }
+  //---------------------------------------------------
 
   public void process(AllTenders r){
 	  
@@ -169,28 +94,338 @@ public class HTMLReportWriter extends ReportWriter {
 	    this.reportText = result.toString();
 	  }
 	  
-  }
-  
   public void process(TendersMatchProfil r){
+	  this.resetReportText();
+
+	    StringBuffer result = new StringBuffer();
+
+	    result.append("<H1>" + r.getTitle() + "</H1>");
+	    result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
+	    result.append("<td valign=\"top\"><b>" + paragraph2HTML(r.getHeaderData())
+	        + "</b></td>");
+	    result.append("<td valign=\"top\">" + paragraph2HTML(r.getImprint())
+	        + "</td>");
+	    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
+	        + "</td></tr></table>");
+
+	    Vector<Row> rows = r.getRows();
+	    result.append("<table style=\"width:400px\">");
+
+	    for (int i = 0; i < rows.size(); i++) {
+	      Row row = rows.elementAt(i);
+	      result.append("<tr>");
+	      for (int k = 0; k < row.getNumColumns(); k++) {
+	        if (i == 0) {
+	          result.append("<td style=\"background:silver;font-weight:bold\">" + row.getColumnAt(k)
+	              + "</td>");
+	        }
+	        else {
+	          if (i > 1) {
+	            result.append("<td style=\"border-top:1px solid silver\">"
+	                + row.getColumnAt(k) + "</td>");
+	          }
+	          else {
+	            result.append("<td valign=\"top\">" + row.getColumnAt(k) + "</td>");
+	          }
+	        }
+	      }
+	      result.append("</tr>");
+	    }
+
+	    result.append("</table>");
+
+	    this.reportText = result.toString();
 	  
   }
   
   public void process(AllApplicationsOnTender r){
+	  this.resetReportText();
+
+	    StringBuffer result = new StringBuffer();
+
+	    result.append("<H1>" + r.getTitle() + "</H1>");
+	    result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
+	    result.append("<td valign=\"top\"><b>" + paragraph2HTML(r.getHeaderData())
+	        + "</b></td>");
+	    result.append("<td valign=\"top\">" + paragraph2HTML(r.getImprint())
+	        + "</td>");
+	    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
+	        + "</td></tr></table>");
+
+	    Vector<Row> rows = r.getRows();
+	    result.append("<table style=\"width:400px\">");
+
+	    for (int i = 0; i < rows.size(); i++) {
+	      Row row = rows.elementAt(i);
+	      result.append("<tr>");
+	      for (int k = 0; k < row.getNumColumns(); k++) {
+	        if (i == 0) {
+	          result.append("<td style=\"background:silver;font-weight:bold\">" + row.getColumnAt(k)
+	              + "</td>");
+	        }
+	        else {
+	          if (i > 1) {
+	            result.append("<td style=\"border-top:1px solid silver\">"
+	                + row.getColumnAt(k) + "</td>");
+	          }
+	          else {
+	            result.append("<td valign=\"top\">" + row.getColumnAt(k) + "</td>");
+	          }
+	        }
+	      }
+	      result.append("</tr>");
+	    }
+
+	    result.append("</table>");
+
+	    this.reportText = result.toString();
 	  
   }
   
   public void process(AllApplicationsOfUser r){
+	  this.resetReportText();
+
+	    StringBuffer result = new StringBuffer();
+
+	    result.append("<H1>" + r.getTitle() + "</H1>");
+	    result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
+	    result.append("<td valign=\"top\"><b>" + paragraph2HTML(r.getHeaderData())
+	        + "</b></td>");
+	    result.append("<td valign=\"top\">" + paragraph2HTML(r.getImprint())
+	        + "</td>");
+	    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
+	        + "</td></tr></table>");
+
+	    Vector<Row> rows = r.getRows();
+	    result.append("<table style=\"width:400px\">");
+
+	    for (int i = 0; i < rows.size(); i++) {
+	      Row row = rows.elementAt(i);
+	      result.append("<tr>");
+	      for (int k = 0; k < row.getNumColumns(); k++) {
+	        if (i == 0) {
+	          result.append("<td style=\"background:silver;font-weight:bold\">" + row.getColumnAt(k)
+	              + "</td>");
+	        }
+	        else {
+	          if (i > 1) {
+	            result.append("<td style=\"border-top:1px solid silver\">"
+	                + row.getColumnAt(k) + "</td>");
+	          }
+	          else {
+	            result.append("<td valign=\"top\">" + row.getColumnAt(k) + "</td>");
+	          }
+	        }
+	      }
+	      result.append("</tr>");
+	    }
+
+	    result.append("</table>");
+
+	    this.reportText = result.toString();
 	  
   }
   
-  public void process(ProjectInterconnection r){
+  public void process(ParticipationsOfUser r){
+	  this.resetReportText();
+
+	    StringBuffer result = new StringBuffer();
+
+	    result.append("<H1>" + r.getTitle() + "</H1>");
+	    result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
+	    result.append("<td valign=\"top\"><b>" + paragraph2HTML(r.getHeaderData())
+	        + "</b></td>");
+	    result.append("<td valign=\"top\">" + paragraph2HTML(r.getImprint())
+	        + "</td>");
+	    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
+	        + "</td></tr></table>");
+
+	    Vector<Row> rows = r.getRows();
+	    result.append("<table style=\"width:400px\">");
+
+	    for (int i = 0; i < rows.size(); i++) {
+	      Row row = rows.elementAt(i);
+	      result.append("<tr>");
+	      for (int k = 0; k < row.getNumColumns(); k++) {
+	        if (i == 0) {
+	          result.append("<td style=\"background:silver;font-weight:bold\">" + row.getColumnAt(k)
+	              + "</td>");
+	        }
+	        else {
+	          if (i > 1) {
+	            result.append("<td style=\"border-top:1px solid silver\">"
+	                + row.getColumnAt(k) + "</td>");
+	          }
+	          else {
+	            result.append("<td valign=\"top\">" + row.getColumnAt(k) + "</td>");
+	          }
+	        }
+	      }
+	      result.append("</tr>");
+	    }
+
+	    result.append("</table>");
+
+	    this.reportText = result.toString();
 	  
   }
   
-  public void process(FanInFanOut r){
+  public void process(ProjectInterconnection r){ //CompositeReport
+	  this.resetReportText();
+
+	    StringBuffer result = new StringBuffer();
+
+	    result.append("<H1>" + r.getTitle() + "</H1>");
+	    result.append("<table><tr>");
+
+	    if (r.getHeaderData() != null) {
+	      result.append("<td>" + paragraph2HTML(r.getHeaderData()) + "</td>");
+	    }
+
+	    result.append("<td>" + paragraph2HTML(r.getImprint()) + "</td>");
+	    result.append("</tr><tr><td></td><td>" + r.getCreated().toString() + "</td></tr></table>");
+
+	    for (int i = 0; i < r.getNumSubReports(); i++) {
+	   
+	    	AllApplicationsOfUser subReport = (AllApplicationsOfUser) r.getSubReportAt(i);
+	    	ParticipationsOfUser subReport1 = (ParticipationsOfUser) r.getSubReportAt(i);
+
+	      this.process(subReport);
+	      this.process(subReport1);
+
+	      result.append(this.reportText + "\n");
+
+	      this.resetReportText();
+	    }
+
+	    this.reportText = result.toString();
 	  
   }
   
+  public void process(ApplicationStatus r){
+	  this.resetReportText();
+
+	    StringBuffer result = new StringBuffer();
+
+	    result.append("<H1>" + r.getTitle() + "</H1>");
+	    result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
+	    result.append("<td valign=\"top\"><b>" + paragraph2HTML(r.getHeaderData())
+	        + "</b></td>");
+	    result.append("<td valign=\"top\">" + paragraph2HTML(r.getImprint())
+	        + "</td>");
+	    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
+	        + "</td></tr></table>");
+
+	    Vector<Row> rows = r.getRows();
+	    result.append("<table style=\"width:400px\">");
+
+	    for (int i = 0; i < rows.size(); i++) {
+	      Row row = rows.elementAt(i);
+	      result.append("<tr>");
+	      for (int k = 0; k < row.getNumColumns(); k++) {
+	        if (i == 0) {
+	          result.append("<td style=\"background:silver;font-weight:bold\">" + row.getColumnAt(k)
+	              + "</td>");
+	        }
+	        else {
+	          if (i > 1) {
+	            result.append("<td style=\"border-top:1px solid silver\">"
+	                + row.getColumnAt(k) + "</td>");
+	          }
+	          else {
+	            result.append("<td valign=\"top\">" + row.getColumnAt(k) + "</td>");
+	          }
+	        }
+	      }
+	      result.append("</tr>");
+	    }
+
+	    result.append("</table>");
+
+	    this.reportText = result.toString();
+
+	  
+  }
+  
+  public void process(TenderStatus r){
+	  this.resetReportText();
+
+	    StringBuffer result = new StringBuffer();
+
+	    result.append("<H1>" + r.getTitle() + "</H1>");
+	    result.append("<table style=\"width:400px;border:1px solid silver\"><tr>");
+	    result.append("<td valign=\"top\"><b>" + paragraph2HTML(r.getHeaderData())
+	        + "</b></td>");
+	    result.append("<td valign=\"top\">" + paragraph2HTML(r.getImprint())
+	        + "</td>");
+	    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
+	        + "</td></tr></table>");
+
+	    Vector<Row> rows = r.getRows();
+	    result.append("<table style=\"width:400px\">");
+
+	    for (int i = 0; i < rows.size(); i++) {
+	      Row row = rows.elementAt(i);
+	      result.append("<tr>");
+	      for (int k = 0; k < row.getNumColumns(); k++) {
+	        if (i == 0) {
+	          result.append("<td style=\"background:silver;font-weight:bold\">" + row.getColumnAt(k)
+	              + "</td>");
+	        }
+	        else {
+	          if (i > 1) {
+	            result.append("<td style=\"border-top:1px solid silver\">"
+	                + row.getColumnAt(k) + "</td>");
+	          }
+	          else {
+	            result.append("<td valign=\"top\">" + row.getColumnAt(k) + "</td>");
+	          }
+	        }
+	      }
+	      result.append("</tr>");
+	    }
+
+	    result.append("</table>");
+
+	    this.reportText = result.toString();
+
+  }
+  
+  public void process(FanInFanOut r){ //CompositeReport
+	  this.resetReportText();
+
+	    StringBuffer result = new StringBuffer();
+
+	    result.append("<H1>" + r.getTitle() + "</H1>");
+	    result.append("<table><tr>");
+
+	    if (r.getHeaderData() != null) {
+	      result.append("<td>" + paragraph2HTML(r.getHeaderData()) + "</td>");
+	    }
+
+	    result.append("<td>" + paragraph2HTML(r.getImprint()) + "</td>");
+	    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
+	        + "</td></tr></table>");
+
+	    for (int i = 0; i < r.getNumSubReports(); i++) {
+	   
+	    	ApplicationStatus subReport = (ApplicationStatus) r.getSubReportAt(i);
+	    	TenderStatus subReport1 = (TenderStatus) r.getSubReportAt(i);
+
+	      this.process(subReport);
+	      this.process(subReport1);
+
+	      result.append(this.reportText + "\n");
+
+	      this.resetReportText();
+	    }
+
+	    this.reportText = result.toString();
+  }
+
+
+  
+  //-------------------------------------------------------------
   public String getReportText() {
     return this.getHeader() + this.reportText + this.getTrailer();
   }
