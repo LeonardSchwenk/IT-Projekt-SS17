@@ -1,9 +1,9 @@
 package de.hdm.marketPlace.server.db;
 
 import java.sql.*;
+import java.util.Vector;
 
-
-
+import de.hdm.marketPlace.shared.bo.Application;
 import de.hdm.marketPlace.shared.bo.UserProfile;
 
 
@@ -121,7 +121,37 @@ public class UserProfileMapper {
 	      e.printStackTrace();
 	    }
 	  }
-	
+	  public Vector<UserProfile> findAll() {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<UserProfile> result = new Vector<UserProfile>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, text, userRef FROM userprofile "  +"ORDER BY name");
+
+		     
+		      while (rs.next()) {
+
+		    		UserProfile u = new UserProfile();
+					u.setId(rs.getInt("id"));
+					u.setText(rs.getString("text"));
+					u.setUserRef(rs.getInt("userRef"));
+				
+
+		        
+		        result.addElement(u);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
 	
 	}
 

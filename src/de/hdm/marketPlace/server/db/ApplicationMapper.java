@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 
 import de.hdm.marketPlace.shared.bo.Application;
 import de.hdm.marketPlace.shared.bo.Tender;
+import de.hdm.marketPlace.shared.bo.TenderProfile;
 import de.hdm.marketPlace.shared.bo.User;
 
 
@@ -120,7 +121,40 @@ public class ApplicationMapper {
 
 	    return a;
 	  }
+	  public Vector<Application> findAll() {
+		    Connection con = DBConnection.getConnection();
 
+		   
+		    Vector<Application> result = new Vector<Application>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, text, name tenderRef, userRef, applicationDate value FROM application " +" ORDER BY tenderRef");
+
+		     
+		      while (rs.next()) {
+
+					Application a = new Application();
+					a.setId(rs.getInt("id"));
+					a.setText(rs.getString("text"));
+					a.setName(rs.getString("name"));
+					
+					a.setTenderRef(rs.getInt("tenderRef"));
+					a.setUserRef(rs.getInt("userRef"));
+					a.setApplicationDate(rs.getDate("applicationDate"));
+
+		        
+		        result.addElement(a);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
 	  
 	  public void delete(Application a) {
 	    Connection con = DBConnection.getConnection();
