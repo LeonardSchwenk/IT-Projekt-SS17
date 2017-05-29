@@ -1,7 +1,7 @@
 package de.hdm.marketPlace.server.report;
 
 import java.util.Date;
-//import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.Vector;
 
 import de.hdm.marketPlace.server.MarketplaceAdministrationImpl;

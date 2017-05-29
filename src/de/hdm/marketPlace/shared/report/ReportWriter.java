@@ -23,6 +23,11 @@ public abstract class ReportWriter {
 	  
 	  public abstract void process(ProjectInterconnection r);
 	  
+	  public abstract void process(ApplicationStatus r);
+	  
+	  public abstract void process(TenderStatus r);
+	  
+	  public abstract void process(ParticipationsOfUser r);
 	  
 	  public abstract void process(FanInFanOut r);
 
