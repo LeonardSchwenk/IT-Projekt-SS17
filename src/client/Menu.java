@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Menu extends Composite{
 	
-	//Auffangwidget		
+	//Auffangswidget		
 	VerticalPanel menuPanel = new VerticalPanel();
 	//Verbindung zur Impl
 	//ProjectMarketplaceAdministrationAsync verwaltung = ClientsideSettings.getProjectMarketplaceAdministration();
