@@ -1,18 +1,20 @@
 package de.hdm.marketPlace.shared;
 
 import de.hdm.marketPlace.shared.bo.*;
-import de.hdm.marketPlace.shared.report.*; // Warum muss importiert werden??
+import de.hdm.marketPlace.shared.report.*; 
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 public interface ReportGenerator extends RemoteService{ //Import Remote Service muss noch importiert werden (welche Stelle?)
 	
 	
 	 public void init() throws IllegalArgumentException;
 
-	  public void setProjectMarketplace(User u, ProjectMarketplace m) throws IllegalArgumentException; 
+	  // public void setProjectMarketplace(User u, ProjectMarketplace m) throws IllegalArgumentException; 
 
-	  public abstract AllTenders createAllTendersReport(ProjectMarketplace m) throws IllegalArgumentException;
+	  public abstract AllTenders createAllTendersReport() throws IllegalArgumentException;
 	  
-	  public abstract TendersMatchProfil createTendersMatchProfilReport(ProjectMarketplace m, User u) throws IllegalArgumentException;
+	  public abstract TendersMatchProfil createTendersMatchProfilReport(User u) throws IllegalArgumentException;
 	  
 	  public abstract AllApplicationsOnTender createAllApplicationsOnTenderReport(Tender t) throws IllegalArgumentException;
 
@@ -21,7 +23,7 @@ public interface ReportGenerator extends RemoteService{ //Import Remote Service 
 	  //------------------------------------------------------ProjectInterconnection
 	  public abstract ProjectInterconnection createProjectInterconnectionReport(User u) throws IllegalArgumentException;
 	  
-	  public ParticipationsOfUser createParticipationsOfUserReport(User u) throws IllegalArgumentException;
+	  public abstract ParticipationsOfUser createParticipationsOfUserReport(User u) throws IllegalArgumentException;
 	  
 	  //---------------------------------------------------- FanInFanOut
 	  public abstract FanInFanOut createFanInFanOutReport() throws IllegalArgumentException;

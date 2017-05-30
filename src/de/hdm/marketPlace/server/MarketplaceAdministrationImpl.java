@@ -272,6 +272,34 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return teMapper.findAll();
 		}
 		
+		public Vector <Tender> getAllTendersByMatch(int Ref) throws IllegalArgumentException{
+			
+			Vector <Attribute> userAt = atMapper.findAllAttributesByUserProfileRef(Ref);
+			Vector <TenderProfile> AllTp = tpMapper.findAll();
+			Vector <Tender> matches = new Vector <Tender>();
+			
+			//Hohlt sich die Attribute jedes Ausschreibungsprofils
+			for(TenderProfile tp : AllTp){
+				Vector <Attribute> tpAt = atMapper.findAllAttributesByUserProfileRef(tp.getId());
+				
+				//Der Name jedes Attributes jedes Ausschreibungsprofils wird gespeichert
+				for(Attribute at : tpAt){
+					String attriTender = at.getName();
+					
+					//Der Name jedes Attributes des Users wird gespeichert
+					for(Attribute uAt : userAt){
+						String attriUser = uAt.getName();
+						
+						//Stimmen die Namen überein wird die passende Ausschreibung geholt
+						if(attriTender == attriUser){
+							matches.add(this.getTenderById(tp.getTenderRef()));
+						}
+					}
+				}
+			}
+			
+			return matches;
+		}
 		
 		
 		//--------------------------------------------

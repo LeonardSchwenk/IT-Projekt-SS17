@@ -12,7 +12,7 @@ import de.hdm.marketPlace.shared.report.*;
 
 
 
-public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportGenerator{ //Wo findet sich RemotService Servlet??
+public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportGenerator{ 
 
 	// Erzeugt später die fertigen Reports und gibt sich mit Hilfe der tabellen aus
 	
@@ -23,7 +23,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	
 	public void init() throws IllegalArgumentException {
 		  
-		    MarketplaceAdministrationImpl a = new MarketplaceAdministrationImpl();  //Passende Klasse fehlt noch
+		    MarketplaceAdministrationImpl a = new MarketplaceAdministrationImpl();
 		    a.init();
 		    this.administration = a;
 		  }
@@ -33,18 +33,18 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  }
 
 	  
-	public void setProjectMarketplace(User u, ProjectMarketplace m) { //muss der marketplace gesetzt werden??
-		    this.administration.joinMarketplace(u.getId(), m.getId()); 
-		  }
+	//public void setProjectMarketplace(User u, ProjectMarketplace m) { //muss der marketplace gesetzt werden??
+		//    this.administration.joinMarketplace(u.getId(), m.getId()); 
+		//  }
 		   
 		  
 		  
-	protected void addImprint(Report r) { //Impressumsdaten anpassen + bank durch ProjectMarketplace ersetzen
+	protected void addImprint(Report r) {
 			 
-			    ProjectMarketplace projectMarketplace = this.administration.getMarketplace(); 
-			    CompositeParagraph imprint = new CompositeParagraph();
+			 //   ProjectMarketplace projectMarketplace = this.administration.getMarketplaceById(p.getId());
+				CompositeParagraph imprint = new CompositeParagraph();
 
-			    imprint.addSubParagraph(new SimpleParagraph(projectMarketplace.getName()));
+			    imprint.addSubParagraph(new SimpleParagraph("ReportGenerator of Project-Marketplace: IT-Project SS17"));
 			    // Mehr Information darstellen??
 
 			    r.setImprint(imprint);
@@ -54,7 +54,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	
 	// ALLE noch mit entsprechendem Code zum erzeugen der einzelnen Reportss
 	
-	  public AllTenders createAllTendersReport(ProjectMarketplace m) throws IllegalArgumentException{
+	  public AllTenders createAllTendersReport() throws IllegalArgumentException{
 		  
 		  if(this.getMarketplaceAdministration() == null)
 			  return null;
@@ -69,7 +69,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  CompositeParagraph header = new CompositeParagraph();
 		  
-		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName()));
+		  header.addSubParagraph(new SimpleParagraph("-"));
 		  
 		  result.setHeaderData(header);
 		  
@@ -82,7 +82,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Tender> allTenders = this.administration.getAllTender(m); 
+		  Vector<Tender> allTenders = this.administration.getAllTender();
 		  
 		  for(Tender t : allTenders){
 			  
@@ -98,7 +98,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 	  }
 		  
-	  public TendersMatchProfil createTendersMatchProfilReport(ProjectMarketplace m, User u) throws IllegalArgumentException{
+	  public TendersMatchProfil createTendersMatchProfilReport( User u) throws IllegalArgumentException{
 		  
 		  if(this.getMarketplaceAdministration() == null)
 			  return null;
@@ -113,7 +113,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  CompositeParagraph header = new CompositeParagraph();
 		  
-		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName()));
+		  header.addSubParagraph(new SimpleParagraph("-"));
 		  header.addSubParagraph(new SimpleParagraph("Name: " + u.getLastname() +", " + u.getFirstname()));
 		  
 		  result.setHeaderData(header);
@@ -128,7 +128,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Tender> allTenders = this.administration.getTenderMatch(u);
+		  Vector<Tender> allTenders = this.administration.getAllTendersByMatch(u.getId());
 		  
 		  for(Tender t : allTenders){
 			  
@@ -176,7 +176,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Application> allApplications = this.administration.getAllApplicationsByTender(t); //Andern
+		  Vector<Application> allApplications = this.administration.getAllApplicationsByTenderRef(t.getId());
 		  
 		  for(Application a : allApplications){
 			  
@@ -185,7 +185,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			 applicationRow.addColumn(new Column(a.getName())); 
 			 applicationRow.addColumn(new Column(administration.getUserById(a.getUserRef()).getLastname() + administration.getUserById(a.getUserRef()).getFirstname()));
 			 applicationRow.addColumn(new Column(a.getText()));
-			 applicationRow.addColumn(new Column(administration.getRatingByApplicationRef(a.getId()).getRate()));
+			 applicationRow.addColumn(new Column(administration.getRatingsByApplicationRef(a.getId()).getRate()));
 
 			 
 			 result.addRow(applicationRow);
@@ -233,7 +233,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			  
 			 applicationRow.addColumn(new Column(a.getName()));
 			 applicationRow.addColumn(new Column(a.getText())); 
-			 applicationRow.addColumn(new Column(administration.getRatingByApplicationRef(a.getId()).getRate()));
+			 applicationRow.addColumn(new Column(administration.getRatingsByApplicationRef(a.getId()).getRate()));
 			 applicationRow.addColumn(new Column(administration.getTenderById(a.getTenderRef()).getName()));
 			 
 			 result.addRow(applicationRow);
@@ -275,7 +275,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Participation> allParticipations = this.administration.getAllParticipationsOfUser(u);
+		  Vector<Participation> allParticipations = this.administration.getAllParticipationsOfUser(u.getId());
 		  
 		  for(Participation a : allParticipations){
 			  
@@ -364,7 +364,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			 int dateInt = administration.getTenderById(a.getTenderRef()).getEndDate().compareTo(now);
 					 
 			 Participation p = null;
-			 p = this.administration.getParticipationByRatingId(administration.getRatingByApplicationRef(a.getId())); //Was passiert wenn Objekt nicht gefunden wird?
+			 p = this.administration.getParticipationByRatingRef(administration.getRatingsByApplicationRef(a.getId()).getId()); //Was passiert wenn Objekt nicht gefunden wird?
 			 
 			 if(p != null){
 					 status = "Accepted";
@@ -425,7 +425,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  
 		  result.addRow(headline);
 		  
-		  Vector<Tender> allTenders = this.administration.getAllTenderOfUser(u);
+		  Vector<Tender> allTenders = this.administration.getAllTenderOfUser(u.getId());
 		  
 		  int Counter = 1;
 		  
@@ -442,7 +442,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			 
 			 int dateInt = t.getEndDate().compareTo(now);
 					 
-			 Participation part = administration.getParticipationByTenderId(t.getId());
+			 Participation part = administration.getParticipationById(t.getId());
 			 
 			 
 			 if(part != null){
@@ -496,6 +496,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		    return result;
 		  
 	  }
+
 
 
 	

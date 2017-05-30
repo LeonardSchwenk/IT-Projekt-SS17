@@ -105,6 +105,10 @@ public interface MarketplaceAdministration {
 	//Ausgeben aller Ausschreibungen
 	public Vector <Tender> getAllTender () throws IllegalArgumentException;
 	
+	//Ausgeben aller Ausschreibungen passend zum eigenen Profil
+	
+	public Vector <Tender> getAllTendersByMatch(int Ref) throws IllegalArgumentException;
+	
 	
 	
 	//Methoden zur Verwaltung von Projekten
