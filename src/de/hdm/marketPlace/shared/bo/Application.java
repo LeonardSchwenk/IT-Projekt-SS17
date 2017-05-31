@@ -145,12 +145,13 @@ public class Application extends BusinessObject{
 		 * Ein neues Datums Objekt wird erstellt 
 		 */
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		
 		/*
-		 * Einem neuen String Objekt werden die Werte von übergebenen Datums Objekt d zugewiesen
+		 * Einer neuen String Variable werden die Werte vom Übergabeparameter d zugewiesen
 		 */
 		String stringDate = df.format(d);
 		/*
-		 * Das neue String Objekt wird zurückgegeben
+		 * Die neue String Variable wird zurückgegeben
 		 */
 		return stringDate;
 	}
