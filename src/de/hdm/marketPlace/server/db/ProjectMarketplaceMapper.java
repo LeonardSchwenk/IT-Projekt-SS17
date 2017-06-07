@@ -87,7 +87,7 @@ public class ProjectMarketplaceMapper {
 
 	        
 	        stmt.executeUpdate("INSERT INTO projectmarketplace (id, name) "
-	           + "VALUES ('" + pm.getName()  +  "')");
+	           + "VALUES ('" + pm.getId() + "','" + pm.getName()  +  "')");
 	      }
 	    }
 	    catch (SQLException e) {

@@ -80,7 +80,7 @@ public class User extends BusinessObject {
 		/*
 		 * Ausgabe des Vornamens gefolgt von Nachname
 		 */
-		    return super.toString() + "FirstName:  " + this.firstname +
+		    return super.toString()+ " " + "FirstName:  " + this.firstname + " "+ 
 			    		"LastName: " + this.lastname;
 			  }
 	
