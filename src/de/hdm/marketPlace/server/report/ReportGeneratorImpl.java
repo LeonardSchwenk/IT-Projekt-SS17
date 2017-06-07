@@ -81,7 +81,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 				/*
 				 * 
 				 */
-			    ProjectMarketplace projectMarketplace = this.administration.getMarketplace(); 
+			    // ProjectMarketplace projectMarketplace = this.administration.getMarketplace(); 
 			    
 			    /*
 			     * ein neues Impressums Objekt wird erstellt
@@ -91,7 +91,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			    /*
 			     * 
 			     */
-			    imprint.addSubParagraph(new SimpleParagraph(projectMarketplace.getName()));
+			    //imprint.addSubParagraph(new SimpleParagraph(projectMarketplace.getName()));
 			    // Mehr Information darstellen??
 
 			    /*
@@ -111,7 +111,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	   * @return Fehlermeldung wenn keine Ausschreibungen vorhanden
 	   * @return Fertiger Report
 	   */
-	  public AllTenders createAllTendersReport(ProjectMarketplace m) throws IllegalArgumentException{
+	  public AllTenders createAllTendersReport() throws IllegalArgumentException{
 		  
 		  /*
 		   * Überprüfung ob der übergebene Marktplatz vorhanden ist beziehungsweise Ausschreibungen erhält
@@ -147,7 +147,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  /*
 		   * Inhalt der Kopfdaten
 		   */
-		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName()));
+		  header.addSubParagraph(new SimpleParagraph("Marketplace: " ));
 		  
 		  /*
 		   * Header Daten dem Report hinzufügen
@@ -175,7 +175,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		   * In einem Vector der aus Ausschreibungsobjekten bestehen soll werden die Ausschreibungen
 		   * des übergeben Marktplatzes m gespeichert
 		   */
-		  Vector<Tender> allTenders = this.administration.getAllTender(m); 
+		  Vector<Tender> allTenders = this.administration.getAllTender();
 		  
 		  /*
 		   * der Vector wird durchsucht wobei jeder Durchgang die Werte in t speichert
@@ -214,7 +214,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	   * @return Fehlermeldung wenn Marktplatz Administration nicht vorhanden
 	   * @return Der fertige Report
 	   */
-	  public TendersMatchProfil createTendersMatchProfilReport(ProjectMarketplace m, User u) throws IllegalArgumentException{
+	  public TendersMatchProfil createTendersMatchProfilReport(User u) throws IllegalArgumentException{
 		  
 		  /*
 		   * Überprüfung ob MarktplatzAdministration vorhanden
@@ -252,7 +252,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		   * Der Erste trägt die Daten des übergebenen Marktplatzes
 		   * Der Zweite trägt die Daten des Users der den Report abfrägt
 		   */
-		  header.addSubParagraph(new SimpleParagraph("Marketplace: " + m.getName()));
+		  header.addSubParagraph(new SimpleParagraph("Marketplace: "));
 		  header.addSubParagraph(new SimpleParagraph("Name: " + u.getLastname() +", " + u.getFirstname()));
 		  
 		  /*
@@ -282,7 +282,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		   * Einem Vector der nur aus Ausschreibungsobjekten bestehen soll werden
 		   * die Ausschreibungs Matches des übergebenen Users s zugewiesen
 		   */
-		  Vector<Tender> allTenders = this.administration.getTenderMatch(u);
+		  Vector<Tender> allTenders = this.administration.getAllTendersByMatch(u.getId());
 		  
 		  /*
 		   * der Vector wird durchsucht wobei jeder Durchgang die Werte in t speichert
@@ -394,7 +394,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		   * Einem Vector der nur aus Bewerbungsobjekten bestehen soll, werden
 		   * alle Bewerbungen der zugehörigen übergebenen Ausschreibung, hinzugefügt
 		   */
-		  Vector<Application> allApplications = this.administration.getAllApplicationsByTender(t); //Andern
+		  Vector<Application> allApplications = this.administration.getAllApplicationsByTenderRef(t.getId());
 		  
 		  /*
 		   * der Vector wird durchsucht wobei jeder Durchgang die Werte in a gespeichert wird
@@ -412,7 +412,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			 applicationRow.addColumn(new Column(a.getName())); 
 			 applicationRow.addColumn(new Column(administration.getUserById(a.getUserRef()).getLastname() + administration.getUserById(a.getUserRef()).getFirstname()));
 			 applicationRow.addColumn(new Column(a.getText()));
-			 applicationRow.addColumn(new Column(administration.getRatingByApplicationRef(a.getId()).getRate()));
+			 applicationRow.addColumn(new Column(administration.getRatingsByApplicationRef(a.getId()).getRate()));
 
 			 /*
 			  * Die neue Reihe wird dem Report hinzugefügt
@@ -522,7 +522,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			 */
 			 applicationRow.addColumn(new Column(a.getName()));
 			 applicationRow.addColumn(new Column(a.getText())); 
-			 applicationRow.addColumn(new Column(administration.getRatingByApplicationRef(a.getId()).getRate()));
+			 applicationRow.addColumn(new Column(administration.getRatingsByApplicationRef(a.getId()).getRate()));
 			 applicationRow.addColumn(new Column(administration.getTenderById(a.getTenderRef()).getName()));
 			 
 			 /*
@@ -617,7 +617,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		   * Einem Vector der nur aus Beteiligungsobjekten bestehen soll, werden
 		   * alle Beteiligungen des übergebenen Users, hinzugefügt
 		   */
-		  Vector<Participation> allParticipations = this.administration.getAllParticipationsOfUser(u);
+		  Vector<Participation> allParticipations = this.administration.getAllParticipationsOfUser(u.getId());
 		  
 		  /*
 		   * der Vector wird durchsucht wobei jeder Durchgang die Werte in a gespeichert wird
@@ -816,7 +816,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			 int dateInt = administration.getTenderById(a.getTenderRef()).getEndDate().compareTo(now);
 					 
 			 Participation p = null;
-			 p = this.administration.getParticipationByRatingId(administration.getRatingByApplicationRef(a.getId())); //Was passiert wenn Objekt nicht gefunden wird?
+			 p = this.administration.getParticipationByRatingRef(administration.getRatingsByApplicationRef(a.getId()).getId());
 			 
 			 if(p != null){
 					 status = "Accepted";
@@ -934,7 +934,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		   * Einem Vector der nur aus Ausschreibungssobjekten bestehen soll, werden
 		   * alle Ausschreibungen des übergebenen Users, hinzugefügt
 		   */
-		  Vector<Tender> allTenders = this.administration.getAllTenderOfUser(u);
+		  Vector<Tender> allTenders = this.administration.getAllTenderOfUser(u.getId());
 		  
 		  /*
 		   * 
@@ -969,7 +969,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 			 
 			 int dateInt = t.getEndDate().compareTo(now);
 					 
-			 Participation part = administration.getParticipationByTenderId(t.getId());
+			 Participation part = administration.getParticipationByTenderRef(t.getId());
 			 
 			 
 			 if(part != null){
@@ -1070,6 +1070,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		    return result;
 		  
 	  }
+
 
 
 	
