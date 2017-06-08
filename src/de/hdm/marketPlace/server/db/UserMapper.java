@@ -39,7 +39,7 @@ private static UserMapper userMapper = null;
 		
 		ResultSet rs = stmt
 		          .executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef  FROM user "
-		              + "WHERE id=" + id + " ORDER BY name");
+		              + "WHERE id=" + id + " ORDER BY firstname");
 		
 		if ( rs.next()){
 			

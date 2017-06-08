@@ -4,6 +4,7 @@ package de.hdm.marketPlace.server.db;
 import java.sql.*;
 
 
+
 public class DBConnection {
 	
     private static Connection con = null; 
@@ -19,6 +20,7 @@ public class DBConnection {
 
 	
 	public static Connection getConnection() {
+		
 		if(con == null){
 			
 		
