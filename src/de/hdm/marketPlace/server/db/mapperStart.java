@@ -11,6 +11,8 @@ import de.hdm.marketPlace.shared.bo.*;
 
 
 import de.hdm.marketPlace.shared.bo.User;
+import de.hdm.marketPlace.shared.report.AllApplicationsOfUser;
+import de.hdm.marketPlace.shared.report.AllTenders;
 import de.hdm.marketPlace.shared.report.PlainTextReportWriter;
 
 public class mapperStart {
@@ -82,27 +84,39 @@ public class mapperStart {
 		
 		
 		
-	MarketplaceAdministrationImpl admin = new MarketplaceAdministrationImpl();
+/*	MarketplaceAdministrationImpl admin = new MarketplaceAdministrationImpl();
+	*/	
 		
-	UserMapper um = UserMapper.userMapper();
+/*	UserMapper um = UserMapper.userMapper();
 		
 		User user1 = um.findByID(1);
 		
-		
-		System.out.println(user1);
-	/*	
+	
 		
 		ReportGeneratorImpl testReport = new ReportGeneratorImpl();
 		PlainTextReportWriter writer = new PlainTextReportWriter();
 		
-		testReport.createAllApplicationsOfUserReport(user1);
+		AllApplicationsOfUser test1 = testReport.createAllApplicationsOfUserReport(user1);
 		
-		writer.process(testReport.createAllApplicationsOfUserReport(user1));
+		writer.getReportText();    //process(test1);
 		
 		System.out.println(writer.getReportText());
+	*/
 		
-	*/	 
-	
+		TenderMapper tm = TenderMapper.tenderMapper();
+		
+		Tender tender1 = tm.findByID(1);
+		
+		ReportGeneratorImpl testReport = new ReportGeneratorImpl();
+		
+		PlainTextReportWriter writer = new PlainTextReportWriter();
+		
+		AllTenders t1 = testReport.createAllTendersReport();
+		
+		writer.process(t1);
+
+		System.out.println(writer.getReportText());
+		
 //UserMapper um = UserMapper.userMapper();
 		
 		
