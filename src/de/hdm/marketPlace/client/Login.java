@@ -1,4 +1,4 @@
-package client;
+package de.hdm.marketPlace.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

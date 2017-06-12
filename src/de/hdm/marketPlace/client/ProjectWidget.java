@@ -1,4 +1,4 @@
-package client;
+package de.hdm.marketPlace.client;
 
 import java.util.Date;
 import java.util.Vector;
