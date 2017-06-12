@@ -211,11 +211,11 @@ public class ParticipationMapper {
 		  }
 
 	  
-	  public Vector<Participation> findAllParticipationsByRatingRef(int ratingRef) {
+	  public Participation findAllParticipationsByRatingRef(int ratingRef) {
 		    Connection con = DBConnection.getConnection();
 
 		   
-		    Vector<Participation> result = new Vector<Participation>();
+		    Participation result = new Participation();
 
 		    try {
 		      Statement stmt = con.createStatement();
@@ -234,8 +234,6 @@ public class ParticipationMapper {
 					p.setEndDate(rs.getDate("endDate"));
 					p.setTenderRef(rs.getInt("tenderRef"));
 
-		        
-		        result.addElement(p);
 		      }
 		    }
 		    catch (Exception e) {
@@ -246,11 +244,11 @@ public class ParticipationMapper {
 		    return result;
 		  }
 	  
-	  public Vector<Participation> findAllParticipationsByTenderRef(int tenderRef) {
+	  public Participation findAllParticipationsByTenderRef(int tenderRef) {
 		    Connection con = DBConnection.getConnection();
 
 		   
-		    Vector<Participation> result = new Vector<Participation>();
+		    Participation result = new Participation();
 
 		    try {
 		      Statement stmt = con.createStatement();
@@ -269,8 +267,6 @@ public class ParticipationMapper {
 					p.setEndDate(rs.getDate("endDate"));
 					p.setTenderRef(rs.getInt("tenderRef"));
 
-		        
-		        result.addElement(p);
 		      }
 		    }
 		    catch (Exception e) {

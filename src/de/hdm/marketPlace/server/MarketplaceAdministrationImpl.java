@@ -121,6 +121,12 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		public void deleteUser (User u) throws IllegalArgumentException {
 			usMapper.delete(u);
 			
+			//Zugehöriges UserProfile löschen
+			UserProfile up = upMapper.findUserProfileByUserRef(u.getId());
+			
+			if (up != null) {
+				this.deleteUserProfile(up);
+			}
 			/*
 			 //Zugeh�riges UserProfile l�schen
 			UserProfile userProfile = upMapper.findByUser(User);
@@ -290,7 +296,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 					for(Attribute uAt : userAt){
 						String attriUser = uAt.getName();
 						
-						//Stimmen die Namen �berein wird die passende Ausschreibung geholt
+						//Stimmen die Namen �berein wird die passende Ausschreibung geholt
 						if(attriTender == attriUser){
 							matches.add(this.getTenderById(tp.getTenderRef()));
 						}
@@ -380,7 +386,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Participation getParticipationByRatingRef (int ratingRef) throws IllegalArgumentException {
-			return paMapper.findByRatingRef (ratingRef);
+			return paMapper.findAllParticipationsByRatingRef(ratingRef);
 		}
 		
 		
@@ -389,7 +395,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Participation getParticipationByTenderRef (int tenderRef) throws IllegalArgumentException {
-			return paMapper.findParticipationByTenderRef (tenderRef);
+			return paMapper.findAllParticipationsByTenderRef(tenderRef);
 		}
 		
 		public Vector <Participation> getAllParticipations () throws IllegalArgumentException {
@@ -483,15 +489,6 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 
 		public void deleteUserProfile(UserProfile up) throws IllegalArgumentException {
 			
-			
-			Vector<Attribute> a= new Vector<Attribute>();
-	      	
-	      	if(a != null) {
-	      		a = atMapper.findAllAttributesByUserProfileRef(int userprofileRef);
-	      		for(Attribute attribute : a){
-	      			this.deleteAttribute(Attribute);
-	      		}
-	      	}
 	    		//Partnerprofil l�schen
 	    		this.upMapper.delete(up);
 	      	}
