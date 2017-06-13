@@ -103,7 +103,7 @@ public class mapperStart {
 		System.out.println(writer.getReportText());
 	*/
 		
-		TenderMapper tm = TenderMapper.tenderMapper();
+		/* TenderMapper tm = TenderMapper.tenderMapper();
 		
 		Tender tender1 = tm.findByID(1);
 		
@@ -116,11 +116,12 @@ public class mapperStart {
 		writer.process(t1);
 
 		System.out.println(writer.getReportText());
+		*/
 		
-//UserMapper um = UserMapper.userMapper();
+		UserMapper um = UserMapper.userMapper();
 		
 		
-	//	System.out.println(um.findByID(1));
+		System.out.println(um.findByID(1));
 	
 }
 }
