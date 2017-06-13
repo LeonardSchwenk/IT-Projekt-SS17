@@ -142,7 +142,7 @@ private static UserMapper userMapper = null;
 			  Statement stmt = con.createStatement();
 			  
 			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef "
-			          + "FROM user " + "WHERE lastname LIKE '" + name
+			          + "FROM user " + "WHERE = name '" + name
 			          + "' ORDER BY name");
 			  while(rs.next()){
 				  

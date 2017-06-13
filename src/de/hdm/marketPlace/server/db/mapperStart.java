@@ -24,14 +24,13 @@ public class mapperStart {
 	public static void main(String[] args) {
 		
 	
+	/*
+		ProjectMapper m1 = ProjectMapper.projectMapper();
 	
- /*	ProjectMarketplaceMapper m1 = ProjectMarketplaceMapper.projectMarketplaceMapper();
+		
 	
-	ProjectMarketplace p1 = new ProjectMarketplace();
-	
-	p1.setName("neuerprojektmarktplatz: DBtest");
-	
-	m1.insert(p1);
+
+	System.out.println(m1.findAllProjectsByUserRef(1));
 	
 	
 	*/
@@ -103,7 +102,7 @@ public class mapperStart {
 		System.out.println(writer.getReportText());
 	*/
 		
-		TenderMapper tm = TenderMapper.tenderMapper();
+	/*	TenderMapper tm = TenderMapper.tenderMapper();
 		
 		Tender tender1 = tm.findByID(1);
 		
@@ -116,11 +115,29 @@ public class mapperStart {
 		writer.process(t1);
 
 		System.out.println(writer.getReportText());
-		
+	*/	
 //UserMapper um = UserMapper.userMapper();
 		
 		
 	//	System.out.println(um.findByID(1));
 	
+		
+		ReportGeneratorImpl report1 = new ReportGeneratorImpl();
+		
+		AllTenders t1 = report1.createAllTendersReport();
+		
+		//PlainTextReportWriter w1 = new PlainTextReportWriter();
+		
+		//w1.process(t1);
+		
+		TenderMapper tm1 = TenderMapper.tenderMapper();
+		
+		
+		
+		System.out.println(tm1.findAll());
+		
+		
+		
+		
 }
 }
