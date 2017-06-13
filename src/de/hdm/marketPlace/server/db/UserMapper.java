@@ -142,7 +142,7 @@ private static UserMapper userMapper = null;
 			  Statement stmt = con.createStatement();
 			  
 			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef "
-			          + "FROM user " + "WHERE user LIKE '" + name
+			          + "FROM user " + "WHERE lastname LIKE '" + name
 			          + "' ORDER BY name");
 			  while(rs.next()){
 				  
@@ -227,7 +227,7 @@ private static UserMapper userMapper = null;
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRefe "
+			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef "
 			          + "FROM user "   + "' ORDER BY name");
 			  while(rs.next()){
 				  
@@ -247,6 +247,32 @@ private static UserMapper userMapper = null;
 		  return result;
 	  }
 	  
+	  //Methode zur Ausgabe aller User anhand einer ProjectMarketplaceRef
+	  public Vector <User> findAllUserByProjectMarketplaceRef (int projectmarketplaceRef){
+		  Connection con = DBConnection.getConnection();
+		  Vector <User> result = new Vector <User>();
+		  
+		  try {
+			  Statement stmt = con.createStatement();
+			  
+			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef " + "FROM user " + "WHERE projectmarketplaceRef = " + projectmarketplaceRef);
+			  while (rs.next()){
+				  
+				  User u = new User();
+				  
+				  u.setId(rs.getInt("id"));
+				  u.setFirstname(rs.getString("firstname"));
+				  u.setLastname(rs.getString("lastname"));
+				  u.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
+				  
+				  result.addElement(u);
+			  }
+		  }
+		  catch (Exception e) {
+			  e.printStackTrace();
+		  }
+		  return result;
+	  }
 	 
 	  
 	  
