@@ -5,11 +5,13 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 import de.hdm.marketPlace.shared.bo.*;
+import de.hdm.marketPlace.shared.*;
 
 
-public class LoginServiceImpl extends RemoteServiceServlet implements
-    LoginService {
+public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
 
 // Ausführung 
 

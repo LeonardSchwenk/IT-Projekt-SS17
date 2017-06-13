@@ -4,37 +4,19 @@ import java.io.Serializable;
 // Tutorial
 
 public class LoginInfo implements Serializable {
+	
+	
 private static final long serialVersionUID = 1L;
 
-
-	 /**
-	  * Login Status des Users
-	  */
 	  private boolean loggedIn = false;
-	  
-	 /**
-	  * Login Url 
-	  */
 	  private String loginUrl;
-	  
-	  /**
-	   * Logou Url
-	   */
 	  private String logoutUrl;
-	  
-	  /**
-	   * Email Adresse des Users
-	   */
 	  private String emailAddress;
+	  private int userId;
+	  private String firtsname;
+	  private String lastanem;
 	  
-	  /**
-	   * Benutzername des Users
-	   */
-	  private String nickname;
-
-	  /**
-	   * Abfrage ob der User eingeloggt ist
-	   */
+	  
 	  public boolean isLoggedIn() {
 	    return loggedIn;
 	  }
@@ -89,18 +71,12 @@ private static final long serialVersionUID = 1L;
 	    this.emailAddress = emailAddress;
 	  }
 
-	  /**
-	   * Ausgabe des Benutzernamens des Users
-	   */
-	  public String getNickname() {
-	    return nickname;
-	  }
+	public int getUserId() {
+		return userId;
+	}
 
-	  /**
-	   * Setzen des Benutzernamens des Users
-	   */
-	  public void setNickname(String nickname) {
-	    this.nickname = nickname;
-	  }
-	  
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 }

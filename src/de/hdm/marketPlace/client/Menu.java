@@ -1,4 +1,4 @@
-package client;
+package de.hdm.marketPlace.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -37,7 +37,7 @@ public class Menu extends Composite{
 		menuPanel.add(bewerbungen);
 		menuPanel.add(ausschreibungen);
 		menuPanel.add(report);
-		menuPanel.add(impressum);
+		menuPanel.add(impressumButton);
  		menuPanel.add(logout);
 
 		
