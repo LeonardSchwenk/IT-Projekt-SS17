@@ -1,4 +1,4 @@
-package client;
+package de.hdm.marketPlace.client;
 
 
 

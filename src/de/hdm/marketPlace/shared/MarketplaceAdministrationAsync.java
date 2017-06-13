@@ -7,6 +7,9 @@ import de.hdm.marketPlace.shared.bo.*;
 import java.util.Date;
 
 public interface MarketplaceAdministrationAsync {
+	
+	public void init(AsyncCallback<Void> callback) throws IllegalArgumentException;
+	
 	void createProject (String name, String text, Date startDate, Date endDate, int managerRef, AsyncCallback <Project> callback);
 	
 	void getProjectById (int projectId, AsyncCallback <Project> callback);
