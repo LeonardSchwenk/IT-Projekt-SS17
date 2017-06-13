@@ -35,7 +35,7 @@ public class UserProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, text, userRef FROM userprofile " + "WHERE id=" + id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, text, userRef FROM userprofile " + "WHERE id=" + id);
 		
 		if ( rs.next()){
 			
@@ -152,6 +152,39 @@ public class UserProfileMapper {
 		    
 		    return result;
 		  }
+	  
+	  public UserProfile findUserProfileByUserRef (int userRef) {
+		  Connection con = DBConnection.getConnection();
+			
+			
+			
+			
+			try {
+				Statement stmt = con.createStatement();
+				
+				
+				ResultSet rs =stmt.executeQuery("SELECT id, text, userRef FROM userprofile " + "WHERE userRef=" + userRef);
+				
+				if ( rs.next()){
+					
+					UserProfile u = new UserProfile();
+					u.setId(rs.getInt("id"));
+					u.setText(rs.getString("text"));
+					u.setUserRef(rs.getInt("userRef"));
+				
+					
+					return u; 
+					
+				}
+			
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				return null;
+			}
+			return null;
+			
+	  }
 	
 	}
 

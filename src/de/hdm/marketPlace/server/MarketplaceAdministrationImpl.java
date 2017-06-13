@@ -76,6 +76,15 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		pmMapper.update(pm);
 	}
 	public void deleteMarketplace(ProjectMarketplace pm) throws IllegalArgumentException {
+		
+		Vector <User> users = usMapper.findAllUserByProjectMarketplaceRef(pm.getId());
+		
+		if (users != null){
+			for (User us : users) {
+				this.deleteUser(us);
+			}
+		}
+		
 		pmMapper.delete(pm);
 	}
 	
@@ -119,43 +128,45 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public void deleteUser (User u) throws IllegalArgumentException {
+			
+			
+			//Zugehöriges UserProfile löschen
+			UserProfile up = upMapper.findUserProfileByUserRef(u.getId());
+			
+			if (up != null) {
+				this.deleteUserProfile(up);
+			}
+			
+			//Zugehörige Projekte löschen
+			Vector <Project> projects = prMapper.findAllProjectsByUserRef(u.getId());
+			
+			if (projects != null) {
+				for (Project pr : projects){
+					this.deleteProject(pr);
+				}
+			}
+			
+			//Zugehörige Bewerbungen löschen
+			Vector <Application> applications = apMapper.findAllApplicationsByUserRef(u.getId());
+			
+			if (applications != null) {
+				for (Application ap : applications) {
+					this.deleteApplication(ap);
+				}
+			}
+			
+			//Zugehörige Ausschreibungen löschen
+			Vector <Tender> tenders = teMapper.findAllTenderByUserRef(u.getId());
+			
+			if (tenders != null) {
+				for (Tender te : tenders) {
+					this.deleteTender(te);
+				}
+			}
+			
+			//User löschen
 			usMapper.delete(u);
 			
-			/*
-			 //Zugeh�riges UserProfile l�schen
-			UserProfile userProfile = upMapper.findByUser(User);
-	  		
-	  		if(userProfile != null) {
-	  			this.deleteUserProfile(userProfile);
-	  		}
-	      
-	      	//Zugeh�rige Projekte l�schen		      
-	      	Vector<Project> pl = new Vector<Project>();
-	      	
-	      	if(pl != null) {
-	      		pl = prMapper.findByUser(User);
-	      		for(Project project: pl){
-	      			this.delete(project);
-
-	      		}
-	      	}
-			
-			//Zugeh�rige Bewerbungen l�schen
-	  		Vector<Application> al = new Vector<Application>();
-	  		
-	  		if (al != null) {
-	  			al = this.raMapper.findByUser(User);
-	  			for(Application application : al){
-	  				this.deleteApplication(a);
-	  			}
-	  		}
-	      
-	  		
-	    
-	      	this.usMapper.delete(User);
-	  	
-		} 
-			 */
 			
 		
 		}
@@ -199,6 +210,13 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public void deleteApplication (Application a) throws IllegalArgumentException {
+			
+			Rating rating = raMapper.findRatingByApplicationRef(a.getId());
+			
+			if (rating != null){
+				this.deleteRating(rating);
+			}
+			
 			apMapper.delete(a);
 			/*
 			 public void deleteApplication(Application application) {
@@ -257,6 +275,15 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public void deleteTender (Tender t) throws IllegalArgumentException{
+			
+			Vector <Application> applications = apMapper.findAllApplicationsByTenderRef(t.getId());
+			
+			if (applications != null) {
+				for (Application ap : applications) {
+					this.deleteApplication(ap);
+				}
+			}
+			
 			teMapper.delete(t);
 		}
 		
@@ -290,7 +317,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 					for(Attribute uAt : userAt){
 						String attriUser = uAt.getName();
 						
-						//Stimmen die Namen �berein wird die passende Ausschreibung geholt
+						//Stimmen die Namen �berein wird die passende Ausschreibung geholt
 						if(attriTender == attriUser){
 							matches.add(this.getTenderById(tp.getTenderRef()));
 						}
@@ -380,7 +407,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Participation getParticipationByRatingRef (int ratingRef) throws IllegalArgumentException {
-			return paMapper.findByRatingRef (ratingRef);
+			return paMapper.findAllParticipationsByRatingRef(ratingRef);
 		}
 		
 		
@@ -389,7 +416,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		}
 		
 		public Participation getParticipationByTenderRef (int tenderRef) throws IllegalArgumentException {
-			return paMapper.findParticipationByTenderRef (tenderRef);
+			return paMapper.findAllParticipationsByTenderRef(tenderRef);
 		}
 		
 		public Vector <Participation> getAllParticipations () throws IllegalArgumentException {
@@ -483,15 +510,6 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 
 		public void deleteUserProfile(UserProfile up) throws IllegalArgumentException {
 			
-			
-			Vector<Attribute> a= new Vector<Attribute>();
-	      	
-	      	if(a != null) {
-	      		a = atMapper.findAllAttributesByUserProfileRef(int userprofileRef);
-	      		for(Attribute attribute : a){
-	      			this.deleteAttribute(Attribute);
-	      		}
-	      	}
 	    		//Partnerprofil l�schen
 	    		this.upMapper.delete(up);
 	      	}
