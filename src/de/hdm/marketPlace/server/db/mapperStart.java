@@ -25,13 +25,10 @@ public class mapperStart {
 		
 	
 	
- /*	ProjectMarketplaceMapper m1 = ProjectMarketplaceMapper.projectMarketplaceMapper();
+		
 	
-	ProjectMarketplace p1 = new ProjectMarketplace();
-	
-	p1.setName("neuerprojektmarktplatz: DBtest");
-	
-	m1.insert(p1);
+
+	System.out.println(m1.findAllProjectsByUserRef(1));
 	
 	
 	*/
@@ -47,14 +44,14 @@ public class mapperStart {
 	
 		um.update(user1);
 		
+		*/
+	/*	AttributeMapper am = AttributeMapper.attributeMapper();
 		
-	//	AttributeMapper am = AttributeMapper.attributeMapper();
-		
-//		Attribute a1 = new Attribute();
+		Attribute a1 = new Attribute();
 		
 		
-		//a1.setText("erster text");;
-		
+		System.out.println(am.findByID(1));
+		*/
 		
 	//	am.insert(a1);
 		
@@ -103,7 +100,7 @@ public class mapperStart {
 		System.out.println(writer.getReportText());
 	*/
 		
-		/* TenderMapper tm = TenderMapper.tenderMapper();
+	/*	TenderMapper tm = TenderMapper.tenderMapper();
 		
 		Tender tender1 = tm.findByID(1);
 		
@@ -116,12 +113,14 @@ public class mapperStart {
 		writer.process(t1);
 
 		System.out.println(writer.getReportText());
-		*/
-		
-		UserMapper um = UserMapper.userMapper();
+	*/	
+     UserMapper um = UserMapper.userMapper();
 		
 		
 		System.out.println(um.findByID(1));
 	
+		
+
+		
 }
 }

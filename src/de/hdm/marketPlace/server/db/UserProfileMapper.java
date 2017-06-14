@@ -130,7 +130,7 @@ public class UserProfileMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, text, userRef FROM userprofile "  +"ORDER BY name");
+		      ResultSet rs = stmt.executeQuery("SELECT id, text, userRef FROM userprofile "  +"ORDER BY text");
 
 		     
 		      while (rs.next()) {

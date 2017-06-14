@@ -127,7 +127,7 @@ public class RatingMapper {
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, rate, text, applicationRef FROM Rating "  +"ORDER BY rate");
+			  ResultSet rs = stmt.executeQuery("SELECT id, rate, text, applicationRef FROM Rating " + "WHERE applicationRef=" + applicationRef +"ORDER BY rate");
 			  while(rs.next()){
 				  
 					Rating r = new Rating();

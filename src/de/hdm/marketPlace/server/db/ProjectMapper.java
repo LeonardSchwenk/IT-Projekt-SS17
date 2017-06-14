@@ -193,7 +193,7 @@ public class ProjectMapper {
 				Statement stmt = con.createStatement();
 
 				ResultSet rs = stmt
-						.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate value FROM project "  +"ORDER BY name");
+						.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate value FROM project " + "WHERE userRef = " + userRef + "ORDER BY name");
 
 			
 				while (rs.next()) {
