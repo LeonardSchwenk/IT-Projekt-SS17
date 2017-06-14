@@ -24,8 +24,6 @@ public class mapperStart {
 	public static void main(String[] args) {
 		
 	
-	/*
-		ProjectMapper m1 = ProjectMapper.projectMapper();
 	
 		
 	
@@ -122,27 +120,7 @@ public class mapperStart {
 		System.out.println(um.findByID(1));
 	
 		
-	/*	ReportGeneratorImpl report1 = new ReportGeneratorImpl();
-		
-		UserMapper um =  UserMapper.userMapper();
-		
-		User u1 = um.findByID(1);
-		
-		
-		
-		AllApplicationsOfUser t1 = report1.createAllApplicationsOfUserReport(u1);
-		
-		//PlainTextReportWriter w1 = new PlainTextReportWriter();
-		
-		//w1.process(t1);
-		
-		
-		
-		
-		System.out.println(t1.getTitle());
-		
-		*/
-		
+
 		
 }
 }
