@@ -10,6 +10,7 @@ import java.util.Vector;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
@@ -328,6 +329,23 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return matches;
 		}
 		
+		//Rüchgabe alle meiner Ausschreibungen
+		
+		public Vector<Tender> getAllTendersByProjectRef(int projectRef)throws IllegalArgumentException{
+			
+			Vector<Tender> myTenders = new Vector<Tender>();
+			
+			Vector<Tender> allTenders =  this.getAllTender();
+			
+			for(Tender tender : allTenders){
+				if(tender.getProjectRef() == projectRef){
+					myTenders.add(tender);
+				}
+			}
+			
+			return myTenders;
+		}
+		
 		
 		//--------------------------------------------
 		//Methoden zur Verwaltung von Projekten
@@ -550,6 +568,36 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		
 		public Vector <Attribute> getAllAttributes () throws IllegalArgumentException {
 			return atMapper.findAll();
+		}
+		
+		//Gibt Liste alle Bewerber auf meine Projecte aus
+		
+		public Vector<User> getAllApplicantOfUser(int userRef) throws IllegalArgumentException {
+			
+			Vector<User> applicant = new Vector<User>();
+			
+			Vector<Project> myProjects = prMapper.findAllProjectsByUserRef(userRef);
+			
+			for(Project project : myProjects){
+				
+				Vector<Tender> myTenders= this.getAllTendersByProjectRef(project.getId());
+				
+				for(Tender tender : myTenders){
+					
+					Vector<Application> app = this.getAllApplicationsByTenderRef(tender.getId());
+					
+					for(Application application : app){
+						
+						applicant.add(this.getUserById(application.getUserRef()));
+					}
+				}
+				
+				
+				
+			}
+			
+			return applicant;
+			
 		}
 		
 

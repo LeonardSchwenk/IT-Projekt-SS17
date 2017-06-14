@@ -1112,6 +1112,88 @@ public class HTMLReportWriter extends ReportWriter {
   
   //-------------------------------------------------------------
   
+
+  
+  
+public void process(AllApplicationsOnAllTenders r){ //CompositeReport
+	  
+	  /*
+	   * Zuerst werden alle gespeicherten Texte im Report resetet um einen komplett neuen
+	   * Report zu garantieren
+	   */
+	  this.resetReportText();
+
+	  /*
+	   * Ein neuer String Buffer wird erstellt der für die Realisierung eines Reports benötigt wird
+	   */
+	    StringBuffer result = new StringBuffer();
+
+	    /*
+	     * An den String Buffer wird der Titel des Reports angefügt  
+	     */
+	    result.append("<H1>" + r.getTitle() + "</H1>");
+	    
+	    /*
+	     * Eine Tabelle wird mit einer Tabellenreihe erstellt und an den String Buffer angefügt
+	     */
+	    result.append("<table><tr>");
+
+	    /*
+	     * Durch eine if Abfrage wird überprüft ob der CompositeReport bereits Header Daten besitzt
+	     * falls dies nicht der Fall ist werden diese angefügt
+	     */
+	    if (r.getHeaderData() != null) {
+	      result.append("<td>" + paragraph2HTML(r.getHeaderData()) + "</td>");
+	    }
+
+	    /*
+	     * Ansonsten werden im Anschluss das Impressum angefügt
+	     */
+	    result.append("<td>" + paragraph2HTML(r.getImprint()) + "</td>");
+	    
+	    /*
+	     * Ein Erstellungsdatum wird ebenfalss erzeugt
+	     */
+	    result.append("</tr><tr><td></td><td>" + r.getCreated().toString()
+	        + "</td></tr></table>");
+
+	    /*
+	     * Mit Hilfe einer for-Schleife wird r durchlaufen
+	     */
+	    for (int i = 0; i < r.getNumSubReports(); i++) {
+	   
+	    	/*
+	    	 * Dabei wird das Objekt AllApplicationsOfUser in der Variable subReport gespeichert
+	    	 * und das Objekt ParticipationOfUser in subReport1
+	    	 */
+	    	AllApplicationsOnTender subReport = (AllApplicationsOnTender) r.getSubReportAt(i);
+
+	    	/*
+	    	 * Anschließend wird für diese Variablen ein Report erstellt
+	    	 */
+	      this.process(subReport);
+
+	      /*
+	       * Diese werden an den String Buffer angehängt
+	       */
+	      result.append(this.reportText + "\n");
+
+	      /*
+	       * Anschließend wird der Report Text resetet um nicht immer die gleichen Ergebnisse erneut mit an den String Buffer anzuhängen
+	       */
+	      this.resetReportText();
+	    }
+	    
+	    /*
+	     * Abschließend wird in den reportText alle angehängten Strings aus dem String Buffer result gespeichert
+	     */
+	    this.reportText = result.toString();
+  }
+
+
+  
+  //-------------------------------------------------------------
+  
   /**
    * Ausgabe des Report Textes
    * @return Report Text als String
@@ -1124,3 +1206,5 @@ public class HTMLReportWriter extends ReportWriter {
     return this.getHeader() + this.reportText + this.getTrailer();
   }
 }
+
+

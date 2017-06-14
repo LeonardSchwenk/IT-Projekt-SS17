@@ -4,11 +4,21 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.marketPlace.client.report.AllApplicationsOfUserShowcase;
+import de.hdm.marketPlace.client.report.AllApplicationsOnAllTendersShowcase;
+import de.hdm.marketPlace.client.report.AllTendersShowcase;
+import de.hdm.marketPlace.client.report.ProjectInterconnectionShowcase;
+import de.hdm.marketPlace.client.report.TendersMatchShowcase;
 import de.hdm.marketPlace.shared.LoginInfo;
 
 public class ReportNavigation extends Composite {
+	
+	private static ClickHandler currentClickHandler = null;
+	private static ClickEvent currentClickEvent = null;
+
 	
 	//Anlegen der Panels
 	
@@ -18,12 +28,12 @@ public class ReportNavigation extends Composite {
 	
 	Button showAllTendersButton = new Button("Alle Ausschreibungen");
 	Button showTendersMatchButton = new Button("Alle Ausschreibungen die zu meinem Profil passen");
-	Button showAllApplicationsOnTenderButton = new Button("Alle Bewerbungen auf Ausschreiben");
+	Button showAllApplicationsOnAllTenderButton = new Button("Alle Bewerbungen auf alle Ausschreiben");
 	Button showAllApplicationsOfUserButton = new Button("Alle Bewerbungen von Nutzer");
 	Button showProjectInterconnectionButton = new Button("Projektverflechtung von Nutzer");
 	Button showFanInFanOutButton = new Button("Fan-In/Fan-Out Analyse eines Nutzers");
 	
-	
+	w
 	
 	public ReportNavigation(final LoginInfo loginInfo){
 		
@@ -35,9 +45,9 @@ public class ReportNavigation extends Composite {
 		showTendersMatchButton.setWidth("200px");
 		showTendersMatchButton.setStylePrimaryName("menu-btn");
 		
-		reportPanel.add(showAllApplicationsOnTenderButton);
-		showAllApplicationsOnTenderButton.setWidth("200px");
-		showAllApplicationsOnTenderButton.setStylePrimaryName("menu-btn");
+		reportPanel.add(showAllApplicationsOnAllTenderButton);
+		showAllApplicationsOnAllTenderButton.setWidth("200px");
+		showAllApplicationsOnAllTenderButton.setStylePrimaryName("menu-btn");
 		
 		reportPanel.add(showAllApplicationsOfUserButton);
 		showAllApplicationsOfUserButton.setWidth("200px");
@@ -55,16 +65,65 @@ public class ReportNavigation extends Composite {
 		
 		//Anlegen der Clickhandler
 		
-		/*
+		
 		showAllTendersButton.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event){
-				Showcase showcaseReport = new AllTendersShowcase(loginInfo);
-				
+				Showcase showcaseReport = new AllTendersShowcase();
+				RootPanel.get("DetailsReport").clear();
+				RootPanel.get("DetailsReport").add(showcaseReport);
 				currentClickHandler=this;
-				currentClickHandler=this;
+				currentClickEvent=event;
 			}
 		});
-		*/
-		//Alle Clickhandler hinzufügen
+		
+		showTendersMatchButton.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event){
+				Showcase showcaseReport = new TendersMatchShowcase(loginInfo);
+				RootPanel.get("DetailsReport").clear();
+				RootPanel.get("DetailsReport").add(showcaseReport);
+				currentClickHandler=this;
+				currentClickEvent=event;
+			}
+		});
+		
+		showAllApplicationsOnAllTenderButton.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event){
+				Showcase showcaseReport = new AllApplicationsOnAllTendersShowcase(loginInfo);
+				RootPanel.get("DetailsReport").clear();
+				RootPanel.get("DetailsReport").add(showcaseReport);
+				currentClickHandler=this;
+				currentClickEvent=event;
+			}
+		});
+		
+		showAllApplicationsOfUserButton.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event){
+				Showcase showcaseReport = new AllApplicationsOfUserShowcase(loginInfo);
+				RootPanel.get("DetailsReport").clear();
+				RootPanel.get("DetailsReport").add(showcaseReport);
+				currentClickHandler=this;
+				currentClickEvent=event;
+			}
+		});
+		
+		showProjectInterconnectionButton.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event){
+				Showcase showcaseReport = new ProjectInterconnectionShowcase(loginInfo);
+				RootPanel.get("DetailsReport").clear();
+				RootPanel.get("DetailsReport").add(showcaseReport);
+				currentClickHandler=this;
+				currentClickEvent=event;
+			}
+		});
+		
+		showFanInFanOutButton.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event){
+				Showcase showcaseReport = new FanInFanOutShowcase(Übergabewert aus Feld);
+				RootPanel.get("DetailsReport").clear();
+				RootPanel.get("DetailsReport").add(showcaseReport);
+				currentClickHandler=this;
+				currentClickEvent=event;
+			}
+		});
 	}
 }

@@ -48,6 +48,9 @@ public interface ReportGenerator extends RemoteService{ //Import Remote Service 
 	   * @param u
 	   * @throws IllegalArgumentException
 	   */
+	  
+	  public abstract AllApplicationsOnAllTenders createAllApplicationsOnAllTendersReport(User u) throws IllegalArgumentException;
+	  
 	  public abstract AllApplicationsOfUser createAllApplicationsOfUserReport(User u) throws IllegalArgumentException;
 	  
 	  
