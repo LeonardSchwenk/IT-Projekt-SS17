@@ -202,7 +202,7 @@ private static UserMapper userMapper = null;
 			  Statement stmt = con.createStatement();
 			  
 			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef "
-			          + "FROM user " + "' ORDER BY name");
+			          + "FROM user "+ "WHERE TenderRef=" + TenderRef + "' ORDER BY fistname");
 			  while(rs.next()){
 				  
 				  User u = new User();
@@ -228,7 +228,7 @@ private static UserMapper userMapper = null;
 			  Statement stmt = con.createStatement();
 			  
 			  ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, projectmarketplaceRef "
-			          + "FROM user "   + "' ORDER BY name");
+			          + "FROM user " + "WHERE ProjectRef=" + ProjectRef  + "' ORDER BY firstname");
 			  while(rs.next()){
 				  
 				  User u = new User();

@@ -169,7 +169,7 @@ public class ApplicationMapper {
 	    }
 	  }
 	  
-	  public Vector<Application> findAllApplicationsByTenderRef(int TenderRef) {
+	  public Vector<Application> findAllApplicationsByTenderRef(int tenderRef) {
 			
 			Connection con = DBConnection.getConnection();
 		
@@ -180,7 +180,7 @@ public class ApplicationMapper {
 
 				ResultSet rs = stmt
 						.executeQuery("SELECT id, text,  tenderRef, userRef FROM application "
-		              + " ORDER BY tenderRef");
+		              +  "WHERE tenderRef=" + tenderRef +" ORDER BY tenderRef");
 
 			
 				while (rs.next()) {
@@ -217,7 +217,7 @@ public class ApplicationMapper {
 				Statement stmt = con.createStatement();
 
 				ResultSet rs = stmt
-						.executeQuery("SELECT id, text,  tenderRef, userRef FROM application "
+						.executeQuery("SELECT id, text,  tenderRef, userRef FROM application "+ "WHERE userRef=" + userRef
 		              + " ORDER BY userRef");
 
 			

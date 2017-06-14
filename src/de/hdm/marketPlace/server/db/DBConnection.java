@@ -10,7 +10,10 @@ public class DBConnection {
     private static Connection con = null; 
 
 	
-	private static final String JDBC_URL = "jdbc:mysql://173.194.245.224/projectmarketplace?user=LeonardSchwenk&password=1234";
+	private static final String JDBC_URL =   "jdbc:mysql://173.194.245.224/projectmarketplace?user=LeonardSchwenk&password=1234";
+	
+//	"connectionName: IT-Projekt-SS17:eu-west1:instance1";
+
 	
 //	"jdbc:mysql://localhost:3306/marketplace";
 	

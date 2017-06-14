@@ -145,7 +145,7 @@ public class TenderMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender " +"ORDER BY projectRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender "+ "WHERE userRef=" + userRef +"ORDER BY projectRef");
 
 		     
 		      while (rs.next()) {
@@ -177,7 +177,7 @@ public class TenderMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender " +"ORDER BY projectRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender " + "WHERE tenderRef=" + tenderRef +"ORDER BY projectRef");
 
 		     
 		      while (rs.next()) {
@@ -211,7 +211,7 @@ public class TenderMapper {
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, text, projectRef, startDate, endDate value FROM tender " +"ORDER BY projectRef");
+			  ResultSet rs = stmt.executeQuery("SELECT id, text, projectRef, startDate, endDate value FROM tender " + "WHERE name=" + name +"ORDER BY projectRef");
 			  while(rs.next()){
 				  
 				  				Tender t = new Tender();

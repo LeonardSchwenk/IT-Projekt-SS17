@@ -46,14 +46,14 @@ public class mapperStart {
 	
 		um.update(user1);
 		
+		*/
+	/*	AttributeMapper am = AttributeMapper.attributeMapper();
 		
-	//	AttributeMapper am = AttributeMapper.attributeMapper();
-		
-//		Attribute a1 = new Attribute();
+		Attribute a1 = new Attribute();
 		
 		
-		//a1.setText("erster text");;
-		
+		System.out.println(am.findByID(1));
+		*/
 		
 	//	am.insert(a1);
 		
@@ -116,27 +116,32 @@ public class mapperStart {
 
 		System.out.println(writer.getReportText());
 	*/	
-//UserMapper um = UserMapper.userMapper();
+     UserMapper um = UserMapper.userMapper();
 		
 		
-	//	System.out.println(um.findByID(1));
+		System.out.println(um.findByID(1));
 	
 		
-		ReportGeneratorImpl report1 = new ReportGeneratorImpl();
+	/*	ReportGeneratorImpl report1 = new ReportGeneratorImpl();
 		
-		AllTenders t1 = report1.createAllTendersReport();
+		UserMapper um =  UserMapper.userMapper();
+		
+		User u1 = um.findByID(1);
+		
+		
+		
+		AllApplicationsOfUser t1 = report1.createAllApplicationsOfUserReport(u1);
 		
 		//PlainTextReportWriter w1 = new PlainTextReportWriter();
 		
 		//w1.process(t1);
 		
-		TenderMapper tm1 = TenderMapper.tenderMapper();
 		
 		
 		
-		System.out.println(tm1.findAll());
+		System.out.println(t1.getTitle());
 		
-		
+		*/
 		
 		
 }

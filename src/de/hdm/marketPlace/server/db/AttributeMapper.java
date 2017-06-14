@@ -170,7 +170,7 @@ public class AttributeMapper {
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, name, text, value, tenderprofileRef, userprofileRef FROM attribute "   +" ORDER BY name");
+			  ResultSet rs = stmt.executeQuery("SELECT id, name, text, value, tenderprofileRef, userprofileRef FROM attribute " + "WHERE userprofileRef=" + userprofileRef  +" ORDER BY name");
 			  while(rs.next()){
 				  
 				  Attribute a = new Attribute();
