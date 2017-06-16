@@ -7,18 +7,18 @@ import de.hdm.marketPlace.shared.bo.*;
 import de.hdm.marketPlace.server.db.*;
 
 import java.util.Vector;
-import java.util.ArrayList;
 import java.util.Date;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
 
 public class MarketplaceAdministrationImpl extends RemoteServiceServlet implements MarketplaceAdministration {
 
+	private static final long serialVersionUID = 1L;
+
 	//Referenz auf den zugehörigen ProjektMarktplatz
-	private ProjectMarketplace marketplace = null;
+	//private ProjectMarketplace marketplace = null;
 	
 	//Anlegen der Mapper
 	private ApplicationMapper apMapper = null;

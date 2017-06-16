@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.marketPlace.client.report.AllApplicationsOfUserShowcase;
 import de.hdm.marketPlace.client.report.AllApplicationsOnAllTendersShowcase;
 import de.hdm.marketPlace.client.report.AllTendersShowcase;
+import de.hdm.marketPlace.client.report.FanInFanOutShowcase;
 import de.hdm.marketPlace.client.report.ProjectInterconnectionShowcase;
 import de.hdm.marketPlace.client.report.TendersMatchShowcase;
 import de.hdm.marketPlace.shared.LoginInfo;
@@ -33,7 +34,7 @@ public class ReportNavigation extends Composite {
 	Button showProjectInterconnectionButton = new Button("Projektverflechtung von Nutzer");
 	Button showFanInFanOutButton = new Button("Fan-In/Fan-Out Analyse eines Nutzers");
 	
-	w
+	
 	
 	public ReportNavigation(final LoginInfo loginInfo){
 		
@@ -118,7 +119,7 @@ public class ReportNavigation extends Composite {
 		
 		showFanInFanOutButton.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event){
-				Showcase showcaseReport = new FanInFanOutShowcase(Übergabewert aus Feld);
+				Showcase showcaseReport = new FanInFanOutShowcase();
 				RootPanel.get("DetailsReport").clear();
 				RootPanel.get("DetailsReport").add(showcaseReport);
 				currentClickHandler=this;
@@ -126,4 +127,24 @@ public class ReportNavigation extends Composite {
 			}
 		});
 	}
+	
+	public static ClickHandler getCurrentClickHandler() {
+		return currentClickHandler;
+	}
+
+	public static ClickEvent getCurrentClickEvent() {
+		return currentClickEvent;
+	}
+
+	public static void setCurrentClickHandler(ClickHandler c){
+		currentClickHandler = c;
+	}
+	public static void setCurrentClickEvent(ClickEvent e){
+		currentClickEvent = e;
+	}
+
+	public static void reload(){
+		currentClickHandler.onClick(currentClickEvent);
+	}
+	
 }

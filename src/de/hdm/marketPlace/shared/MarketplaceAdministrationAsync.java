@@ -1,6 +1,6 @@
 package de.hdm.marketPlace.shared;
 
-import java.util.ArrayList;
+
 import java.util.Vector;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.marketPlace.shared.bo.*;
@@ -85,7 +85,7 @@ public interface MarketplaceAdministrationAsync {
 	public User getUserById (int userRef, AsyncCallback <User> callback);
 	
 	
-	public Vector<User> getAllApplicantOfUser(int userRef, AsyncCallback <User> callback);
+	public Vector<User> getAllApplicantOfUser(int userRef, AsyncCallback <Vector<User>> callback);
 	
 	
 

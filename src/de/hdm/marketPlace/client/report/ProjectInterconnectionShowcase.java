@@ -1,5 +1,10 @@
 package de.hdm.marketPlace.client.report;
 
+import java.util.Vector;
+
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 
@@ -40,16 +45,14 @@ public class ProjectInterconnectionShowcase extends Showcase {
 		ReportGeneratorAsync reportGenerator = ClientsideSettings.getReportGenerator();
 		MarketplaceAdministrationAsync admin = ClientsideSettings.getAdministration();
 		
-		
-				
 	
-		//HIER WEITER
+		//Benutzer muss aus einer Liste seiner Bewerber einen wählen
 		
-		final ListBox bewerberBox = new ListBox();
-		bewerberBox.addItem("Bitte wähle einen Bewerber aus");
+		final ListBox applicantBox = new ListBox();
+		applicantBox.addItem("Bitte wählen Sie den gewünschten Bewerber aus");
 		
-		reportGenerator.getBewerberAufEigeneAusschreibungen(identityChoiceReport.getSelectedIdentityAsObject(), 
-				new AsyncCallback<Vector<Organisationseinheit>>() {
+		admin.getAllApplicantOfUser(loginInfo.getUserId(), new AsyncCallback<Vector<User>>(){
+			
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -58,39 +61,74 @@ public class ProjectInterconnectionShowcase extends Showcase {
 					}
 
 					@Override
-					public void onSuccess(Vector<Organisationseinheit> result) {
+					public void onSuccess(Vector<User> result) {
 						
-						for (Organisationseinheit bewerber : result) {
+						for (User bewerber : result) {
 							
-							bewerberBox.addItem(result.getName());  
+							applicantBox.addItem(bewerber.getFirstname()+", "+bewerber.getLastname()+", ID: "+bewerber.getId()); 
 							
 						   	
 						}	
 				}
 		});
 		
+		inputPanel.add(applicantBox);
+		inputPanel.add(resultPanel);
+		this.add(inputPanel);
 		
 		//___________________________________________
 		
-		reportGenerator.createProjectInterconnectionReport(currentUser, new AsyncCallback <ProjectInterconnection> (){
+		applicantBox.addChangeHandler(new ChangeHandler(){
 			
-			public void onFailure(Throwable caught) {
-				showcase.append("Fehler: " + caught.getMessage());;
-				
-			}
-
 			@Override
-			public void onSuccess(ProjectInterconnection result) {
-				if(result!= null){
-					
-					HTMLReportWriter writer = new HTMLReportWriter();
+			public void onChange(ChangeEvent event){
 				
-					writer.process(result);
+				resultPanel.clear();
+				String s = applicantBox.getValue(applicantBox.getSelectedIndex());
+				String last = s.substring(s.indexOf(":")+1, s.length());
+				int selectedId = Integer.valueOf(last);
+				
+				
+				 
+					admin.getUserById(selectedId,  new AsyncCallback <User> (){
 					
-					showcase.append(writer.getReportText());
-				}	
+							public void onFailure(Throwable caught) {
+								showcase.append("Fehler: " + caught.getMessage());;
+								
+							}
+				
+							@Override
+							public void onSuccess(User result) {
+								if(result!= null){
+									
+									currentUser = result;
+								}	
+							}
+						});	
+		
+				reportGenerator.createProjectInterconnectionReport(currentUser, new AsyncCallback <ProjectInterconnection> (){
+					
+					public void onFailure(Throwable caught) {
+						showcase.append("Fehler: " + caught.getMessage());;
+						
+					}
+		
+					@Override
+					public void onSuccess(ProjectInterconnection result) {
+						if(result!= null){
+							
+							HTMLReportWriter writer = new HTMLReportWriter();
+						
+							writer.process(result);
+							
+							resultPanel.append(writer.getReportText());
+						}	
+					}
+				});	
+				
 			}
-		});	
+				
+			});
 
 	}
 

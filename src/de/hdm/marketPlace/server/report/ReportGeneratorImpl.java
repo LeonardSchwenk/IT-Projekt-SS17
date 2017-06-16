@@ -17,9 +17,13 @@ import de.hdm.marketPlace.shared.report.*;
 
 public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportGenerator{ //Wo findet sich RemotService Servlet??
 
+	
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Attribute der Klasse
 	 */
+	
+
 	
 	/**
 	 * Administrations Variable die für die Reports benötigt wird
