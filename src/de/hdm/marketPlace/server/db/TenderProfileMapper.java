@@ -6,7 +6,8 @@ import java.util.Date;
 import java.util.Vector;
 
 import de.hdm.marketPlace.shared.bo.Participation;
-import de.hdm.marketPlace.shared.bo.TenderProfile;;
+import de.hdm.marketPlace.shared.bo.TenderProfile;
+import de.hdm.marketPlace.shared.bo.UserProfile;;
 
 
 public class TenderProfileMapper {
@@ -161,6 +162,38 @@ public class TenderProfileMapper {
 		    return result;
 		  }
 	
+	  public UserProfile findTenderProfileByTenderRef (int tenderRef) {
+		  Connection con = DBConnection.getConnection();
+			
+			
+			
+			
+			try {
+				Statement stmt = con.createStatement();
+				
+				
+				ResultSet rs =stmt.executeQuery("SELECT id, text, userRef FROM userprofile " + "WHERE tenderRef=" + tenderRef);
+				
+				if ( rs.next()){
+					
+					UserProfile u = new UserProfile();
+					u.setId(rs.getInt("id"));
+					u.setText(rs.getString("text"));
+					u.setUserRef(rs.getInt("tenderRef"));
+				
+					
+					return u; 
+					
+				}
+			
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				return null;
+			}
+			return null;
+			
+	  }
 	  
 	  
 	  
