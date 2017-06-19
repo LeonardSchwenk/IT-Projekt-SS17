@@ -300,9 +300,9 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return teMapper.findAll();
 		}
 		
-		public Vector <Tender> getAllTendersByMatch(int Ref) throws IllegalArgumentException{
+		public Vector <Tender> getAllTendersByMatch(int userprofileRef) throws IllegalArgumentException{
 			
-			Vector <Attribute> userAt = atMapper.findAllAttributesByUserProfileRef(Ref);
+			Vector <Attribute> userAt = atMapper.findAllAttributesByUserProfileRef(userprofileRef);
 			Vector <TenderProfile> AllTp = tpMapper.findAll();
 			Vector <Tender> matches = new Vector <Tender>();
 			
@@ -329,7 +329,7 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return matches;
 		}
 		
-		//Rüchgabe alle meiner Ausschreibungen
+		//Rï¿½chgabe alle meiner Ausschreibungen
 		
 		public Vector<Tender> getAllTendersByProjectRef(int projectRef)throws IllegalArgumentException{
 			
