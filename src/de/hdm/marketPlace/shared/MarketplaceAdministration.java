@@ -457,6 +457,8 @@ public interface MarketplaceAdministration {
 	 */
 	public void deleteTenderProfile (TenderProfile tenderProfile) throws IllegalArgumentException;
 	
+	public Vector<TenderProfile> getAllTenderProfilesByTenderRef (int tenderRef) throws IllegalArgumentException;
+	
 	
 	/**
 	 * Methoden zur Verwaltung eines UserProfile

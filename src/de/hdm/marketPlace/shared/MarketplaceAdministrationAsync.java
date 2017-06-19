@@ -135,7 +135,9 @@ public interface MarketplaceAdministrationAsync {
 	
 	void updateTenderProfile (TenderProfile tp, int tenderRef, AsyncCallback <Void> callback);
 	
-	void delteTenderProfile (TenderProfile tp, AsyncCallback<Void> callback);
+	void deleteTenderProfile (TenderProfile tp, AsyncCallback<Void> callback);
+	
+	void getAllTenderProfilesByTenderRef (int tenderRef, AsyncCallback <Vector<TenderProfile>> callback);
 	
 	
 	
