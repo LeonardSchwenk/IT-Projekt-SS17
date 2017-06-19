@@ -162,7 +162,7 @@ public class TenderProfileMapper {
 		    return result;
 		  }
 	
-	  public UserProfile findTenderProfileByTenderRef (int tenderRef) {
+	  public UserProfile findAllTenderProfilesByTenderRef (int tenderRef) {
 		  Connection con = DBConnection.getConnection();
 			
 			
