@@ -367,6 +367,8 @@ public interface MarketplaceAdministration {
 	 */
 	public Participation getParticipationByTenderRef (int tenderRef) throws IllegalArgumentException;
 	
+	public Vector <Participation> getParticipationsByProjectRef (int projectRef) throws IllegalArgumentException;
+	
 	/**
 	 * Anzeigen aller Teilnahmen aller Projekte
 	 * @throws IllegalArgumentException
@@ -533,6 +535,8 @@ public interface MarketplaceAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Vector<Attribute> getAttributesByUserProfileRef(int userprofileRef) throws IllegalArgumentException;
+	
+	public Vector <Attribute> getAttributesByTenderProfileRef (int tenderProfileRef) throws IllegalArgumentException;
 
 	/**
 	 * Anzeigen aller Attribute

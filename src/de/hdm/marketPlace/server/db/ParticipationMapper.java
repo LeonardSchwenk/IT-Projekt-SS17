@@ -276,6 +276,41 @@ public class ParticipationMapper {
 		    
 		    return result;
 		  }
+	  
+	  public Vector<Participation> findAllParticipationsByProjectRef(int projectRef) {
+		    Connection con = DBConnection.getConnection();
+
+		   
+		    Vector<Participation> result = new Vector<Participation>();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate value FROM participation " + "WHERE projectRef=" + projectRef +"ORDER BY workingDays");
+
+		     
+		      while (rs.next()) {
+		    	  Participation p = new Participation();
+		    	  p.setId(rs.getInt("id"));
+					p.setWorkingDays(rs.getInt("workingDays"));
+					p.setProjectRef(rs.getInt("projectRef"));
+					p.setUserRef(rs.getInt("userRef"));
+					p.setRatingRef(rs.getInt("ratingRef"));
+					p.setStartDate(rs.getDate("startDate"));
+					p.setEndDate(rs.getDate("endDate"));
+					p.setTenderRef(rs.getInt("tenderRef"));
+
+		        
+		        result.addElement(p);
+		      }
+		    }
+		    catch (Exception e) {
+		      e.printStackTrace();
+		    }
+
+		    
+		    return result;
+		  }
 
 	}
 

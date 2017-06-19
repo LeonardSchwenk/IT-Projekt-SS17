@@ -168,37 +168,7 @@ public class TenderMapper {
 		    return result;
 		  }
 	  
-	  public Vector<Tender> findAllTenderByTenderRef(int tenderRef) {
-		    Connection con = DBConnection.getConnection();
-
-		   
-		    Vector<Tender> result = new Vector<Tender>();
-
-		    try {
-		      Statement stmt = con.createStatement();
-
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender " + "WHERE tenderRef=" + tenderRef +"ORDER BY projectRef");
-
-		     
-		      while (rs.next()) {
-		    	  Tender t = new Tender();
-					t.setId(rs.getInt("id"));
-					t.setName(rs.getString("name"));
-					t.setText(rs.getString("text"));
-					t.setProjectRef(rs.getInt("projectRef"));
-					t.setStartDate(rs.getDate("startDate"));
-					t.setEndDate(rs.getDate("endDate")); 
-		        
-		        result.addElement(t);
-		      }
-		    }
-		    catch (Exception e) {
-		      e.printStackTrace();
-		    }
-
-		    
-		    return result;
-		  }
+	
 	  
 	  
 	  
@@ -265,6 +235,43 @@ public class TenderMapper {
 		    return result;
 		  }
 		 // gettendermatch
+	  
+	  public Vector <Tender> findAllTendersByProjectRef (int projectRef) {
+		  Connection con = DBConnection.getConnection();
+		  
+		  Vector <Tender> result = new Vector <Tender>();
+		  
+		  try {
+			  Statement stmt = con.createStatement();
+			  ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender "+ "WHERE projectRef=  " + projectRef +"ORDER BY projectRef");
+			  
+			  while (rs.next()) {
+				  Tender t = new Tender();
+					  t.setId(rs.getInt("id"));
+					  t.setName(rs.getString("name"));
+					  t.setText(rs.getString("text"));
+					  t.setProjectRef(rs.getInt("projectRef"));
+					  t.setStartDate(rs.getDate("startDate"));
+					  t.setEndDate(rs.getDate("endDate"));
+					  
+				  result.addElement(t);
+			  	}
+		  	}
+		  
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		  
+		  return result;
+	  }
+}
+			
+				  
+			  
+		  
+
 	
-	}
+	
+
+
 
