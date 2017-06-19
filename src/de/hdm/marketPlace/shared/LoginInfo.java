@@ -13,8 +13,8 @@ private static final long serialVersionUID = 1L;
 	  private String logoutUrl;
 	  private String emailAddress;
 	  private int userId;
-	  private String firtsname;
-	  private String lastanem;
+	  private String firstName;
+	  private String lastName;
 	  
 	  
 	  public boolean isLoggedIn() {
@@ -77,6 +77,22 @@ private static final long serialVersionUID = 1L;
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 }

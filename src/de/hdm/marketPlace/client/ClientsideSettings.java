@@ -12,6 +12,8 @@ public class ClientsideSettings extends CommonSettings{
 	
 	private static MarketplaceAdministrationAsync administration = null;
 	
+	private static ReportGeneratorAsync reportGenerator = null;
+	
 	private static final String LOGGER_NAME = "Tngly Web Client";
 	
 	private static final  Logger log = Logger.getLogger(LOGGER_NAME);
@@ -51,4 +53,21 @@ public class ClientsideSettings extends CommonSettings{
 		return administration;
 	}
 	
+	public static ReportGeneratorAsync getReportGenerator() {
+		if (reportGenerator == null) {
+			reportGenerator = GWT.create(ReportGenerator.class);
+
+			final AsyncCallback<Void> initReportGeneratorCallback = new AsyncCallback<Void>() {
+				public void onFailure(Throwable caught) {
+					ClientsideSettings.getLogger()
+							.severe("Der ReportGenerator konnte nicht initialisiert werden!" + caught);
+				}
+				public void onSuccess(Void result) {
+					ClientsideSettings.getLogger().info("Der ReportGenerator wurde initialisiert.");
+				}
+			};
+			reportGenerator.init(initReportGeneratorCallback);
+		}
+		return reportGenerator;
+	}
 }

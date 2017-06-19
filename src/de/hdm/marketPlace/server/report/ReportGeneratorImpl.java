@@ -17,9 +17,13 @@ import de.hdm.marketPlace.shared.report.*;
 
 public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportGenerator{ //Wo findet sich RemotService Servlet??
 
+	
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Attribute der Klasse
 	 */
+	
+
 	
 	/**
 	 * Administrations Variable die für die Reports benötigt wird
@@ -426,6 +430,62 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		  return result;
 		  
 	  }
+	  
+public AllApplicationsOnAllTenders createAllApplicationsOnAllTendersReport(User u) throws IllegalArgumentException{
+	  /*
+	   * Überprüfung ob MarktplatzAdministration vorhanden
+	   */
+	  if(this.getMarketplaceAdministration() == null)
+		  return null;
+
+	  /*
+	   * Leerer Report wird erstellt
+	   */
+	  AllApplicationsOnAllTenders result = new AllApplicationsOnAllTenders();
+
+		/*
+		 * Der Report erhält einen Titel
+		 */
+	    result.setTitle("FanInOut Analyse of all Users");
+
+		/*
+		 * Dem Report wird ein Impressum hinzugefügt
+		 */
+	    this.addImprint(result);
+
+		/*
+		 * Dem Report wird ein Erstellungsdatum hinzugefügt	  
+		 */
+	    result.setCreated(new Date());
+
+		  /*
+		   * Einem Vector der nur aus Usersobjekten bestehen soll, werden
+		   * alle User hinzugefügt
+		   */
+	    Vector<Tender> allTenders = this.administration.getAllTenderOfUser(u.getId());
+
+		  /*
+		   * der Vector wird durchsucht wobei jeder Durchgang die Werte in u gespeichert wird
+		   */
+	    for (Tender t : allTenders) {
+	   
+		 /*
+		  * Dem Report werden zwei unter Reports hinzugefügt
+		  * der erste Unter Report erstellt einen Report, welcher den Status aller Bewerbungen eines Users ausgibt
+		  * der zweite Unter Report erstellt einen Report, welcher alle den Status aller Ausschreibungen eines Users ausgibt
+		  */
+	      result.addSubReport(this.createAllApplicationsOnTenderReport(t));
+	    }
+
+		/*
+		 * Der fertige Report wird zurückgegeben
+		 */
+	    return result;
+	  
+}
+
+
+	  
 
 	  /**
 	   * Erstellen eines Reports, welcher alle Bewerbungen eines Users ausgibt

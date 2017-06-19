@@ -1,6 +1,6 @@
 package de.hdm.marketPlace.shared;
 
-import java.util.ArrayList;
+
 import java.util.Vector;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import de.hdm.marketPlace.shared.bo.*;
@@ -67,6 +67,8 @@ public interface MarketplaceAdministrationAsync {
 	
 	void delteTenderProfile (TenderProfile tp, AsyncCallback<Void> callback);
 	
+	void getAllTendersByProjectRef(int projectRef, AsyncCallback<Void> callback);
+	
 	
 	//UserProfile
 	
@@ -78,7 +80,12 @@ public interface MarketplaceAdministrationAsync {
 	
 	void deleteUserProfile (UserProfile up, AsyncCallback <Void> callback);
 	
+	//User
 	
+	public User getUserById (int userRef, AsyncCallback <User> callback);
+	
+	
+	public Vector<User> getAllApplicantOfUser(int userRef, AsyncCallback <Vector<User>> callback);
 	
 	
 

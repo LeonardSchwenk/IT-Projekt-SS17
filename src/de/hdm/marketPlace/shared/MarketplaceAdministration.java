@@ -242,6 +242,8 @@ public interface MarketplaceAdministration {
 	
 	public Vector <Tender> getAllTendersByMatch(int Ref) throws IllegalArgumentException;
 	
+	public Vector<Tender> getAllTendersByProjectRef(int projectRef)throws IllegalArgumentException;
+	
 	
 	
 	/**
@@ -535,7 +537,7 @@ public interface MarketplaceAdministration {
 	public Vector <Attribute> getAllAttributes () throws IllegalArgumentException;
 	
 	
-	
+	public Vector<User> getAllApplicantOfUser(int userRef) throws IllegalArgumentException;
 	
 	
 	
