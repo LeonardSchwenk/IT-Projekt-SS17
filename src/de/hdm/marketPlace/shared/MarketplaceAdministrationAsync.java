@@ -92,6 +92,8 @@ public interface MarketplaceAdministrationAsync {
 	
 	void getAllProjects (AsyncCallback<Vector<Project>>callback);
 	
+	void getProjectByProjectMarketplaceRef (int projectmarketplaceRef, AsyncCallback <Vector<Project>> callback);
+	
 	
 	//Participation
 	

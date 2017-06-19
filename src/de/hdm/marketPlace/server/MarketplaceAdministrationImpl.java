@@ -87,6 +87,14 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			}
 		}
 		
+		Vector <Project> projects = prMapper.findAllProjectsByProjectMarketplaceRef(pm.getId());
+		
+		if (projects!=null){
+			for (Project p : projects){
+				this.deleteProject(p);
+			}
+		}
+		
 		pmMapper.delete(pm);
 	}
 	
@@ -163,6 +171,15 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			if (tenders != null) {
 				for (Tender te : tenders) {
 					this.deleteTender(te);
+				}
+			}
+			
+			//Zugehörige Teilnahmen löschen
+			Vector <Participation> participations = paMapper.findAllParticipationsByUserRef(u.getId());
+			
+			if (participations !=null) {
+				for (Participation pa : participations){
+					this.deleteParticipation(pa);
 				}
 			}
 			
@@ -391,6 +408,10 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 			return prMapper.findAll();
 		}
 		
+		public Vector <Project> getProjectByProjectMarketplaceRef (int projectmarketplaceRef) throws IllegalArgumentException {
+			return prMapper.findAllProjectsByProjectMarketplaceRef(projectmarketplaceRef);
+		}
+		
 		//-----------------------------------------------------
 		
 
@@ -471,6 +492,13 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 	}
 	
 	public void deleteRating (Rating r) throws IllegalArgumentException {
+		
+		Participation pa = paMapper.findAllParticipationsByRatingRef(r.getId());
+		
+		if (pa!=null){
+			this.deleteParticipation(pa);
+		}
+		
 		raMapper.delete(r);
 	}
 	

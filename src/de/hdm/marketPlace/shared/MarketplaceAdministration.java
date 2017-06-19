@@ -302,6 +302,8 @@ public interface MarketplaceAdministration {
 	 */
 	public Vector <Project> getAllProjects () throws IllegalArgumentException;
 	
+	public Vector <Project> getProjectByProjectMarketplaceRef (int projectmarketplaceRef) throws IllegalArgumentException;
+	
 	
 	
 	/**
