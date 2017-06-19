@@ -28,10 +28,10 @@ public class mapperStart {
 		
 	
 
-	System.out.println(m1.findAllProjectsByUserRef(1));
+	//System.out.println(m1.findAllProjectsByUserRef(1));
 	
 	
-	*/
+	
 		
 	/*	UserMapper um = UserMapper.userMapper();
 		
