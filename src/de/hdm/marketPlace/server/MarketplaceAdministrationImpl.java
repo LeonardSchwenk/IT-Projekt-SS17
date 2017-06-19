@@ -273,15 +273,16 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 					this.deleteApplication(ap);
 				}
 			}
-			Vector <TenderProfile> tprofiles = tpMapper.findAllTenderProfilesByTenderRef (t.getId());
 			
-			if (tprofiles != null) {
-				for (TenderProfile tp: tprofiles) {
-					this.deleteTenderProfile(tp);
-				}
+			TenderProfile tp = tpMapper.findAllTenderProfilesByTenderRef(t.getId());
+			
+			if (tp!=null){
+				this.deleteTenderProfile(tp);
 			}
 			
 			teMapper.delete(t);
+					
+			
 		}
 		
 		public Vector <Tender> getAllTenderOfUser (int userRef) throws IllegalArgumentException {
@@ -498,8 +499,8 @@ public class MarketplaceAdministrationImpl extends RemoteServiceServlet implemen
 		this.tpMapper.delete(tp);
 	}
 	
-	public Vector <TenderProfile> getAllTenderProfilesByTenderRef (int tenderRef) {
-		return this.tpMapper.findAllTenderProfilesByTenderRef (tenderRef);
+	public TenderProfile getAllTenderProfilesByTenderRef (int tenderRef){
+		return tpMapper.findAllTenderProfilesByTenderRef(tenderRef);
 	}
 	//-----------------------------------------------------
 	

@@ -457,7 +457,7 @@ public interface MarketplaceAdministration {
 	 */
 	public void deleteTenderProfile (TenderProfile tenderProfile) throws IllegalArgumentException;
 	
-	public Vector<TenderProfile> getAllTenderProfilesByTenderRef (int tenderRef) throws IllegalArgumentException;
+	public TenderProfile getAllTenderProfilesByTenderRef (int tenderRef) throws IllegalArgumentException;
 	
 	
 	/**
