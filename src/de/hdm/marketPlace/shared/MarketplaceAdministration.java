@@ -8,13 +8,13 @@ import java.util.Vector;
 import de.hdm.marketPlace.shared.bo.*;
 
 /**
- * Die Klasse realisiert ein Interface welches als Methodenübersicht für die MarketplaceAdministrationImpl dient
+ * Die Klasse realisiert ein Interface welches als Methodenï¿½bersicht fï¿½r die MarketplaceAdministrationImpl dient
  */
 
 public interface MarketplaceAdministration {
 	
 	/**
-	 * Die init() Methode lässt die Impl Klasse auf die Methoden dieses Interfaces zugreifen
+	 * Die init() Methode lï¿½sst die Impl Klasse auf die Methoden dieses Interfaces zugreifen
 	 */
 	public void init() throws IllegalArgumentException;
 	
@@ -38,7 +38,7 @@ public interface MarketplaceAdministration {
 	public void updateMarketplace (ProjectMarketplace pm, String name)throws IllegalArgumentException;
 	
 	/**
-	 * Methode zum Löschen eines Marktplatzes
+	 * Methode zum Lï¿½schen eines Marktplatzes
 	 * @param pm
 	 * @throws IllegalArgumentException
 	 */
@@ -82,7 +82,7 @@ public interface MarketplaceAdministration {
 	public User createUser (String firstName, String lastName) throws IllegalArgumentException;
 	
 	/**
-	 * Methode zur Rückgabe eines Users anhand seiner ID
+	 * Methode zur Rï¿½ckgabe eines Users anhand seiner ID
 	 * @param userRef
 	 * @throws IllegalArgumentException
 	 */
@@ -98,7 +98,7 @@ public interface MarketplaceAdministration {
 	public void updateUser (User u, String firstName, String lastName) throws IllegalArgumentException;
 	
 	/**
-	 * Methode zum Löschen eines Benutzers
+	 * Methode zum Lï¿½schen eines Benutzers
 	 * @param u
 	 * @throws IllegalArgumentException
 	 */
@@ -116,6 +116,8 @@ public interface MarketplaceAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Vector <User> getAllUser () throws IllegalArgumentException;
+	
+	public Vector <User> getAllApplicantOfUser (int userRef) throws IllegalArgumentException;
 	
 	
 	/**
@@ -151,7 +153,7 @@ public interface MarketplaceAdministration {
 	public void updateApplication (Application a, String name, String text, int userRef, int tenderRef) throws IllegalArgumentException;
 	
 	/**
-	 * eine Bewerbung löschen
+	 * eine Bewerbung lï¿½schen
 	 * @param a
 	 * @throws IllegalArgumentException
 	 */
@@ -193,7 +195,7 @@ public interface MarketplaceAdministration {
 	public Tender createTender (String name, int projectRef, String text, Date startDate, Date endDate) throws IllegalArgumentException;
 	
 	/**
-	 * Rückgabe einer Ausschreibung anhand einer Id
+	 * Rï¿½ckgabe einer Ausschreibung anhand einer Id
 	 * @param tenderRef
 	 * @throws IllegalArgumentException
 	 */
@@ -212,7 +214,7 @@ public interface MarketplaceAdministration {
 	public void updateTender (Tender t, int projectRef, String text, String name, Date startDate, Date endDate ) throws IllegalArgumentException;
 	
 	/**
-	 * eine Ausschreibung löschen
+	 * eine Ausschreibung lï¿½schen
 	 * @param t
 	 * @throws IllegalArgumentException
 	 */
@@ -240,7 +242,7 @@ public interface MarketplaceAdministration {
 	
 	//Ausgeben aller Ausschreibungen passend zum eigenen Profil
 	
-	public Vector <Tender> getAllTendersByMatch(int Ref) throws IllegalArgumentException;
+	public Vector <Tender> getAllTendersByMatch(int userprofileRef) throws IllegalArgumentException;
 	
 	public Vector<Tender> getAllTendersByProjectRef(int projectRef)throws IllegalArgumentException;
 	
@@ -300,6 +302,8 @@ public interface MarketplaceAdministration {
 	 */
 	public Vector <Project> getAllProjects () throws IllegalArgumentException;
 	
+	public Vector <Project> getProjectByProjectMarketplaceRef (int projectmarketplaceRef) throws IllegalArgumentException;
+	
 	
 	
 	/**
@@ -337,7 +341,7 @@ public interface MarketplaceAdministration {
 	public void updateParticipation (Participation pa, int userRef, int projectRef, int wd, Date startDate, Date endDate) throws IllegalArgumentException;
 	
 	/**
-	 * Löschen einer Teilnahme
+	 * Lï¿½schen einer Teilnahme
 	 * @param pa
 	 * @throws IllegalArgumentException
 	 */
@@ -365,6 +369,8 @@ public interface MarketplaceAdministration {
 	 */
 	public Participation getParticipationByTenderRef (int tenderRef) throws IllegalArgumentException;
 	
+	public Vector <Participation> getParticipationsByProjectRef (int projectRef) throws IllegalArgumentException;
+	
 	/**
 	 * Anzeigen aller Teilnahmen aller Projekte
 	 * @throws IllegalArgumentException
@@ -386,7 +392,7 @@ public interface MarketplaceAdministration {
 	public Rating createRating (float rate, String text) throws IllegalArgumentException;
 	
 	/**
-	 * Rückgabe eines Ratings anhand einer Id
+	 * Rï¿½ckgabe eines Ratings anhand einer Id
 	 * @param ratingRef
 	 * @throws IllegalArgumentException
 	 */
@@ -402,7 +408,7 @@ public interface MarketplaceAdministration {
 	public void updateRating (Rating r, float rate, String text) throws IllegalArgumentException;
 	
 	/**
-	 * Löschen einer Bewertung
+	 * Lï¿½schen einer Bewertung
 	 * @param r
 	 * @throws IllegalArgumentException
 	 */
@@ -449,11 +455,13 @@ public interface MarketplaceAdministration {
 	public void updateTenderProfile (TenderProfile up, int tenderRef) throws IllegalArgumentException;
 	
 	/**
-	 * Löschen eines Ausschreiberprofils
+	 * Lï¿½schen eines Ausschreiberprofils
 	 * @param tenderProfile
 	 * @throws IllegalArgumentException
 	 */
 	public void deleteTenderProfile (TenderProfile tenderProfile) throws IllegalArgumentException;
+	
+	public TenderProfile getAllTenderProfilesByTenderRef (int tenderRef) throws IllegalArgumentException;
 	
 	
 	/**
@@ -484,7 +492,7 @@ public interface MarketplaceAdministration {
 	public void updateUserProfile (UserProfile up, String text) throws IllegalArgumentException;
 	
 	/**
-	 * Löschen eines Ausschreiberprofils
+	 * Lï¿½schen eines Ausschreiberprofils
 	 * @param up
 	 * @throws IllegalArgumentException
 	 */
@@ -517,7 +525,7 @@ public interface MarketplaceAdministration {
 	public void updateAttribute(Attribute a, int userprofileRef, String name, String text, int value) throws IllegalArgumentException;
 				
 	/**
-	 * Löschen eines Attributes
+	 * Lï¿½schen eines Attributes
 	 * @param a
 	 * @throws IllegalArgumentException
 	 */
@@ -529,6 +537,8 @@ public interface MarketplaceAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Vector<Attribute> getAttributesByUserProfileRef(int userprofileRef) throws IllegalArgumentException;
+	
+	public Vector <Attribute> getAttributesByTenderProfileRef (int tenderProfileRef) throws IllegalArgumentException;
 
 	/**
 	 * Anzeigen aller Attribute
@@ -537,7 +547,7 @@ public interface MarketplaceAdministration {
 	public Vector <Attribute> getAllAttributes () throws IllegalArgumentException;
 	
 	
-	public Vector<User> getAllApplicantOfUser(int userRef) throws IllegalArgumentException;
+	
 	
 	
 	
