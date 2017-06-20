@@ -65,7 +65,7 @@ protected void run(){
 	
 	//Alle Projekte des aktuellen nutzers werden in Vector zurückgegeben
 	
-	admin.getAllProjectsOfUser(info.getUserId(), new AsyncCallback<Vector<Project>>(){
+	admin.getAllProjectsOfUser(info.getUserId(), new GetProjectCallback(){
 		
 		@Override
 		public void onFailure(Throwable caught) {
@@ -169,7 +169,7 @@ TextColumn<Project> projectmarketplaceRefColumn = new TextColumn<Project>(){
 	
 };
 
-  dataGrid.addColumn(endDateColumn, "Projektmarktplatz-ID");
+  dataGrid.addColumn(projectmarketplaceRefColumn, "Projektmarktplatz-ID");
 
 //------------------------------------------------------------
   TextColumn<Project> userRefColumn = new TextColumn<Project>(){
@@ -182,7 +182,7 @@ TextColumn<Project> projectmarketplaceRefColumn = new TextColumn<Project>(){
 		
 	};
 
-	  dataGrid.addColumn(endDateColumn, "Projektleiter-ID");
+	  dataGrid.addColumn(userRefColumn, "Projektleiter-ID");
 
 	//------------------------------------------------------------
 	  
