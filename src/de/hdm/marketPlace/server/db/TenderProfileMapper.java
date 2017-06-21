@@ -105,7 +105,7 @@ public class TenderProfileMapper {
 	        String date = mySQLformate.format(currentDate);
 	        
 
-	      stmt.executeUpdate("UPDATE TenderProfile " + "SET TenderRef=\""
+	      stmt.executeUpdate("UPDATE tenderProfile " + "SET tenderRef=\""
 	          + tp.getTenderRef() + "\", " + "tenderprofileDate=\"" + date+   "\" "
 	          + "WHERE id=" + tp.getId());
 
@@ -124,7 +124,7 @@ public class TenderProfileMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM TenderProfile " + "WHERE Id=" + tp.getId());
+	      stmt.executeUpdate("DELETE FROM tenderProfile " + "WHERE id=" + tp.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

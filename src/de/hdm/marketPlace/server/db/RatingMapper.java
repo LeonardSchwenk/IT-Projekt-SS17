@@ -74,7 +74,7 @@ public class RatingMapper {
 	        stmt = con.createStatement();
 
 	        
-	        stmt.executeUpdate("INSERT INTO Rating (id, rate, text, applicationRef) "
+	        stmt.executeUpdate("INSERT INTO rating (id, rate, text, applicationRef) "
 	           + "VALUES (" + r.getRate() + ",'" + r.getText() + ",'" + r.getApplicationRef() +  "'" +")");
 	      }
 	    }
@@ -92,9 +92,9 @@ public class RatingMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE Rating " + "SET Rate=\""
+	      stmt.executeUpdate("UPDATE rating " + "SET rate=\""
 	          + r.getRate() + "\", " + "text=\"" + r.getText() + "applicationRef=\"" + r.getApplicationRef() +  "\" "
-	          + "WHERE Id=" + r.getId());
+	          + "WHERE id=" + r.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -111,7 +111,7 @@ public class RatingMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Rating " + "WHERE id=" + r.getId());
+	      stmt.executeUpdate("DELETE FROM rating " + "WHERE id=" + r.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();
@@ -127,7 +127,7 @@ public class RatingMapper {
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, rate, text, applicationRef FROM Rating " + "WHERE applicationRef=" + applicationRef +"ORDER BY rate");
+			  ResultSet rs = stmt.executeQuery("SELECT id, rate, text, applicationRef FROM rating " + "WHERE applicationRef=" + applicationRef +"ORDER BY rate");
 			  while(rs.next()){
 				  
 					Rating r = new Rating();

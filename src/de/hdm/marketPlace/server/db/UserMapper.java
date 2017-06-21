@@ -102,9 +102,9 @@ private static UserMapper userMapper = null;
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE user " + "SET FistName=\""
-	          + u.getFirstname()+ "SET LastName=\""
-	    	          + u.getLastname() + "SET ProjectMarketplaceRef=\""
+	      stmt.executeUpdate("UPDATE user " + "SET fistName=\""
+	          + u.getFirstname()+ "SET lastName=\""
+	    	          + u.getLastname() + "SET projectMarketplaceRef=\""
 	    	    	          + u.getProjectmarketplaceRef() + "\" "
 	          + "WHERE id=" + u.getId());
 

@@ -110,8 +110,8 @@ public class ApplicationMapper {
 	        Date currentDate = new Date();
 	        String date = mySQLformate.format(currentDate);
 
-	      stmt.executeUpdate("UPDATE application " + "SET Text=\""
-	          + a.getText() + "\", " + "Name=\"" + a.getName() + "\", " + "\", " + "UserRef=\"" + a.getUserRef() + "\", " + "TenderRef=\"" + a.getTenderRef() +  "applicationDate=\"" + date  +  "\" "
+	      stmt.executeUpdate("UPDATE application " + "SET text=\""
+	          + a.getText() + "\", " + "name=\"" + a.getName() + "\", " + "\", " + "userRef=\"" + a.getUserRef() + "\", " + "tenderRef=\"" + a.getTenderRef() +  "applicationDate=\"" + date  +  "\" "
 	          + "WHERE id=" + a.getId());
 
 	    }

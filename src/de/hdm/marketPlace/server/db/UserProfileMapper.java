@@ -97,7 +97,7 @@ public class UserProfileMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("UPDATE User " +  "\", " + "SET Text=\""   + u.getText() + "\", "  + "SET UserRef=\""
+	      stmt.executeUpdate("UPDATE User " +  "\", " + "SET text=\""   + u.getText() + "\", "  + "SET userRef=\""
 	    	    	          + u.getUserRef() + "\" " + "WHERE id=" + u.getId());
 
 	    }

@@ -73,7 +73,7 @@ public class TenderMapper {
 
 	  
 	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM Tender ");
+	          + "FROM tender ");
 
 	     
 	      if (rs.next()) {
@@ -87,7 +87,7 @@ public class TenderMapper {
 	        String date = mySQLformate.format(currentDate);
 
 	        
-	        stmt.executeUpdate("INSERT INTO Tender ( id, text, projectRef, startDate, endDate ) "
+	        stmt.executeUpdate("INSERT INTO tender ( id, text, projectRef, startDate, endDate ) "
 	           + "VALUES (" + t.getText() + ",'" + t.getProjectRef() + ",'" + t.getName()  +  "','"    +  date +  "','"    + date +"')");
 	      }
 	    }
@@ -109,9 +109,9 @@ public class TenderMapper {
 	        Date currentDate = new Date();
 	        String date = mySQLformate.format(currentDate);
 
-	      stmt.executeUpdate("UPDATE Tender " + "SET Text=\""
-	          + t.getText() + "\", " + "ProjectRef=\"" + t.getProjectRef() + "\", " + "Name=\"" + t.getName() +  "StartDate=\"" + date +  "\", " +  "EndDate=\"" + date  +  "\" "
-	          + "WHERE Id=" + t.getId());
+	      stmt.executeUpdate("UPDATE tender " + "SET text=\""
+	          + t.getText() + "\", " + "projectRef=\"" + t.getProjectRef() + "\", " + "name=\"" + t.getName() +  "startDate=\"" + date +  "\", " +  "endDate=\"" + date  +  "\" "
+	          + "WHERE id=" + t.getId());
 
 	    }
 	    catch (SQLException e) {
@@ -128,7 +128,7 @@ public class TenderMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Tender " + "WHERE id=" + t.getId());
+	      stmt.executeUpdate("DELETE FROM tender " + "WHERE id=" + t.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

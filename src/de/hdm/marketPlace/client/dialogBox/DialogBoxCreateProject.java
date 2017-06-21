@@ -119,13 +119,15 @@ public class DialogBoxCreateProject extends DialogBox{
 			@Override
 			public void onSuccess(Project result) {
 				
+				final Project p = null ;
+				
 				Window.alert("Das Projekt wurde erfolgreich angelegt!");
 				hide();
 				
 				
 				MarketplaceAdministrationAsync admin = ClientsideSettings.getAdministration();
 
-				admin.createProject(txt_projectname.getName(), txta_discription.getText(), db_startdate.getValue(), db_enddate.getValue(), info.getUserId(), new AsyncCallback<Project>(){
+				admin.createProject(txt_projectname.getValue(), txta_discription.getValue(), db_startdate.getValue(), db_enddate.getValue(), info.getUserId(), new AsyncCallback<Project>(){
 					
 					
 					public void onFailure(Throwable caught){
@@ -135,7 +137,9 @@ public class DialogBoxCreateProject extends DialogBox{
 					public void onSuccess(Project result){
 						
 						
-				
+						Window.alert("Das Projekt"+ "  "+ p.getName() +" wurde erfolgreich angelegt");
+						hide();
+						
 			}
 				});
 			
