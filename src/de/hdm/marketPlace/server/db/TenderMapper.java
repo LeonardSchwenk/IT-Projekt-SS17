@@ -31,13 +31,13 @@ public class TenderMapper {
 		Connection con = DBConnection.getConnection();
 		
 	
-	
+	 
 	
 	try {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectRef, startDate, endDate  FROM tender " + "WHERE id= " + id +"ORDER BY projectRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectRef, startDate, endDate  FROM tender " + "WHERE id= " + id + " ORDER BY projectRef");
 		
 		if ( rs.next()){
 			
@@ -145,7 +145,7 @@ public class TenderMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender "+ "WHERE userRef=" + userRef +"ORDER BY projectRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate FROM tender "+ "WHERE userRef=" + userRef +"ORDER BY projectRef");
 
 		     
 		      while (rs.next()) {
@@ -181,7 +181,7 @@ public class TenderMapper {
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, text, projectRef, startDate, endDate value FROM tender " + "WHERE name=" + name +"ORDER BY projectRef");
+			  ResultSet rs = stmt.executeQuery("SELECT id, text, projectRef, startDate, endDate FROM tender " + "WHERE name=" + name +"ORDER BY projectRef");
 			  while(rs.next()){
 				  
 				  				Tender t = new Tender();
@@ -212,7 +212,7 @@ public class TenderMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender " +"ORDER BY projectRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate FROM tender " +"ORDER BY projectRef");
 
 		     
 		      while (rs.next()) {
@@ -243,7 +243,7 @@ public class TenderMapper {
 		  
 		  try {
 			  Statement stmt = con.createStatement();
-			  ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate value FROM tender "+ "WHERE projectRef=  " + projectRef +"ORDER BY projectRef");
+			  ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate FROM tender "+ "WHERE projectRef=  " + projectRef +"ORDER BY projectRef");
 			  
 			  while (rs.next()) {
 				  Tender t = new Tender();

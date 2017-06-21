@@ -29,7 +29,9 @@ public class mapperStart {
 		
 		admin.init();
 		
-		System.out.println(admin.getApplicationById(1));
+		System.out.println(admin.getAllProjects());
+		
+		
 		
 /*	
 

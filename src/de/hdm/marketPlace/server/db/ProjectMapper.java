@@ -38,8 +38,9 @@ public class ProjectMapper {
 	try {
 		Statement stmt = con.createStatement();
 		
+	
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate  FROM project " + "WHERE id=" + id +"ORDER BY name");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate FROM project "  + "WHERE id=" + id +" ORDER BY name");
 		
 		if ( rs.next()){
 			
@@ -154,7 +155,7 @@ public class ProjectMapper {
 		      Statement stmt = con.createStatement();
 
 		      ResultSet rs = stmt
-		          .executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef value FROM project "
+		          .executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef  FROM project "
 		              + " ORDER BY name");
 
 		    
@@ -193,7 +194,7 @@ public class ProjectMapper {
 				Statement stmt = con.createStatement();
 
 				ResultSet rs = stmt
-						.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate value FROM project " + "WHERE userRef = " + userRef + "ORDER BY name");
+						.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate FROM project " + "WHERE userRef = " + userRef + "ORDER BY name");
 
 			
 				while (rs.next()) {
@@ -229,7 +230,7 @@ public class ProjectMapper {
 				Statement stmt = con.createStatement();
 
 				ResultSet rs = stmt
-						.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate value FROM project " + "WHERE projectmarketplaceRef = " + projectmarketplaceRef + "ORDER BY name");
+						.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate FROM project " + "WHERE projectmarketplaceRef = " + projectmarketplaceRef + " ORDER BY name");
 
 			
 				while (rs.next()) {
@@ -239,7 +240,6 @@ public class ProjectMapper {
 					p.setText(rs.getString("text"));
 					p.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
 					p.setUserRef(rs.getInt("userRef"));
-					
 					p.setStartDate(rs.getDate("startDate"));
 					p.setEndDate(rs.getDate("endDate"));
 					

@@ -44,7 +44,7 @@ public class ProjectMarketplaceMapper {
 	      Statement stmt = con.createStatement();
 
 	      ResultSet rs = stmt.executeQuery("SELECT id, name FROM projectmarketplace "
-	              + "WHERE id=" + id +"ORDER BY name" );
+	              + "WHERE id= " + id +" ORDER BY name" );
 
 	    
 	      if (rs.next()) {

@@ -129,7 +129,7 @@ public class ApplicationMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, text, name tenderRef, userRef, applicationDate value FROM application " +" ORDER BY tenderRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id, text, name tenderRef, userRef, applicationDate FROM application " +" ORDER BY tenderRef");
 
 		     
 		      while (rs.next()) {
