@@ -219,6 +219,42 @@ public class ProjectMapper {
 			return result;
 		}
 	  
+	  public Vector<Project> findAllProjectsByProjectMarketplaceRef(int projectmarketplaceRef) {
+			
+			Connection con = DBConnection.getConnection();
+		
+			Vector<Project> result = new Vector<Project>();
+
+			try {
+				Statement stmt = con.createStatement();
+
+				ResultSet rs = stmt
+						.executeQuery("SELECT id, name, text, projectmarketplaceRef, userRef, startDate, endDate value FROM project " + "WHERE projectmarketplaceRef = " + projectmarketplaceRef + "ORDER BY name");
+
+			
+				while (rs.next()) {
+					Project p = new Project();
+					p.setId(rs.getInt("id"));
+					p.setName(rs.getString("name"));
+					p.setText(rs.getString("text"));
+					p.setProjectmarketplaceRef(rs.getInt("projectmarketplaceRef"));
+					p.setUserRef(rs.getInt("userRef"));
+					
+					p.setStartDate(rs.getDate("startDate"));
+					p.setEndDate(rs.getDate("endDate"));
+					
+					
+				
+					result.addElement(p);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			
+			return result;
+		}
+	  
 	  
 	  
 	}

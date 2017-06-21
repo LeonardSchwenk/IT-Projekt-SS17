@@ -162,7 +162,7 @@ public class TenderProfileMapper {
 		    return result;
 		  }
 	  
-	  public UserProfile findAllTenderProfilesByTenderRef (int tenderRef) {
+	  public TenderProfile findAllTenderProfilesByTenderRef (int tenderRef) {
 		  Connection con = DBConnection.getConnection();
 			
 			
@@ -172,17 +172,17 @@ public class TenderProfileMapper {
 				Statement stmt = con.createStatement();
 				
 				
-				ResultSet rs =stmt.executeQuery("SELECT id, text, userRef FROM userprofile " + "WHERE tenderRef=" + tenderRef);
+				ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, tenderprofileDate value FROM tenderProfile " + "WHERE id=" + tenderRef +"ORDER BY tenderRef");
 				
 				if ( rs.next()){
 					
-					UserProfile u = new UserProfile();
-					u.setId(rs.getInt("id"));
-					u.setText(rs.getString("text"));
-					u.setUserRef(rs.getInt("tenderRef"));
+					TenderProfile tp = new TenderProfile();
+					tp.setId(rs.getInt("id"));
+					tp.setTenderRef(rs.getInt("tenderRef"));
+					tp.setTenderprofileDate(rs.getDate("tenderprofileDate"));
 				
 					
-					return u; 
+					return tp; 
 					
 				}
 			

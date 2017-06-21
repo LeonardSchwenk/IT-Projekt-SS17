@@ -302,6 +302,8 @@ public interface MarketplaceAdministration {
 	 */
 	public Vector <Project> getAllProjects () throws IllegalArgumentException;
 	
+	public Vector <Project> getProjectByProjectMarketplaceRef (int projectmarketplaceRef) throws IllegalArgumentException;
+	
 	
 	
 	/**
@@ -366,6 +368,8 @@ public interface MarketplaceAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Participation getParticipationByTenderRef (int tenderRef) throws IllegalArgumentException;
+	
+	public Vector <Participation> getParticipationsByProjectRef (int projectRef) throws IllegalArgumentException;
 	
 	/**
 	 * Anzeigen aller Teilnahmen aller Projekte
@@ -457,7 +461,7 @@ public interface MarketplaceAdministration {
 	 */
 	public void deleteTenderProfile (TenderProfile tenderProfile) throws IllegalArgumentException;
 	
-	public Vector<TenderProfile> getAllTenderProfilesByTenderRef (int tenderRef) throws IllegalArgumentException;
+	public TenderProfile getAllTenderProfilesByTenderRef (int tenderRef) throws IllegalArgumentException;
 	
 	
 	/**
@@ -533,6 +537,8 @@ public interface MarketplaceAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Vector<Attribute> getAttributesByUserProfileRef(int userprofileRef) throws IllegalArgumentException;
+	
+	public Vector <Attribute> getAttributesByTenderProfileRef (int tenderProfileRef) throws IllegalArgumentException;
 
 	/**
 	 * Anzeigen aller Attribute

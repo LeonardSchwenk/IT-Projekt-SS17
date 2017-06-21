@@ -92,6 +92,8 @@ public interface MarketplaceAdministrationAsync {
 	
 	void getAllProjects (AsyncCallback<Vector<Project>>callback);
 	
+	void getProjectByProjectMarketplaceRef (int projectmarketplaceRef, AsyncCallback <Vector<Project>> callback);
+	
 	
 	//Participation
 	
@@ -108,6 +110,8 @@ public interface MarketplaceAdministrationAsync {
 	void getAllParticipationsOfUser (int userRef, AsyncCallback <Vector<Participation>> callback);
 	
 	void getParticipationsByTenderRef (int tenderRef, AsyncCallback <Participation> callback);
+	
+	void getParticipationsByProjectRef (int projectRef, AsyncCallback <Vector<Participation>> callback);
 	
 	void getAllParticipations (AsyncCallback <Vector<Participation>> callback);
 	
@@ -137,7 +141,7 @@ public interface MarketplaceAdministrationAsync {
 	
 	void deleteTenderProfile (TenderProfile tp, AsyncCallback<Void> callback);
 	
-	void getAllTenderProfilesByTenderRef (int tenderRef, AsyncCallback <Vector<TenderProfile>> callback);
+	void getAllTenderProfilesByTenderRef (int tenderRef, AsyncCallback <TenderProfile> callback);
 	
 	
 	
@@ -161,6 +165,8 @@ public interface MarketplaceAdministrationAsync {
 	void deleteAttribute (Attribute a, AsyncCallback <Void> callback);
 	
 	void getAttributesByUserProfileRef (int userprofileRef, AsyncCallback <Vector<Attribute>> callback);
+	
+	void getAttributesByTenderProfileRef (int tenderprofileRef, AsyncCallback <Vector<Attribute>> callback);
 	
 	void getAllAttributes (AsyncCallback <Vector<Attribute>> callback);
 	

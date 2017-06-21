@@ -191,6 +191,35 @@ public class AttributeMapper {
 		  }
 		  return result;
 	  }
+	  
+	  public Vector<Attribute> findAllAttributesByTenderProfileRef(int tenderprofileRef){
+		  Connection con = DBConnection.getConnection();
+		  Vector<Attribute> result = new Vector <Attribute>();
+		  
+		  try{
+			  Statement stmt = con.createStatement();
+			  
+			  ResultSet rs = stmt.executeQuery("SELECT id, name, text, value, tenderprofileRef, userprofileRef FROM attribute " + "WHERE tenderprofileRef=" + tenderprofileRef  +" ORDER BY name");
+			  while(rs.next()){
+				  
+				  Attribute a = new Attribute();
+					a.setId(rs.getInt("id"));
+					a.setName(rs.getString("name"));
+					a.setText(rs.getString("text"));
+					a.setValue(rs.getInt("value"));
+					a.setTenderprofilRef(rs.getInt("tenderprofileRef"));
+					a.setUserprofileRef(rs.getInt("userprofileRef"));
+					
+					
+				  result.addElement(a);
+			  }
+		  
+		  }
+		  catch(Exception e){
+			  e.printStackTrace();
+		  }
+		  return result;
+	  }
 	
 	}
 
