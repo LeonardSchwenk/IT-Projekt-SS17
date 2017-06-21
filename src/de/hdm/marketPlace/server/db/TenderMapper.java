@@ -37,7 +37,7 @@ public class TenderMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectRef, startDate, endDate value FROM tender " + "WHERE id= " + id +"ORDER BY projectRef");
+		ResultSet rs =stmt.executeQuery("SELECT id, name, text, projectRef, startDate, endDate  FROM tender " + "WHERE id= " + id +"ORDER BY projectRef");
 		
 		if ( rs.next()){
 			

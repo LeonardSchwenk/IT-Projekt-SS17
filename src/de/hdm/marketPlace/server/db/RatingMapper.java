@@ -33,7 +33,7 @@ public class RatingMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, rate, text, applicationRef value FROM rating " + "WHERE id=" + id +"ORDER BY rate");
+		ResultSet rs =stmt.executeQuery("SELECT id, rate, text, applicationRef  FROM rating " + "WHERE id=" + id +"ORDER BY rate");
 		
 		if ( rs.next()){
 			

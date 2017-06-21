@@ -25,8 +25,13 @@ public class mapperStart {
 		
 	
 	
+		MarketplaceAdministrationImpl admin = new MarketplaceAdministrationImpl();
 		
-	
+		admin.init();
+		
+		System.out.println(admin.getApplicationById(1));
+		
+/*	
 
 	System.out.println(m1.findAllProjectsByUserRef(1));
 	
@@ -114,12 +119,12 @@ public class mapperStart {
 
 		System.out.println(writer.getReportText());
 	*/	
-     UserMapper um = UserMapper.userMapper();
+   /*  UserMapper um = UserMapper.userMapper();
 		
 		
 		System.out.println(um.findByID(1));
 	
-		
+		*/
 
 		
 }
