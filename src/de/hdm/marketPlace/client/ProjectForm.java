@@ -220,7 +220,7 @@ TextColumn<Project> projectmarketplaceRefColumn = new TextColumn<Project>(){
 					dxcp.center();
 				}
 				else {
-					Window.alert("Bitte wählen Sie das Porjekt aus, welches Sie bearbeiten wollen!");
+					Window.alert("Bitte wählen Sie das Projekt aus, welches Sie bearbeiten wollen!");
 				}
 			}
 		});
