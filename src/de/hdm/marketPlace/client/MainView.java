@@ -47,7 +47,7 @@ public class MainView extends Composite {
 		}
 		public void openProjects(){
 			this.contentP.clear();
-			Projects projects= new Projects(this);
+			ProjectForm projects= new ProjectForm(this);
 			this.contentP.add(projects);
 		}
 		public void openTender(){
