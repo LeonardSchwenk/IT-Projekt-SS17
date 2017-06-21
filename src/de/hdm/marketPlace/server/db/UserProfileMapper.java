@@ -35,7 +35,8 @@ public class UserProfileMapper {
 		Statement stmt = con.createStatement();
 		
 		
-		ResultSet rs =stmt.executeQuery("SELECT id, text, userRef FROM userprofile " + "WHERE id=" + id);
+		
+		ResultSet rs =stmt.executeQuery("SELECT id, text, userRef  FROM userProfile " + "WHERE id= " + id + " ORDER BY id");
 		
 		if ( rs.next()){
 			
@@ -130,7 +131,7 @@ public class UserProfileMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, text, userRef FROM userprofile "  +"ORDER BY text");
+		      ResultSet rs = stmt.executeQuery("SELECT id, text, userRef FROM userprofile "  +" ORDER BY text");
 
 		     
 		      while (rs.next()) {

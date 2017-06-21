@@ -139,7 +139,7 @@ public class TenderProfileMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, tenderRef, tenderprofileDate FROM tenderProfile "  +"ORDER BY tenderRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id, tenderRef, tenderprofileDate FROM tenderProfile "  +" ORDER BY tenderRef");
 
 		     
 		      while (rs.next()) {
@@ -172,7 +172,7 @@ public class TenderProfileMapper {
 				Statement stmt = con.createStatement();
 				
 				
-				ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, tenderprofileDate FROM tenderProfile " + "WHERE id=" + tenderRef +"ORDER BY tenderRef");
+				ResultSet rs =stmt.executeQuery("SELECT id, tenderRef, tenderprofileDate FROM tenderProfile " + "WHERE id=" + tenderRef +" ORDER BY tenderRef");
 				
 				if ( rs.next()){
 					

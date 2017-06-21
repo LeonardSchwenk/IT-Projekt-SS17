@@ -134,7 +134,6 @@ public class TenderMapper {
 	      e.printStackTrace();
 	    }
 	  }
-	//  getalltenderbyuser
 	  
 	  public Vector<Tender> findAllTenderByUserRef(int userRef) {
 		    Connection con = DBConnection.getConnection();
@@ -145,7 +144,7 @@ public class TenderMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate FROM tender "+ "WHERE userRef=" + userRef +"ORDER BY projectRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate FROM tender "+ "WHERE userRef=" + userRef +" ORDER BY projectRef");
 
 		     
 		      while (rs.next()) {
@@ -181,7 +180,7 @@ public class TenderMapper {
 		  try{
 			  Statement stmt = con.createStatement();
 			  
-			  ResultSet rs = stmt.executeQuery("SELECT id, text, projectRef, startDate, endDate FROM tender " + "WHERE name=" + name +"ORDER BY projectRef");
+			  ResultSet rs = stmt.executeQuery("SELECT id, text, projectRef, startDate, endDate FROM tender " + "WHERE name=" + name +" ORDER BY projectRef");
 			  while(rs.next()){
 				  
 				  				Tender t = new Tender();
@@ -212,7 +211,7 @@ public class TenderMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate FROM tender " +"ORDER BY projectRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate FROM tender " +" ORDER BY projectRef");
 
 		     
 		      while (rs.next()) {
@@ -243,7 +242,7 @@ public class TenderMapper {
 		  
 		  try {
 			  Statement stmt = con.createStatement();
-			  ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate FROM tender "+ "WHERE projectRef=  " + projectRef +"ORDER BY projectRef");
+			  ResultSet rs = stmt.executeQuery("SELECT id ,name, text, projectRef, startDate, endDate FROM tender "+ "WHERE projectRef=  " + projectRef +" ORDER BY projectRef");
 			  
 			  while (rs.next()) {
 				  Tender t = new Tender();

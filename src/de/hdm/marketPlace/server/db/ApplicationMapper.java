@@ -129,7 +129,7 @@ public class ApplicationMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, text, name tenderRef, userRef, applicationDate FROM application " +" ORDER BY tenderRef");
+		      ResultSet rs = stmt.executeQuery("SELECT id, text, name, tenderRef, userRef, applicationDate FROM application " +" ORDER BY tenderRef");
 
 		     
 		      while (rs.next()) {
@@ -138,7 +138,6 @@ public class ApplicationMapper {
 					a.setId(rs.getInt("id"));
 					a.setText(rs.getString("text"));
 					a.setName(rs.getString("name"));
-					
 					a.setTenderRef(rs.getInt("tenderRef"));
 					a.setUserRef(rs.getInt("userRef"));
 					a.setApplicationDate(rs.getDate("applicationDate"));
@@ -178,7 +177,7 @@ public class ApplicationMapper {
 				Statement stmt = con.createStatement();
 
 				ResultSet rs = stmt
-						.executeQuery("SELECT id, text,  tenderRef, userRef FROM application "
+						.executeQuery("SELECT id, text, name, tenderRef, userRef FROM application "
 		              +  "WHERE tenderRef=" + tenderRef +" ORDER BY tenderRef");
 
 			
@@ -216,7 +215,7 @@ public class ApplicationMapper {
 				Statement stmt = con.createStatement();
 
 				ResultSet rs = stmt
-						.executeQuery("SELECT id, text,  tenderRef, userRef FROM application "+ "WHERE userRef=" + userRef
+						.executeQuery("SELECT id, text, name, tenderRef, userRef FROM application "+ "WHERE userRef=" + userRef
 		              + " ORDER BY userRef");
 
 			
@@ -225,7 +224,6 @@ public class ApplicationMapper {
 					a.setId(rs.getInt("id"));
 					a.setText(rs.getString("text"));
 					a.setName(rs.getString("name"));
-					
 					a.setTenderRef(rs.getInt("tenderRef"));
 					a.setUserRef(rs.getInt("userRef"));
 					a.setApplicationDate(rs.getDate("applicationDate"));

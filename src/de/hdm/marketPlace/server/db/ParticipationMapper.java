@@ -148,7 +148,7 @@ public class ParticipationMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate FROM participation " + "WHERE userRef=" + userRef +"ORDER BY workingDays");
+		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate FROM participation " + "WHERE userRef=" + userRef +" ORDER BY workingDays");
 
 		     
 		      while (rs.next()) {
@@ -186,7 +186,7 @@ public class ParticipationMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, userRef, tenderRef, ratingRef, startDate, endDate FROM participation " +"ORDER BY workingDays");
+		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, userRef, tenderRef, ratingRef, startDate, endDate FROM participation " +" ORDER BY workingDays");
 
 		     
 		      while (rs.next()) {
@@ -223,7 +223,7 @@ public class ParticipationMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate FROM participation " + "WHERE ratingRef=" + ratingRef +"ORDER BY workingDays");
+		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate FROM participation " + "WHERE ratingRef=" + ratingRef +" ORDER BY workingDays");
 
 		     
 		      while (rs.next()) {
@@ -256,7 +256,7 @@ public class ParticipationMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate FROM participation " + "WHERE tenderRef=" + tenderRef +"ORDER BY workingDays");
+		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate FROM participation " + "WHERE tenderRef=" + tenderRef +" ORDER BY workingDays");
 
 		     
 		      while (rs.next()) {
@@ -289,7 +289,7 @@ public class ParticipationMapper {
 		    try {
 		      Statement stmt = con.createStatement();
 
-		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate FROM participation " + "WHERE projectRef=" + projectRef +"ORDER BY workingDays");
+		      ResultSet rs = stmt.executeQuery("SELECT id, workingDays, projectRef, tenderRef, userRef, ratingRef, startDate, endDate FROM participation " + "WHERE projectRef=" + projectRef +" ORDER BY workingDays");
 
 		     
 		      while (rs.next()) {
