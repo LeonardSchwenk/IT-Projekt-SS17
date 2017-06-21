@@ -136,7 +136,7 @@ public class ProjectMapper {
 	    try {
 	      Statement stmt = con.createStatement();
 
-	      stmt.executeUpdate("DELETE FROM Project " + "WHERE id=" + p.getId());
+	      stmt.executeUpdate("DELETE FROM project " + "WHERE id=" + p.getId());
 	    }
 	    catch (SQLException e) {
 	      e.printStackTrace();

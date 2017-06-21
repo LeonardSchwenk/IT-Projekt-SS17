@@ -69,7 +69,7 @@ public class ParticipationMapper {
 
 	  
 	      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-	          + "FROM Participation ");
+	          + "FROM participation ");
 
 	     
 	      if (rs.next()) {
@@ -85,7 +85,7 @@ public class ParticipationMapper {
 	        
 
 	        
-	        stmt.executeUpdate("INSERT INTO Participation (id, workingDays, projectRef, tenderRef, userRef, ratingRef) "
+	        stmt.executeUpdate("INSERT INTO participation (id, workingDays, projectRef, tenderRef, userRef, ratingRef) "
 	           + "VALUES ('" + p.getWorkingDays() + "','" + p.getProjectRef() + "','" + p.getTenderRef() + "','"
 	            + p.getUserRef()+  "','"  + p.getRatingRef() + "','"    +  date +  "','"    + date + "')");
 	      }
@@ -193,10 +193,11 @@ public class ParticipationMapper {
 					p.setWorkingDays(rs.getInt("workingDays"));
 					p.setProjectRef(rs.getInt("projectRef"));
 					p.setUserRef(rs.getInt("userRef"));
+					p.setTenderRef(rs.getInt("tenderRef"));
 					p.setRatingRef(rs.getInt("ratingRef"));
 					p.setStartDate(rs.getDate("startDate"));
 					p.setEndDate(rs.getDate("endDate"));
-					p.setTenderRef(rs.getInt("tenderRef"));
+					
 
 		        
 		        result.addElement(p);
